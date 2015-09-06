@@ -1,2 +1,2 @@
-tweet-pick
+daily-tweet
 ========================
