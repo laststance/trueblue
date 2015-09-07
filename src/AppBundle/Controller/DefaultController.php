@@ -8,10 +8,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/home", name="homepage")
+     * @Route("/", name="indexpage")
      */
     public function indexAction()
     {
-        return $this->render('AppBundle:Default:home.html.twig');
+        return $this->render('AppBundle:Default:index.html.twig');
     }
 }
