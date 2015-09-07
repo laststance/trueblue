@@ -1,0 +1,5 @@
+{% if app.user %}
+    <h1>Hello {{ app.user.username }}!!</h1>
+{% else %}
+    <h1>Hello Guest!!</h1>
+{% endif %}

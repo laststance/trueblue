@@ -1,12 +1,23 @@
 security:
     providers:
-        in_memory:
-            memory: ~
+        oauth_user_provider:
+             id: hwi_oauth.user.provider
 
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt|error)|css|images|js)/
             security: false
 
-        default:
-            anonymous: ~
+        secured_area:
+            pattern: ^/
+            anonymous: true
+            oauth:
+                resource_owners:
+                  twitter:   "/login/check-twitter"
+                login_path:   /login
+                failure_path: /login
+                oauth_user_provider:
+                    service: hwi_oauth.user.provider
+
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }

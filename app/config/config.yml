@@ -78,3 +78,18 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+hwi_oauth:
+    firewall_name: secured_area
+
+    http_client:
+        timeout: 10
+        verify_peer: false
+        ignore_errors: false
+        max_redirects: 1
+
+    resource_owners:
+        twitter:
+            type:                twitter
+            client_id:           zTksHL24tgOVZYnclw3TCRR8l
+            client_secret:       kndGuDdXhMWDpjiAjXUCi0S0x3N38VKANBHQetUElSoSi82IGy
