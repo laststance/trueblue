@@ -2,10 +2,10 @@ var gulp = require('gulp');
 var sass = require('gulp-ruby-sass');
 
 gulp.task('sass', function() {
-  return sass('./src/OAuth/LoginBundle/Resources/scss/*.scss', {style: 'expanded'})
-  .pipe(gulp.dest('./src/OAuth/LoginBundle/Resources/public/css'));
+  return sass('app/Resources/scss/*.scss', {style: 'expanded', base: 'app'})
+  .pipe(gulp.dest('./web/css'));
 });
 
 gulp.task('watch', function() {
-  gulp.watch('./src/OAuth/LoginBundle/Resources/scss/*.scss', ['sass']);
+  gulp.watch('app/Resources/scss/*.scss', ['sass']);
 });
