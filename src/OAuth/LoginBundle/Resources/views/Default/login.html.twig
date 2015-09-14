@@ -1,3 +1,29 @@
-<a href="{{ path('hwi_oauth_service_redirect', { 'service' : 'twitter' }) }}">
-Login with Twitter
-</a>
+{% extends 'base.html.twig' %}
+{% block stylesheet %}
+  <link rel="stylesheet" href="{{ asset('/css/login.css') }}">
+  <link href='https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two' rel='stylesheet' type='text/css'>
+{% endblock %}
+{% block body %}
+<nav class="navbar">
+  <ul class="nav">
+    <li class="nav-item header-title pull-left">
+      <h1>Daily Tweet</h1>
+    </li>
+    <li class="nav-item login-button pull-right">
+      <a href="{{ path('hwi_oauth_service_redirect', { 'service' : 'twitter' }) }}" class="btn btn-twitter-login">Login with Twitter</a>
+    </li>
+  </ul>
+</nav>
+<main class="container">
+  <section class="row">
+    <div class="col-md-5 service-infomation">
+      <p>Daily Tweetはtwitterからその日のつぶやきを取得して一つの記事にまとめるサービスです。</p>
+        <p>twitterから気軽にライフログを始めよう!</p>
+    </div>
+  </section>
+</main>
+{% endblock %}
+
+{% block javascript %}
+<script src="{{ asset('/js/login.js') }}"></script>
+{% endblock %}
