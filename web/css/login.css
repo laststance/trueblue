@@ -1,0 +1,72 @@
+html,
+body {
+  background-image: url("../img/background.jpg");
+  height: 100%;
+}
+
+.navbar {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding-top: 20px;
+}
+.navbar .nav {
+  margin: 0 auto;
+  width: 80%;
+}
+
+.header-title {
+  color: rgba(255, 255, 255, 0.7);
+  font-family: Shadows Into Light Two;
+}
+
+.btn-twitter-login {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: #c2ffff;
+  cursor: pointer;
+  transition-duration: .5s;
+}
+.btn-twitter-login:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: rgba(57, 69, 228, 0.97);
+}
+
+main {
+  color: rgba(255, 255, 255, 0.88);
+}
+main .service-infomation {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  font-size: 24px;
+  margin-top: 100px;
+  padding: 20px;
+}
+
+@media (min-width: 34em) and (max-width: 47.9em) {
+  main .service-infomation {
+    height: 240px;
+    padding: 30px;
+  }
+}
+@media (max-width: 34em) {
+  main {
+    height: 70%;
+  }
+  main section {
+    height: 100%;
+  }
+  main section .service-infomation {
+    height: 100%;
+    margin-top: auto;
+    padding: 20px 10px 0;
+  }
+
+  .header-title,
+  .login-button {
+    float: none !important;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .login-button {
+    padding-top: 30px;
+  }
+}

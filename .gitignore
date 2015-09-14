@@ -12,3 +12,6 @@
 /composer.phar
 tags
 /nbproject/
+.tags_swap
+/node_modules/
+/.sass-cache/

@@ -1,3 +1,15 @@
+o_auth_login:
+    resource: "@OAuthLoginBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /connect
+
+twitter_login:
+    pattern: /login/check-twitter
