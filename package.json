@@ -4,6 +4,7 @@
   "description": "create article from daily tweet",
   "devDependencies": {
     "gulp": "^3.9.0",
+    "gulp-babel": "^5.2.1",
     "gulp-ruby-sass": "^2.0.2"
   }
 }
