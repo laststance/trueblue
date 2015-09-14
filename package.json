@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "create article from daily tweet",
   "devDependencies": {
+    "babelify": "^6.3.0",
+    "browserify": "^11.1.0",
     "gulp": "^3.9.0",
-    "gulp-babel": "^5.2.1",
     "gulp-ruby-sass": "^2.0.2",
-    "jquery": "^2.1.4"
+    "jquery": "^2.1.4",
+    "vinyl-source-stream": "^1.1.0"
   }
 }
