@@ -8,7 +8,7 @@
         {% block stylesheet %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
-    <body>
+    <body class="{{ app.request.get('_route') }}">
         {% block body %}{% endblock %}
         {% block javascript %}{% endblock %}
     </body>
