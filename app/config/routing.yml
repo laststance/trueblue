@@ -1,5 +1,5 @@
 o_auth_login:
-    resource: "@OAuthLoginBundle/Controller/"
+    resource: "@LoginBundle/Controller/"
     type:     annotation
     prefix:   /
 

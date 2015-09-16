@@ -1,6 +1,6 @@
 <?php
 
-namespace OAuth\LoginBundle\Tests\Controller;
+namespace LoginBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
