@@ -1,6 +1,6 @@
 <?php
 
-namespace OAuth\LoginBundle\Controller;
+namespace LoginBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -14,6 +14,6 @@ class DefaultController extends Controller
       */
     public function loginAction()
     {
-        return $this->render('OAuthLoginBundle:Default:login.html.twig');
+        return $this->render('LoginBundle:Default:login.html.twig');
     }
 }
