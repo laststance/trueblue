@@ -11,3 +11,7 @@ before_script:
 
 script:
     - ./vendor/phpunit/phpunit/phpunit --verbose --debug -c app/
+
+env:
+    global:
+        - secure: "w9ADXOQH2B4MqmXnzMgSD+qLQgfdS6OtA99N1RqtEUvKZBrGpbzLsxyKwCmMbPGBXv2zknV8hbvbN18AYK1mXINFyZe01WyV6nABKjjt50spuB5W0sRS936D3Qa5fQTwCtQpgIIVQgO2ca2lSie3ufQcrze2aZoANmlWHb9k5R1a2IzNpLBaibS1szfCu1TvdRUtV3mhnQfGZ1iFIs7yLnztr4g5Gn/UTkrPwyBtUT1LDC0gB7RNYi/I2dYicx5tAeTc740fQrdSjhw4Snx6CTWm3z57CdA7fSe0ks4NHgYSH8+szBP1piGlWYpfl8/h7oJL0oj+p/1KKkVX3gMusZTl+6iD50bY2HJm74VIr4N0/cV3yj/5w9EP9KBxJCH98iGYl16ARxw+94xoEGHqObYALi+ifBbhcHLu+h+etCEho5/ayxA4gioF7x0vxg02qOpKfUB3JVR/uD4r0M/WX5cES2ehzTBL05QzkMmOFSBO43GmP/BB+fWMMHiYLMBVaK4FvjbJcggtv346mDcTX7mHb3WPoEeqZKl/tON1xCVVzaYsAJA0r/AM/ZzyK8C2Ncxom1IvLaPF0Zgfz/BRWTejfkcM+E8ZSORyXUqxTZBbjsdgYrpX4AoWVCY094oC5QHZOEHx2Ida5yQax+7rua9lWHOmclSTKWo8j5Qs9S0="
