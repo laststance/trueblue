@@ -7,7 +7,7 @@ var source = require('vinyl-source-stream');
 var es6_files = ['login.es6', 'index.es6'];
 
 gulp.task('sass', function() {
-  return sass('./app/Resources/scss/*.scss', {style: 'expanded'})
+  return sass('./app/Resources/scss/*.scss', {style: 'expanded', bundleExec: true})
   .pipe(gulp.dest('./web/css'));
 });
 
