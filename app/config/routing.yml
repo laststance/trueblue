@@ -6,6 +6,7 @@ o_auth_login:
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+    prefix: /
 
 hwi_oauth_redirect:
     resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
