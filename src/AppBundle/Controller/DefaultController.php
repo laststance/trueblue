@@ -15,7 +15,7 @@ class DefaultController extends Controller
     {
         $twitter_api = $this->container->get('twitter_api');
         // dump($this->get('security.token_storage')->getToken());
-        dump($twitter_api->getBearerToken());
+        dump($twitter_api);
         //今日のつぶやき一覧を取得
         $today_tweet = '';
         //今日のつぶやき一覧をtemplateに貼り付けてrender
