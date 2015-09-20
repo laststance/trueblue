@@ -15,6 +15,7 @@ class TwitterAPI
 
     protected $consumer_key = ''; // api key
     protected $consumer_secret = ''; // api secret
+    protected $bearer_token = '';
 
     /**
      * @param TokenStorage $token_storage $this->container->get('security.token_storage')
@@ -29,12 +30,14 @@ class TwitterAPI
         $this->oauth_token = $oauth_token;
         $this->consumer_key = $key_and_token['consumer_key'];
         $this->consumer_secret = $key_and_token['consumer_secret'];
+        $this->bearer_token = $key_and_token['bearer_token'];
     }
 
     /**
+     * generate new BearerToken connect with twitter api
      * @return string BearerToken
      */
-    public function getBearerToken()
+    public function generateBearerToken()
     {
         $api_key = $this->consumer_key;
         $api_secret = $this->consumer_secret;
