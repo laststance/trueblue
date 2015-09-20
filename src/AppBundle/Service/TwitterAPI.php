@@ -48,7 +48,7 @@ class TwitterAPI
               'user_id' => $this->oauthToken->getRawToken()['user_id'],
               'count' => '200',
             );
-            $decoded_json = $this->getUserTimeline($get_query);
+            $decoded_json = $this->callUserTimeline($get_query);
             //今日一番最初のつぶやきのsince_id抽出処理
 
             //抽出したsince_idをDBに登録
@@ -62,7 +62,7 @@ class TwitterAPI
               'count' => '200',
             );
 
-            return $decoded_json = $this->getUserTimeline($get_query);
+            return $decoded_json = $this->callUserTimeline($get_query);
         }
     }
 
@@ -72,7 +72,7 @@ class TwitterAPI
     * @param array $get_query
     * @return stdClass $decoded_json
     */
-    protected function getUserTimeline(array $get_query = array())
+    protected function callUserTimeline(array $get_query = array())
     {
         $this->request_url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
 
