@@ -69,4 +69,44 @@ class TwitterAPI
 
         return $decoded_json->access_token;
     }
+
+    /**
+     * Get the value of Oauth Token
+     *
+     * @return HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken
+     */
+    public function getOauthToken()
+    {
+        return $this->oauth_token;
+    }
+
+    /**
+     * Get the value of Consumer Key
+     *
+     * @return mixed
+     */
+    public function getConsumerKey()
+    {
+        return $this->consumer_key;
+    }
+
+    /**
+     * Get the value of Consumer Secret
+     *
+     * @return mixed
+     */
+    public function getConsumerSecret()
+    {
+        return $this->consumer_secret;
+    }
+
+    /**
+     * Get the value of Bearer Token
+     *
+     * @return mixed
+     */
+    public function getBearerToken()
+    {
+        return $this->bearer_token;
+    }
 }
