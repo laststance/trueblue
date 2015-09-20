@@ -109,43 +109,6 @@ class TwitterAPI
     }
 
     /**
-     * create new BearerToken connect with twitter api
-     * @return string BearerToken
-     */
-    public function createNewBearerToken()
-    {
-        $api_key = $this->consumer_key;
-        $api_secret = $this->consumer_secret;
-
-        // クレデンシャルを作成
-        $credential = base64_encode($api_key . ':' . $api_secret);
-
-        // リクエストURL
-        $this->request_url = 'https://api.twitter.com/oauth2/token';
-
-        // リクエスト用のコンテキストを作成する
-        $context = array(
-          'http' => array(
-            'method' => 'POST',
-            'header' => array(
-              'Authorization: Basic ' . $credential,
-              'Content-Type: application/x-www-form-urlencoded;charset=UTF-8' ,
-            ),
-            'content' => http_build_query(array( 'grant_type' => 'client_credentials')),
-          ),
-        );
-
-        $response_json = @file_get_contents($this->request_url, false, stream_context_create($context));
-        $decoded_json = json_decode($response_json);
-
-        if ($decoded_json->token_type !== 'bearer') {
-            throw new \Exeption('faild to get the BearerToken');
-        }
-
-        return $decoded_json->access_token;
-    }
-
-    /**
     * concat encoded get_query to http_request_url
     * @param string $request_url
     * @param string $get_query
