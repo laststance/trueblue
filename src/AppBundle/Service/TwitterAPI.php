@@ -11,7 +11,7 @@ class TwitterAPI
     /**
      * @var HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken
      */
-    protected $oauth_token;
+    protected $oauthToken;
 
     protected $consumer_key = ''; // api key
     protected $consumer_secret = ''; // api secret
@@ -23,11 +23,11 @@ class TwitterAPI
      */
     public function __construct(TokenStorage $token_storage, array $key_and_token)
     {
-        if (($oauth_token = $token_storage->getToken()) instanceof OAuthToken === false) {
-            throw new InvalidArgumentException(sprintf('Object get from tokenstrage was not a OAuthToken. getting "%s" object.', get_class($oauth_token)));
+        if (($oauthToken = $token_storage->getToken()) instanceof OAuthToken === false) {
+            throw new InvalidArgumentException(sprintf('Object get from tokenstrage was not a OAuthToken. getting "%s" object.', get_class($oauthToken)));
         }
 
-        $this->oauth_token = $oauth_token;
+        $this->oauthToken = $oauthToken;
         $this->consumer_key = $key_and_token['consumer_key'];
         $this->consumer_secret = $key_and_token['consumer_secret'];
         $this->bearer_token = $key_and_token['bearer_token'];
@@ -77,7 +77,7 @@ class TwitterAPI
      */
     public function getOauthToken()
     {
-        return $this->oauth_token;
+        return $this->oauthToken;
     }
 
     /**
