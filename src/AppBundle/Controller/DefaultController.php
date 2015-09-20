@@ -15,10 +15,10 @@ class DefaultController extends Controller
     {
         $twitter_api = $this->container->get('twitter_api');
         // dump($this->get('security.token_storage')->getToken());
-        dump($twitter_api);
         //今日のつぶやき一覧を取得
-        $today_tweet = '';
+        //$todays_tweet = $twitter_api->getTodaysTweet();
+
         //今日のつぶやき一覧をtemplateに貼り付けてrender
-        return $this->render('AppBundle:Default:index.html.twig', array('today_tweet' => $today_tweet));
+        return $this->render('AppBundle:Default:index.html.twig', array('today_tweet' => $todays_tweet));
     }
 }
