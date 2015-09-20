@@ -89,16 +89,14 @@ class TwitterAPI
     }
 
     /**
-     * @param string date format 'Y-m-d'
-     * @return json tweet
-     */
-    protected function callTweetByDate($date)
+    * call api https://api.twitter.com/1.1/search/tweets.json
+    *
+    * @param array $get_query
+    * @return stdClass $decoded_json
+    */
+    protected function callSearchTweets(array $get_query = array())
     {
         $this->request_url = 'https://api.twitter.com/1.1/search/tweets.json';
-        $get_query = array(
-          'q' => 'from:' . $this->oauthToken->getRawToken()['screen_name'] . ' since:'. $date,
-          'include_entities' => 'true',
-        );
 
         $this->request_url = $this->concatGetQuery($this->request_url, $get_query);
 
