@@ -91,5 +91,5 @@ hwi_oauth:
     resource_owners:
         twitter:
             type:                twitter
-            client_id:           zTksHL24tgOVZYnclw3TCRR8l
-            client_secret:       kndGuDdXhMWDpjiAjXUCi0S0x3N38VKANBHQetUElSoSi82IGy
+            client_id:           "%client_id%"
+            client_secret:       "%client_secret%"
