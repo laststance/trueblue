@@ -13,10 +13,12 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $twitter_api = $this->container->get('twitter_api');
+        $twitterApi = $this->container->get('twitter_api');
         // dump($this->get('security.token_storage')->getToken());
         //今日のつぶやき一覧を取得
-        //$todays_tweet = $twitter_api->getTodaysTweet();
+        $todays_tweet = new \stdClass(); //$twitter_api->getTodaysTweet();
+
+        dump($twitterApi->createNewBearerToken());
 
         //今日のつぶやき一覧をtemplateに貼り付けてrender
         return $this->render('AppBundle:Default:index.html.twig', array('today_tweet' => $todays_tweet));
