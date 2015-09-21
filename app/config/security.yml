@@ -1,7 +1,7 @@
 security:
     providers:
         oauth_user_provider:
-             id: hwi_oauth.user.provider
+             id: oauth_entity_user_provider
 
     firewalls:
         dev:
@@ -17,7 +17,7 @@ security:
                 login_path:   /login
                 failure_path: /login
                 oauth_user_provider:
-                    service: hwi_oauth.user.provider
+                    service: oauth_entity_user_provider
 
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }

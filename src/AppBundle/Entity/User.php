@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUser;
 
 /**
  * User
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\UserRepository")
  */
-class User
+class User extends OAuthUser
 {
     /**
      * @var integer
@@ -24,9 +25,23 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="twitter_user_id", type="string", length=255)
+     * @ORM\Column(name="twitter_id", type="string", length=255)
      */
-    private $twitterUserId;
+    private $twitterId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="username", type="string", length=255)
+     */
+    protected $username;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    private $isActive;
 
     /**
      * @var \DateTime
@@ -46,7 +61,7 @@ class User
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -54,26 +69,72 @@ class User
     }
 
     /**
-     * Set twitterUserId
+     * Set twitterId
      *
-     * @param string $twitterUserId
+     * @param string $twitterId
      * @return User
      */
-    public function setTwitterUserId($twitterUserId)
+    public function setTwitterId($twitterId)
     {
-        $this->twitterUserId = $twitterUserId;
+        $this->twitterId = $twitterId;
 
         return $this;
     }
 
     /**
-     * Get twitterUserId
+     * Get twitterId
      *
-     * @return string 
+     * @return string
      */
-    public function getTwitterUserId()
+    public function getTwitterId()
     {
-        return $this->twitterUserId;
+        return $this->twitterId;
+    }
+
+    /**
+     * Set username
+     *
+     * @param string $username
+     * @return User
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * Get username
+     *
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * Set isActive
+     *
+     * @param boolean $isActive
+     * @return User
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get isActive
+     *
+     * @return boolean
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
     }
 
     /**
@@ -92,7 +153,7 @@ class User
     /**
      * Get createAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreateAt()
     {
@@ -115,7 +176,7 @@ class User
     /**
      * Get updateAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdateAt()
     {
