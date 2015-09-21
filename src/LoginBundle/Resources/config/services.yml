@@ -1,6 +1,0 @@
-parameters:
-    oauth_user_provider.class: HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider
-
-services:
-    oauth_user_provider.service:
-        class: %oauth_user_provider.class%
