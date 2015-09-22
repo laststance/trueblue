@@ -1,13 +1,22 @@
 language: php
+
 php:
-- 5.6
+  - 5.6
+
+services:
+  - mysql
+
 before_script:
-- cp app/config/parameters.yml.dist app/config/parameters.yml
-- composer self-update
-- composer install --dev --no-interaction --prefer-source
-- app/console cache:warmup --env=test --quiet
+  - cp app/config/parameters.yml.dist app/config/parameters.yml
+  - composer self-update
+  - composer install --dev --no-interaction --prefer-source
+  - app/console doctrine:database:create --env=test --no-interaction --quiet
+  - app/console doctrine:schema:create  --env=test --no-interaction --quiet
+  - app/console cache:warmup --env=test --quiet
+
 script:
-- "./vendor/phpunit/phpunit/phpunit --verbose --debug -c app/"
+  - "./vendor/phpunit/phpunit/phpunit --verbose --debug -c app/"
+
 env:
   global:
   - secure: x/5NDwghuvtVNnAwn60pMs82npJW/sRKqNdThwJXYNeCmlk0s8X2KRt1TeuiJqe/4BK9Eh8SmBzCTqUe4zl190Cx+TytrZWc7F+M+kPOfC05ueeYDx1wp9XKsd232DmPrDq0TnwKJNCEjotn+0jsJwmNF5Hdbkgi1R3bM/g8OHcpIAuJSuoizSNibyJMT4L38fGgqluCX7l3UtSvk4br4EBqjBlREHYcjRFGd/URc9v/8l7bGZHT+IXR5j1bRXyQVE7nAnxQtkPpvXFCUM1GBcXk0GoDwD5nfVP0ydaQ+JrvmECDELWWXadgspPeg00z8G2vf+UiAig/ht+ocQT7hPnME7O0Khxokw3DkyiZcQhV5wVEzKWyHN7vS35PysU1Ij4JAOFoTRbS8aPmI6STzHFcoqsKdfkq1wPmJ2oY5YGOPZOdU3tfk7h6FvLfZBIzut3ObPLi7YJLyBqmZEm0Eb46rYbUzY0D0iPZW1ERECfoypPmq8suCW/c+3O6lu2S8aMTxpHScSkjfb9AgKNQ28ssEc2n6qNToXHMBmGkMeJfqBYGBlDLo+QjxIadykn7Da0WuDXTnxFA/RfD396KDbaq3W/n0AUG+S0+XrZBVjM9OA52i5A2eWj1O6y0+WAGsbNMqoGJ47j9f8T14xEHoMvX91gVq7TH/d+Xj8kLUnM=
