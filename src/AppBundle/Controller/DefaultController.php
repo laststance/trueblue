@@ -23,4 +23,12 @@ class DefaultController extends Controller
         //今日のつぶやき一覧をtemplateに貼り付けてrender
         return $this->render('AppBundle:Default:index.html.twig', array('timeline' => $timeline));
     }
+
+    /**
+    * @Route("/login", name="login")
+    */
+   public function loginAction()
+   {
+       return $this->render('AppBundle:Default:login.html.twig');
+   }
 }

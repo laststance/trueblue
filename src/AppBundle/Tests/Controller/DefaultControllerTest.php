@@ -15,4 +15,15 @@ class DefaultControllerTest extends WebTestCase
         //$this->assertEquals(200, $client->getResponse()->getStatusCode());
         //$this->assertTrue($crawler->filter('html:contains("Homepage")')->count() > 0);
     }
+
+    public function testLogin()
+    {
+        $client = static::createClient();
+
+        $crawler = $client->request('GET', '/login');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $this->assertTrue($crawler->filter('body.login')->count() > 0);
+    }
 }
