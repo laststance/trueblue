@@ -21,6 +21,8 @@
   </article>
 </main>
 {% endblock %}
-
 {% block javascript %}
+<script type="text/javascript">
+  var timeline = {{ timeline|json_encode()|raw }};
+</script>
 {% endblock %}

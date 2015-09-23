@@ -1,7 +1,7 @@
 
 .navbar {
-  width: 100%;
   position: fixed;
+  width: 100%;
 }
 
 main {
@@ -12,16 +12,16 @@ main {
   }
 
   .timeline-item {
-      background-color: rgba(255, 255, 255, .8);
-      color: rgba(0, 0, 0, .8);
-      padding: 9px 12px;
-      border-left: 1px solid rgba(100, 100, 100, .6);
-      border-right: 1px solid rgba(100, 100, 100, .6);
-      border-bottom: 1px solid rgba(100, 100, 100, .6);
+    background-color: rgba(255, 255, 255, .8);
+    border-bottom: 1px solid rgba(100, 100, 100, .6);
+    border-left: 1px solid rgba(100, 100, 100, .6);
+    border-right: 1px solid rgba(100, 100, 100, .6);
+    color: rgba(0, 0, 0, .8);
+    padding: 9px 12px;
 
-      p {
-        margin-bottom: 0;
-      }
+    p {
+      margin-bottom: 0;
+    }
   }
 
 }
@@ -29,9 +29,8 @@ main {
 // tablet
 @media (min-width: 34em) and (max-width: 47.9em) {
   main {
-
+    z-index: auto;
   }
-
 }
 
 // smart phone

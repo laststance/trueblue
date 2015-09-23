@@ -1,6 +1,6 @@
 .navbar {
-  width: 100%;
   position: fixed;
+  width: 100%;
 }
 
 main {
@@ -11,16 +11,21 @@ main .timeline {
 }
 main .timeline-item {
   background-color: rgba(255, 255, 255, 0.8);
-  color: rgba(0, 0, 0, 0.8);
-  padding: 9px 12px;
+  border-bottom: 1px solid rgba(100, 100, 100, 0.6);
   border-left: 1px solid rgba(100, 100, 100, 0.6);
   border-right: 1px solid rgba(100, 100, 100, 0.6);
-  border-bottom: 1px solid rgba(100, 100, 100, 0.6);
+  color: rgba(0, 0, 0, 0.8);
+  padding: 9px 12px;
 }
 main .timeline-item p {
   margin-bottom: 0;
 }
 
+@media (min-width: 34em) and (max-width: 47.9em) {
+  main {
+    z-index: auto;
+  }
+}
 @media (max-width: 34em) {
   main {
     height: 70%;
