@@ -37,6 +37,20 @@ class User extends OAuthUser
     protected $username;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="today_since_id", type="string", length=255)
+     */
+    private $todaySinceId;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="since_id_at", type="datetime")
+     */
+    private $sinceIdAt;
+
+    /**
      * @var boolean
      *
      * @ORM\Column(name="is_active", type="boolean")
@@ -56,7 +70,6 @@ class User extends OAuthUser
      * @ORM\Column(name="update_at", type="datetime")
      */
     private $updateAt;
-
 
     /**
      * Get id
@@ -92,27 +105,49 @@ class User extends OAuthUser
     }
 
     /**
-     * Set username
+     * Set todaySinceId
      *
-     * @param string $username
      * @return User
      */
-    public function setUsername($username)
-    {
-        $this->username = $username;
+     public function setTodaySinceId($todaySinceId)
+     {
+         $this->todaySinceId = $todaySinceId;
 
-        return $this;
-    }
+         return $this;
+     }
 
     /**
-     * Get username
+     * Get todaySinceId
      *
      * @return string
      */
-    public function getUsername()
-    {
-        return $this->username;
-    }
+     public function getTodaySinceId()
+     {
+         return $this->todaySinceId;
+     }
+
+     /**
+      * Set sinceIdAt
+      *
+      * @param \DateTime $sinceIdAt
+      * @return User
+      */
+     public function setSinceIdAt($sinceIdAt)
+     {
+         $this->sinceIdAt = $sinceIdAt;
+
+         return $this;
+     }
+
+     /**
+      * Get sinceIdAt
+      *
+      * @return \DateTime
+      */
+     public function getSinceIdAt()
+     {
+         return $this->sinceIdAt;
+     }
 
     /**
      * Set isActive

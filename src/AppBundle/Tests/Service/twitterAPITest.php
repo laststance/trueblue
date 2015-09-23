@@ -15,18 +15,20 @@ class TwitterAPITest extends \PHPUnit_Framework_TestCase
     protected $twitterApi;
 
     /**
-     * @var HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken
-     */
-    protected $oauthToken;
+    * @var Symfony\Component\Security\Core\Authentication\Token\Storage
+    */
+    protected $tokenStorage;
 
     protected $params = array();
 
     public function setUp()
     {
-        $this->oauthToken = new OAuthToken('access_token', array('ROLE_TEST'));
-        $this->oauthToken->setResourceOwnerName('github');
+        $mockDoctrine = $this->getMock('Doctrine\Bundle\DoctrineBundle\Registry', array(), array(), '', false);
+        $oauthToken = new OAuthToken('access_token', array('ROLE_TEST'));
+        $oauthToken->setResourceOwnerName('github');
         $tokenStorage = new TokenStorage();
-        $tokenStorage->setToken($this->oauthToken);
+        $this->tokenStorage = $tokenStorage;
+        $tokenStorage->setToken($oauthToken);
 
         $this->params = array(
           'consumer_key' => 'consumer_key_value',
@@ -34,7 +36,7 @@ class TwitterAPITest extends \PHPUnit_Framework_TestCase
           'bearer_token' => 'bearer_token_value',
         );
 
-        $this->twitterApi = new TwitterAPI($tokenStorage, $this->params);
+        $this->twitterApi = new TwitterAPI($mockDoctrine, $tokenStorage, $this->params);
     }
 
     /**
@@ -43,18 +45,19 @@ class TwitterAPITest extends \PHPUnit_Framework_TestCase
     public function testAcceptOAuthTokenOnly()
     {
         $mockToken = $this->getMock('Symfony\Component\Security\Core\Authentication\Token\TokenInterface');
+        $mockDoctrine = $this->getMock('Doctrine\Bundle\DoctrineBundle\Registry', array(), array(), '', false);
         $tokenStorage = new TokenStorage();
         $tokenStorage->setToken($mockToken);
 
-        $twitterApi = new TwitterAPI($tokenStorage, $this->params);
+        $twitterApi = new TwitterAPI($mockDoctrine, $tokenStorage, $this->params);
     }
 
     /**
      * @test
      */
-    public function getOauthToken()
+    public function getTokenStorage()
     {
-        $this->assertSame($this->twitterApi->getOauthToken(), $this->oauthToken);
+        $this->assertSame($this->twitterApi->getTokenStorage(), $this->tokenStorage);
     }
 
     /**

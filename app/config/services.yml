@@ -10,7 +10,7 @@ parameters:
 services:
     twitter_api:
         class: AppBundle\Service\TwitterAPI
-        arguments: ["@security.token_storage", "%twitter_api%"]
+        arguments: [@doctrine, "@security.token_storage", "%twitter_api%"]
 
     oauth_entity_user_provider:
         class: AppBundle\Service\OAuthEntityUserProvider

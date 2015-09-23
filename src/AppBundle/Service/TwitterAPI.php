@@ -5,13 +5,19 @@ namespace AppBundle\Service;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
+use Doctrine\Bundle\DoctrineBundle\Registry;
 
 class TwitterAPI
 {
     /**
-     * @var HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken
-     */
-    protected $oauthToken;
+    * @var Doctrine\Bundle\DoctrineBundle\Registry
+    */
+    protected $doctrine;
+
+    /**
+    * @var Symfony\Component\Security\Core\Authentication\Token\Storage
+    */
+    protected $tokenStorage;
 
     protected $consumer_key = ''; // api key
     protected $consumer_secret = ''; // api secret
@@ -20,49 +26,104 @@ class TwitterAPI
     protected $request_url = ''; // decide by api call method
 
     /**
-     * @param TokenStorage $token_storage $this->container->get('security.token_storage')
+     * @param TokenStorage $tokenStorage $this->container->get('security.token_storage')
      * @param array $key_and_token twitter api key and tokens
      */
-    public function __construct(TokenStorage $token_storage, array $key_and_token)
+    public function __construct(Registry $doctrine, TokenStorage $tokenStorage, array $key_and_token)
     {
-        if (($oauthToken = $token_storage->getToken()) instanceof OAuthToken === false) {
-            throw new InvalidArgumentException(sprintf('Object get from tokenstrage was not a OAuthToken. getting "%s" object.', get_class($oauthToken)));
+        if ($tokenStorage->getToken() instanceof OAuthToken === false) {
+            throw new InvalidArgumentException(sprintf('Object get from tokenstrage was not a OAuthToken. getting "%s" object.', get_class($tokenStorage->getToken())));
         }
 
-        $this->oauthToken = $oauthToken;
+        $this->doctrine = $doctrine;
+        $this->tokenStorage = $tokenStorage;
         $this->consumer_key = $key_and_token['consumer_key'];
         $this->consumer_secret = $key_and_token['consumer_secret'];
         $this->bearer_token = $key_and_token['bearer_token'];
     }
 
     /**
-     * @return TBD
+     * @return array|null timeline or null
      */
-    public function getTodaysTweet()
+    public function getTodayTimeline()
     {
-        $database['todays_since_id'] = '';
+        $get_query = ['user_id' => $this->tokenStorage->getToken()->getRawToken()['user_id']];
+        $today = (new \DateTime())->format('Y-m-d');
+        $since_id_at = $this->tokenStorage->getToken()->getUser()->getSinceIdAt();
 
-        // 今日の始点つぶやきのsince_idが無ければタイムラインをまるまる取得してsince_idを計算する
-        if (!$database['todays_since_id']) {
-            $get_query = array(
-              'user_id' => $this->oauthToken->getRawToken()['user_id'],
-              'count' => '200',
-            );
-            $decoded_json = $this->callStatusesUserTimeline($get_query);
-            //今日一番最初のつぶやきのsince_id抽出処理
+        // 今日の始点ツイートのsince_idが無ければタイムラインをまるまる取得してsince_idを計算する
+        if ($since_id_at === null || $since_id_at->format('Y-m-d') !== $today) {
+            $timeline = $this->searchTodayTimeline($get_query);
 
-            //抽出したsince_idをDBに登録
-
-            //今日のつぶやき一覧をreturn
-
+            return $timeline;
+        }
         // since_idがあればget_queryに指定して今日のつぶやき一覧をapiから取得
+        if ('undefined' !== $today_since_id = $this->tokenStorage->getToken()->getUser()->getTodaySinceId()) {
+            $get_query['since_id'] = $today_since_id;
+        // since_idがundefinedなら200件まで取得 今日以前のつぶやきが存在しないアカウントなど
         } else {
-            $get_query = array(
-              'user_id' => $this->oauthToken->getRawToken()['user_id'],
-              'count' => '200',
-            );
+            $get_query['count'] = '200';
+        }
+        $timeline = $this->callStatusesUserTimeline($get_query);
 
-            return $decoded_json = $this->callStatusesUserTimeline($get_query);
+        return $timeline;
+    }
+
+    /**
+     * @param array $get_query api parameters
+     * @return array|null timeline or null
+     */
+    protected function searchTodayTimeline(array $get_query)
+    {
+        $today = (new \DateTime())->format('Y-m-d');
+        $saved_timelime = array(); // 今までに取得したtimelime
+        $index = 0; // for文を回した回数
+
+        while (true) {
+            // timeline取得apiを叩く 2回目以降はmax_idで指定したつぶやきも含まれるので切り捨てる
+            $fetch_timelime = $index === 0 ? $this->callStatusesUserTimeline($get_query) : array_slice($this->callStatusesUserTimeline($get_query), 1);
+            $saved_timelime = array_merge($saved_timelime, $fetch_timelime);
+
+            // apiからの取得件数が0件
+            if (count($fetch_timelime) < 1) {
+                // timelineの総取得総数が0件 一件もつぶやきが無い人など
+                if (count($saved_timelime) < 1) {
+                    return null;
+                // 直前に取得した分までが本日のつぶやき
+                } else {
+                    return $saved_timelime;
+                }
+            }
+
+            // 今日一番最初のつぶやきのsince_idとtimelimeを抽出する
+            for ($i=$index; count($saved_timelime) > $i; $i++) {
+                $tweet = array_key_exists($i, $saved_timelime) ? $saved_timelime[$i] : null; // null 本日以前のつぶやきが見つからなかった
+
+                // 本日以前のつぶやきであるか？ あるいは本日以前のつぶやきが存在しない
+                if ($tweet === null || $today !== date('Y-m-d', strtotime($tweet->created_at))) {
+                    // 本日のつぶやきが0件
+                    if ($index === 0) {
+                      return null;
+                    }
+
+                    // 本日のタイムラインを抽出
+                    $today_timelime = array_slice($saved_timelime, 0, $index);
+
+                    // sinceId情報をDBに保存
+                    $userEntity = $this->doctrine->getRepository('AppBundle:User')->find($this->tokenStorage->getToken()->getUser()->getId());
+                    $today_since_id = $tweet !== null ? $tweet->id_str : 'undefined'; // 本日以前のつぶやきが存在しない場合 undefined
+                    $userEntity->setTodaySinceId($today_since_id);
+                    $userEntity->setSinceIdAt(new \DateTime());
+                    $em = $this->doctrine->getEntityManager();
+                    $em->persist($userEntity);
+                    $em->flush();
+
+                    return $today_timelime;
+                }
+                $index++;
+            }
+            // api次回取得位置を指定
+            $get_query = array_merge($get_query, array('max_id' => $tweet->id_str));
         }
     }
 
@@ -175,13 +236,13 @@ class TwitterAPI
     }
 
     /**
-     * Get the value of Oauth Token
+     * Get the value of Token Storage
      *
-     * @return HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken
+     * @return mixed
      */
-    public function getOauthToken()
+    public function getTokenStorage()
     {
-        return $this->oauthToken;
+        return $this->tokenStorage;
     }
 
     /**
