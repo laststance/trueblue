@@ -21,6 +21,6 @@ class DefaultController extends Controller
         dump($timeline);
 
         //今日のつぶやき一覧をtemplateに貼り付けてrender
-        return $this->render('AppBundle:Default:index.html.twig', array('today_tweet' => $timeline));
+        return $this->render('AppBundle:Default:index.html.twig', array('timeline' => $timeline));
     }
 }
