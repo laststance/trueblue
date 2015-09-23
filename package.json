@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "create article from daily tweet",
   "devDependencies": {
+    "react": "^0.13.3",
     "babelify": "^6.3.0",
     "browserify": "^11.1.0",
     "gulp": "^3.9.0",
