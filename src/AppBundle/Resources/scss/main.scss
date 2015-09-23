@@ -1,0 +1,20 @@
+html,
+body {
+  background-image: url('../img/background.jpg');
+  height: 100%;
+}
+
+.navbar {
+  background-color: rgba(255, 255, 255, .2);
+  padding-top: 20px;
+
+  .nav {
+    margin: 0 auto;
+    width: 80%;
+  }
+
+  .header-title {
+    color: rgba(255, 255, 255, .7);
+    font-family: Shadows Into Light Two;
+  }
+ }

@@ -55,7 +55,14 @@
         "symfony-web-dir": "web",
         "symfony-assets-install": "relative",
         "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
+            "file": "app/config/parameters.yml",
+            "env-map": {
+              "client_id": "CONSUMER_KEY",
+              "client_secret": "CONSUMER_SECRET",
+              "consumer_key": "CONSUMER_KEY",
+              "consumer_secret": "CONSUMER_SECRET",
+              "bearer_token": "BEARER_TOKEN"
+            }
         },
         "branch-alias": {
             "dev-master": "2.7-dev"

@@ -1,1 +1,18 @@
-@import url(../assets/css/bootstrap.css);
+html,
+body {
+  background-image: url("../img/background.jpg");
+  height: 100%;
+}
+
+.navbar {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding-top: 20px;
+}
+.navbar .nav {
+  margin: 0 auto;
+  width: 80%;
+}
+.navbar .header-title {
+  color: rgba(255, 255, 255, 0.7);
+  font-family: Shadows Into Light Two;
+}

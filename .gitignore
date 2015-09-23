@@ -15,3 +15,4 @@ tags
 .tags_swap
 /node_modules/
 /.sass-cache/
+/.bundle/

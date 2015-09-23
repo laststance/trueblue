@@ -1,8 +1,23 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'AppBundle::base.html.twig' %}
+{% block stylesheet %}
+  <link rel="stylesheet" href="{{ asset('/css/index.css') }}">
+  <link href='https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two' rel='stylesheet' type='text/css'>
+{% endblock %}
 {% block body %}
-  <h1>INDEX Page</h1>
-  {% if app.user %}
-    <h1>Hello {{ app.user.username }}!!</h1>
-  {% endif %}
+<nav class="navbar">
+  <ul class="nav">
+    <li class="nav-item header-title pull-left">
+      <h1>Hello @{{ app.user.username }} {{ random(['＼(・｀(ｪ)・)/', '(*ノ・ω・）', 'o (◡‿◡✿)', 'ヽ(*・ω・)ﾉ']) }}</h1>
+    </li>
+  </ul>
+</nav>
+<main id="container" class="container">
+
+</main>
+{% endblock %}
+{% block javascript %}
+<script type="text/javascript">
+  var timeline_json = eval({{ timeline|json_encode()|raw }});
+</script>
+<script src="{{ asset('/js/index.js') }}"></script>
 {% endblock %}
