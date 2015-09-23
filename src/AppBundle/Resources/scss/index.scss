@@ -1,0 +1,46 @@
+
+.navbar {
+  width: 100%;
+  position: fixed;
+}
+
+main {
+  color: rgba(255, 255, 255, .88);
+
+  .timeline {
+    padding-top: 90px;
+  }
+
+  .timeline-item {
+      background-color: rgba(255, 255, 255, .8);
+      color: rgba(0, 0, 0, .8);
+      padding: 9px 12px;
+      border-left: 1px solid rgba(100, 100, 100, .6);
+      border-right: 1px solid rgba(100, 100, 100, .6);
+      border-bottom: 1px solid rgba(100, 100, 100, .6);
+
+      p {
+        margin-bottom: 0;
+      }
+  }
+
+}
+
+// tablet
+@media (min-width: 34em) and (max-width: 47.9em) {
+  main {
+
+  }
+
+}
+
+// smart phone
+@media (max-width: 34em) {
+  main {
+    height: 70%;
+
+    section {
+      height: 100%;
+    }
+  }
+}

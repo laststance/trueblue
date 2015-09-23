@@ -1,0 +1,31 @@
+.navbar {
+  width: 100%;
+  position: fixed;
+}
+
+main {
+  color: rgba(255, 255, 255, 0.88);
+}
+main .timeline {
+  padding-top: 90px;
+}
+main .timeline-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: rgba(0, 0, 0, 0.8);
+  padding: 9px 12px;
+  border-left: 1px solid rgba(100, 100, 100, 0.6);
+  border-right: 1px solid rgba(100, 100, 100, 0.6);
+  border-bottom: 1px solid rgba(100, 100, 100, 0.6);
+}
+main .timeline-item p {
+  margin-bottom: 0;
+}
+
+@media (max-width: 34em) {
+  main {
+    height: 70%;
+  }
+  main section {
+    height: 100%;
+  }
+}
