@@ -5,10 +5,17 @@
 }
 
 main {
-  color: rgba(255, 255, 255, .88);
 
-  .timeline {
+  #timeline {
     padding-top: 90px;
+
+    section:first-child {
+      border-radius: 5px 5px 0 0;
+    }
+
+    section:last-child {
+      border-radius: 0 0 5px 5px;
+    }
   }
 
   .timeline-item {
@@ -16,11 +23,39 @@ main {
     border-bottom: 1px solid rgba(100, 100, 100, .6);
     border-left: 1px solid rgba(100, 100, 100, .6);
     border-right: 1px solid rgba(100, 100, 100, .6);
-    color: rgba(0, 0, 0, .8);
+    color: rgba(0, 0, 0, .76);
     padding: 9px 12px;
 
     p {
       margin-bottom: 0;
+    }
+
+    .profile-image {
+      border-radius: 5px;
+      padding-top: 3px;
+    }
+
+    .pull-right {
+      width: 90%;
+    }
+
+    .user-name {
+      font-size: 15px;
+    }
+
+    .screen-name {
+      color: rgba(30, 30, 30, .5);
+      font-size: 13px;
+    }
+
+    .text {
+      font-weight: bold;
+      padding: 5px 0;
+    }
+
+    .create-at {
+      color: rgba(30, 30, 30, .5);
+      font-size: 13px;
     }
   }
 

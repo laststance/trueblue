@@ -11,18 +11,13 @@
     </li>
   </ul>
 </nav>
-<main class="container">
-  <article class="row timeline">
-    {% for i in 0..100 %}
-    <section class="timeline-item col-md-offset-3 col-md-6">
-      <p>message {{i}}</p>
-    </section>
-    {% endfor %}
-  </article>
+<main id="container" class="container">
+
 </main>
 {% endblock %}
 {% block javascript %}
 <script type="text/javascript">
-  var timeline = {{ timeline|json_encode()|raw }};
+  var timeline_json = eval({{ timeline|json_encode()|raw }});
 </script>
+<script src="{{ asset('/js/index.js') }}"></script>
 {% endblock %}

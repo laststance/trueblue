@@ -3,22 +3,47 @@
   width: 100%;
 }
 
-main {
-  color: rgba(255, 255, 255, 0.88);
-}
-main .timeline {
+main #timeline {
   padding-top: 90px;
+}
+main #timeline section:first-child {
+  border-radius: 5px 5px 0 0;
+}
+main #timeline section:last-child {
+  border-radius: 0 0 5px 5px;
 }
 main .timeline-item {
   background-color: rgba(255, 255, 255, 0.8);
   border-bottom: 1px solid rgba(100, 100, 100, 0.6);
   border-left: 1px solid rgba(100, 100, 100, 0.6);
   border-right: 1px solid rgba(100, 100, 100, 0.6);
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(0, 0, 0, 0.76);
   padding: 9px 12px;
 }
 main .timeline-item p {
   margin-bottom: 0;
+}
+main .timeline-item .profile-image {
+  border-radius: 5px;
+  padding-top: 3px;
+}
+main .timeline-item .pull-right {
+  width: 90%;
+}
+main .timeline-item .user-name {
+  font-size: 15px;
+}
+main .timeline-item .screen-name {
+  color: rgba(30, 30, 30, 0.5);
+  font-size: 13px;
+}
+main .timeline-item .text {
+  font-weight: bold;
+  padding: 5px 0;
+}
+main .timeline-item .create-at {
+  color: rgba(30, 30, 30, 0.5);
+  font-size: 13px;
 }
 
 @media (min-width: 34em) and (max-width: 47.9em) {
