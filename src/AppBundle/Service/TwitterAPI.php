@@ -135,7 +135,7 @@ class TwitterAPI
      * get timelime since_id from max_id
      *
      * @param string $since_id
-       @param string $max_id
+     * @param string $max_id
      * @return array|null timeline or null
      */
     public function getTimelineSinceFromMax($since_id, $max_id)
