@@ -43,6 +43,8 @@ class TwitterAPI
     }
 
     /**
+     * get today timeline json
+     *
      * @return array|null timeline or null
      */
     public function getTodayTimeline()
@@ -70,6 +72,8 @@ class TwitterAPI
     }
 
     /**
+     * search since_id & set db. return today timeline json
+     *
      * @param array $get_query api parameters
      * @return array|null timeline or null
      */
@@ -125,6 +129,30 @@ class TwitterAPI
             // api次回取得位置を指定
             $get_query = array_merge($get_query, array('max_id' => $tweet->id_str));
         }
+    }
+
+    /**
+     * get timelime since_id from max_id
+     *
+     * @param string $since_id
+       @param string $max_id
+     * @return array|null timeline or null
+     */
+    public function getTimelineSinceFromMax($since_id, $max_id)
+    {
+      if (!is_string($since_id) || !is_string($max_id)) {
+          throw new InvalidArgumentException('TwitterAPI::getTimelineSinceFromMax() arguments must be string.');
+      }
+
+      $get_query = [
+        'user_id' => $this->tokenStorage->getToken()->getRawToken()['user_id'],
+        'since_id' => $since_id,
+        'max_id' =>  $max_id,
+      ];
+
+      $decoded_json = $this->callStatusesUserTimeline($get_query);
+
+      return $decoded_json;
     }
 
     /**

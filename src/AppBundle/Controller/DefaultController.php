@@ -18,7 +18,9 @@ class DefaultController extends Controller
         dump($this->get('security.token_storage')->getToken());
         //今日のつぶやき一覧を取得
         $timeline = $twitterApi->getTodayTimeline();
-        dump($timeline);
+
+        $past_timeline = $twitterApi->getTimelineSinceFromMax('646343100630110208', '646693816548749312');
+        dump($past_timeline);
 
         //今日のつぶやき一覧をtemplateに貼り付けてrender
         return $this->render('AppBundle:Default:index.html.twig', array('timeline' => $timeline));
