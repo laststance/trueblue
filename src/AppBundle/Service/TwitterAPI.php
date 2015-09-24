@@ -55,7 +55,7 @@ class TwitterAPI
 
         // 今日の始点ツイートのsince_idが無ければタイムラインをまるまる取得してsince_idを計算する
         if ($since_id_at === null || $since_id_at->format('Y-m-d') !== $today) {
-            $timeline = $this->searchTodayTimeline($get_query);
+            $timeline = $this->findTodayTimeline($get_query);
 
             return $timeline;
         }
@@ -72,12 +72,12 @@ class TwitterAPI
     }
 
     /**
-     * search since_id & set db. return today timeline json
+     * find since_id & set db. return today timeline json
      *
      * @param array $get_query api parameters
      * @return array|null timeline or null
      */
-    protected function searchTodayTimeline(array $get_query)
+    protected function findTodayTimeline(array $get_query)
     {
         $today = (new \DateTime())->format('Y-m-d');
         $saved_timelime = array(); // 今までに取得したtimelime
