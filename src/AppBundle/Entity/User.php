@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Doctrine\Common\Collections\ArrayCollection;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUser;
 
 /**
@@ -10,6 +12,7 @@ use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUser;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\UserRepository")
+ * @UniqueEntity("twitterId")
  */
 class User extends OAuthUser
 {
@@ -25,7 +28,7 @@ class User extends OAuthUser
     /**
      * @var string
      *
-     * @ORM\Column(name="twitter_id", type="string", length=255)
+     * @ORM\Column(name="twitter_id", type="string", length=255, unique=true)
      */
     private $twitterId;
 
@@ -42,6 +45,13 @@ class User extends OAuthUser
      * @ORM\Column(name="today_since_id", type="string", length=255)
      */
     private $todaySinceId;
+
+    /**
+     * @var PastTimeline
+     *
+     * @ORM\OneToMany(targetEntity="PastTimeline", mappedBy="user")
+     */
+    private $pastTimelines;
 
     /**
      * @var \DateTime
@@ -70,6 +80,11 @@ class User extends OAuthUser
      * @ORM\Column(name="update_at", type="datetime")
      */
     private $updateAt;
+
+    public function __construct()
+    {
+      $this->pastTimelines = new ArrayCollection();
+    }
 
     /**
      * Get id

@@ -5,7 +5,7 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Entity\TodaysSinceId;
+use AppBundle\Entity\PastTimeline;
 
 class DefaultController extends Controller
 {
@@ -17,10 +17,12 @@ class DefaultController extends Controller
         $twitterApi = $this->container->get('twitter_api');
         dump($this->get('security.token_storage')->getToken());
         //今日のつぶやき一覧を取得
-        $timeline = $twitterApi->getTodayTimeline();
+        //$timeline = $twitterApi->getTodayTimeline();
 
-        $past_timeline = $twitterApi->getTimelineSinceFromMax('646343100630110208', '646693816548749312');
-        dump($past_timeline);
+        // DBから過去のタイムラインを取得してreactに渡す
+        $timeline = $this->getDoctrine()->getRepository('AppBundle:PastTimeline')->find(2)->getTimelineJson();
+        $timeline = json_decode($timeline);
+        dump($timeline);
 
         //今日のつぶやき一覧をtemplateに貼り付けてrender
         return $this->render('AppBundle:Default:index.html.twig', array('timeline' => $timeline));
