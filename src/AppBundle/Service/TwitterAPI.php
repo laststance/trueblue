@@ -80,28 +80,28 @@ class TwitterAPI
     protected function findTodayTimeline(array $get_query)
     {
         $today = (new \DateTime())->format('Y-m-d');
-        $saved_timelime = array(); // 今までに取得したtimelime
+        $saved_timeline = array(); // 今までに取得したtimeline
         $index = 0; // for文を回した回数
 
         while (true) {
             // timeline取得apiを叩く 2回目以降はmax_idで指定したつぶやきも含まれるので切り捨てる
-            $fetch_timelime = $index === 0 ? $this->callStatusesUserTimeline($get_query) : array_slice($this->callStatusesUserTimeline($get_query), 1);
-            $saved_timelime = array_merge($saved_timelime, $fetch_timelime);
+            $fetch_timeline = $index === 0 ? $this->callStatusesUserTimeline($get_query) : array_slice($this->callStatusesUserTimeline($get_query), 1);
+            $saved_timeline = array_merge($saved_timeline, $fetch_timeline);
 
             // apiからの取得件数が0件
-            if (count($fetch_timelime) < 1) {
+            if (count($fetch_timeline) < 1) {
                 // timelineの総取得総数が0件 一件もつぶやきが無い人など
-                if (count($saved_timelime) < 1) {
+                if (count($saved_timeline) < 1) {
                     return null;
                 // 直前に取得した分までが本日のつぶやき
                 } else {
-                    return $saved_timelime;
+                    return $saved_timeline;
                 }
             }
 
-            // 今日一番最初のつぶやきのsince_idとtimelimeを抽出する
-            for ($i=$index; count($saved_timelime) > $i; $i++) {
-                $tweet = array_key_exists($i, $saved_timelime) ? $saved_timelime[$i] : null; // null 本日以前のつぶやきが見つからなかった
+            // 今日一番最初のつぶやきのsince_idとtimelineを抽出する
+            for ($i=$index; count($saved_timeline) > $i; $i++) {
+                $tweet = array_key_exists($i, $saved_timeline) ? $saved_timeline[$i] : null; // null 本日以前のつぶやきが見つからなかった
 
                 // 本日以前のつぶやきであるか？ あるいは本日以前のつぶやきが存在しない
                 if ($tweet === null || $today !== date('Y-m-d', strtotime($tweet->created_at))) {
@@ -111,7 +111,7 @@ class TwitterAPI
                     }
 
                     // 本日のタイムラインを抽出
-                    $today_timelime = array_slice($saved_timelime, 0, $index);
+                    $today_timeline = array_slice($saved_timeline, 0, $index);
 
                     // sinceId情報をDBに保存
                     $userEntity = $this->doctrine->getRepository('AppBundle:User')->find($this->tokenStorage->getToken()->getUser()->getId());
@@ -122,7 +122,7 @@ class TwitterAPI
                     $em->persist($userEntity);
                     $em->flush();
 
-                    return $today_timelime;
+                    return $today_timeline;
                 }
                 $index++;
             }
@@ -132,7 +132,67 @@ class TwitterAPI
     }
 
     /**
-     * get timelime since_id from max_id
+     * get since_id ~ max_id range by target date
+     *
+     * @param \DateTme $targetDate must be up to 6 days ago. because twitter api limit.
+     * @param array $get_query
+     * @return array|string ['since_id' => '1234', 'max_id' => '5678', 'timeline_json' => decoded_json] or String of reasons that do not exist
+     */
+    public function findIdRangeByDate(\DateTime $targetDate, array $get_query = [])
+    {
+        $target_day = $targetDate->format('Y-m-d');
+        $saved_timeline = array(); // 今までに取得したtimeline
+        $index = 0; // for文を回した回数
+        $max_id = null;
+        $since_id = null;
+        $get_query = array_merge($get_query, ['user_id' => $this->tokenStorage->getToken()->getRawToken()['user_id']]);
+
+        while (true) {
+            // timeline取得apiを叩く 2回目以降はmax_idで指定したつぶやきも含まれるので切り捨てる
+            $fetch_timeline = $index === 0 ? $this->callStatusesUserTimeline($get_query) : array_slice($this->callStatusesUserTimeline($get_query), 1);
+            $saved_timeline = array_merge($saved_timeline, $fetch_timeline);
+
+            // apiからの取得件数が0件
+            if (count($fetch_timeline) < 1) {
+                // timelineの総取得総数が0件 一件もつぶやきが無い人など
+                if (count($saved_timeline) < 1) {
+                    return 'timeline get count 0.';
+                // 直前のループまでに取得した分までが指定日のtimeline
+                } else {
+                    return 'It reached api limit in the course of obtaining the since_id.';
+                }
+            }
+
+            for ($i=$index; count($saved_timeline) > $i; $i++) {
+                $tweet = $saved_timeline[$i];
+                // 指定日のtweetが一件もなかった場合
+                if ($max_id === null && $target_day > date('Y-m-d', strtotime($tweet->created_at))) {
+                    return 'target days tweet not found.';
+                }
+
+                // 指定日の一番最後のtweetをmax_idとしてセット
+                if ($max_id === null && $target_day === date('Y-m-d', strtotime($tweet->created_at))) {
+                    $max_id = $tweet->id_str;
+                    $max_id_index = $index;
+                }
+
+                // 指定日一日前の最初のtweetのsice_idとしてセット
+                if ($target_day > date('Y-m-d', strtotime($tweet->created_at))) {
+                    $sice_id = $tweet->id_str;
+                    $target_day_timeline = array_slice($saved_timeline, $max_id_index, $index);
+
+                    return ['since_id' => $since_id, 'max_id' => $max_id, 'timeline_json' => $target_day_timeline];
+                }
+
+                $index++;
+            }
+            // api次回取得位置を指定
+            $get_query = array_merge($get_query, ['max_id' => $tweet->id_str, 'count' => '21']);
+        }
+    }
+
+    /**
+     * get timeline since_id from max_id
      *
      * @param string $since_id
      * @param string $max_id
