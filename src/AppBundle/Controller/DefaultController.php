@@ -19,9 +19,8 @@ class DefaultController extends Controller
 
         // 今日のtimelineを取得
         $timeline = $twitterApi->getTodayTimeline();
-        dump($timeline);
         // DBから過去のtimelinelistを取得
-        //$past_timeline_list = $twitterApi->getPastTimelineList();
+        $past_timeline_list = $twitterApi->getPastTimelineList();
 
         return $this->render('AppBundle:Default:index.html.twig', ['timeline' => $timeline]);
     }
