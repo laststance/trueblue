@@ -55,9 +55,10 @@ class TwitterAPI
 
         // 今日の始点ツイートのsince_idが無ければsince_idを計算後、timlineを返す
         if ($since_id_at === null || $since_id_at->format('Y-m-d') !== $today) {
+
             $result = $this->findIdRangeByDate(new \DateTime(), $get_query);
             // エラーメッセージの場合
-            if (is_string($result)) {
+            if (isset($result['error'])) {
                 return $result;
             }
 
@@ -91,7 +92,7 @@ class TwitterAPI
      *
      * @param \DateTme $targetDate must be up to 6 days ago. because twitter api limit.
      * @param array $get_query
-     * @return array|string ['since_id' => '1234', 'max_id' => '5678', 'timeline_json' => decoded_json] or String of reasons that do not exist
+     * @return array ['since_id' => '1234', 'max_id' => '5678', 'timeline_json' => decoded_json] or ['error' => 'error msg']
      */
     public function findIdRangeByDate(\DateTime $targetDate, array $get_query = [])
     {
@@ -111,7 +112,7 @@ class TwitterAPI
             if (count($fetch_timeline) < 1) {
                 // timelineの総取得総数が0件 一件もつぶやきが無い人など
                 if (count($saved_timeline) < 1) {
-                    return 'timeline get count 0.';
+                    return ['error' => 'timeline get count 0.'];
                 // apiの取得範囲制限内で指定日のsince_idが見つからない
                 } else {
                     return ['since_id' => 'undefined', 'max_id' => $max_id, 'timeline_json' => $saved_timeline];
@@ -122,7 +123,7 @@ class TwitterAPI
                 $tweet = $saved_timeline[$i];
                 // 指定日のtweetが一件もなかった場合
                 if ($max_id === null && $target_day > date('Y-m-d', strtotime($tweet->created_at))) {
-                    return 'target days tweet not found.';
+                    return ['error' => 'target days tweet not found.'];
                 }
 
                 // 指定日の一番最後のtweetをmax_idとしてセット
