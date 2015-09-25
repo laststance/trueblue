@@ -14,19 +14,11 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $twitterApi = $this->container->get('twitter_api');
         dump($this->get('security.token_storage')->getToken());
-
-        $user = $this->get('security.token_storage')->getToken()->getUser(); //->getId();
-        //$past_time_lime = $this->getDoctrine()->getRepository('AppBundle:PastTimeline')->findByUser($user);
+        $twitterApi = $this->container->get('twitter_api');
 
         //昨日のつぶやき一覧を取得
         $timeline = $twitterApi->getTodayTimeline();
-
-        //$dbuser = $this->getDoctrine()->getRepository('AppBundle:User')->find($user->getId());
-
-        // DBから過去のタイムラインを取得
-        //$timeline = $this->getDoctrine()->getRepository('AppBundle:PastTimeline')->find(2)->getTimelineJson();
 
         //今日のつぶやき一覧をtemplateに貼り付けてrender
         return $this->render('AppBundle:Default:index.html.twig', ['timeline' => $timeline]);
