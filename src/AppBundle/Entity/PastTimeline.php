@@ -26,7 +26,7 @@ class PastTimeline
     /**
      * @var User
      *
-     *@ORM\ManyToOne(targetEntity="User", inversedBy="pastTimelines")
+     *@ORM\ManyToOne(targetEntity="User", inversedBy="pastTimelines", cascade={"persist"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
