@@ -17,10 +17,12 @@ class DefaultController extends Controller
         dump($this->get('security.token_storage')->getToken());
         $twitterApi = $this->container->get('twitter_api');
 
-        //昨日のつぶやき一覧を取得
+        // 今日のtimelineを取得
         $timeline = $twitterApi->getTodayTimeline();
+        dump($timeline);
+        // DBから過去のtimelinelistを取得
+        //$past_timeline_list = $twitterApi->getPastTimelineList();
 
-        //今日のつぶやき一覧をtemplateに貼り付けてrender
         return $this->render('AppBundle:Default:index.html.twig', ['timeline' => $timeline]);
     }
 

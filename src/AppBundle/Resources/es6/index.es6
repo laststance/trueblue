@@ -1,5 +1,7 @@
 var React = require('react');
 var Timeline = require('./timeline.jsx');
+window.jQuery = window.$ = require('jquery');
+var bootstrap = require('./bootstrap.js');
 
 var RootComponent = React.createClass({
   getInitialState: function() {
