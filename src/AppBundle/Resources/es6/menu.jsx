@@ -32,7 +32,7 @@ var Menu = React.createClass({
     });
     return (
       <div id="menu">
-        <Button bsStyle="primary" bsSize="large" onClick={this.open}>Menu</Button>
+        <Button className="btn-header-right" bsSize="large" onClick={this.open}>Menu</Button>
 
         <Modal show={this.state.showModal} onHide={this.close}>
           <Modal.Header closeButton>
