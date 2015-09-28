@@ -177,7 +177,7 @@ class TwitterAPI
     *
     * @return stdClass $decoded_json
     */
-    public function getPastTimelineList()
+    public function getPastTimelineFromDB()
     {
 
     }

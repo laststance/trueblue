@@ -2,7 +2,7 @@ var React = require('react');
 
 var Timeline = React.createClass({
   render: function() {
-    if (this.props.timeline_json.error) {
+    if (!this.props.timeline_json.length || this.props.timeline_json.error) {
       var view = (
         <article id="timeline" className="row">
           <div className='timeline-item col-md-offset-3 col-md-6 error-msg'>
@@ -14,7 +14,7 @@ var Timeline = React.createClass({
       var view = this.props.timeline_json.map(function(tweet, index){
         var date = new Date(tweet.created_at);
         return (
-          <section className='timeline-item col-md-offset-3 col-md-6' data-id={tweet.id_str} data-index={index}>
+          <section className='timeline-item col-md-offset-3 col-md-6' key={tweet.id_str} data-id={tweet.id_str} data-index={index}>
             <div className="contents">
               <div className="pull-left">
                 <img className="profile-image" src={tweet.user.profile_image_url} />

@@ -3,6 +3,11 @@
   width: 100%;
 }
 
+main #menu {
+  position: fixed;
+  right: 40px;
+  top: 20px;
+}
 main #timeline {
   padding-top: 90px;
 }
