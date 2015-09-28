@@ -21,7 +21,7 @@ class DefaultController extends Controller
         $timeline = $twitterApi->getTodayTimeline();
 
         // DBから過去のtimelinelistを取得
-        $pastTimelines = $this->getDoctrine()->getRepository('AppBundle:PastTimeline')->findByUser($this->get('security.token_storage')->getToken()->getUser());
+        $pastTimelines = $this->getDoctrine()->getRepository('AppBundle:PastTimeline')->findByUser($this->get('security.token_storage')->getToken()->getUser(), ['date' => 'DESC']);
         $timeline_date_list = array_map(function($obj) {return $obj->getDate()->format('Y-m-d');} , $pastTimelines);
         // 今日のタイムラインを表示するボタンに使用
         array_unshift($timeline_date_list, (new \DateTime())->format('Y-m-d'));
