@@ -27,17 +27,16 @@ var Menu = React.createClass({
 
  render() {
     var self = this;
-    var list_group_items = this.props.past_timeline_date_list.map(function(date_str) {
+    var list_group_items = this.props.timeline_date_list.map(function(date_str) {
       return <ListGroupItem key={date_str} onClick={self._onClick.bind(this, {date_str})}>{date_str}</ListGroupItem>;
     });
-
     return (
       <div id="menu">
         <Button bsStyle="primary" bsSize="large" onClick={this.open}>Menu</Button>
 
         <Modal show={this.state.showModal} onHide={this.close}>
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title>アーカイブ</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <ListGroup>

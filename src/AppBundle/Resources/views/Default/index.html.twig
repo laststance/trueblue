@@ -20,9 +20,9 @@
 {% endblock %}
 {% block javascript %}
 <script type="text/javascript">
-  var pastday_json_url = "{{ path('pastday_json') }}";
+  var json_daily_url = "{{ path('json_daily') }}";
+  var timeline_date_list = eval({{ timeline_date_list|json_encode()|raw }});
   var timeline_json = eval({{ timeline|json_encode()|raw }});
-  var past_timeline_date_list = eval({{ past_timeline_date_list|json_encode()|raw }});
 </script>
 <script src="{{ asset('/js/index.js') }}"></script>
 {% endblock %}
