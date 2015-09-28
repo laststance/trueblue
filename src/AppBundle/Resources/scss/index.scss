@@ -6,6 +6,12 @@
 
 main {
 
+  #menu {
+    position: fixed;
+    right: 13%;
+    top: 20px;
+  }
+
   #timeline {
     padding-top: 90px;
 
@@ -15,6 +21,14 @@ main {
 
     section:last-child {
       border-radius: 0 0 5px 5px;
+    }
+
+    .error-msg {
+      border-radius: 5px;
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 40px;
+      padding: 30px;
     }
   }
 

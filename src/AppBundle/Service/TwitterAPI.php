@@ -43,6 +43,8 @@ class TwitterAPI
     }
 
     /**
+     * get today timeline json
+     *
      * @return array|null timeline or null
      */
     public function getTodayTimeline()
@@ -51,12 +53,28 @@ class TwitterAPI
         $today = (new \DateTime())->format('Y-m-d');
         $since_id_at = $this->tokenStorage->getToken()->getUser()->getSinceIdAt();
 
-        // 今日の始点ツイートのsince_idが無ければタイムラインをまるまる取得してsince_idを計算する
+        // 今日の始点ツイートのsince_idが無ければsince_idを計算後、timlineを返す
         if ($since_id_at === null || $since_id_at->format('Y-m-d') !== $today) {
-            $timeline = $this->searchTodayTimeline($get_query);
 
-            return $timeline;
+            $result = $this->findIdRangeByDate(new \DateTime(), $get_query);
+            // エラーメッセージの場合
+            if (isset($result['error'])) {
+                return $result;
+            }
+
+            // since_idのDB登録
+            $user = $this->tokenStorage->getToken()->getUser();
+            $user->setTodaySinceId($result['since_id']);
+            $user->setSinceIdAt(new \DateTime());
+            $user->setUpdateAt(new \DateTime());
+            $em = $this->doctrine->getEntityManager();
+            $user = $em->merge($user);
+            $em->persist($user);
+            $em->flush();
+
+            return $result['timeline_json'];
         }
+
         // since_idがあればget_queryに指定して今日のつぶやき一覧をapiから取得
         if ('undefined' !== $today_since_id = $this->tokenStorage->getToken()->getUser()->getTodaySinceId()) {
             $get_query['since_id'] = $today_since_id;
@@ -70,61 +88,98 @@ class TwitterAPI
     }
 
     /**
-     * @param array $get_query api parameters
-     * @return array|null timeline or null
+     * get since_id ~ max_id range by target date
+     *
+     * @param \DateTme $targetDate must be up to 6 days ago. because twitter api limit.
+     * @param array $get_query
+     * @return array ['since_id' => '1234', 'max_id' => '5678', 'timeline_json' => decoded_json] or ['error' => 'error msg']
      */
-    protected function searchTodayTimeline(array $get_query)
+    public function findIdRangeByDate(\DateTime $targetDate, array $get_query = [])
     {
-        $today = (new \DateTime())->format('Y-m-d');
-        $saved_timelime = array(); // 今までに取得したtimelime
+        $target_day = $targetDate->format('Y-m-d');
+        $saved_timeline = array(); // 今までに取得したtimeline
         $index = 0; // for文を回した回数
+        $max_id = null;
+        $since_id = null;
+        $get_query = array_merge($get_query, ['user_id' => $this->tokenStorage->getToken()->getRawToken()['user_id']]);
 
         while (true) {
             // timeline取得apiを叩く 2回目以降はmax_idで指定したつぶやきも含まれるので切り捨てる
-            $fetch_timelime = $index === 0 ? $this->callStatusesUserTimeline($get_query) : array_slice($this->callStatusesUserTimeline($get_query), 1);
-            $saved_timelime = array_merge($saved_timelime, $fetch_timelime);
+            $fetch_timeline = $index === 0 ? $this->callStatusesUserTimeline($get_query) : array_slice($this->callStatusesUserTimeline($get_query), 1);
+            $saved_timeline = array_merge($saved_timeline, $fetch_timeline);
 
             // apiからの取得件数が0件
-            if (count($fetch_timelime) < 1) {
+            if (count($fetch_timeline) < 1) {
                 // timelineの総取得総数が0件 一件もつぶやきが無い人など
-                if (count($saved_timelime) < 1) {
-                    return null;
-                // 直前に取得した分までが本日のつぶやき
+                if (count($saved_timeline) < 1) {
+                    return ['error' => 'timeline get count 0.'];
+                // apiの取得範囲制限内で指定日のsince_idが見つからない
                 } else {
-                    return $saved_timelime;
+                    return ['since_id' => 'undefined', 'max_id' => $max_id, 'timeline_json' => $saved_timeline];
                 }
             }
 
-            // 今日一番最初のつぶやきのsince_idとtimelimeを抽出する
-            for ($i=$index; count($saved_timelime) > $i; $i++) {
-                $tweet = array_key_exists($i, $saved_timelime) ? $saved_timelime[$i] : null; // null 本日以前のつぶやきが見つからなかった
-
-                // 本日以前のつぶやきであるか？ あるいは本日以前のつぶやきが存在しない
-                if ($tweet === null || $today !== date('Y-m-d', strtotime($tweet->created_at))) {
-                    // 本日のつぶやきが0件
-                    if ($index === 0) {
-                      return null;
-                    }
-
-                    // 本日のタイムラインを抽出
-                    $today_timelime = array_slice($saved_timelime, 0, $index);
-
-                    // sinceId情報をDBに保存
-                    $userEntity = $this->doctrine->getRepository('AppBundle:User')->find($this->tokenStorage->getToken()->getUser()->getId());
-                    $today_since_id = $tweet !== null ? $tweet->id_str : 'undefined'; // 本日以前のつぶやきが存在しない場合 undefined
-                    $userEntity->setTodaySinceId($today_since_id);
-                    $userEntity->setSinceIdAt(new \DateTime());
-                    $em = $this->doctrine->getEntityManager();
-                    $em->persist($userEntity);
-                    $em->flush();
-
-                    return $today_timelime;
+            for ($i=$index; count($saved_timeline) > $i; $i++) {
+                $tweet = $saved_timeline[$i];
+                // 指定日のtweetが一件もなかった場合
+                if ($max_id === null && $target_day > date('Y-m-d', strtotime($tweet->created_at))) {
+                    return ['error' => 'target days tweet not found.'];
                 }
+
+                // 指定日の一番最後のtweetをmax_idとしてセット
+                if ($max_id === null && $target_day === date('Y-m-d', strtotime($tweet->created_at))) {
+                    $max_id = $tweet->id_str;
+                    $max_id_index = $index;
+                }
+
+                // 指定日一日前の最初のtweetのsice_idとしてセット
+                if ($target_day > date('Y-m-d', strtotime($tweet->created_at))) {
+                    $since_id = $tweet->id_str;
+                    $target_day_timeline = array_slice($saved_timeline, $max_id_index, $index);
+
+                    return ['since_id' => $since_id, 'max_id' => $max_id, 'timeline_json' => $target_day_timeline];
+                }
+
                 $index++;
             }
             // api次回取得位置を指定
-            $get_query = array_merge($get_query, array('max_id' => $tweet->id_str));
+            $get_query = array_merge($get_query, ['max_id' => $tweet->id_str, 'count' => '21']);
         }
+    }
+
+    /**
+     * get timeline since_id from max_id
+     *
+     * @param string $since_id
+     * @param string $max_id
+     * @return array|null timeline or null
+     */
+    public function getTimelineSinceFromMax($since_id, $max_id)
+    {
+      if (!is_string($since_id) || !is_string($max_id)) {
+          throw new InvalidArgumentException('TwitterAPI::getTimelineSinceFromMax() arguments must be string.');
+      }
+
+      $get_query = [
+        'user_id' => $this->tokenStorage->getToken()->getRawToken()['user_id'],
+        'since_id' => $since_id,
+        'max_id' =>  $max_id,
+      ];
+
+      $decoded_json = $this->callStatusesUserTimeline($get_query);
+
+      return $decoded_json;
+    }
+
+    /**
+    *
+    *
+    *
+    * @return stdClass $decoded_json
+    */
+    public function getPastTimelineFromDB()
+    {
+
     }
 
     /**

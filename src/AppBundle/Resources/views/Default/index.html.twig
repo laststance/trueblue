@@ -9,14 +9,19 @@
     <li class="nav-item header-title pull-left">
       <h1>Hello @{{ app.user.username }} {{ random(['＼(・｀(ｪ)・)/', '(*ノ・ω・）', 'o (◡‿◡✿)', 'ヽ(*・ω・)ﾉ']) }}</h1>
     </li>
+    <li class="nav-item pull-right">
+      <!-- React <MenuComponent /> render position -->
+    </li>
   </ul>
 </nav>
 <main id="container" class="container">
-
+  <!-- React <TimelineComponent /> render position -->
 </main>
 {% endblock %}
 {% block javascript %}
 <script type="text/javascript">
+  var json_daily_url = "{{ path('json_daily') }}";
+  var timeline_date_list = eval({{ timeline_date_list|json_encode()|raw }});
   var timeline_json = eval({{ timeline|json_encode()|raw }});
 </script>
 <script src="{{ asset('/js/index.js') }}"></script>

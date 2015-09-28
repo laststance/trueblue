@@ -3,6 +3,11 @@
   width: 100%;
 }
 
+main #menu {
+  position: fixed;
+  right: 13%;
+  top: 20px;
+}
 main #timeline {
   padding-top: 90px;
 }
@@ -11,6 +16,13 @@ main #timeline section:first-child {
 }
 main #timeline section:last-child {
   border-radius: 0 0 5px 5px;
+}
+main #timeline .error-msg {
+  border-radius: 5px;
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 40px;
+  padding: 30px;
 }
 main .timeline-item {
   background-color: rgba(255, 255, 255, 0.8);

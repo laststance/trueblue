@@ -1,14 +1,3 @@
-.btn-twitter-login {
-  background-color: rgba(255, 255, 255, 0.3);
-  color: #c2ffff;
-  cursor: pointer;
-  transition-duration: .5s;
-}
-.btn-twitter-login:hover {
-  background-color: rgba(255, 255, 255, 0.8);
-  color: rgba(57, 69, 228, 0.97);
-}
-
 main {
   color: rgba(255, 255, 255, 0.88);
 }
@@ -40,13 +29,13 @@ main .service-infomation {
   }
 
   .header-title,
-  .login-button {
+  .header-button {
     float: none !important;
     margin-bottom: 10px;
     text-align: center;
   }
 
-  .login-button {
+  .header-button {
     padding-top: 30px;
   }
 }
