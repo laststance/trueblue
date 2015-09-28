@@ -12,9 +12,16 @@ var TimelineComponent = React.createClass({
     };
   },
   getDailyJson(date) {
-    $.get(json_daily_url + '/' + date, function(json) {
-      this.setState({timeline_json: json});
-    }.bind(this));
+    var newDate = new Date();
+    var today = newDate.getFullYear() + '-0' + (newDate.getMonth()+1) + '-' + newDate.getDate();
+
+    if (date === today) {
+      this.setState({timeline_json: timeline_json});
+    } else {
+      $.get(json_daily_url + '/' + date, function(json) {
+        this.setState({timeline_json: json});
+      }.bind(this));
+    }
   },
   render() {
     return (
