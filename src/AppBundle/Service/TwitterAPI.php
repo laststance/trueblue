@@ -9,6 +9,7 @@ use Doctrine\Bundle\DoctrineBundle\Registry;
 
 /**
 * TODO: 全てのメソッドがコンストラクタでinjectしたUserオブジェクトを対象にしているので、Cronで全ユーザーにfindIdRangeByDate()を実行したい処理がやりにくい
+* TODO: OAuthTokenからuser_idを取得する処理はSessionが有効なログイン時にしか使え無いのでUserオブジェクトから取得するように変更する
 */
 
 class TwitterAPI
