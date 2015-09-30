@@ -7,6 +7,10 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 
+/**
+* TODO: 全てのメソッドがコンストラクタでinjectしたUserオブジェクトを対象にしているので、Cronで全ユーザーにfindIdRangeByDate()を実行したい処理がやりにくい
+*/
+
 class TwitterAPI
 {
     /**
