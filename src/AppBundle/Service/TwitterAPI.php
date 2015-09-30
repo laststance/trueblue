@@ -98,13 +98,13 @@ class TwitterAPI
     {
         $target_day = $targetDate->format('Y-m-d');
         $saved_timeline = array(); // 今までに取得したtimeline
-        $index = 0; // for文を回した回数
+        $index = 0; // for文を回した回数 apiから20件づつ取得、forを回すという流れなのでこの変数は処理したtweetの合計数 - 1となる
         $max_id = null;
         $since_id = null;
         $get_query = array_merge($get_query, ['user_id' => $this->tokenStorage->getToken()->getRawToken()['user_id']]);
 
         while (true) {
-            // timeline取得apiを叩く 2回目以降はmax_idで指定したつぶやきも含まれるので切り捨てる
+            // timeline取得apiを叩く 2回目以降はmax_idで指定したつぶやき自身も含まれるので切り捨てる(指定max_id未満が欲しいので)
             $fetch_timeline = $index === 0 ? $this->callStatusesUserTimeline($get_query) : array_slice($this->callStatusesUserTimeline($get_query), 1);
             $saved_timeline = array_merge($saved_timeline, $fetch_timeline);
 
@@ -120,22 +120,27 @@ class TwitterAPI
             }
 
             for ($i=$index; count($saved_timeline) > $i; $i++) {
+                // tweet1件についての情報が格納されたオブジェクト
                 $tweet = $saved_timeline[$i];
+                // 投稿日時 GMTで取得されるので日本のタイムゾーンに変換し、yyyy-mm-dd形式の文字列に整形
+                $created_day = (new \DateTime($tweet->created_at))->setTimezone(new \DateTimeZone('Asia/Tokyo'))->format('Y-m-d');
+
                 // 指定日のtweetが一件もなかった場合
-                if ($max_id === null && $target_day > date('Y-m-d', strtotime($tweet->created_at))) {
+                if ($max_id === null && $target_day > $created_day) {
                     return ['error' => 'target days tweet not found.'];
                 }
 
                 // 指定日の一番最後のtweetをmax_idとしてセット
-                if ($max_id === null && $target_day === date('Y-m-d', strtotime($tweet->created_at))) {
+                if ($max_id === null && $target_day === $created_day) {
                     $max_id = $tweet->id_str;
                     $max_id_index = $index;
                 }
 
                 // 指定日一日前の最初のtweetのsice_idとしてセット
-                if ($target_day > date('Y-m-d', strtotime($tweet->created_at))) {
+                if ($target_day > $created_day) {
                     $since_id = $tweet->id_str;
-                    $target_day_timeline = array_slice($saved_timeline, $max_id_index, $index);
+                    // 今までapiから取得したtimelineからmax_id ~ (since_id - 1)の範囲を取得する
+                    $target_day_timeline = array_slice($saved_timeline, $max_id_index, ($index - $max_id_index));
 
                     return ['since_id' => $since_id, 'max_id' => $max_id, 'timeline_json' => $target_day_timeline];
                 }
