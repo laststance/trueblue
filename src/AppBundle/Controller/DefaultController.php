@@ -17,8 +17,6 @@ class DefaultController extends Controller
     {
         $twitterApi = $this->container->get('twitter_api');
 
-        $testline = $twitterApi->findIdRangeByDate(new \DateTime('2015-09-24'));
-        dump($testline);
 
         // 今日のtimelineを取得
         $timeline = $twitterApi->getTodayTimeline();
