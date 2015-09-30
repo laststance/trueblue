@@ -177,17 +177,6 @@ class TwitterAPI
     }
 
     /**
-    *
-    *
-    *
-    * @return stdClass $decoded_json
-    */
-    public function getPastTimelineFromDB()
-    {
-
-    }
-
-    /**
     * call api https://api.twitter.com/1.1/statuses/user_timeline.json
     *
     * @param array $get_query
