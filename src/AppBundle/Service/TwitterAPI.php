@@ -8,6 +8,8 @@ use AppBundle\Entity\User;
 
 /**
 * TODO: 全てのメソッドがコンストラクタでinjectしたUserオブジェクトを対象にしているので、Cronで全ユーザーにfindIdRangeByDate()を実行したい処理がやりにくい
+* TODO: コンストラクタにUserが必須のため、全ユーザーを取得してforeachの中でUserをセットする処理が書きにくい
+* TODO: findIdRangeByDate() since_idとmax_idを取得するのが目的なのに処理過程が指定日のタイムラインを取得するのに最適であるというジレンマ
 */
 
 class TwitterAPI
