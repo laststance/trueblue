@@ -9,7 +9,7 @@ parameters:
 services:
     twitter_api:
         class: AppBundle\Service\TwitterAPI
-        arguments: [@doctrine, "@security.token_storage", "%twitter_api%"]
+        arguments: [@doctrine, "@=service('security.token_storage').getToken().getUser()", "%twitter_api%"]
 
     oauth_entity_user_provider:
         class: AppBundle\Service\OAuthEntityUserProvider

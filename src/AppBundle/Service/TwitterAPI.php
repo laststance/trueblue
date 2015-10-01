@@ -3,13 +3,11 @@
 namespace AppBundle\Service;
 
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
-use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
 use Doctrine\Bundle\DoctrineBundle\Registry;
+use AppBundle\Entity\User;
 
 /**
 * TODO: 全てのメソッドがコンストラクタでinjectしたUserオブジェクトを対象にしているので、Cronで全ユーザーにfindIdRangeByDate()を実行したい処理がやりにくい
-* TODO: OAuthTokenからuser_idを取得する処理はSessionが有効なログイン時にしか使え無いのでUserオブジェクトから取得するように変更する
 */
 
 class TwitterAPI
@@ -20,9 +18,9 @@ class TwitterAPI
     protected $doctrine;
 
     /**
-    * @var Symfony\Component\Security\Core\Authentication\Token\Storage
+    * @var AppBundle\Entity\User
     */
-    protected $tokenStorage;
+    public $user;
 
     protected $consumer_key = ''; // api key
     protected $consumer_secret = ''; // api secret
@@ -31,17 +29,13 @@ class TwitterAPI
     protected $request_url = ''; // decide by api call method
 
     /**
-     * @param TokenStorage $tokenStorage $this->container->get('security.token_storage')
+     * @param User $user
      * @param array $key_and_token twitter api key and tokens
      */
-    public function __construct(Registry $doctrine, TokenStorage $tokenStorage, array $key_and_token)
+    public function __construct(Registry $doctrine, User $user, array $key_and_token)
     {
-        if ($tokenStorage->getToken() instanceof OAuthToken === false) {
-            throw new InvalidArgumentException(sprintf('Object get from tokenstrage was not a OAuthToken. getting "%s" object.', get_class($tokenStorage->getToken())));
-        }
-
         $this->doctrine = $doctrine;
-        $this->tokenStorage = $tokenStorage;
+        $this->user = $user;
         $this->consumer_key = $key_and_token['consumer_key'];
         $this->consumer_secret = $key_and_token['consumer_secret'];
         $this->bearer_token = $key_and_token['bearer_token'];
@@ -54,9 +48,9 @@ class TwitterAPI
      */
     public function getTodayTimeline()
     {
-        $get_query = ['user_id' => $this->tokenStorage->getToken()->getRawToken()['user_id']];
+        $get_query = ['user_id' => $this->user->getTwitterId()];
         $today = (new \DateTime())->format('Y-m-d');
-        $since_id_at = $this->tokenStorage->getToken()->getUser()->getSinceIdAt();
+        $since_id_at = $this->user->getSinceIdAt();
 
         // 今日の始点ツイートのsince_idが無ければsince_idを計算後、timlineを返す
         if ($since_id_at === null || $since_id_at->format('Y-m-d') !== $today) {
@@ -68,7 +62,7 @@ class TwitterAPI
             }
 
             // since_idのDB登録
-            $user = $this->tokenStorage->getToken()->getUser();
+            $user = $this->user;
             $user->setTodaySinceId($result['since_id']);
             $user->setSinceIdAt(new \DateTime());
             $user->setUpdateAt(new \DateTime());
@@ -81,7 +75,7 @@ class TwitterAPI
         }
 
         // since_idがあればget_queryに指定して今日のつぶやき一覧をapiから取得
-        if ('undefined' !== $today_since_id = $this->tokenStorage->getToken()->getUser()->getTodaySinceId()) {
+        if ('undefined' !== $today_since_id = $this->user->getTodaySinceId()) {
             $get_query['since_id'] = $today_since_id;
         // since_idがundefinedなら200件まで取得 今日以前のつぶやきが存在しないアカウントなど
         } else {
@@ -106,7 +100,7 @@ class TwitterAPI
         $index = 0; // for文を回した回数 apiから20件づつ取得、forを回すという流れなのでこの変数は処理したtweetの合計数 - 1となる
         $max_id = null;
         $since_id = null;
-        $get_query = array_merge($get_query, ['user_id' => $this->tokenStorage->getToken()->getRawToken()['user_id']]);
+        $get_query = array_merge($get_query, ['user_id' => $this->user->getTwitterId()]);
 
         while (true) {
             // timeline取得apiを叩く 2回目以降はmax_idで指定したつぶやき自身も含まれるので切り捨てる(指定max_id未満が欲しいので)
@@ -171,7 +165,7 @@ class TwitterAPI
       }
 
       $get_query = [
-        'user_id' => $this->tokenStorage->getToken()->getRawToken()['user_id'],
+        'user_id' => $this->user->getTwitterId(),
         'since_id' => $since_id,
         'max_id' =>  $max_id,
       ];
@@ -290,13 +284,25 @@ class TwitterAPI
     }
 
     /**
-     * Get the value of Token Storage
+     * Get the value of User
      *
      * @return mixed
      */
-    public function getTokenStorage()
+    public function getUser()
     {
-        return $this->tokenStorage;
+        return $this->user;
+    }
+
+    /**
+     * Get the value of User
+     *
+     * @return mixed
+     */
+    public function setUser(User $user)
+    {
+        $this->user = $user;
+
+        return $this;
     }
 
     /**

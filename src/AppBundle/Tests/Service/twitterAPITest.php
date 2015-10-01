@@ -3,9 +3,8 @@
 namespace AppBundle\Tests\Service;
 
 use AppBundle\Service\TwitterAPI;
-use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Prophecy\Argument\Token\AnyValuesToken;
+use AppBundle\Entity\User;
 
 class TwitterAPITest extends \PHPUnit_Framework_TestCase
 {
@@ -14,21 +13,12 @@ class TwitterAPITest extends \PHPUnit_Framework_TestCase
      */
     protected $twitterApi;
 
-    /**
-    * @var Symfony\Component\Security\Core\Authentication\Token\Storage
-    */
-    protected $tokenStorage;
-
     protected $params = array();
 
     public function setUp()
     {
         $mockDoctrine = $this->getMock('Doctrine\Bundle\DoctrineBundle\Registry', array(), array(), '', false);
-        $oauthToken = new OAuthToken('access_token', array('ROLE_TEST'));
-        $oauthToken->setResourceOwnerName('github');
-        $tokenStorage = new TokenStorage();
-        $this->tokenStorage = $tokenStorage;
-        $tokenStorage->setToken($oauthToken);
+        $user = $this->getMock('AppBundle\Entity\User');
 
         $this->params = array(
           'consumer_key' => 'consumer_key_value',
@@ -36,28 +26,25 @@ class TwitterAPITest extends \PHPUnit_Framework_TestCase
           'bearer_token' => 'bearer_token_value',
         );
 
-        $this->twitterApi = new TwitterAPI($mockDoctrine, $tokenStorage, $this->params);
-    }
-
-    /**
-     * @expectedException InvalidArgumentException
-     */
-    public function testAcceptOAuthTokenOnly()
-    {
-        $mockToken = $this->getMock('Symfony\Component\Security\Core\Authentication\Token\TokenInterface');
-        $mockDoctrine = $this->getMock('Doctrine\Bundle\DoctrineBundle\Registry', array(), array(), '', false);
-        $tokenStorage = new TokenStorage();
-        $tokenStorage->setToken($mockToken);
-
-        $twitterApi = new TwitterAPI($mockDoctrine, $tokenStorage, $this->params);
+        $this->twitterApi = new TwitterAPI($mockDoctrine, $user, $this->params);
     }
 
     /**
      * @test
      */
-    public function getTokenStorage()
+    public function getUser()
     {
-        $this->assertSame($this->twitterApi->getTokenStorage(), $this->tokenStorage);
+        $this->assertTrue($this->twitterApi->getUser() instanceof User);
+    }
+
+    /**
+     * @test
+     */
+    public function setUser()
+    {
+        $user = $this->getMock('AppBundle\Entity\User');
+        $this->twitterApi->setUser($user);
+        $this->assertSame($this->twitterApi->getUser(), $user);
     }
 
     /**
