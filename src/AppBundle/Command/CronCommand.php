@@ -14,6 +14,8 @@ use AppBundle\Entity\PastTimeline;
 /**
  * 指定した日付の全ユーザーのタイムラインをDBに保存する
  *
+ * TODO: テストが出来ないのでTwitterAPIをDIしたい
+ *
  * app/sonsole cron:SaveTargetDateTimeline yyyy-mm-dd
  */
 class CronCommand extends ContainerAwareCommand
