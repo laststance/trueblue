@@ -4,4 +4,4 @@ daily-tweet [![Build Status](https://travis-ci.org/ryota-murakami/daily-tweet.sv
 
 #### This app save the twitter timeline by day.
 
-![example](./daily-tweet-example.png)
+![example](./daily-tweet-example.jpg)

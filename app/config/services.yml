@@ -5,16 +5,15 @@ imports:
 
 parameters:
 #    parameter_name: value
-    app_bundle.entity.user: AppBundle\Entity\User
 
 services:
     twitter_api:
         class: AppBundle\Service\TwitterAPI
-        arguments: [@doctrine, "@security.token_storage", "%twitter_api%"]
+        arguments: [@doctrine, "@=service('security.token_storage').getToken().getUser()", "%twitter_api%"]
 
     oauth_entity_user_provider:
         class: AppBundle\Service\OAuthEntityUserProvider
-        arguments: [@doctrine, "%app_bundle.entity.user%", {twitter: twitterId}]
+        arguments: [@doctrine, "AppBundle\Entity\User", {twitter: twitterId}]
 
 #    service_name:
 #        class: AppBundle\Directory\ClassName

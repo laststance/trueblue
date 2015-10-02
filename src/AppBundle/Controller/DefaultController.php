@@ -17,16 +17,14 @@ class DefaultController extends Controller
     {
         $twitterApi = $this->container->get('twitter_api');
 
-        $testline = $twitterApi->findIdRangeByDate(new \DateTime('2015-09-24'));
-        dump($testline);
-
         // 今日のtimelineを取得
         $timeline = $twitterApi->getTodayTimeline();
 
         // DBから過去のtimelinelistを取得
+        // TODO: 長いのでもっと簡単にUserオブジェクトを取得する手段を考える
         $pastTimelines = $this->getDoctrine()->getRepository('AppBundle:PastTimeline')->findByUser($this->get('security.token_storage')->getToken()->getUser(), ['date' => 'DESC']);
         $timeline_date_list = array_map(function($obj) {return $obj->getDate()->format('Y-m-d');} , $pastTimelines);
-        // 今日のタイムラインを表示するボタンに使用
+        // 今日のタイムライン表示ボタンに使用
         array_unshift($timeline_date_list, (new \DateTime())->format('Y-m-d'));
 
         return $this->render('AppBundle:Default:index.html.twig',[
