@@ -23,7 +23,7 @@ gulp.task('browserify', function() {
   });
 });
 
-gulp.task('permission', shell.task([
+gulp.task('chmod', shell.task([
   'sudo chmod -R 777 ./app/cache/',
   'sudo chmod -R 777 ./app/logs/'
 ]));
