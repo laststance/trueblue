@@ -23,7 +23,8 @@
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
-        "phpunit/phpunit": "~4.0"
+        "phpunit/phpunit": "~4.0",
+        "heroku/heroku-buildpack-php": "*"
     },
     "scripts": {
         "post-root-package-install": [
