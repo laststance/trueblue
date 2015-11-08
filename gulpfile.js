@@ -28,6 +28,10 @@ gulp.task('permission', shell.task([
   'sudo chmod -R 777 ./app/logs/'
 ]));
 
+gulp.task('unit', shell.task(
+  './vendor/phpunit/phpunit/phpunit --verbose --debug -c app/'
+));
+
 gulp.task('watch', function() {
   gulp.watch('./src/AppBundle/Resources/scss/*.scss', ['sass']);
   gulp.watch('./src/AppBundle/Resources/es6/*.es6', ['browserify']);
