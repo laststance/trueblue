@@ -16,7 +16,7 @@ use AppBundle\Entity\PastTimeline;
  *
  * TODO: テストが出来ないのでTwitterAPIをDIしたい
  *
- * app/sonsole cron:SaveTargetDateTimeline yyyy-mm-dd
+ * app/console cron:SaveTargetDateTimeline yyyy-mm-dd
  */
 class CronCommand extends ContainerAwareCommand
 {
