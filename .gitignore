@@ -16,3 +16,4 @@ tags
 /node_modules/
 /.sass-cache/
 /.bundle/
+.DS_Store
