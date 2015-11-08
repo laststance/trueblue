@@ -3,6 +3,7 @@ var sass = require('gulp-ruby-sass');
 var browserify = require('browserify');
 var babelify = require('babelify');
 var source = require('vinyl-source-stream');
+var shell = require('gulp-shell');
 
 var es6_files = ['login.es6', 'index.es6', 'timeline.jsx', 'menu.jsx'];
 
@@ -21,6 +22,11 @@ gulp.task('browserify', function() {
      .pipe(gulp.dest('./web/js'));
   });
 });
+
+gulp.task('permission', shell.task([
+  'sudo chmod -R 777 ./app/cache/',
+  'sudo chmod -R 777 ./app/logs/'
+]));
 
 gulp.task('watch', function() {
   gulp.watch('./src/AppBundle/Resources/scss/*.scss', ['sass']);

@@ -7,6 +7,7 @@
     "browserify": "^11.1.0",
     "gulp": "^3.9.0",
     "gulp-ruby-sass": "^2.0.2",
+    "gulp-shell": "^0.5.1",
     "jquery": "^2.1.4",
     "react": "^0.13.3",
     "react-bootstrap": "^0.25.2",
