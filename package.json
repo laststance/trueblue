@@ -5,12 +5,16 @@
   "devDependencies": {
     "babelify": "^6.3.0",
     "browserify": "^11.1.0",
+    "chai": "^3.4.1",
     "gulp": "^3.9.0",
     "gulp-ruby-sass": "^2.0.2",
     "gulp-shell": "^0.5.1",
     "jquery": "^2.1.4",
+    "mocha": "^2.3.3",
+    "nightmare": "^2.0.7",
     "react": "^0.13.3",
     "react-bootstrap": "^0.25.2",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-source-stream": "^1.1.0",
+    "vo": "^1.0.3"
   }
 }
