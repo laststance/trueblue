@@ -5,7 +5,7 @@ var babelify = require('babelify');
 var source = require('vinyl-source-stream');
 var shell = require('gulp-shell');
 
-var es6_files = ['login.es6', 'index.es6', 'timeline.jsx', 'menu.jsx'];
+var es6_files = ['login.es6', 'index.es6'];
 
 gulp.task('sass', function() {
   return sass('./src/AppBundle/Resources/scss/*.scss', {style: 'expanded'})
