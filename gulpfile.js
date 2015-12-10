@@ -23,6 +23,11 @@ gulp.task('build:js', function() {
   });
 });
 
+gulp.task('build',[
+  'build:sass',
+  'build:js'
+]);
+
 gulp.task('chmod', shell.task([
   'sudo chmod -R 777 ./app/cache/',
   'sudo chmod -R 777 ./app/logs/'
