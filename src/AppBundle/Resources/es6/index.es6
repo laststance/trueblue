@@ -1,14 +1,16 @@
 var React = require('react');
 var $ = require('jquery');
 var Timeline = require('./timeline.jsx');
-var Menu = require('./menu.jsx');
+var Header = require('./header.jsx');
 
-var TimelineComponent = React.createClass({
+
+var RootComponent = React.createClass({
   getInitialState() {
     return {
       timeline_json: timeline_json,
       json_daily_url: json_daily_url,
-      timeline_date_list: timeline_date_list
+      timeline_date_list: timeline_date_list,
+      app_user_username: app_user_username
     };
   },
   getDailyJson(date) {
@@ -22,18 +24,19 @@ var TimelineComponent = React.createClass({
         this.setState({timeline_json: json});
       }.bind(this));
     }
+    return 0;
   },
   render() {
     return (
       <div>
+        <Header getDailyJson={this.getDailyJson} timeline_date_list={this.state.timeline_date_list} app_user_username={this.state.app_user_username} />
         <Timeline timeline_json={this.state.timeline_json} />
-        <Menu onClick={this.getDailyJson} timeline_date_list={this.state.timeline_date_list} />
       </div>
     );
   }
 });
 
 React.render(
-  <TimelineComponent />,
+  <RootComponent />,
   document.getElementById('container')
 );

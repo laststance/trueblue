@@ -7,12 +7,12 @@ var shell = require('gulp-shell');
 
 var es6_files = ['login.es6', 'index.es6'];
 
-gulp.task('sass', function() {
+gulp.task('build:sass', function() {
   return sass('./src/AppBundle/Resources/scss/*.scss', {style: 'expanded'})
   .pipe(gulp.dest('./web/css'));
 });
 
-gulp.task('browserify', function() {
+gulp.task('build:js', function() {
   return es6_files.forEach(function(file_name) {
     browserify('./src/AppBundle/Resources/es6/' + file_name, { debug: true })
      .transform(babelify)
@@ -22,6 +22,11 @@ gulp.task('browserify', function() {
      .pipe(gulp.dest('./web/js'));
   });
 });
+
+gulp.task('build',[
+  'build:sass',
+  'build:js'
+]);
 
 gulp.task('chmod', shell.task([
   'sudo chmod -R 777 ./app/cache/',
@@ -33,7 +38,7 @@ gulp.task('unit', shell.task(
 ));
 
 gulp.task('watch', function() {
-  gulp.watch('./src/AppBundle/Resources/scss/*.scss', ['sass']);
-  gulp.watch('./src/AppBundle/Resources/es6/*.es6', ['browserify']);
-  gulp.watch('./src/AppBundle/Resources/es6/*.jsx', ['browserify']);
+  gulp.watch('./src/AppBundle/Resources/scss/*.scss', ['build:sass']);
+  gulp.watch('./src/AppBundle/Resources/es6/*.es6', ['build:js']);
+  gulp.watch('./src/AppBundle/Resources/es6/*.jsx', ['build:js']);
 });
