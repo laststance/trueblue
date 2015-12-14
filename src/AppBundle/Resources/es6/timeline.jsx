@@ -11,7 +11,7 @@ var Timeline = React.createClass({
         </article>
       );
     } else {
-      var view = this.props.timeline_json.map(function(tweet, index){
+      var view = this.props.timeline_json.map(function(tweet, index) {
         var date = new Date(tweet.created_at);
         return (
           <section className='timeline-item col-md-offset-3 col-md-6' key={tweet.id_str} data-id={tweet.id_str} data-index={index}>
