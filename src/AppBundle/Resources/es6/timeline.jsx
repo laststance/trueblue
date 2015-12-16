@@ -1,7 +1,7 @@
-var React = require('react');
+const React = require('react');
 
-var Timeline = React.createClass({
-  render: function() {
+const Timeline = React.createClass({
+  render() {
     if (!this.props.timeline_json.length || this.props.timeline_json.error) {
       var view = (
         <article id="timeline" className="row">
@@ -11,8 +11,8 @@ var Timeline = React.createClass({
         </article>
       );
     } else {
-      var view = this.props.timeline_json.map(function(tweet, index) {
-        var date = new Date(tweet.created_at);
+      var view = this.props.timeline_json.map((tweet, index)=> {
+        const date = new Date(tweet.created_at);
         return (
           <section className='timeline-item col-md-offset-3 col-md-6' key={tweet.id_str} data-id={tweet.id_str} data-index={index}>
             <div className="contents">

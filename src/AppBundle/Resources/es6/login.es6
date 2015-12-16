@@ -1,4 +1,4 @@
-var $ = require('jquery');
+const $ = require('jquery');
 
 // スマホのタッチスクリーンでボタンのhoverイベントを有効にする
 $('.btn-twitter-login').on('touchstart', () => {

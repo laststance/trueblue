@@ -5,12 +5,12 @@ const NavItem = require('react-bootstrap').NavItem;
 const Menu = require('./menu.jsx');
 
 const Header = React.createClass({
-  get_kaomoji: function() {
+  get_kaomoji() {
     const kaomoji_list = ['＼(・｀(ｪ)・)/', '(*ノ・ω・）', 'o (◡‿◡✿)', 'ヽ(*・ω・)ﾉ'];
     const rand = Math.round(Math.random() * kaomoji_list.length - 1);
     return kaomoji_list[rand];
   },
-  render: function() {
+  render() {
       return (
           <Navbar>
               <Nav>
