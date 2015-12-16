@@ -20,9 +20,9 @@ const RootComponent = React.createClass({
     if (date === today) {
       this.setState({timeline_json: timeline_json});
     } else {
-      $.get(json_daily_url + '/' + date, (json)=> {
+      $.get(json_daily_url + '/' + date, ((json)=> {
         this.setState({timeline_json: json});
-      }.bind(this));
+      }).bind(this));
     }
     return 0;
   },
