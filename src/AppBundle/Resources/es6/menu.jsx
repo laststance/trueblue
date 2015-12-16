@@ -1,11 +1,11 @@
-var React = require('react');
-var Button = require('react-bootstrap').Button;
-var Popover = require('react-bootstrap').Popover;
-var Modal = require('react-bootstrap').Modal;
-var ListGroup = require('react-bootstrap').ListGroup;
-var ListGroupItem = require('react-bootstrap').ListGroupItem;
+const React = require('react');
+const Button = require('react-bootstrap').Button;
+const Popover = require('react-bootstrap').Popover;
+const Modal = require('react-bootstrap').Modal;
+const ListGroup = require('react-bootstrap').ListGroup;
+const ListGroupItem = require('react-bootstrap').ListGroupItem;
 
-var Menu = React.createClass({
+const Menu = React.createClass({
   getInitialState() {
     return {
       showModal: false
@@ -14,21 +14,21 @@ var Menu = React.createClass({
 
   close() {
     this.setState({ showModal: false });
-  },
+  }.bind(this),
 
   open() {
     this.setState({ showModal: true });
-  },
+  }.bind(this),
 
   _onClick(date_str) {
     this.close();
     this.props.onClick(date_str.date_str);
-  },
+  }.bind(this),
 
  render() {
-    var self = this;
-    var list_group_items = this.props.timeline_date_list.map(function(date_str) {
-      return <ListGroupItem key={date_str} onClick={self._onClick.bind(this, {date_str})}>{date_str}</ListGroupItem>;
+    const self = this;
+    const list_group_items = this.props.timeline_date_list.map(function(date_str) {
+      return <ListGroupItem key={date_str} onClick={self._onClick({date_str})}>{date_str}</ListGroupItem>;
     });
     return (
       <div id="menu">

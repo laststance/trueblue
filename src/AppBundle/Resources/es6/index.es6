@@ -1,10 +1,10 @@
-var React = require('react');
-var $ = require('jquery');
-var Timeline = require('./timeline.jsx');
-var Header = require('./header.jsx');
+const React = require('react');
+const $ = require('jquery');
+const Timeline = require('./timeline.jsx');
+const Header = require('./header.jsx');
 
 
-var RootComponent = React.createClass({
+const RootComponent = React.createClass({
   getInitialState() {
     return {
       timeline_json: timeline_json,
@@ -14,8 +14,8 @@ var RootComponent = React.createClass({
     };
   },
   getDailyJson(date) {
-    var newDate = new Date();
-    var today = newDate.getFullYear() + '-0' + (newDate.getMonth()+1) + '-' + newDate.getDate();
+    const newDate = new Date();
+    const today = newDate.getFullYear() + '-0' + (newDate.getMonth()+1) + '-' + newDate.getDate();
 
     if (date === today) {
       this.setState({timeline_json: timeline_json});

@@ -1,9 +1,9 @@
-var React = require('react');
+const React = require('react');
 
-var Timeline = React.createClass({
+const Timeline = React.createClass({
   render: function() {
     if (!this.props.timeline_json.length || this.props.timeline_json.error) {
-      var view = (
+      const view = (
         <article id="timeline" className="row">
           <div className='timeline-item col-md-offset-3 col-md-6 error-msg'>
               <p>tweet not found.</p>
@@ -12,7 +12,7 @@ var Timeline = React.createClass({
       );
     } else {
       var view = this.props.timeline_json.map(function(tweet, index) {
-        var date = new Date(tweet.created_at);
+        const date = new Date(tweet.created_at);
         return (
           <section className='timeline-item col-md-offset-3 col-md-6' key={tweet.id_str} data-id={tweet.id_str} data-index={index}>
             <div className="contents">
