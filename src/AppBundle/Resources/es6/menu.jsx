@@ -14,21 +14,21 @@ const Menu = React.createClass({
 
   close() {
     this.setState({ showModal: false });
-  }.bind(this),
+  },
 
   open() {
     this.setState({ showModal: true });
-  }.bind(this),
+  },
 
   _onClick(date_str) {
     this.close();
     this.props.onClick(date_str.date_str);
-  }.bind(this),
+  },
 
  render() {
     const self = this;
-    const list_group_items = this.props.timeline_date_list.map(function(date_str) {
-      return <ListGroupItem key={date_str} onClick={self._onClick({date_str})}>{date_str}</ListGroupItem>;
+    const list_group_items = this.props.timeline_date_list.map((date_str)=> {
+      return <ListGroupItem key={date_str} onClick={self._onClick.bind(this, {date_str})}>{date_str}</ListGroupItem>;
     });
     return (
       <div id="menu">
