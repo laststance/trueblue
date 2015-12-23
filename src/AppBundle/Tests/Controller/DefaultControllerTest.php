@@ -21,8 +21,8 @@ class DefaultControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/login');
 
+        // ログインページが表示されること
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-
         $this->assertTrue($crawler->filter('body.login')->count() > 0);
     }
 }
