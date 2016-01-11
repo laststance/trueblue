@@ -13,7 +13,7 @@ services:
 
     oauth_entity_user_provider:
         class: AppBundle\Service\OAuthEntityUserProvider
-        arguments: [@doctrine, "AppBundle\Entity\User", {twitter: twitterId}]
+        arguments: [@doctrine, AppBundle\Entity\User, {twitter: twitterId}]
 
 #    service_name:
 #        class: AppBundle\Directory\ClassName
