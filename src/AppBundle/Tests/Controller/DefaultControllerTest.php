@@ -6,13 +6,23 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class DefaultControllerTest extends WebTestCase
 {
+    use ControllerTestUtilTrait;
+
+    private $client;
+
     public function testIndex()
     {
-        $client = static::createClient();
+        $this->client = static::createClient();
 
         // 未ログイン
-        $crawler = $client->request('GET', '/');
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $crawler = $this->client->request('GET', '/');
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+
+        // ログイン @TODO: 500を返すので原因を調査する
+        //$this->logIn();
+        //$crawler = $this->client->request('GET', '/');
+        //$this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
     }
 
     public function testLogin()
