@@ -51,8 +51,12 @@ class CronCommand extends ContainerAwareCommand
         foreach ($users as $user) {
             // 昨日のタイムラインJsonを取得
             $twitterApi = new twitterApi($doctrine, $user, $api_parameter);
-            $timeline_json = $twitterApi->findIdRangeByDate($targetDate)['timeline_json'];
-            $encoded_json = json_encode($timeline_json); // DBにはJSON文字列をまるごと格納する
+            $res = $twitterApi->findIdRangeByDate($targetDate);
+
+            // 指定日のタイムラインが一件も無い場合
+            if ( !array_key_exists('timeline_json', $res) ) continue;
+
+            $encoded_json = json_encode($res['timeline_json']); // DBにはJSONとして格納する
 
             // DBに保存するTimeLineオブジェクトを作成
             $pastTimeLine = new PastTimeline();
