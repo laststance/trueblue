@@ -19,3 +19,4 @@ tags
 /.sass-cache/
 /.bundle/
 .DS_Store
+.idea
