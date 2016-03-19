@@ -1,0 +1,2 @@
+users:
+  - { name: dailytweet, groups: "sudo" }
