@@ -2,3 +2,4 @@
 - hosts: web+db
   roles:
     - common
+    - nginx
