@@ -1,4 +1,0 @@
-users:
-  - { name: dailytweet, groups: "sudo" }
-
-server_hostname: dailytweet
