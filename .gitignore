@@ -20,3 +20,4 @@ tags
 /.bundle/
 .DS_Store
 .idea
+/group_vars/all

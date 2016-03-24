@@ -1,4 +1,0 @@
-users:
-  - { name: foo, groups: "sudo" }
-
-server_hostname: foo
