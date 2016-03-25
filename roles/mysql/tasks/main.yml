@@ -1,16 +1,13 @@
 ---
-- name: Install Mysql package
-  yum: name={{ item }} state=present
+
+- name: Install MySQL Server
+  apt:
+        name={{ item }}
+        state=installed
   with_items:
-   - mysql-server
-   - MySQL-python
-   - libselinux-python
-   - libsemanage-python
+        "{{ mysql_packages }}"
 
-- name: Create Mysql configuration file
-  template: src=my.cnf.j2 dest=/etc/my.cnf
+- name: Copy the my.cnf file
+  template: src=my.cnf.j2 dest=/etc/mysql/my.cnf
   notify:
-  - restart mysql
-
-- name: Start Mysql Service
-  service: name=mysqld state=started enabled=yes
+   - Restart MySQL
