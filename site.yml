@@ -4,3 +4,4 @@
     #- common
     - nginx
     #- mysql
+    - php-fpm

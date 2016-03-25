@@ -6,3 +6,15 @@ server_hostname: foo
 mysql_packages:
     - mysql-common
     - mysql-server
+
+php_pkgs:
+        - php5-fpm
+        - php5
+        - php5-mysql
+        - php5-mcrypt
+        - php5-cli
+        - php5-common
+        - php5-curl
+        - php5-dev
+        - php5-fpm
+        - php5-gd
