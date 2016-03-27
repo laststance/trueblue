@@ -20,4 +20,4 @@ tags
 /.bundle/
 .DS_Store
 .idea
-/group_vars/all
+/ansible/group_vars/all

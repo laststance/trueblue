@@ -1,7 +1,8 @@
 ---
 - hosts: web+db
+  remote_user: root
   roles:
-    #- common
+    - common
     - nginx
-    #- mysql
+    - mysql
     - php-fpm
