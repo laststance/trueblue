@@ -20,4 +20,5 @@ tags
 /.bundle/
 .DS_Store
 .idea
-ansible/group_vars/all
+/ansible/group_vars/all
+fabfile.pyc
