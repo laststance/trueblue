@@ -4,7 +4,7 @@ from fabric.api import cd, env, local, run, task, sudo
 from fabric.contrib.project import rsync_project
 
 env.hosts = ('dailytweet.net')
-env.user = ('dailytweet')
+env.user = ('root')
 env.use_ssh_config = True
 
 env.remote_project_dir = ('/home/dailytweet/daily-tweet')
@@ -35,12 +35,18 @@ def _rsync():
             'gulpfile.js',
             'package.json',
             '.DS_Store',
-            '.editorconfig'
+            '.editorconfig',
+            'app/logs',
+            'app/cache/dev',
+            'app/cache/pro_',
+            'app/cache/test'
         ),
         delete=True
     )
 
 def _remote_refresh():
     with cd(env.remote_project_dir):
+        run('app/console doctrine:database:create --if-not-exists')
+        run('app/console doctrine:schema:update --force')
         run('app/console cache:clear --env=prod --no-warmup --no-optional-warmers')
         sudo('service php5-fpm restart')
