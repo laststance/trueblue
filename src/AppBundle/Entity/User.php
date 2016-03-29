@@ -120,6 +120,28 @@ class User extends OAuthUser
     }
 
     /**
+     * Set username
+     *
+     * @param string $username
+     * @return User
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * Get username
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
      * Set todaySinceId
      *
      * @return User
@@ -147,7 +169,7 @@ class User extends OAuthUser
       * @param \DateTime $sinceIdAt
       * @return User
       */
-     public function setSinceIdAt($sinceIdAt)
+     public function setSinceIdAt(\DateTime $sinceIdAt)
      {
          $this->sinceIdAt = $sinceIdAt;
 
@@ -193,7 +215,7 @@ class User extends OAuthUser
      * @param \DateTime $createAt
      * @return User
      */
-    public function setCreateAt($createAt)
+    public function setCreateAt(\DateTime $createAt)
     {
         $this->createAt = $createAt;
 
@@ -216,7 +238,7 @@ class User extends OAuthUser
      * @param \DateTime $updateAt
      * @return User
      */
-    public function setUpdateAt($updateAt)
+    public function setUpdateAt(\DateTime $updateAt)
     {
         $this->updateAt = $updateAt;
 
