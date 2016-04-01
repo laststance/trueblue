@@ -1,11 +1,5 @@
 ---
 
-- name: Add nginx stable repository
-  apt_repository: repo="ppa:nginx/stable"
-
-- name: Update apt
-  apt: update_cache=yes cache_valid_time=3600
-
 - name: Install nginx
   apt: name=nginx state=present
 
