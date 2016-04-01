@@ -21,6 +21,3 @@
     - restart sshd
   copy: src="sshd_config" dest="/etc/ssh/sshd_config" owner=root group=root mode=0600
   tags: sshd
-
-- name: Update apt
-  apt: update_cache=yes
