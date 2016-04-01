@@ -23,3 +23,5 @@ parameters:
         consumer_key: ~
         consumer_secret: ~
         bearer_token: ~
+
+    session_expires: 604800
