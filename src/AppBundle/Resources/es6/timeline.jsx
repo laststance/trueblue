@@ -20,10 +20,10 @@ const Timeline = React.createClass({
                 className='timeline-item col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10'
                 key={tweet.id_str} data-id={tweet.id_str} data-index={index}>
                 <div className="contents">
-                  <div className="pull-left">
+                  <div className="left-side">
                     <img className="profile-image" src={tweet.user.profile_image_url}/>
                   </div>
-                  <div className="pull-right">
+                  <div className="right-side">
                     <span className="user-name">{tweet.user.name}</span> <span
                     className="screen-name">@{tweet.user.screen_name}</span>
                     <p className="text">{tweet.text}</p>

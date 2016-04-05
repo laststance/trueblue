@@ -16,7 +16,7 @@ const RootComponent = React.createClass({
   getDailyJson(date) {
     const newDate = new Date();
     const today = newDate.getFullYear() + '-0' + (newDate.getMonth()+1) + '-' + newDate.getDate();
-
+      
     if (date === today) {
       this.setState({timeline_json: timeline_json});
     } else {
