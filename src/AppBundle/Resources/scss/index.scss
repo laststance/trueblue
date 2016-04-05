@@ -14,11 +14,11 @@ main {
   #timeline {
     padding-top: 90px;
 
-    section:first-child {
+    div:first-child > .row > section {
       border-radius: 5px 5px 0 0;
     }
 
-    section:last-child {
+    div:last-child > .row > section {
       border-radius: 0 0 5px 5px;
     }
 
