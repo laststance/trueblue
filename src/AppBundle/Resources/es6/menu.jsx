@@ -13,11 +13,11 @@ const Menu = React.createClass({
   },
 
   close() {
-    this.setState({ showModal: false });
+    this.setState({showModal: false});
   },
 
   open() {
-    this.setState({ showModal: true });
+    this.setState({showModal: true});
   },
 
   _onClick(date_str) {
@@ -25,14 +25,14 @@ const Menu = React.createClass({
     this.props.onClick(date_str.date_str);
   },
 
- render() {
+  render() {
     const self = this;
     const list_group_items = this.props.timeline_date_list.map((date_str)=> {
       return <ListGroupItem key={date_str} onClick={self._onClick.bind(this, {date_str})}>{date_str}</ListGroupItem>;
     });
     return (
       <div id="menu">
-        <Button className="btn-header-right" bsSize="large" onClick={this.open}>Menu</Button>
+        <Button className="btn-header-right" bsSize="large" onClick={this.open}>&#9776;</Button>
 
         <Modal show={this.state.showModal} onHide={this.close}>
           <Modal.Header closeButton>
