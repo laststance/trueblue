@@ -1,0 +1,4 @@
+---
+
+- name: insert the latest tweet to db
+  cron: name="insert the latest tweet to db" minute="0" hour="0" job="/home/dailytweet/daily-tweet/app/console cron:SaveTargetDateTimeline $(date -d yesterday +\%Y-\%m-\%d)"

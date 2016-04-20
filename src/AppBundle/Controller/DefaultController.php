@@ -4,14 +4,40 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use AppBundle\Entity\PastTimeline;
 
 class DefaultController extends Controller
 {
     /**
      * @Route("/", name="indexpage")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        return $this->render('AppBundle:Default:index.html.twig');
+        $twitterApi = $this->container->get('twitter_api');
+
+        // 今日のtimelineを取得
+        $timeline = $twitterApi->getTodayTimeline();
+
+        // DBから過去のtimelinelistを取得
+        // TODO: 長いのでもっと簡単にUserオブジェクトを取得する手段を考える
+        $pastTimelines = $this->getDoctrine()->getRepository('AppBundle:PastTimeline')->findByUser($this->get('security.token_storage')->getToken()->getUser(), ['date' => 'DESC']);
+        $timeline_date_list = array_map(function($obj) {return $obj->getDate()->format('Y-m-d');} , $pastTimelines);
+        // 今日のタイムライン表示ボタンに使用
+        array_unshift($timeline_date_list, (new \DateTime())->format('Y-m-d'));
+
+        return $this->render('AppBundle:Default:index.html.twig',[
+          'timeline' => $timeline,
+          'timeline_date_list' => $timeline_date_list,
+        ]);
     }
+
+    /**
+    * @Route("/login", name="login")
+    */
+   public function loginAction()
+   {
+       return $this->render('AppBundle:Default:login.html.twig');
+   }
 }

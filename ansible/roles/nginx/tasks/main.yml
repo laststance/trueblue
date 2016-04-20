@@ -1,0 +1,20 @@
+---
+
+- name: Install nginx
+  apt: name=nginx state=present
+
+- name: Unlink default
+  file: path=/etc/nginx/sites-enabled/default state=absent
+
+- name: Copy nginx.conf
+  template: src=nginx.conf dest=/etc/nginx/nginx.conf
+
+- name: Copy dailytweet.conf
+  template: src=dailytweet.conf dest=/etc/nginx/sites-available/dailytweet.conf
+
+- name: Enable dailytweet.conf
+  file: src=/etc/nginx/sites-available/dailytweet.conf dest=/etc/nginx/sites-enabled/dailytweet.conf owner=root group=root mode=0755 state=link
+  notify: restart nginx
+
+- name: Create project root dir
+  file: path=/home/dailytweet/daily-tweet state=directory owner=dailytweet group=sudo mode=0755

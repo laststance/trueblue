@@ -1,0 +1,58 @@
+[client]
+port = 3306
+socket = /var/run/mysqld/mysqld.sock
+
+[mysqld]
+port = 3306
+bind-address = 0.0.0.0
+datadir = /var/lib/mysql
+socket = /var/run/mysqld/mysqld.sock
+pid-file = /var/run/mysqld/mysqld.pid
+
+# Slow query log configuration.
+slow_query_log = 1
+slow_query_log_file = /var/log/mysql-slow.log
+long_query_time = 2
+
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links = 0
+
+# User is ignored when systemd is used (fedora >= 15).
+user = mysql
+
+# http://dev.mysql.com/doc/refman/5.5/en/performance-schema.html
+;performance_schema
+
+# Memory settings.
+key_buffer_size = 256M
+max_allowed_packet = 64M
+table_open_cache = 256
+sort_buffer_size = 1M
+read_buffer_size = 1M
+read_rnd_buffer_size = 4M
+myisam_sort_buffer_size = 64M
+thread_cache_size = 8
+query_cache_size = 16M
+max_connections = 151
+
+# Other settings.
+wait_timeout = 28800
+
+# Try number of CPU's * 2 for thread_concurrency.
+thread_concurrency = 2
+
+# InnoDB settings.
+innodb_file_per_table = 1
+innodb_buffer_pool_size = 256M
+innodb_additional_mem_pool_size = 20M
+innodb_log_file_size = 64M
+innodb_log_buffer_size = 8M
+innodb_flush_log_at_trx_commit = 1
+innodb_lock_wait_timeout = 50
+
+[mysqldump]
+quick
+max_allowed_packet = 64M
+
+[mysqld_safe]
+pid-file = /var/run/mysqld/mysqld.pid

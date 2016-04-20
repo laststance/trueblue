@@ -1,0 +1,12 @@
+@mixin fix_header_layout() {
+  .header-title-kaomoji {
+    display: none;
+  }
+
+  @media (max-width: 34em) {
+    .root-header > .container > .nav.navbar-nav {
+      margin: 0 0;
+      width: 100%;
+    }
+  }
+}

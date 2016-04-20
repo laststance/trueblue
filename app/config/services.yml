@@ -1,9 +1,20 @@
 # Learn more about services, parameters and containers at
 # http://symfony.com/doc/current/book/service_container.html
+imports:
+    - { resource: parameters.yml }
+
 parameters:
 #    parameter_name: value
 
 services:
+    twitter_api:
+        class: AppBundle\Service\TwitterAPI
+        arguments: [@doctrine, "@=service('security.token_storage').getToken().getUser()", "%twitter_api%"]
+
+    oauth_entity_user_provider:
+        class: AppBundle\Service\OAuthEntityUserProvider
+        arguments: [@doctrine, AppBundle\Entity\User, {twitter: twitterId}]
+
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]

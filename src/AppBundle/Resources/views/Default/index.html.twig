@@ -1,8 +1,19 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'AppBundle::base.html.twig' %}
+{% block stylesheet %}
+  <link rel="stylesheet" href="{{ asset('/css/index.css') }}">
+  <link href='https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two' rel='stylesheet' type='text/css'>
+{% endblock %}
 {% block body %}
-  <h1>INDEX Page</h1>
-  {% if app.user %}
-    <h1>Hello {{ app.user.username }}!!</h1>
-  {% endif %}
+<main id="container" class="container">
+  <!-- React <TimelineComponent /> render position -->
+</main>
+{% endblock %}
+{% block javascript %}
+<script type="text/javascript">
+  var json_daily_url = "{{ path('json_daily') }}";
+  var timeline_date_list = eval({{ timeline_date_list|json_encode()|raw }});
+  var timeline_json = eval({{ timeline|json_encode()|raw }});
+  var app_user_username = "{{ app.user.username }}";
+</script>
+<script src="{{ asset('/js/index.js') }}"></script>
 {% endblock %}

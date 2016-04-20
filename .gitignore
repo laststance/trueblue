@@ -1,4 +1,6 @@
 /web/bundles/
+/web/css/
+/web/js/
 /app/bootstrap.php.cache
 /app/cache/*
 /app/config/parameters.yml
@@ -15,3 +17,8 @@ tags
 .tags_swap
 /node_modules/
 /.sass-cache/
+/.bundle/
+.DS_Store
+.idea
+/ansible/group_vars/all
+fabfile.pyc
