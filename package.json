@@ -2,7 +2,8 @@
   "name": "daily-tweet",
   "version": "1.0.0",
   "description": "create article from daily tweet",
-  "devDependencies": {
+  "dependencies": {
+    "glob": "^7.0.3",
     "babelify": "^6.3.0",
     "browserify": "^11.1.0",
     "chai": "^3.4.1",
@@ -14,8 +15,5 @@
     "react": "^0.13.3",
     "react-bootstrap": "^0.25.2",
     "vinyl-source-stream": "^1.1.0"
-  },
-  "dependencies": {
-    "glob": "^7.0.3"
   }
 }
