@@ -4,8 +4,9 @@ var browserify = require('browserify');
 var babelify = require('babelify');
 var source = require('vinyl-source-stream');
 var shell = require('gulp-shell');
+var glob = require('glob');
 
-var es6_files = ['login.es6', 'index.es6'];
+ Array.prototype.getLastVal = function (){ return this[this.length -1];}
 
 gulp.task('build:sass', function() {
   return sass('./src/AppBundle/Resources/scss/*.scss', {style: 'expanded'})
@@ -13,12 +14,12 @@ gulp.task('build:sass', function() {
 });
 
 gulp.task('build:js', function() {
-  return es6_files.forEach(function(file_name) {
-    browserify('./src/AppBundle/Resources/es6/' + file_name, { debug: true })
+  return glob.sync('./src/AppBundle/Resources/es6/**/*.es6').forEach(function(file_path) {
+    browserify(file_path, { debug: true })
      .transform(babelify)
      .bundle()
      .on("error", function (err) { console.log("Error : " + err.message); })
-     .pipe(source(file_name.split('.')[0] + '.js'))
+     .pipe(source(file_path.split('/').getLastVal().split('.')[0] + '.js'))
      .pipe(gulp.dest('./web/js'));
   });
 });
@@ -39,6 +40,5 @@ gulp.task('unit', shell.task(
 
 gulp.task('watch', function() {
   gulp.watch('./src/AppBundle/Resources/scss/*.scss', ['build:sass']);
-  gulp.watch('./src/AppBundle/Resources/es6/*.es6', ['build:js']);
-  gulp.watch('./src/AppBundle/Resources/es6/*.jsx', ['build:js']);
+  gulp.watch('./src/AppBundle/Resources/es6/*.{es6,jsx}', ['build:js']);
 });
