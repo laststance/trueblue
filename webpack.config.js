@@ -7,17 +7,16 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 const devBuild = process.env.NODE_ENV !== 'production';
 const nodeEnv = devBuild ? 'development' : 'production';
 
-
 var config = {
-    entry: [
-        './client/Recipes/startup/clientRegistration'
-        //'./client/Recipes-redux/startup/clientRegistration'
+    entry: {
+        'index': './client/js/index.jsx',
+        'login': './client/js/login.js'
 
-    ],
+    },
     output: {
         path: './web/assets/build/',
         publicPath: '/assets/build/',
-        filename: 'client-bundle.js',
+        filename: '/js/[name].js',
     },
     resolve: {
         extensions: ['', '.js', '.jsx'],

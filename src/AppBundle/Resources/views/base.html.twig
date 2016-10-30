@@ -5,12 +5,16 @@
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <title>{% block title %}Daily Tweet{% endblock %}</title>
         <link rel="stylesheet" href="{{ asset('/assets/css/bootstrap.css') }}">
-        <link rel="stylesheet" href="{{ asset('/css/main.css') }}">
         {% block stylesheet %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body class="{{ app.request.get('_route') }}">
         {% block body %}{% endblock %}
-        {% block javascript %}{% endblock %}
+        {% block javascript %}
+            {% if app.environment == "dev" %}
+            <script src="{{ asset('webpack-dev-server.js', 'webpack') }}"></script>
+            {% endif %}
+            <script src="{{ asset('assets/build/client-bundle.js', 'webpack') }}"></script>
+        {% endblock %}
     </body>
 </html>

@@ -31,6 +31,9 @@ framework:
         cookie_lifetime: "%session_expires%"
     fragments:       ~
     http_method_override: true
+    assets:
+        packages:
+            webpack: ~
 
 # Twig Configuration
 twig:

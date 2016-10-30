@@ -1,6 +1,6 @@
 {% extends 'AppBundle::base.html.twig' %}
 {% block stylesheet %}
-  <link rel="stylesheet" href="{{ asset('/css/login.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/build/stylesheets/login.css', 'webpack') }}">
   <link href='https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two' rel='stylesheet' type='text/css'>
 {% endblock %}
 {% block body %}
@@ -28,5 +28,5 @@
 {% endblock %}
 
 {% block javascript %}
-<script src="{{ asset('/js/login.js') }}"></script>
+<script src="{{ asset('/assets/build/js/login.js') }}"></script>
 {% endblock %}

@@ -25,3 +25,4 @@ parameters:
         bearer_token: ~
 
     session_expires: 604800
+    assets_base_url:   "http://localhost:8080"
