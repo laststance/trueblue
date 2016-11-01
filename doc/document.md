@@ -15,4 +15,7 @@ $ node_modules/.bin/gulp -T
 
 # run dev server
 $ app/console server:run # you may kick web/app_dev.php
+
+webpack devserver
+$ webpack-dev-server --progress --colors --config webpack.config.js
 ```
