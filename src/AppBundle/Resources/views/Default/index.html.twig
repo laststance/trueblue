@@ -1,6 +1,6 @@
 {% extends 'AppBundle::base.html.twig' %}
 {% block stylesheet %}
-  <link rel="stylesheet" href="{{ asset('/css/index.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/build/stylesheets/index.css', 'webpack') }}">
   <link href='https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two' rel='stylesheet' type='text/css'>
 {% endblock %}
 {% block body %}
@@ -15,5 +15,5 @@
   var timeline_json = eval({{ timeline|json_encode()|raw }});
   var app_user_username = "{{ app.user.username }}";
 </script>
-<script src="{{ asset('/js/index.js') }}"></script>
+<script src="{{ asset('/assets/build/js/index.js') }}"></script>
 {% endblock %}
