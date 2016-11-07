@@ -1,7 +1,5 @@
 import ReactOnRails from 'react-on-rails';
 const React = require('react');
-const ReactDOM = require('react-dom');
-const $ = require('jquery');
 const Timeline = require('./components/timeline.jsx');
 const Header = require('./components/header.jsx');
 require('../sass/main.scss');
