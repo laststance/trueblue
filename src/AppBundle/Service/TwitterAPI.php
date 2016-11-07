@@ -124,7 +124,7 @@ class TwitterAPI
                 // tweet1件についての情報が格納されたオブジェクト
                 $tweet = $saved_timeline[$i];
                 // 投稿日時 GMTで取得されるので日本のタイムゾーンに変換し、yyyy-mm-dd形式の文字列に整形
-                $created_day = (new \DateTime($tweet->created_at))->setTimezone(new \DateTimeZone('Asia/Tokyo'))->format('Y-m-d');
+                $created_day = (new \DateTime($tweet['created_at']))->setTimezone(new \DateTimeZone('Asia/Tokyo'))->format('Y-m-d');
 
                 // 指定日のtweetが一件もなかった場合
                 if ($max_id === null && $target_day > $created_day) {
@@ -133,13 +133,13 @@ class TwitterAPI
 
                 // 指定日の一番最後のtweetをmax_idとしてセット
                 if ($max_id === null && $target_day === $created_day) {
-                    $max_id = $tweet->id_str;
+                    $max_id = $tweet['id_str'];
                     $max_id_index = $index;
                 }
 
                 // 指定日一日前の最初のtweetのsice_idとしてセット
                 if ($target_day > $created_day) {
-                    $since_id = $tweet->id_str;
+                    $since_id = $tweet['id_str'];
                     // 今までapiから取得したtimelineからmax_id ~ (since_id - 1)の範囲を取得する
                     $target_day_timeline = array_slice($saved_timeline, $max_id_index, ($index - $max_id_index));
 
@@ -149,7 +149,7 @@ class TwitterAPI
                 $index++;
             }
             // api次回取得位置を指定
-            $get_query = array_merge($get_query, ['max_id' => $tweet->id_str, 'count' => '21']);
+            $get_query = array_merge($get_query, ['max_id' => $tweet['id_str'], 'count' => '21']);
         }
     }
 
