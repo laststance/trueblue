@@ -26,10 +26,15 @@ class DefaultController extends Controller
         $timeline_date_list = array_map(function($obj) {return $obj->getDate()->format('Y-m-d');} , $pastTimelines);
         // 今日のタイムライン表示ボタンに使用
         array_unshift($timeline_date_list, (new \DateTime())->format('Y-m-d'));
-
+dump($this->generateUrl('json_daily'));
         return $this->render('AppBundle:Default:index.html.twig',[
-          'timeline' => $timeline,
-          'timeline_date_list' => $timeline_date_list,
+            'props' => $this->get('jms_serializer')->serialize(
+                [
+                    'json_daily_url' => $this->generateUrl('json_daily'),
+                    'timeline_date_list' => $timeline_date_list,
+                    'timeline_json' => $timeline,
+                    'app_user_username' => $this->getUser()->getUsername()
+                ], 'json')
         ]);
     }
 

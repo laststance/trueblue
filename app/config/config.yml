@@ -18,7 +18,8 @@ framework:
     form:            ~
     csrf_protection: ~
     validation:      { enable_annotations: true }
-    #serializer:      { enable_annotations: true }
+    serializer:
+        { enabled : true }
     templating:
         engines: ['twig']
         #assets_version: SomeVersionScheme
@@ -87,3 +88,8 @@ hwi_oauth:
 
 limenius_react:
     default_rendering: "client_side"
+
+jms_serializer:
+    visitors:
+        json:
+            options: JSON_UNESCAPED_SLASHES

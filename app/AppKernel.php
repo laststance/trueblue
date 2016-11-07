@@ -18,6 +18,9 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new Limenius\ReactBundle\LimeniusReactBundle(),
+            new JMS\DiExtraBundle\JMSDiExtraBundle($this),
+            new JMS\AopBundle\JMSAopBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

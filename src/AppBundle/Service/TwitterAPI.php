@@ -194,7 +194,7 @@ class TwitterAPI
         $context = $this->createBearerAuthContext();
 
         $response_json = @file_get_contents($this->request_url, false, stream_context_create($context));
-        $decoded_json = json_decode($response_json);
+        $decoded_json = json_decode($response_json, true);
 
         return $decoded_json;
     }

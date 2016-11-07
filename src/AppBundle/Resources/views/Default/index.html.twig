@@ -6,15 +6,9 @@
 {% block body %}
 <main id="container" class="container">
   <!-- React <TimelineComponent /> render position -->
-  {{ react_component('RootComponent') }}
+  {{ react_component('RootComponent', {'props': props}) }}
 </main>
 {% endblock %}
 {% block javascript %}
-<script type="text/javascript">
-  var json_daily_url = "{{ path('json_daily') }}";
-  var timeline_date_list = eval({{ timeline_date_list|json_encode()|raw }});
-  var timeline_json = eval({{ timeline|json_encode()|raw }});
-  var app_user_username = "{{ app.user.username }}";
-</script>
 <script src="{{ asset('/assets/build/js/index.js', 'webpack') }}"></script>
 {% endblock %}
