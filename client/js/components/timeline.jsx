@@ -15,11 +15,11 @@ export default class Timeline extends React.Component {
       var view = this.props.timeline_json.map((tweet, index)=> {
         const date = new Date(tweet.created_at);
         return (
-          <div className="col-lg-offset-1 col-lg-10">
+          <div className="col-lg-offset-1 col-lg-10" key={tweet.id_str}>
             <div className="row">
               <section
                 className='timeline-item col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10'
-                key={tweet.id_str} data-id={tweet.id_str} data-index={index}>
+                 data-id={tweet.id_str} data-index={index}>
                 <div className="contents">
                   <div className="left-side">
                     <img className="profile-image" src={tweet.user.profile_image_url}/>
