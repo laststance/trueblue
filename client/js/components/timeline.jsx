@@ -1,5 +1,7 @@
+import autobind from 'autobind-decorator';
 import React from 'react';
 
+@autobind
 export default class Timeline extends React.Component {
 
   render() {

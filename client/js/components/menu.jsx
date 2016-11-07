@@ -1,9 +1,11 @@
+import autobind from 'autobind-decorator';
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { Modal } from 'react-bootstrap';
 import { ListGroup } from 'react-bootstrap';
 import { ListGroupItem } from 'react-bootstrap';
 
+@autobind
 export default class Menu extends React.Component {
 
     constructor(props, context) {

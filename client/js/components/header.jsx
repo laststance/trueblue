@@ -1,8 +1,10 @@
+import autobind from 'autobind-decorator';
 import React from 'react';
 import { Navbar } from 'react-bootstrap';
 import { Nav } from 'react-bootstrap';
 import Menu from './menu.jsx';
 
+@autobind
 export default class Header extends React.Component {
 
     get_kaomoji() {
