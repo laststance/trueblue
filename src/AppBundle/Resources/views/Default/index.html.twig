@@ -6,6 +6,7 @@
 {% block body %}
 <main id="container" class="container">
   <!-- React <TimelineComponent /> render position -->
+  {{ react_component('RootComponent') }}
 </main>
 {% endblock %}
 {% block javascript %}
@@ -15,5 +16,5 @@
   var timeline_json = eval({{ timeline|json_encode()|raw }});
   var app_user_username = "{{ app.user.username }}";
 </script>
-<script src="{{ asset('/assets/build/js/index.js') }}"></script>
+<script src="{{ asset('/assets/build/js/index.js', 'webpack') }}"></script>
 {% endblock %}

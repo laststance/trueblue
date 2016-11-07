@@ -1,3 +1,4 @@
+import ReactOnRails from 'react-on-rails';
 const React = require('react');
 const ReactDOM = require('react-dom');
 const $ = require('jquery');
@@ -39,7 +40,4 @@ const RootComponent = React.createClass({
     }
 });
 
-ReactDOM.render(
-    <RootComponent />,
-    document.getElementById('container')
-);
+ReactOnRails.register({ RootComponent });
