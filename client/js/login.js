@@ -1,4 +1,3 @@
-const $ = require('jquery');
 require('../sass/main.scss');
 require('../sass/login.scss');
 
