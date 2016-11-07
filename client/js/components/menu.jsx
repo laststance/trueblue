@@ -1,55 +1,55 @@
-const React = require('react');
-const Button = require('react-bootstrap').Button;
-const Popover = require('react-bootstrap').Popover;
-const Modal = require('react-bootstrap').Modal;
-const ListGroup = require('react-bootstrap').ListGroup;
-const ListGroupItem = require('react-bootstrap').ListGroupItem;
+import React from 'react';
+import { Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
+import { ListGroup } from 'react-bootstrap';
+import { ListGroupItem } from 'react-bootstrap';
 
-const Menu = React.createClass({
-  getInitialState() {
-    return {
-      showModal: false
-    };
-  },
+export default class Menu extends React.Component {
 
-  close() {
-    this.setState({showModal: false});
-  },
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            showModal: false
+        }
+    }
 
-  open() {
-    this.setState({showModal: true});
-  },
+    close() {
+        this.setState({showModal: false});
+    }
 
-  _onClick(date_str) {
-    this.close();
-    this.props.onClick(date_str.date_str);
-  },
+    open() {
+        this.setState({showModal: true});
+    }
 
-  render() {
-    const self = this;
-    const list_group_items = this.props.timeline_date_list.map((date_str)=> {
-      return <ListGroupItem key={date_str} onClick={self._onClick.bind(this, {date_str})}>{date_str}</ListGroupItem>;
-    });
-    return (
-      <div id="menu">
-        <Button className="btn-header-right" bsSize="large" onClick={this.open}>&#9776;</Button>
+    _onClick(date_str) {
+        this.close();
+        this.props.onClick(date_str.date_str);
+    }
 
-        <Modal show={this.state.showModal} onHide={this.close}>
-          <Modal.Header closeButton>
-            <Modal.Title>アーカイブ</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <ListGroup>
-              {list_group_items}
-            </ListGroup>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={this.close}>Close</Button>
-          </Modal.Footer>
-        </Modal>
-      </div>
-    );
-  }
-});
+    render() {
+        const self = this;
+        const list_group_items = this.props.timeline_date_list.map((date_str)=> {
+            return <ListGroupItem key={date_str}
+                                  onClick={self._onClick.bind(this, {date_str})}>{date_str}</ListGroupItem>;
+        });
+        return (
+            <div id="menu">
+                <Button className="btn-header-right" bsSize="large" onClick={this.open}>&#9776;</Button>
 
-module.exports = Menu;
+                <Modal show={this.state.showModal} onHide={this.close}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>アーカイブ</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <ListGroup>
+                            {list_group_items}
+                        </ListGroup>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button onClick={this.close}>Close</Button>
+                    </Modal.Footer>
+                </Modal>
+            </div>
+        );
+    }
+}

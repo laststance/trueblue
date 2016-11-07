@@ -1,6 +1,7 @@
-const React = require('react');
+import React from 'react';
 
-const Timeline = React.createClass({
+export default class Timeline extends React.Component {
+
   render() {
     console.log(this.props.timeline_json.length);
     if (!this.props.timeline_json.length || this.props.timeline_json.error) {
@@ -46,6 +47,4 @@ const Timeline = React.createClass({
     );
   }
 
-});
-
-module.exports = Timeline;
+}

@@ -1,9 +1,9 @@
 import ReactOnRails from 'react-on-rails';
-const React = require('react');
-const Timeline = require('./components/timeline.jsx');
-const Header = require('./components/header.jsx');
-require('../sass/main.scss');
-require('../sass/index.scss');
+import React from 'react';
+import Timeline from './components/timeline.jsx';
+import Header from './components/header.jsx';
+import '../sass/main.scss';
+import '../sass/index.scss';
 
 export default class RootComponent extends React.Component {
 
