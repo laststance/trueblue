@@ -17,5 +17,5 @@ $ mysql.server start
 $ ansible-playbook -i ansible/production ansible/site.yml
 
 # deploy
-$ fab deploy
+$ fab -f fabric/daily-tweet.py deploy
 ```
