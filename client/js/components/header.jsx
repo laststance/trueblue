@@ -8,7 +8,7 @@ import Menu from './menu.jsx';
 export default class Header extends React.Component {
 
     get_kaomoji() {
-        const kaomoji_list = ['＼(・｀(ｪ)・)/', '(*ノ・ω・）', 'o (◡‿◡✿)', 'ヽ(*・ω・)ﾉ'];
+        const kaomoji_list = ['ｏ口(・∀・ )', '(*ノ・ω・）', 'o (◡‿◡✿)', 'ヽ(*・ω・)ﾉ'];
         const rand = Math.round(Math.random() * kaomoji_list.length - 1);
         return kaomoji_list[rand];
     }
