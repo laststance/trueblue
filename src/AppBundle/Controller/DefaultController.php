@@ -27,7 +27,7 @@ class DefaultController extends Controller
         // 今日のタイムライン表示ボタンに使用
         array_unshift($timeline_date_list, (new \DateTime())->format('Y-m-d'));
 
-        return $this->render('AppBundle:Default:index.html.twig',[
+        return $this->render(':default:index.html.twig',[
             'props' => $this->get('jms_serializer')->serialize(
                 [
                     'json_daily_url' => $this->generateUrl('json_daily'),
@@ -43,6 +43,6 @@ class DefaultController extends Controller
     */
    public function loginAction()
    {
-       return $this->render('AppBundle:Default:login.html.twig');
+       return $this->render(':default:login.html.twig');
    }
 }
