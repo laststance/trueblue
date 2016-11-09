@@ -8,7 +8,8 @@ body {
 	left: 0;
 	position: fixed;
 	width: 100%;
-	background-color: #eeeeee;
+	background-color: rgba(238, 238, 238, 0.5);
+	z-index: 1;
 	.header-title {
 		color: inherit;
 	}
