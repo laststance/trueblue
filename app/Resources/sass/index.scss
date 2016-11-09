@@ -1,15 +1,22 @@
 @import "mixin.scss";
 
 body {
-	background-image: url('../img/background.jpg');
-	background-attachment: fixed;
-	background-size: cover;
+	background-color: #f5f8fa;
 }
 
 .navbar {
 	left: 0;
 	position: fixed;
 	width: 100%;
+	background-color: #eeeeee;
+	.header-title {
+		color: inherit;
+	}
+	.btn-header-right {
+		color: inherit;
+		background-color: inherit;
+		border: solid 1px #ABA3B8;
+	}
 }
 
 // bootstrapのデフォルトスタイル打ち消し
@@ -30,11 +37,14 @@ main {
 		padding-bottom: 50px;
 
 		div:first-child > .row > section {
-			border-radius: 5px 5px 0 0;
+			border-top-right-radius: 5px;
+			border-top-left-radius: 5px;
+			border-top: 1px solid rgba(100, 100, 100, .6);
 		}
 
 		div:last-child > .row > section {
-			border-radius: 0 0 5px 5px;
+			border-bottom-left-radius: 5px;
+			border-bottom-right-radius: 5px;
 		}
 
 		.error-msg {
@@ -46,7 +56,7 @@ main {
 	}
 
 	.timeline-item {
-		background-color: rgba(255, 255, 255, .8);
+		background-color: rgba(255, 255, 255, 0.3);
 		border-bottom: 1px solid rgba(100, 100, 100, .6);
 		border-left: 1px solid rgba(100, 100, 100, .6);
 		border-right: 1px solid rgba(100, 100, 100, .6);
