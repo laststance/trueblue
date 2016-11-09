@@ -5,13 +5,15 @@ import React from 'react';
 export default class Timeline extends React.Component {
 
   render() {
-    if (typeof this.props.timeline_json === "undefined" || !this.props.timeline_json.length || this.props.timeline_json.error) {
+    if (typeof this.props.timeline_json == "undefined" || !this.props.timeline_json.length || this.props.timeline_json.error) {
       var view = (
-        <article id="timeline" className="row">
-          <div className='timeline-item col-md-offset-3 col-md-6 error-msg'>
-            <p>tweet not found.</p>
+          <div>
+            <div className="row">
+              <section className='timeline-item col-md-offset-3 col-md-6 error-msg'>
+                <p>tweet not found.</p>
+              </section>
+            </div>
           </div>
-        </article>
       );
     } else {
       var view = this.props.timeline_json.map((tweet, index)=> {
