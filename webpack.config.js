@@ -9,8 +9,8 @@ const nodeEnv = devBuild ? 'development' : 'production';
 
 var config = {
     entry: {
-        'index': './client/js/index.jsx',
-        'login': './client/js/login.js'
+        'index': './app/Resources/js/index.jsx',
+        'login': './app/Resources/js/login.js'
 
     },
     output: {
@@ -30,7 +30,7 @@ var config = {
             'window.jQuery'       : 'jquery',
         }),
         new CopyWebpackPlugin([
-            { from: './client/img', to: './img' },
+            { from: './app/Resources/img', to: './img' },
         ]),
         new webpack.DefinePlugin({
             'process.env': {
