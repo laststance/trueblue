@@ -77,9 +77,10 @@ class TwitterAPI
         }
 
         // since_idがあればget_queryに指定して今日のつぶやき一覧をapiから取得
-        if ('undefined' !== $today_since_id = $this->user->getTodaySinceId()) {
+        $today_since_id = $this->user->getTodaySinceId();
+        if ($today_since_id !== '') {
             $get_query['since_id'] = $today_since_id;
-        // since_idがundefinedなら200件まで取得 今日以前のつぶやきが存在しないアカウントなど
+        // since_idが無ければ200件まで取得 今日以前のつぶやきが存在しないアカウントなど
         } else {
             $get_query['count'] = '200';
         }

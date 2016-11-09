@@ -56,7 +56,7 @@ class User extends OAuthUser
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="since_id_at", type="datetime")
+     * @ORM\Column(name="since_id_at", type="datetime", nullable=true)
      */
     private $sinceIdAt;
 

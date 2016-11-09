@@ -47,7 +47,6 @@ class OAuthEntityUserProvider extends EntityUserProvider implements UserProvider
             $user->setIsActive(true);
             $user->setCreateAt(new \DateTime());
             $user->setUpdateAt(new \DateTime());
-            $user->setSinceIdAt(new \DateTime());
             $this->em->persist($user);
             $this->em->flush();
 
