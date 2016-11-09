@@ -6,6 +6,11 @@ body {
 	height: 100%;
 }
 
+// bootstrapのデフォルトスタイル打ち消し
+.btn:focus {
+	outline: 0;
+}
+
 .btn-header-right {
 	background-color: rgba(255, 255, 255, .3);
 	color: rgb(194, 255, 255);
