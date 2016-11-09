@@ -8,8 +8,8 @@ export default class Timeline extends React.Component {
         if (typeof this.props.timeline_json == "undefined" || !this.props.timeline_json.length || this.props.timeline_json.error) {
             var view = (
                 <div>
-                    <div className="row">
-                        <section className='timeline-item col-md-offset-3 col-md-6 error-msg'>
+                    <div className="row" style={{margin: 0}}>
+                        <section className='timeline-item error-msg col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10'>
                             <p>tweet not found.</p>
                         </section>
                     </div>
