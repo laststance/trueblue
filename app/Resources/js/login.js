@@ -1,5 +1,5 @@
-require('../sass/main.scss');
-require('../sass/login.scss');
+import '../sass/main.scss';
+import '../sass/login.scss';
 
 // スマホのタッチスクリーンでボタンのhoverイベントを有効にする
 $('.btn-twitter-login').on('touchstart', () => {
