@@ -1,12 +1,33 @@
+body {
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,f6f6f6+47,ededed+100;White+3D+%231 */
+	background: #ffffff; /* Old browsers */
+	background: -moz-linear-gradient(top,  #ffffff 0%, #f6f6f6 47%, #ededed 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+}
+
+.navbar {
+	background-color: inherit;
+	.header-title {
+		color: inherit;
+	}
+	.btn-header-right {
+		color: inherit;
+		background-color: inherit;
+		border: solid 1px #ABA3B8;
+	}
+}
+
 main {
-	color: rgba(255, 255, 255, .88);
+	color: #3C4C52;
 
 	.service-infomation {
-		background-color: rgba(255, 255, 255, .2);
 		border-radius: 4px;
 		font-size: 24px;
 		margin-top: 140px;
 		padding: 20px 20px 30px;
+		text-align: center;
 	}
 }
 
@@ -32,9 +53,12 @@ main {
 			.service-infomation {
 				height: 100%;
 				margin-top: auto;
-				padding: 20px 10px 0;
 			}
 		}
+	}
+
+	.navbar {
+		padding-bottom: 0;
 	}
 
 	.header-title,

@@ -7,7 +7,7 @@
 <nav class="navbar">
   <ul class="nav">
     <li class="nav-item header-title pull-left">
-      <h1>Daily Tweet</h1>
+      <div>Daily Tweet</div>
     </li>
     <li class="nav-item header-button pull-right">
       <a href="{{ path('hwi_oauth_service_redirect', { 'service' : 'twitter' }) }}" class="btn btn-header-right">Login with Twitter</a>
@@ -16,9 +16,8 @@
 </nav>
 <main class="container">
   <section class="row">
-    <div class="col-md-5 service-infomation">
-      <p>Daily Tweetはtwitterからその日のつぶやきを取得して一つの記事にまとめるサービスです。</p>
-        <p>twitterから気軽にライフログを始めよう!</p>
+    <div class="service-infomation">
+      Daily Tweetはtwitter上の自分のつぶやきを日別にまとめるサービスです。
     </div>
   </section>
 </main>

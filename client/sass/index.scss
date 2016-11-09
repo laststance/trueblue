@@ -1,5 +1,10 @@
 @import "mixin.scss";
 
+body {
+	background-image: url('../img/background.jpg');
+	background-attachment: fixed;
+}
+
 .navbar {
 	left: 0;
 	position: fixed;
