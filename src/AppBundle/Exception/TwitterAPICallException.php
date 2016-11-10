@@ -2,7 +2,9 @@
 
 namespace AppBundle\Exception;
 
-class TwitterAPICallException extends \HttpException
+use Symfony\Component\HttpKernel\Exception\HttpException;
+
+class TwitterAPICallException extends HttpException
 {
 
 }
