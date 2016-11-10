@@ -19,6 +19,7 @@ class TwitterAPITest extends \PHPUnit_Framework_TestCase
     {
         $mockDoctrine = $this->getMock('Doctrine\Bundle\DoctrineBundle\Registry', array(), array(), '', false);
         $user = $this->getMock('AppBundle\Entity\User');
+        $client = $this->getMock('AppBundle\Service\HTTPClient');
 
         $this->params = array(
           'consumer_key' => 'consumer_key_value',
@@ -26,7 +27,7 @@ class TwitterAPITest extends \PHPUnit_Framework_TestCase
           'bearer_token' => 'bearer_token_value',
         );
 
-        $this->twitterApi = new TwitterAPI($mockDoctrine, $user, $this->params);
+        $this->twitterApi = new TwitterAPI($mockDoctrine, $user, $client, $this->params);
     }
 
     /**

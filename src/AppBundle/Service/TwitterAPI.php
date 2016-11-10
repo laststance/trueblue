@@ -2,9 +2,12 @@
 
 namespace AppBundle\Service;
 
+use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use AppBundle\Entity\User;
+use GuzzleHttp\Client;
+use AppBundle\Exception\TwitterAPICallException;
 
 /**
 * TODO: 全てのメソッドがコンストラクタでinjectしたUserオブジェクトを対象にしているので、Cronで全ユーザーにfindIdRangeByDate()を実行したい処理がやりにくい
@@ -14,6 +17,11 @@ use AppBundle\Entity\User;
 
 class TwitterAPI
 {
+    /**
+     * @var Client
+     */
+    protected $client;
+
     /**
     * @var Doctrine\Bundle\DoctrineBundle\Registry
     */
@@ -34,8 +42,9 @@ class TwitterAPI
      * @param User $user
      * @param array $key_and_token twitter api key and tokens
      */
-    public function __construct(Registry $doctrine, User $user, array $key_and_token)
+    public function __construct(Registry $doctrine, User $user, HTTPClient $client, array $key_and_token)
     {
+        $this->client = $client;
         $this->doctrine = $doctrine;
         $this->user = $user;
         $this->consumer_key = $key_and_token['consumer_key'];
@@ -184,7 +193,7 @@ class TwitterAPI
     * @param array $get_query
     * @return stdClass $decoded_json
     */
-    protected function callStatusesUserTimeline(array $get_query = array())
+    protected function callStatusesUserTimeline(array $get_query = [])
     {
         $this->request_url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
 
@@ -192,12 +201,9 @@ class TwitterAPI
             $this->request_url = $this->concatGetQuery($this->request_url, $get_query);
         }
 
-        $context = $this->createBearerAuthContext();
+        $response = $this->get($this->request_url, $this->createHeader());
 
-        $response_json = @file_get_contents($this->request_url, false, stream_context_create($context));
-        $decoded_json = json_decode($response_json, true);
-
-        return $decoded_json;
+        return $response;
     }
 
     /**
@@ -206,55 +212,38 @@ class TwitterAPI
     * @param array $get_query
     * @return stdClass $decoded_json
     */
-    protected function callSearchTweets(array $get_query = array())
+    protected function callSearchTweets(array $get_query = [])
     {
         $this->request_url = 'https://api.twitter.com/1.1/search/tweets.json';
 
-        $this->request_url = $this->concatGetQuery($this->request_url, $get_query);
+        if ($get_query) {
+            $this->request_url = $this->concatGetQuery($this->request_url, $get_query);
+        }
 
-        $context = $this->createBearerAuthContext();
+        $response = $this->get($this->request_url, $this->createHeader());
 
-        $response_json = @file_get_contents($this->request_url, false, stream_context_create($context));
-        $decoded_json = json_decode($response_json);
-
-        return $decoded_json;
+        return $response;
     }
 
     /**
-     * create new BearerToken connect with twitter api
-     * @return string BearerToken
+     * call api to get request
+     *
+     * @param string $url
+     * @param array $options
+     * @return array $decoded_json
+     * @throws TwitterAPICallException
      */
-    public function createNewBearerToken()
+    private function get(string $url, array $options = [])
     {
-        $api_key = $this->consumer_key;
-        $api_secret = $this->consumer_secret;
-
-        // クレデンシャルを作成
-        $credential = base64_encode($api_key . ':' . $api_secret);
-
-        // リクエストURL
-        $this->request_url = 'https://api.twitter.com/oauth2/token';
-
-        // リクエスト用のコンテキストを作成する
-        $context = array(
-          'http' => array(
-            'method' => 'POST',
-            'header' => array(
-              'Authorization: Basic ' . $credential,
-              'Content-Type: application/x-www-form-urlencoded;charset=UTF-8' ,
-            ),
-            'content' => http_build_query(array( 'grant_type' => 'client_credentials')),
-          ),
-        );
-
-        $response_json = @file_get_contents($this->request_url, false, stream_context_create($context));
-        $decoded_json = json_decode($response_json);
-
-        if ($decoded_json->token_type !== 'bearer') {
-            throw new \Exeption('faild to get the BearerToken');
+        try {
+            $response = $this->client->get($url, $options);
+        } catch (RequestException $e) {
+            throw new TwitterAPICallException();
         }
 
-        return $decoded_json->access_token;
+        $decoded_json = json_decode($response, true);
+
+        return $decoded_json;
     }
 
     /**
@@ -271,19 +260,17 @@ class TwitterAPI
     }
 
     /**
-    * create bearer_token authrization http_request_context
+    * create http header
+     *
     * @return array context
     */
-    protected function createBearerAuthContext()
+    protected function createHeader()
     {
-        return array(
-                 'http' => array(
-                   'method' => 'GET',
-                   'header' => array(
-                     'Authorization: Bearer ' . $this->bearer_token,
-                   ),
-                 ),
-               );
+        return [
+            'headers' => [
+                'Authorization' => 'Bearer '.$this->bearer_token // create bearer_token authrization header
+            ]
+        ];
     }
 
     /**

@@ -23,12 +23,12 @@ class CronCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this->setName('cron:SaveTargetDateTimeline')
-          ->setDescription('Save to DB All users Target Date Timeline.')
-          ->addArgument(
-            'date',
-            InputArgument::REQUIRED,
-            'what date do you want to save?'
-          );
+            ->setDescription('Save to DB All users Target Date Timeline.')
+            ->addArgument(
+                'date',
+                InputArgument::REQUIRED,
+                'what date do you want to save?'
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -42,6 +42,7 @@ class CronCommand extends ContainerAwareCommand
         $em = $doctrine->getEntityManager();
         // 登録ユーザーを取得
         $users = $doctrine->getRepository('AppBundle:User')->findAll();
+        $client = $this->getContainer()->get('app.service.httpclient');
         // tiwtter_apiのアクセストークン類
         $api_parameter = $this->getContainer()->getParameter('twitter_api');
         // タイムラインを取得する日付
@@ -50,11 +51,13 @@ class CronCommand extends ContainerAwareCommand
         // メイン処理
         foreach ($users as $user) {
             // 昨日のタイムラインJsonを取得
-            $twitterApi = new twitterApi($doctrine, $user, $api_parameter);
+            $twitterApi = new twitterApi($doctrine, $user, $client, $api_parameter);
             $res = $twitterApi->findIdRangeByDate($targetDate);
 
             // 指定日のタイムラインが一件も無い場合
-            if ( !array_key_exists('timeline_json', $res) ) continue;
+            if (!array_key_exists('timeline_json', $res)) {
+                continue;
+            }
 
             $encoded_json = json_encode($res['timeline_json']); // DBにはJSONとして格納する
 

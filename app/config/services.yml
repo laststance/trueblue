@@ -7,13 +7,16 @@ parameters:
 #    parameter_name: value
 
 services:
+    app.service.httpclient:
+        class: AppBundle\Service\HTTPClient
+
     twitter_api:
         class: AppBundle\Service\TwitterAPI
-        arguments: [@doctrine, "@=service('security.token_storage').getToken().getUser()", "%twitter_api%"]
+        arguments: ["@doctrine", "@=service('security.token_storage').getToken().getUser()", "@app.service.httpclient", "%twitter_api%"]
 
     oauth_entity_user_provider:
         class: AppBundle\Service\OAuthEntityUserProvider
-        arguments: [@doctrine, AppBundle\Entity\User, {twitter: twitterId}]
+        arguments: ["@doctrine", AppBundle\Entity\User, {twitter: twitterId}]
 
 #    service_name:
 #        class: AppBundle\Directory\ClassName
