@@ -1,4 +1,4 @@
-import '../sass/main.scss';
+import '../sass/common.scss';
 import '../sass/login.scss';
 
 // スマホのタッチスクリーンでボタンのhoverイベントを有効にする
