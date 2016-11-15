@@ -7,17 +7,7 @@ body {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
 }
 
-.navbar {
-	background-color: inherit;
-	.header-title {
-		color: inherit;
-	}
-	.btn-header-right {
-		color: inherit;
-		background-color: inherit;
-		border: solid 1px #ABA3B8;
-	}
-}
+@import "component/navbar";
 
 main {
 	color: #3C4C52;

@@ -4,29 +4,7 @@ body {
 	background-color: #f5f8fa;
 }
 
-.navbar {
-	left: 0;
-	position: fixed;
-	width: 100%;
-	background-color: rgba(238, 238, 238, 0.5);
-	z-index: 1;
-	.header-title {
-		color: inherit;
-	}
-	.btn-header-right {
-		color: inherit;
-		background-color: inherit;
-		border: solid 1px #ABA3B8;
-	}
-}
-
-// bootstrapのデフォルトスタイル打ち消し
-.navbar-default {
-	border: 0;
-}
-.btn-default {
-	border: 0;
-}
+@import "component/navbar";
 
 main {
 	.root-header > .container {

@@ -1,0 +1,16 @@
+.navbar {
+	left: 0;
+	position: fixed;
+	background-color: inherit;
+	background-color: rgba(238, 238, 238, 0.5);
+	width: 100%;
+	z-index: 1;
+	.header-title {
+		color: inherit;
+	}
+	.btn-header-right {
+		color: inherit;
+		background-color: inherit;
+		border: solid 1px #ABA3B8;
+	}
+}
