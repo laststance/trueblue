@@ -7,8 +7,8 @@ body {
 }
 
 // bootstrapのデフォルトスタイル打ち消し
-.btn:focus {
-	outline: 0;
+*:focus, *:active:focus {
+	outline: 0 !important;
 }
 .list-group-item:focus {
 	outline: 0;
