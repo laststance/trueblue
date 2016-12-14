@@ -205,8 +205,6 @@ class TwitterAPI
 
     private function enableHtmlLink(array $tweets, $links = true, $users = true, $hashtags = true)
     {
-        $return = [];
-dump($tweets);
         foreach ($tweets as $index => $tweet) {
 
             $text = $tweet['text'];
