@@ -6,6 +6,10 @@ body {
 	height: 100%;
 }
 
+a {
+	color: #3B94D9;
+}
+
 // bootstrapのデフォルトスタイル打ち消し
 *:focus, *:active:focus {
 	outline: 0 !important;

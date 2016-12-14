@@ -31,7 +31,7 @@ export default class Timeline extends React.Component {
                                     <div className="right-side">
                                         <span className="user-name">{tweet.user.name}</span> <span
                                         className="screen-name">@{tweet.user.screen_name}</span>
-                                        <p className="text">{tweet.text}</p>
+                                        <p className="text" dangerouslySetInnerHTML={{__html: tweet.text}}></p>
                                         <p
                                             className="create-at">{date.getFullYear()}年{date.getMonth() + 1}月{date.getDate()}日 {date.getHours()}時{date.getMinutes()}分</p>
                                     </div>

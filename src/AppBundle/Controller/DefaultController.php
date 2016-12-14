@@ -19,7 +19,7 @@ class DefaultController extends Controller
 
         // 今日のtimelineを取得
         $timeline = $twitterApi->getTodayTimeline();
-
+dump($timeline);
         // DBから過去のtimelinelistを取得
         // TODO: 長いのでもっと簡単にUserオブジェクトを取得する手段を考える
         $pastTimelines = $this->getDoctrine()->getRepository('AppBundle:PastTimeline')->findByUser($this->get('security.token_storage')->getToken()->getUser(), ['date' => 'DESC']);

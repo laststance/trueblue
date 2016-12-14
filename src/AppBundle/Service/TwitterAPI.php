@@ -10,11 +10,10 @@ use GuzzleHttp\Client;
 use AppBundle\Exception\TwitterAPICallException;
 
 /**
-* TODO: 全てのメソッドがコンストラクタでinjectしたUserオブジェクトを対象にしているので、Cronで全ユーザーにfindIdRangeByDate()を実行したい処理がやりにくい
-* TODO: コンストラクタにUserが必須のため、全ユーザーを取得してforeachの中でUserをセットする処理が書きにくい
-* TODO: findIdRangeByDate() since_idとmax_idを取得するのが目的なのに処理過程が指定日のタイムラインを取得するのに最適であるというジレンマ
-*/
-
+ * TODO: 全てのメソッドがコンストラクタでinjectしたUserオブジェクトを対象にしているので、Cronで全ユーザーにfindIdRangeByDate()を実行したい処理がやりにくい
+ * TODO: コンストラクタにUserが必須のため、全ユーザーを取得してforeachの中でUserをセットする処理が書きにくい
+ * TODO: findIdRangeByDate() since_idとmax_idを取得するのが目的なのに処理過程が指定日のタイムラインを取得するのに最適であるというジレンマ
+ */
 class TwitterAPI
 {
     /**
@@ -23,13 +22,13 @@ class TwitterAPI
     protected $client;
 
     /**
-    * @var Doctrine\Bundle\DoctrineBundle\Registry
-    */
+     * @var Doctrine\Bundle\DoctrineBundle\Registry
+     */
     protected $doctrine;
 
     /**
-    * @var AppBundle\Entity\User
-    */
+     * @var AppBundle\Entity\User
+     */
     public $user;
 
     protected $consumer_key = ''; // api key
@@ -39,10 +38,21 @@ class TwitterAPI
     protected $request_url = ''; // decide by api call method
 
     /**
+     * @var CommonService
+     */
+    private $commonService;
+
+    /**
      * @param User $user
      * @param array $key_and_token twitter api key and tokens
      */
-    public function __construct(Registry $doctrine, User $user, HTTPClient $client, array $key_and_token)
+    public function __construct(
+        Registry $doctrine,
+        User $user,
+        HTTPClient $client,
+        array $key_and_token,
+        CommonService $commonService
+    )
     {
         $this->client = $client;
         $this->doctrine = $doctrine;
@@ -50,6 +60,7 @@ class TwitterAPI
         $this->consumer_key = $key_and_token['consumer_key'];
         $this->consumer_secret = $key_and_token['consumer_secret'];
         $this->bearer_token = $key_and_token['bearer_token'];
+        $this->commonService = $commonService;
     }
 
     /**
@@ -89,13 +100,13 @@ class TwitterAPI
         $today_since_id = $this->user->getTodaySinceId();
         if ($today_since_id !== '') {
             $get_query['since_id'] = $today_since_id;
-        // since_idが無ければ200件まで取得 今日以前のつぶやきが存在しないアカウントなど
+            // since_idが無ければ200件まで取得 今日以前のつぶやきが存在しないアカウントなど
         } else {
             $get_query['count'] = '200';
         }
         $timeline = $this->callStatusesUserTimeline($get_query);
 
-        return $timeline;
+        return $this->enableHtmlLink($timeline);
     }
 
     /**
@@ -116,7 +127,10 @@ class TwitterAPI
 
         while (true) {
             // timeline取得apiを叩く 2回目以降はmax_idで指定したつぶやき自身も含まれるので切り捨てる(指定max_id未満が欲しいので)
-            $fetch_timeline = $index === 0 ? $this->callStatusesUserTimeline($get_query) : array_slice($this->callStatusesUserTimeline($get_query), 1);
+            $fetch_timeline = $index === 0 ? $this->callStatusesUserTimeline($get_query) : array_slice(
+                $this->callStatusesUserTimeline($get_query),
+                1
+            );
             $saved_timeline = array_merge($saved_timeline, $fetch_timeline);
 
             // apiからの取得件数が0件
@@ -124,17 +138,19 @@ class TwitterAPI
                 // timelineの総取得総数が0件 一件もつぶやきが無い人など
                 if (count($saved_timeline) < 1) {
                     return ['error' => 'timeline get count 0.'];
-                // apiの取得範囲制限内で指定日のsince_idが見つからない
+                    // apiの取得範囲制限内で指定日のsince_idが見つからない
                 } else {
                     return ['since_id' => 'undefined', 'max_id' => $max_id, 'timeline_json' => $saved_timeline];
                 }
             }
 
-            for ($i=$index; count($saved_timeline) > $i; $i++) {
+            for ($i = $index; count($saved_timeline) > $i; $i++) {
                 // tweet1件についての情報が格納されたオブジェクト
                 $tweet = $saved_timeline[$i];
                 // 投稿日時 GMTで取得されるので日本のタイムゾーンに変換し、yyyy-mm-dd形式の文字列に整形
-                $created_day = (new \DateTime($tweet['created_at']))->setTimezone(new \DateTimeZone('Asia/Tokyo'))->format('Y-m-d');
+                $created_day = (new \DateTime($tweet['created_at']))->setTimezone(
+                    new \DateTimeZone('Asia/Tokyo')
+                )->format('Y-m-d');
 
                 // 指定日のtweetが一件もなかった場合
                 if ($max_id === null && $target_day > $created_day) {
@@ -172,27 +188,80 @@ class TwitterAPI
      */
     public function getTimelineSinceFromMax($since_id, $max_id)
     {
-      if (!is_string($since_id) || !is_string($max_id)) {
-          throw new InvalidArgumentException('TwitterAPI::getTimelineSinceFromMax() arguments must be string.');
-      }
+        if (!is_string($since_id) || !is_string($max_id)) {
+            throw new InvalidArgumentException('TwitterAPI::getTimelineSinceFromMax() arguments must be string.');
+        }
 
-      $get_query = [
-        'user_id' => $this->user->getTwitterId(),
-        'since_id' => $since_id,
-        'max_id' =>  $max_id,
-      ];
+        $get_query = [
+            'user_id' => $this->user->getTwitterId(),
+            'since_id' => $since_id,
+            'max_id' => $max_id,
+        ];
 
-      $decoded_json = $this->callStatusesUserTimeline($get_query);
+        $decoded_json = $this->callStatusesUserTimeline($get_query);
 
-      return $decoded_json;
+        return $decoded_json;
+    }
+
+    private function enableHtmlLink(array $tweets, $links = true, $users = true, $hashtags = true)
+    {
+        $return = [];
+dump($tweets);
+        foreach ($tweets as $index => $tweet) {
+
+            $text = $tweet['text'];
+
+            $entities = [];
+
+            if ($links && is_array($tweet['entities']['urls'])) {
+                foreach ($tweet['entities']['urls'] as $e) {
+                    $temp["start"] = $e['indices'][0];
+                    $temp["end"] = $e['indices'][1];
+                    $temp["replacement"] = "<a href='".$e['expanded_url']."' target='_blank'>".$e['display_url']."</a>";
+                    $entities[] = $temp;
+                }
+            }
+            if ($users && is_array($tweet['entities']['user_mentions'])) {
+                foreach ($tweet['entities']['user_mentions'] as $e) {
+                    $temp["start"] = $e['indices'][0];
+                    $temp["end"] = $e['indices'][1];
+                    $temp["replacement"] = "<a href='https://twitter.com/".$e['screen_name']."' target='_blank'>@".$e['screen_name']."</a>";
+                    $entities[] = $temp;
+                }
+            }
+            if ($hashtags && is_array($tweet['entities']['hashtags'])) {
+                foreach ($tweet['entities']['hashtags'] as $e) {
+                    $temp["start"] = $e['indices'][0];
+                    $temp["end"] = $e['indices'][1];
+                    $temp["replacement"] = "<a href='https://twitter.com/hashtag/".$e['text']."?src=hash' target='_blank'>#".$e['text']."</a>";
+                    $entities[] = $temp;
+                }
+            }
+
+            usort(
+                $entities,
+                function ($a, $b) {
+                    return ($b["start"] - $a["start"]);
+                }
+            );
+
+
+            foreach ($entities as $item) {
+                $text = $this->commonService->mbSubstrReplace($text, $item["replacement"], $item["start"], $item["end"] - $item["start"]);
+            }
+
+            $tweets[$index]['text'] = $text;
+        }
+
+        return $tweets;
     }
 
     /**
-    * call api https://api.twitter.com/1.1/statuses/user_timeline.json
-    *
-    * @param array $get_query
-    * @return stdClass $decoded_json
-    */
+     * call api https://api.twitter.com/1.1/statuses/user_timeline.json
+     *
+     * @param array $get_query
+     * @return stdClass $decoded_json
+     */
     protected function callStatusesUserTimeline(array $get_query = [])
     {
         $this->request_url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
@@ -207,11 +276,11 @@ class TwitterAPI
     }
 
     /**
-    * call api https://api.twitter.com/1.1/search/tweets.json
-    *
-    * @param array $get_query
-    * @return stdClass $decoded_json
-    */
+     * call api https://api.twitter.com/1.1/search/tweets.json
+     *
+     * @param array $get_query
+     * @return stdClass $decoded_json
+     */
     protected function callSearchTweets(array $get_query = [])
     {
         $this->request_url = 'https://api.twitter.com/1.1/search/tweets.json';
@@ -238,7 +307,7 @@ class TwitterAPI
         try {
             $response = $this->client->get($url, $options);
         } catch (RequestException $e) {
-            throw new TwitterAPICallException();
+            throw new TwitterAPICallException(500, "twitter api call faild.", $e);
         }
 
         $decoded_json = json_decode($response, true);
@@ -247,29 +316,29 @@ class TwitterAPI
     }
 
     /**
-    * concat encoded get_query to http_request_url
-    * @param string $request_url
-    * @param string $get_query
-    * @return string $request_url_with_query
-    */
+     * concat encoded get_query to http_request_url
+     * @param string $request_url
+     * @param string $get_query
+     * @return string $request_url_with_query
+     */
     protected function concatGetQuery($request_url, $get_query)
     {
-        $request_url_with_query = $request_url . '?' . http_build_query($get_query);
+        $request_url_with_query = $request_url.'?'.http_build_query($get_query);
 
         return $request_url_with_query;
     }
 
     /**
-    * create http header
+     * create http header
      *
-    * @return array context
-    */
+     * @return array context
+     */
     protected function createHeader()
     {
         return [
             'headers' => [
                 'Authorization' => 'Bearer '.$this->bearer_token // create bearer_token authrization header
-            ]
+            ],
         ];
     }
 
