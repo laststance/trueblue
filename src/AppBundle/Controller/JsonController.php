@@ -31,17 +31,18 @@ class JsonController extends Controller
 
      // DBから過去日のタイムラインを取得
      $repository =$this->getDoctrine()->getRepository('AppBundle:PastTimeline');
-     $pastTimeline = $repository->findOneBy(array(
+     $pastTimeline = $repository->findOneBy([
        'user' => $this->get('security.token_storage')->getToken()->getUser(),
        'date' => new \DateTime($date)
-     ));
-     $timelinejson = $pastTimeline !== null ? $pastTimeline->getTimelineJson() : new stdClass();
+     ]);
+
+     $timelinejson = !is_null($pastTimeline) ? json_decode($pastTimeline->getTimelineJson(), true) : [];
+
+     $timelinejson = json_encode($this->get('app.service.common_service')->enableHtmlLink($timelinejson));
 
      // DBに入れる際、既にjson_encode済みなので通常のResponseクラスを使う
      $response = new Response($timelinejson);
      $response->headers->set('Content-Type', 'application/json');
      return $response;
   }
-
-
 }

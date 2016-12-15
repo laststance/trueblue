@@ -19,6 +19,7 @@ class DefaultController extends Controller
 
         // 今日のtimelineを取得
         $timeline = $twitterApi->getTodayTimeline();
+        $timeline = $this->get('app.service.common_service')->enableHtmlLink($timeline);
 
         // DBから過去のtimelinelistを取得
         // TODO: 長いのでもっと簡単にUserオブジェクトを取得する手段を考える
