@@ -17,3 +17,16 @@ $('.btn-twitter-login').on('touchstart', () => {
     setTimeout(moveCheck, 100);
     //0.1秒後にmoveCheck()を実行。
 });
+
+// ヘッダーの高さ分だけメインコンテンツにmargin-topを指定する(レスポンシブなので画面サイズによってヘッダーの高さが変わる)
+$(() => {
+    calcHeight();
+});
+$(window).on('resize', () => {
+    calcHeight();
+});
+
+const calcHeight = function () {
+    let navHeight = $('nav.navbar').outerHeight();
+    $('.service-infomation').css('margin-top', navHeight + 'px');
+}
