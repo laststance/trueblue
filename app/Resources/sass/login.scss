@@ -4,6 +4,11 @@ body {
 
 @import "component/navbar";
 
+img {
+	max-width: 100%;
+	height: auto;
+}
+
 main {
 	color: #3C4C52;
 
