@@ -22,7 +22,6 @@ class DefaultControllerTest extends WebTestCase
         //$this->logIn();
         //$crawler = $this->client->request('GET', '/');
         //$this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-
     }
 
     public function testLogin()

@@ -3,7 +3,6 @@
 namespace AppBundle\Tests\Service;
 
 use AppBundle\Service\TwitterAPI;
-use Prophecy\Argument\Token\AnyValuesToken;
 use AppBundle\Entity\User;
 
 class TwitterAPITest extends \PHPUnit_Framework_TestCase
