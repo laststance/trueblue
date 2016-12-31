@@ -51,8 +51,12 @@ class CronCommand extends ContainerAwareCommand
 
         // メイン処理
         foreach ($users as $user) {
+            if (empty($twitterApi)) {
+                $twitterApi = new twitterApi($doctrine, $user, $client, $api_parameter, $commonService);
+            } else {
+                $twitterApi->setUser($user);
+            }
             // 昨日のタイムラインJsonを取得
-            $twitterApi = new twitterApi($doctrine, $user, $client, $api_parameter, $commonService);
             $res = $twitterApi->findIdRangeByDate($targetDate);
 
             // 指定日のタイムラインが一件も無い場合
