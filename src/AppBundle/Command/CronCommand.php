@@ -35,7 +35,7 @@ class CronCommand extends ContainerAwareCommand
     {
         // 引数のフォーマットバリデーション
         if (!preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}/', $arg_date = $input->getArgument('date'))) {
-            throw new \Exeption('invalid argument. date format must be yyyy-mm-dd. e.g. 2020-04-03');
+            throw new \InvalidArgumentException('invalid argument. date format must be yyyy-mm-dd. e.g. 2020-04-03');
         }
 
         $doctrine = $this->getContainer()->get('doctrine');
