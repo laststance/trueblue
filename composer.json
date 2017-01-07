@@ -27,15 +27,13 @@
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^1.12",
         "sensio/generator-bundle": "~2.3",
-        "phpunit/phpunit": "~4.0",
-        "heroku/heroku-buildpack-php": "*"
+        "phpunit/phpunit": "~4.0"
     },
     "scripts": {
         "post-root-package-install": [
             "SymfonyStandard\\Composer::hookRootPackageInstall"
         ],
         "post-install-cmd": [
-            "Sensio\\Bundle\\DisributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",

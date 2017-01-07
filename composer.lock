@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3b4a20f28d071cfb83c060382438dcff",
-    "content-hash": "09cd13137bb204998e0eb0da777d9ee1",
+    "hash": "2be2bc1b6cf04a8e46758f6a308e26e4",
+    "content-hash": "ebe2884515b47ee11bcedb04f1d937c2",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -3196,50 +3196,6 @@
             ],
             "description": "A tool to automatically fix PHP code style",
             "time": "2016-12-01 00:05:05"
-        },
-        {
-            "name": "heroku/heroku-buildpack-php",
-            "version": "v113",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/heroku/heroku-buildpack-php.git",
-                "reference": "af7089595b889690df2594044c8626068178f739"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/af7089595b889690df2594044c8626068178f739",
-                "reference": "af7089595b889690df2594044c8626068178f739",
-                "shasum": ""
-            },
-            "bin": [
-                "bin/heroku-hhvm-apache2",
-                "bin/heroku-hhvm-nginx",
-                "bin/heroku-php-apache2",
-                "bin/heroku-php-nginx"
-            ],
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "David Zuelke",
-                    "email": "dz@heroku.com"
-                }
-            ],
-            "description": "Toolkit for starting a PHP application locally, with or without foreman, using the same config for PHP/HHVM and Apache2/Nginx as on Heroku",
-            "homepage": "https://github.com/heroku/heroku-buildpack-php",
-            "keywords": [
-                "apache",
-                "apache2",
-                "foreman",
-                "heroku",
-                "hhvm",
-                "nginx",
-                "php"
-            ],
-            "time": "2016-10-19 23:42:40"
         },
         {
             "name": "phpdocumentor/reflection-common",
