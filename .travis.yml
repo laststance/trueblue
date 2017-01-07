@@ -18,7 +18,8 @@ before_script:
   - app/console cache:warmup --env=test --quiet
 
 script:
-  - "./vendor/phpunit/phpunit/phpunit --verbose --debug -c app/"
+  - ./vendor/phpunit/phpunit/phpunit --verbose --debug -c app/
+  - ./vendor/bin/php-cs-fixer fix --diff --dry-run -v
 
 notifications:
   slack:
