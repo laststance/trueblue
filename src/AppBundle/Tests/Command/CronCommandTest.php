@@ -2,10 +2,10 @@
 
 namespace AppBundle\Tests\Command;
 
-use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Symfony\Component\Console\Tester\CommandTester;
 use AppBundle\Command\CronCommand;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\Console\Tester\CommandTester;
 
 class CronCommandTest extends KernelTestCase
 {

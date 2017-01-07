@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * PastTimeline
+ * PastTimeline.
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\PastTimelineRepository")
@@ -15,7 +15,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class PastTimeline
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -59,11 +59,10 @@ class PastTimeline
      */
     private $updateAt;
 
-
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -71,9 +70,10 @@ class PastTimeline
     }
 
     /**
-     * Set user
+     * Set user.
      *
      * @param User $user
+     *
      * @return PastTimeline
      */
     public function setUser($user)
@@ -84,7 +84,7 @@ class PastTimeline
     }
 
     /**
-     * Get user
+     * Get user.
      *
      * @return User
      */
@@ -94,9 +94,10 @@ class PastTimeline
     }
 
     /**
-     * Set date
+     * Set date.
      *
      * @param \DateTime $date
+     *
      * @return PastTimeline
      */
     public function setDate($date)
@@ -107,7 +108,7 @@ class PastTimeline
     }
 
     /**
-     * Get date
+     * Get date.
      *
      * @return \DateTime
      */
@@ -117,9 +118,10 @@ class PastTimeline
     }
 
     /**
-     * Set timelineJson
+     * Set timelineJson.
      *
      * @param string $timelineJson
+     *
      * @return PastTimeline
      */
     public function setTimelineJson($timelineJson)
@@ -130,7 +132,7 @@ class PastTimeline
     }
 
     /**
-     * Get timelineJson
+     * Get timelineJson.
      *
      * @return string
      */
@@ -140,9 +142,10 @@ class PastTimeline
     }
 
     /**
-     * Set createAt
+     * Set createAt.
      *
      * @param \DateTime $createAt
+     *
      * @return PastTimeline
      */
     public function setCreateAt($createAt)
@@ -153,7 +156,7 @@ class PastTimeline
     }
 
     /**
-     * Get createAt
+     * Get createAt.
      *
      * @return \DateTime
      */
@@ -163,9 +166,10 @@ class PastTimeline
     }
 
     /**
-     * Set updateAt
+     * Set updateAt.
      *
      * @param \DateTime $updateAt
+     *
      * @return PastTimeline
      */
     public function setUpdateAt($updateAt)
@@ -176,7 +180,7 @@ class PastTimeline
     }
 
     /**
-     * Get updateAt
+     * Get updateAt.
      *
      * @return \DateTime
      */

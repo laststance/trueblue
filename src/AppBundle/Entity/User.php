@@ -2,13 +2,13 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUser;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * User
+ * User.
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\UserRepository")
@@ -17,7 +17,7 @@ use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUser;
 class User extends OAuthUser
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -61,7 +61,7 @@ class User extends OAuthUser
     private $sinceIdAt;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_active", type="boolean")
      */
@@ -83,13 +83,13 @@ class User extends OAuthUser
 
     public function __construct()
     {
-      $this->pastTimelines = new ArrayCollection();
+        $this->pastTimelines = new ArrayCollection();
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -97,9 +97,10 @@ class User extends OAuthUser
     }
 
     /**
-     * Set twitterId
+     * Set twitterId.
      *
      * @param string $twitterId
+     *
      * @return User
      */
     public function setTwitterId($twitterId)
@@ -110,7 +111,7 @@ class User extends OAuthUser
     }
 
     /**
-     * Get twitterId
+     * Get twitterId.
      *
      * @return string
      */
@@ -120,9 +121,10 @@ class User extends OAuthUser
     }
 
     /**
-     * Set username
+     * Set username.
      *
      * @param string $username
+     *
      * @return User
      */
     public function setUsername($username)
@@ -133,7 +135,8 @@ class User extends OAuthUser
     }
 
     /**
-     * Get username
+     * Get username.
+     *
      * @return string
      */
     public function getUsername()
@@ -141,11 +144,11 @@ class User extends OAuthUser
         return $this->username;
     }
 
-    /**
-     * Set todaySinceId
-     *
-     * @return User
-     */
+     /**
+      * Set todaySinceId.
+      *
+      * @return User
+      */
      public function setTodaySinceId($todaySinceId)
      {
          $this->todaySinceId = $todaySinceId;
@@ -153,20 +156,21 @@ class User extends OAuthUser
          return $this;
      }
 
-    /**
-     * Get todaySinceId
-     *
-     * @return string
-     */
+     /**
+      * Get todaySinceId.
+      *
+      * @return string
+      */
      public function getTodaySinceId()
      {
          return $this->todaySinceId;
      }
 
      /**
-      * Set sinceIdAt
+      * Set sinceIdAt.
       *
       * @param \DateTime $sinceIdAt
+      *
       * @return User
       */
      public function setSinceIdAt(\DateTime $sinceIdAt)
@@ -177,7 +181,7 @@ class User extends OAuthUser
      }
 
      /**
-      * Get sinceIdAt
+      * Get sinceIdAt.
       *
       * @return \DateTime
       */
@@ -187,9 +191,10 @@ class User extends OAuthUser
      }
 
     /**
-     * Set isActive
+     * Set isActive.
      *
-     * @param boolean $isActive
+     * @param bool $isActive
+     *
      * @return User
      */
     public function setIsActive($isActive)
@@ -200,9 +205,9 @@ class User extends OAuthUser
     }
 
     /**
-     * Get isActive
+     * Get isActive.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsActive()
     {
@@ -210,9 +215,10 @@ class User extends OAuthUser
     }
 
     /**
-     * Set createAt
+     * Set createAt.
      *
      * @param \DateTime $createAt
+     *
      * @return User
      */
     public function setCreateAt(\DateTime $createAt)
@@ -223,7 +229,7 @@ class User extends OAuthUser
     }
 
     /**
-     * Get createAt
+     * Get createAt.
      *
      * @return \DateTime
      */
@@ -233,9 +239,10 @@ class User extends OAuthUser
     }
 
     /**
-     * Set updateAt
+     * Set updateAt.
      *
      * @param \DateTime $updateAt
+     *
      * @return User
      */
     public function setUpdateAt(\DateTime $updateAt)
@@ -246,7 +253,7 @@ class User extends OAuthUser
     }
 
     /**
-     * Get updateAt
+     * Get updateAt.
      *
      * @return \DateTime
      */

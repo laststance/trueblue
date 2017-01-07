@@ -2,15 +2,15 @@
 
 namespace AppBundle\Service;
 
+use AppBundle\Entity\User;
+use AppBundle\Exception\TwitterAPICallException;
+use Doctrine\Bundle\DoctrineBundle\Registry;
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use Doctrine\Bundle\DoctrineBundle\Registry;
-use AppBundle\Entity\User;
-use GuzzleHttp\Client;
-use AppBundle\Exception\TwitterAPICallException;
 
 /**
- * MEMO: findIdRangeByDate() since_idとmax_idを取得するのが目的なのに処理過程が指定日のタイムラインを取得するのに最適であるというジレンマ
+ * MEMO: findIdRangeByDate() since_idとmax_idを取得するのが目的なのに処理過程が指定日のタイムラインを取得するのに最適であるというジレンマ.
  */
 class TwitterAPI
 {
@@ -41,7 +41,7 @@ class TwitterAPI
     private $commonService;
 
     /**
-     * @param User $user
+     * @param User  $user
      * @param array $key_and_token twitter api key and tokens
      */
     public function __construct(
@@ -50,8 +50,7 @@ class TwitterAPI
         HTTPClient $client,
         array $key_and_token,
         CommonService $commonService
-    )
-    {
+    ) {
         $this->client = $client;
         $this->doctrine = $doctrine;
         $this->user = $user;
@@ -62,7 +61,7 @@ class TwitterAPI
     }
 
     /**
-     * get today timeline json
+     * get today timeline json.
      *
      * @return array|null timeline or null
      */
@@ -74,7 +73,6 @@ class TwitterAPI
 
         // 今日の始点ツイートのsince_idが無ければsince_idを計算後、timlineを返す
         if ($since_id_at === null || $since_id_at->format('Y-m-d') !== $today) {
-
             $result = $this->findIdRangeByDate(new \DateTime(), $get_query);
             // エラーメッセージの場合
             if (isset($result['error'])) {
@@ -108,16 +106,17 @@ class TwitterAPI
     }
 
     /**
-     * get since_id ~ max_id range by target date
+     * get since_id ~ max_id range by target date.
      *
-     * @param \DateTme $targetDate must be up to 6 days ago. because twitter api limit.
-     * @param array $get_query
+     * @param \DateTme $targetDate must be up to 6 days ago. because twitter api limit
+     * @param array    $get_query
+     *
      * @return array ['since_id' => '1234', 'max_id' => '5678', 'timeline_json' => decoded_json] or ['error' => 'error msg']
      */
     public function findIdRangeByDate(\DateTime $targetDate, array $get_query = [])
     {
         $target_day = $targetDate->format('Y-m-d');
-        $saved_timeline = array(); // 今までに取得したtimeline
+        $saved_timeline = []; // 今までに取得したtimeline
         $index = 0; // for文を回した回数 apiから20件づつ取得、forを回すという流れなのでこの変数は処理したtweetの合計数 - 1となる
         $max_id = null;
         $since_id = null;
@@ -142,7 +141,7 @@ class TwitterAPI
                 }
             }
 
-            for ($i = $index; count($saved_timeline) > $i; $i++) {
+            for ($i = $index; count($saved_timeline) > $i; ++$i) {
                 // tweet1件についての情報が格納されたオブジェクト
                 $tweet = $saved_timeline[$i];
                 // 投稿日時 GMTで取得されるので日本のタイムゾーンに変換し、yyyy-mm-dd形式の文字列に整形
@@ -170,7 +169,7 @@ class TwitterAPI
                     return ['since_id' => $since_id, 'max_id' => $max_id, 'timeline_json' => $target_day_timeline];
                 }
 
-                $index++;
+                ++$index;
             }
             // api次回取得位置を指定
             $get_query = array_merge($get_query, ['max_id' => $tweet['id_str'], 'count' => '21']);
@@ -178,10 +177,11 @@ class TwitterAPI
     }
 
     /**
-     * get timeline since_id from max_id
+     * get timeline since_id from max_id.
      *
      * @param string $since_id
      * @param string $max_id
+     *
      * @return array|null timeline or null
      */
     public function getTimelineSinceFromMax($since_id, $max_id)
@@ -202,9 +202,10 @@ class TwitterAPI
     }
 
     /**
-     * call api https://api.twitter.com/1.1/statuses/user_timeline.json
+     * call api https://api.twitter.com/1.1/statuses/user_timeline.json.
      *
      * @param array $get_query
+     *
      * @return stdClass $decoded_json
      */
     protected function callStatusesUserTimeline(array $get_query = [])
@@ -221,9 +222,10 @@ class TwitterAPI
     }
 
     /**
-     * call api https://api.twitter.com/1.1/search/tweets.json
+     * call api https://api.twitter.com/1.1/search/tweets.json.
      *
      * @param array $get_query
+     *
      * @return stdClass $decoded_json
      */
     protected function callSearchTweets(array $get_query = [])
@@ -240,19 +242,21 @@ class TwitterAPI
     }
 
     /**
-     * call api to get request
+     * call api to get request.
      *
      * @param string $url
-     * @param array $options
-     * @return array $decoded_json
+     * @param array  $options
+     *
      * @throws TwitterAPICallException
+     *
+     * @return array $decoded_json
      */
     private function get(string $url, array $options = [])
     {
         try {
             $response = $this->client->get($url, $options);
         } catch (RequestException $e) {
-            throw new TwitterAPICallException(500, "twitter api call faild.", $e);
+            throw new TwitterAPICallException(500, 'twitter api call faild.', $e);
         }
 
         $decoded_json = json_decode($response, true);
@@ -261,9 +265,11 @@ class TwitterAPI
     }
 
     /**
-     * concat encoded get_query to http_request_url
+     * concat encoded get_query to http_request_url.
+     *
      * @param string $request_url
      * @param string $get_query
+     *
      * @return string $request_url_with_query
      */
     protected function concatGetQuery($request_url, $get_query)
@@ -274,7 +280,7 @@ class TwitterAPI
     }
 
     /**
-     * create http header
+     * create http header.
      *
      * @return array context
      */
@@ -282,13 +288,13 @@ class TwitterAPI
     {
         return [
             'headers' => [
-                'Authorization' => 'Bearer '.$this->bearer_token // create bearer_token authrization header
+                'Authorization' => 'Bearer '.$this->bearer_token, // create bearer_token authrization header
             ],
         ];
     }
 
     /**
-     * Get the value of User
+     * Get the value of User.
      *
      * @return mixed
      */
@@ -298,7 +304,7 @@ class TwitterAPI
     }
 
     /**
-     * Get the value of User
+     * Get the value of User.
      *
      * @return mixed
      */
@@ -310,7 +316,7 @@ class TwitterAPI
     }
 
     /**
-     * Get the value of Consumer Key
+     * Get the value of Consumer Key.
      *
      * @return mixed
      */
@@ -320,7 +326,7 @@ class TwitterAPI
     }
 
     /**
-     * Get the value of Consumer Secret
+     * Get the value of Consumer Secret.
      *
      * @return mixed
      */
@@ -330,7 +336,7 @@ class TwitterAPI
     }
 
     /**
-     * Get the value of Bearer Token
+     * Get the value of Bearer Token.
      *
      * @return mixed
      */

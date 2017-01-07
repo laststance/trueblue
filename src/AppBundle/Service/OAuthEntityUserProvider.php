@@ -2,13 +2,13 @@
 
 namespace AppBundle\Service;
 
-use HWI\Bundle\OAuthBundle\Security\Core\User\EntityUserProvider;
+use AppBundle\Entity\User;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
+use HWI\Bundle\OAuthBundle\Security\Core\User\EntityUserProvider;
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
-use Doctrine\Common\Persistence\ManagerRegistry;
-use AppBundle\Entity\User;
 
 class OAuthEntityUserProvider extends EntityUserProvider implements UserProviderInterface
 {
@@ -31,12 +31,11 @@ class OAuthEntityUserProvider extends EntityUserProvider implements UserProvider
 
             $username = $response->getUsername();
 
-            if (null === $user = $this->repository->findOneBy(array($this->properties[$resourceOwnerName] => $username))) {
+            if (null === $user = $this->repository->findOneBy([$this->properties[$resourceOwnerName] => $username])) {
                 throw new UsernameNotFoundException(sprintf("User '%s' not found.", $username));
             }
 
             return $user;
-
         } catch (UsernameNotFoundException $e) {
             $rawResponse = $response->getResponse();
 

@@ -2,17 +2,16 @@
 
 namespace AppBundle\Command;
 
+use AppBundle\Entity\PastTimeline;
+use AppBundle\Entity\User;
+use AppBundle\Service\TwitterAPI;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use AppBundle\Service\TwitterAPI;
-use AppBundle\Entity\User;
-use AppBundle\Entity\PastTimeline;
 
 /**
- * 指定した日付の全ユーザーのタイムラインをDBに保存する
+ * 指定した日付の全ユーザーのタイムラインをDBに保存する.
  *
  * TODO: テストが出来ないのでTwitterAPIをDIしたい
  *
