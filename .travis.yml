@@ -19,7 +19,7 @@ before_script:
 
 script:
   - ./vendor/phpunit/phpunit/phpunit --verbose --debug -c app/
-  - ./vendor/bin/php-cs-fixer fix --diff --dry-run -v
+  - ./bin/php-cs-fixer fix --diff --dry-run -v
 
 notifications:
   slack:
