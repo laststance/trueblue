@@ -25,6 +25,7 @@
         "guzzlehttp/guzzle": "~6.0"
     },
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^1.12",
         "sensio/generator-bundle": "~2.3",
         "phpunit/phpunit": "~4.0",
         "heroku/heroku-buildpack-php": "*"
@@ -34,7 +35,7 @@
             "SymfonyStandard\\Composer::hookRootPackageInstall"
         ],
         "post-install-cmd": [
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DisributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
