@@ -31,4 +31,14 @@ class CronCommandTest extends KernelTestCase
         $commandTester = new CommandTester($command);
         $commandTester->execute(['command' => $command->getName(), 'date' => 'あ']);
     }
+
+    public function testShouldBePersist()
+    {
+        // TODO: 空のFixtureDBを準備
+
+        // TODO: TwitterAPIのモックを作成
+        // TODO: Userのモックを作成
+
+        // TODO: persistされたデータをDBからSelectし、正しいデータが入っているか確認する
+    }
 }
