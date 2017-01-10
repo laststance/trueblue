@@ -14,12 +14,23 @@ class CronCommandTest extends KernelTestCase
      */
     private $application;
 
+    /**
+     * @var CommandTester
+     */
+    private $commandTester;
+
+    /**
+     * @var Command
+     */
+    private $command;
+
     protected function setUp()
     {
         self::bootKernel();
         $this->application = new Application(self::$kernel);
-
         $this->application->add(new CronCommand());
+        $this->command = $this->application->find('cron:SaveTargetDateTimeline');
+        $this->commandTester = new CommandTester($this->command);
     }
 
     /**
@@ -27,9 +38,7 @@ class CronCommandTest extends KernelTestCase
      */
     public function testInvalidArgument()
     {
-        $command = $this->application->find('cron:SaveTargetDateTimeline');
-        $commandTester = new CommandTester($command);
-        $commandTester->execute(['command' => $command->getName(), 'date' => 'あ']);
+        $this->commandTester->execute(['command' => $this->command->getName(), 'date' => 'あ']);
     }
 
     public function testShouldBePersist()
