@@ -4,11 +4,12 @@ namespace AppBundle\Tests\Command;
 
 use AppBundle\Command\CronCommand;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 
-class CronCommandTest extends KernelTestCase
+class CronCommandTest extends MyKernelTestCase
 {
+    protected static $fixtures = [__DIR__.'/../DataFixtures/Alice/user.yml'];
+
     /**
      * @var Application
      */
@@ -43,8 +44,6 @@ class CronCommandTest extends KernelTestCase
 
     public function testShouldBePersist()
     {
-        // TODO: 空のFixtureDBを準備
-
         // TODO: TwitterAPIのモックを作成
         // TODO: Userのモックを作成
 
