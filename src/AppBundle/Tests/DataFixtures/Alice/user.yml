@@ -1,0 +1,10 @@
+AppBundle\Entity\User:
+    SampleUser:
+        twitterId: 1
+        username: TestFixture
+        todaySinceId: 1
+        sinceIdAt: 1
+        isActive: true
+        createAt: \Datatime()
+        updateAt: \Datatime()
+
