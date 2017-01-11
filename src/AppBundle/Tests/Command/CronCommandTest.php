@@ -59,8 +59,7 @@ class CronCommandTest extends MyKernelTestCase
      */
     public function testInvalidArgument()
     {
-        $exitStatus = $this->commandTester->execute(['command' => $this->command->getName(), 'date' => 'あ']);
-        $this->assertEquals(0, $exitStatus);
+        $this->commandTester->execute(['command' => $this->command->getName(), 'date' => 'あ']);
     }
 
     public function testShouldBePersist()
