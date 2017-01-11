@@ -13,7 +13,7 @@ class HTTPClient
 
     public function __construct()
     {
-        $this->client = new Client(['timeout' => 2.0]);
+        $this->client = new Client(['timeout' => 10.0]);
     }
 
     public function get(string $url, array $options = [])
