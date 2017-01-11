@@ -205,6 +205,8 @@ class TwitterAPI
     /**
      * Get the value of User.
      *
+     * @param $user User
+     *
      * @return mixed
      */
     public function setUser(User $user)
