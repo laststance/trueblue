@@ -144,51 +144,51 @@ class User extends OAuthUser
         return $this->username;
     }
 
-     /**
-      * Set todaySinceId.
-      *
-      * @return User
-      */
-     public function setTodaySinceId($todaySinceId)
-     {
-         $this->todaySinceId = $todaySinceId;
+    /**
+     * Set todaySinceId.
+     *
+     * @return User
+     */
+    public function setTodaySinceId($todaySinceId)
+    {
+        $this->todaySinceId = $todaySinceId;
 
-         return $this;
-     }
+        return $this;
+    }
 
-     /**
-      * Get todaySinceId.
-      *
-      * @return string
-      */
-     public function getTodaySinceId()
-     {
-         return $this->todaySinceId;
-     }
+    /**
+     * Get todaySinceId.
+     *
+     * @return string
+     */
+    public function getTodaySinceId()
+    {
+        return $this->todaySinceId;
+    }
 
-     /**
-      * Set sinceIdAt.
-      *
-      * @param \DateTime $sinceIdAt
-      *
-      * @return User
-      */
-     public function setSinceIdAt(\DateTime $sinceIdAt)
-     {
-         $this->sinceIdAt = $sinceIdAt;
+    /**
+     * Set sinceIdAt.
+     *
+     * @param \DateTime $sinceIdAt
+     *
+     * @return User
+     */
+    public function setSinceIdAt(\DateTime $sinceIdAt)
+    {
+        $this->sinceIdAt = $sinceIdAt;
 
-         return $this;
-     }
+        return $this;
+    }
 
-     /**
-      * Get sinceIdAt.
-      *
-      * @return \DateTime
-      */
-     public function getSinceIdAt()
-     {
-         return $this->sinceIdAt;
-     }
+    /**
+     * Get sinceIdAt.
+     *
+     * @return \DateTime
+     */
+    public function getSinceIdAt()
+    {
+        return $this->sinceIdAt;
+    }
 
     /**
      * Set isActive.

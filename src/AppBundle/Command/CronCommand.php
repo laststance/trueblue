@@ -30,7 +30,7 @@ class CronCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         // 引数のフォーマットバリデーション
-        if (!preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}/', $arg_date = $input->getArgument('date'))) {
+        if (!preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}/', $argDate = $input->getArgument('date'))) {
             throw new \InvalidArgumentException('invalid argument. date format must be yyyy-mm-dd. e.g. 2020-04-03');
         }
 
@@ -40,7 +40,7 @@ class CronCommand extends ContainerAwareCommand
         $users = $doctrine->getRepository('AppBundle:User')->findAll();
         $twitterApi = $this->getContainer()->get('twitter_api');
         // タイムラインを取得する日付
-        $targetDate = new \DateTime($arg_date);
+        $targetDate = new \DateTime($argDate);
 
         // メイン処理
         foreach ($users as $user) {
@@ -54,12 +54,12 @@ class CronCommand extends ContainerAwareCommand
                 continue;
             }
 
-            $encoded_json = json_encode($res['timeline_json']); // DBにはJSONとして格納する
+            $encodedJson = json_encode($res['timeline_json']); // DBにはJSONとして格納する
 
             // DBに保存するTimeLineオブジェクトを作成
             $pastTimeLine = new PastTimeline();
             $pastTimeLine->setUser($user);
-            $pastTimeLine->setTimelineJson($encoded_json);
+            $pastTimeLine->setTimelineJson($encodedJson);
             $pastTimeLine->setDate($targetDate);
             $now = new \DateTime();
             $pastTimeLine->setCreateAt($now);

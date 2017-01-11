@@ -2,13 +2,12 @@
 
 namespace AppBundle\Tests\Service;
 
-use AppBundle\Entity\User;
 use AppBundle\Service\TwitterAPI;
 
 class TwitterAPITest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var AppBundle\Service\TwitterAPI
+     * @var TwitterAPI
      */
     protected $twitterApi;
 
@@ -17,7 +16,6 @@ class TwitterAPITest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $mockDoctrine = $this->getMock('Doctrine\Bundle\DoctrineBundle\Registry', [], [], '', false);
-        $user = $this->getMock('AppBundle\Entity\User');
         $client = $this->getMock('AppBundle\Service\HTTPClient');
         $commonService = $this->getMock('AppBundle\Service\CommonService');
 
@@ -27,15 +25,7 @@ class TwitterAPITest extends \PHPUnit_Framework_TestCase
           'bearer_token' => 'bearer_token_value',
         ];
 
-        $this->twitterApi = new TwitterAPI($mockDoctrine, $user, $client, $this->params, $commonService);
-    }
-
-    /**
-     * @test
-     */
-    public function getUser()
-    {
-        $this->assertTrue($this->twitterApi->getUser() instanceof User);
+        $this->twitterApi = new TwitterAPI($mockDoctrine, $client, $this->params, $commonService);
     }
 
     /**
