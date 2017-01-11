@@ -23,6 +23,7 @@ class JsonController extends Controller
       // 今日のタイムラインを返す
      if ($date === (new \DateTime())->format('Y-m-d')) {
          $twitterApi = $this->container->get('twitter_api');
+         $twitterApi->setUser($this->getUser());
          $timeline = $twitterApi->getTodayTimeline();
 
          return new JsonResponse($timeline);

@@ -29,7 +29,8 @@
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^1.12",
         "sensio/generator-bundle": "~2.3",
-        "phpunit/phpunit": "~4.0"
+        "phpunit/phpunit": "~4.0",
+        "phake/phake": "2.*"
     },
     "scripts": {
         "post-root-package-install": [

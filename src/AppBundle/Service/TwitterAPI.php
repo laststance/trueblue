@@ -46,7 +46,7 @@ class TwitterAPI
      */
     public function __construct(
         Registry $doctrine,
-        User $user,
+        User $user = null,
         HTTPClient $client,
         array $key_and_token,
         CommonService $commonService

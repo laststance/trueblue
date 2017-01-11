@@ -4,7 +4,6 @@ namespace AppBundle\Command;
 
 use AppBundle\Entity\PastTimeline;
 use AppBundle\Entity\User;
-use AppBundle\Service\TwitterAPI;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -12,8 +11,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * 指定した日付の全ユーザーのタイムラインをDBに保存する.
- *
- * TODO: テストが出来ないのでTwitterAPIをDIしたい
  *
  * app/console cron:SaveTargetDateTimeline yyyy-mm-dd
  */
@@ -38,23 +35,17 @@ class CronCommand extends ContainerAwareCommand
         }
 
         $doctrine = $this->getContainer()->get('doctrine');
-        $em = $doctrine->getEntityManager();
+        $em = $this->getContainer()->get('doctrine.orm.entity_manager');
         // 登録ユーザーを取得
         $users = $doctrine->getRepository('AppBundle:User')->findAll();
-        $client = $this->getContainer()->get('app.service.httpclient');
-        // tiwtter_apiのアクセストークン類
-        $api_parameter = $this->getContainer()->getParameter('twitter_api');
-        $commonService = $this->getContainer()->get('app.service.common_service');
+        $twitterApi = $this->getContainer()->get('twitter_api');
         // タイムラインを取得する日付
         $targetDate = new \DateTime($arg_date);
 
         // メイン処理
         foreach ($users as $user) {
-            if (empty($twitterApi)) {
-                $twitterApi = new twitterApi($doctrine, $user, $client, $api_parameter, $commonService);
-            } else {
-                $twitterApi->setUser($user);
-            }
+            $twitterApi->setUser($user);
+
             // 昨日のタイムラインJsonを取得
             $res = $twitterApi->findIdRangeByDate($targetDate);
 

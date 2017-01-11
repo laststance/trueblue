@@ -15,6 +15,7 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         $twitterApi = $this->container->get('twitter_api');
+        $twitterApi->setUser($this->getUser());
 
         // 今日のtimelineを取得
         $timeline = $twitterApi->getTodayTimeline();
