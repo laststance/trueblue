@@ -9,9 +9,6 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 
-/**
- * MEMO: findIdRangeByDate() since_idとmax_idを取得するのが目的なのに処理過程が指定日のタイムラインを取得するのに最適であるというジレンマ.
- */
 class TwitterAPI
 {
     /**
