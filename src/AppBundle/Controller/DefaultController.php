@@ -22,9 +22,8 @@ class DefaultController extends Controller
         $timeline = $this->get('app.service.common_service')->enableHtmlLink($timeline);
 
         // DBから過去のtimelinelistを取得
-        // TODO: 長いのでもっと簡単にUserオブジェクトを取得する手段を考える
         $pastTimelines = $this->getDoctrine()->getRepository('AppBundle:PastTimeline')->findByUser(
-            $this->get('security.token_storage')->getToken()->getUser(),
+            $this->getUser(),
             ['date' => 'DESC']
         );
         $timelineDateList = array_map(
