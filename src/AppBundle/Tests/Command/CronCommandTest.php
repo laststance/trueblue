@@ -3,6 +3,8 @@
 namespace AppBundle\Tests\Command;
 
 use AppBundle\Command\CronCommand;
+use AppBundle\Entity\PastTimeline;
+use AppBundle\Entity\User;
 use AppBundle\Service\TwitterAPI;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
@@ -69,12 +71,8 @@ class CronCommandTest extends MyKernelTestCase
         $exitStatus = $this->commandTester->execute(['command' => $this->command->getName(), 'date' => '2020-12-12']);
         $this->assertEquals(0, $exitStatus);
 
-        $user = $this->getFixtureUserArray()[0];
-        $pastTimeLine = $this->entityManager->getRepository(
-            'AppBundle:PastTimeline'
-        )->findOneBy(
-            ['user' => $user]
-        );
+        $user = $this->getFixtureUser();
+        $pastTimeLine = $this->getAssertTarget($user);
 
         $this->assertEquals($pastTimeLine->getUser()->getId(), $user->getId());
         $this->assertEquals(
@@ -82,8 +80,7 @@ class CronCommandTest extends MyKernelTestCase
             $this->mockApiResponse['timeline_json']
         );
 
-        $this->entityManager->remove($pastTimeLine);
-        $this->entityManager->flush();
+        $this->cleanDB($pastTimeLine);
     }
 
     private function setMocks()
@@ -106,5 +103,27 @@ class CronCommandTest extends MyKernelTestCase
         return $this->entityManager->getRepository(
             'AppBundle:User'
         )->findBy(['username' => 'TestFixture']);
+    }
+
+    private function getFixtureUser()
+    {
+        return $this->entityManager->getRepository(
+            'AppBundle:User'
+        )->findOneBy(['username' => 'TestFixture']);
+    }
+
+    private function getAssertTarget(User $user)
+    {
+        return $this->entityManager->getRepository(
+            'AppBundle:PastTimeline'
+        )->findOneBy(
+            ['user' => $user]
+        );
+    }
+
+    private function cleanDB(PastTimeline $pastTimeLine)
+    {
+        $this->entityManager->remove($pastTimeLine);
+        $this->entityManager->flush();
     }
 }
