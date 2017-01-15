@@ -19,8 +19,10 @@ class DefaultController extends Controller
 
         // 今日のtimelineを取得
         $timeline = $twitterApi->getTodayTimeline();
-        $timeline = $this->get('app.service.common_service')->enableHtmlLink($timeline);
-
+        // TODO:
+        if (!isset($timeline['error'])) {
+            $timeline = $this->get('app.service.common_service')->enableHtmlLink($timeline);
+        }
         // DBから過去のtimelinelistを取得
         $pastTimelines = $this->getDoctrine()->getRepository('AppBundle:PastTimeline')->findByUser(
             $this->getUser(),

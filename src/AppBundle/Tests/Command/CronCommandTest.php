@@ -5,7 +5,7 @@ namespace AppBundle\Tests\Command;
 use AppBundle\Command\CronCommand;
 use AppBundle\Entity\PastTimeline;
 use AppBundle\Entity\User;
-use AppBundle\Service\TwitterAPI;
+use AppBundle\Service\TwitterAPIService;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
@@ -85,7 +85,7 @@ class CronCommandTest extends MyKernelTestCase
 
     private function setMocks()
     {
-        $mockApi = Phake::mock(TwitterAPI::class);
+        $mockApi = Phake::mock(TwitterAPIService::class);
         Phake::when($mockApi)->findIdRangeByDate(Phake::anyParameters())->thenReturn($this->mockApiResponse);
         $this->container->set('twitter_api', $mockApi);
 

@@ -7,12 +7,18 @@ parameters:
 #    parameter_name: value
 
 services:
-    app.service.httpclient:
-        class: AppBundle\Service\HTTPClient
+    # TODO: not service
+    http_client:
+        class: AppBundle\API\HTTPClient
+
+    # TODO: not service
+    twitter_api_client:
+        class: AppBundle\API\TwitterAPIClient
+        arguments: ["@http_client", "%twitter_api%"]
 
     twitter_api:
-        class: AppBundle\Service\TwitterAPI
-        arguments: ["@doctrine", "@app.service.httpclient", "%twitter_api%", "@app.service.common_service"]
+        class: AppBundle\Service\TwitterAPIService
+        arguments: ["@doctrine", "@twitter_api_client"]
 
     oauth_entity_user_provider:
         class: AppBundle\Service\OAuthEntityUserProvider

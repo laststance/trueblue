@@ -2,53 +2,35 @@
 
 namespace AppBundle\Service;
 
+use AppBundle\API\TwitterAPIClient;
 use AppBundle\Entity\User;
-use AppBundle\Exception\TwitterAPICallException;
 use Doctrine\Bundle\DoctrineBundle\Registry;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 
-class TwitterAPI
+class TwitterAPIService
 {
-    /**
-     * @var Client
-     */
-    protected $client;
-
     /**
      * @var Registry
      */
-    protected $doctrine;
+    private $doctrine;
 
     /**
      * @var User
+     *           TODO: inject
      */
-    public $user;
-
-    protected $consumerKey = ''; // api key
-    protected $consumerSecret = ''; // api secret
-    protected $bearerToken = '';
-
-    protected $requestUrl = ''; // decide by api call method
+    private $user;
 
     /**
-     * @var CommonService
+     * @var TwitterAPIClient
      */
-    private $commonService;
+    private $api;
 
     public function __construct(
         Registry $doctrine,
-        HTTPClient $client,
-        array $keyAndToken,
-        CommonService $commonService
+        TwitterAPIClient $api
     ) {
-        $this->client = $client;
         $this->doctrine = $doctrine;
-        $this->consumerKey = $keyAndToken['consumer_key'];
-        $this->consumerSecret = $keyAndToken['consumer_secret'];
-        $this->bearerToken = $keyAndToken['bearer_token'];
-        $this->commonService = $commonService;
+        $this->api = $api;
     }
 
     /**
@@ -87,11 +69,8 @@ class TwitterAPI
         $todaySinceId = $this->user->getTodaySinceId();
         if ($todaySinceId !== '') {
             $getQuery['since_id'] = $todaySinceId;
-            // since_idが無ければ200件まで取得 今日以前のつぶやきが存在しないアカウントなど
-        } else {
-            $getQuery['count'] = '200';
         }
-        $timeline = $this->callStatusesUserTimeline($getQuery);
+        $timeline = $this->api->callStatusesUserTimeline($getQuery);
 
         return $timeline;
     }
@@ -108,15 +87,15 @@ class TwitterAPI
     {
         $targetDay = $targetDate->format('Y-m-d');
         $savedTimeline = []; // 今までに取得したtimeline
-        $index = 0; // for文を回した回数 apiから20件づつ取得、forを回すという流れなのでこの変数は処理したtweetの合計数 - 1となる
+        $index = 0; // for文を回した回数 apiから200件づつ取得、forを回すという流れなのでこの変数は処理したtweetの合計数 - 1となる
         $maxId = null;
         $sinceId = null;
-        $getQuery = array_merge($getQuery, ['user_id' => $this->user->getTwitterId()]);
+        $getQuery = array_merge($getQuery, ['user_id' => $this->user->getTwitterId(), 'count' => '200']);
 
         while (true) {
             // timeline取得apiを叩く 2回目以降はmax_idで指定したつぶやき自身も含まれるので切り捨てる(指定max_id未満が欲しいので)
-            $fetchTimeline = $index === 0 ? $this->callStatusesUserTimeline($getQuery) : array_slice(
-                $this->callStatusesUserTimeline($getQuery),
+            $fetchTimeline = $index === 0 ? $this->api->callStatusesUserTimeline($getQuery) : array_slice(
+                $this->api->callStatusesUserTimeline($getQuery),
                 1
             );
             $savedTimeline = array_merge($savedTimeline, $fetchTimeline);
@@ -187,7 +166,7 @@ class TwitterAPI
             'max_id' => $maxId,
         ];
 
-        $decodedJson = $this->callStatusesUserTimeline($getQuery);
+        $decodedJson = $this->api->callStatusesUserTimeline($getQuery);
 
         return $decodedJson;
     }
@@ -217,124 +196,18 @@ class TwitterAPI
     }
 
     /**
-     * Get the value of Consumer Key.
-     *
-     * @return mixed
+     * @return TwitterAPIClient
      */
-    public function getConsumerKey()
+    public function getApi()
     {
-        return $this->consumerKey;
+        return $this->api;
     }
 
     /**
-     * Get the value of Consumer Secret.
-     *
-     * @return mixed
+     * @param TwitterAPIClient $api
      */
-    public function getConsumerSecret()
+    public function setApi(TwitterAPIClient $api)
     {
-        return $this->consumerSecret;
-    }
-
-    /**
-     * Get the value of Bearer Token.
-     *
-     * @return mixed
-     */
-    public function getBearerToken()
-    {
-        return $this->bearerToken;
-    }
-
-    /**
-     * call api https://api.twitter.com/1.1/statuses/user_timeline.json.
-     *
-     * @param array $getQuery
-     *
-     * @return stdClass $decoded_json
-     */
-    protected function callStatusesUserTimeline(array $getQuery = [])
-    {
-        $this->requestUrl = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
-
-        if ($getQuery) {
-            $this->requestUrl = $this->concatGetQuery($this->requestUrl, $getQuery);
-        }
-
-        $response = $this->get($this->requestUrl, $this->createHeader());
-
-        return $response;
-    }
-
-    /**
-     * call api https://api.twitter.com/1.1/search/tweets.json.
-     *
-     * @param array $getQuery
-     *
-     * @return stdClass $decoded_json
-     */
-    protected function callSearchTweets(array $getQuery = [])
-    {
-        $this->requestUrl = 'https://api.twitter.com/1.1/search/tweets.json';
-
-        if ($getQuery) {
-            $this->requestUrl = $this->concatGetQuery($this->requestUrl, $getQuery);
-        }
-
-        $response = $this->get($this->requestUrl, $this->createHeader());
-
-        return $response;
-    }
-
-    /**
-     * call api to get request.
-     *
-     * @param string $url
-     * @param array  $options
-     *
-     * @throws TwitterAPICallException
-     *
-     * @return array $decoded_json
-     */
-    private function get(string $url, array $options = [])
-    {
-        try {
-            $response = $this->client->get($url, $options);
-        } catch (RequestException $e) {
-            throw new TwitterAPICallException(500, 'twitter api call faild.', $e);
-        }
-
-        $decodedJson = json_decode($response, true);
-
-        return $decodedJson;
-    }
-
-    /**
-     * concat encoded get_query to http_request_url.
-     *
-     * @param string $requestUrl
-     * @param string $getQuery
-     *
-     * @return string $request_url_with_query
-     */
-    private function concatGetQuery($requestUrl, $getQuery)
-    {
-        $requestUrlWithQuery = $requestUrl.'?'.http_build_query($getQuery);
-
-        return $requestUrlWithQuery;
-    }
-
-    /**
-     * create http header.
-     *
-     * @return array context
-     */
-    private function createHeader()
-    {
-        return [
-            'headers' => [
-                'Authorization' => 'Bearer '.$this->bearerToken, // create bearer_token authrization header
-            ],
-        ];
+        $this->api = $api;
     }
 }

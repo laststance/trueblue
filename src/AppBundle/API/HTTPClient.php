@@ -1,10 +1,11 @@
 <?php
 
-namespace AppBundle\Service;
+namespace AppBundle\API;
 
 use GuzzleHttp\Client;
 
 /**
+ * TODO: remove
  * GuzzleHttp\Client shortcut wrapper.
  */
 class HTTPClient
