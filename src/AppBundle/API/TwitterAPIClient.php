@@ -2,6 +2,8 @@
 
 namespace AppBundle\API;
 
+use GuzzleHttp\Client;
+
 class TwitterAPIClient
 {
     private $client;
@@ -13,9 +15,9 @@ class TwitterAPIClient
     // #TODO: endpoint
     private $requestUrl = ''; // decide by api call method
 
-    public function __construct(HTTPClient $client, array $config)
+    public function __construct(array $config)
     {
-        $this->client = $client;
+        $this->client = new Client(['timeout' => 10.0]);
         $this->consumerKey = $config['consumer_key'];
         $this->consumerSecret = $config['consumer_secret'];
         $this->bearerToken = $config['bearer_token'];
@@ -74,7 +76,7 @@ class TwitterAPIClient
     private function get(string $url, array $options = [])
     {
         try {
-            $response = $this->client->get($url, $options);
+            $response = $this->client->get($url, $options)->getBody()->getContents();
         } catch (RequestException $e) {
             throw new TwitterAPICallException(500, 'twitter api call faild.', $e);
         }
