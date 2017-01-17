@@ -16,9 +16,6 @@ class TwitterAPIClient
     private $consumerSecret = ''; // api secret
     private $bearerToken = '';
 
-    // #TODO: endpoint
-    private $requestUrl = ''; // decide by api call method
-
     public function __construct(array $config)
     {
         $this->client = new Client(['timeout' => 10.0]);
@@ -38,13 +35,13 @@ class TwitterAPIClient
      */
     public function callStatusesUserTimeline(array $getQuery = [])
     {
-        $this->requestUrl = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
+        $requestUrl = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
 
         if ($getQuery) {
-            $this->requestUrl = $this->concatGetQuery($this->requestUrl, $getQuery);
+            $requestUrl = $this->concatGetQuery($requestUrl, $getQuery);
         }
 
-        $response = $this->get($this->requestUrl, $this->createHeader());
+        $response = $this->get($requestUrl, $this->createHeader());
 
         return $response;
     }
@@ -60,13 +57,13 @@ class TwitterAPIClient
      */
     public function callSearchTweets(array $getQuery = [])
     {
-        $this->requestUrl = 'https://api.twitter.com/1.1/search/tweets.json';
+        $requestUrl = 'https://api.twitter.com/1.1/search/tweets.json';
 
         if ($getQuery) {
-            $this->requestUrl = $this->concatGetQuery($this->requestUrl, $getQuery);
+            $requestUrl = $this->concatGetQuery($requestUrl, $getQuery);
         }
 
-        $response = $this->get($this->requestUrl, $this->createHeader());
+        $response = $this->get($requestUrl, $this->createHeader());
 
         return $response;
     }
