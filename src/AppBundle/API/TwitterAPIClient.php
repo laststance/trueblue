@@ -28,7 +28,9 @@ class TwitterAPIClient
     }
 
     /**
-     * call api https://api.twitter.com/1.1/statuses/user_timeline.json.
+     * GET statuses/user_timeline.
+     *
+     * https://dev.twitter.com/rest/reference/get/statuses/user_timeline
      *
      * @param array $getQuery
      *
@@ -48,7 +50,9 @@ class TwitterAPIClient
     }
 
     /**
-     * call api https://api.twitter.com/1.1/search/tweets.json.
+     * GET search/tweets.
+     *
+     * https://dev.twitter.com/rest/reference/get/search/tweets
      *
      * @param array $getQuery
      *
