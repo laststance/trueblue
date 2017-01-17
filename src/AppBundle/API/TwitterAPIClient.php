@@ -3,9 +3,13 @@
 namespace AppBundle\API;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 
 class TwitterAPIClient
 {
+    /**
+     * @var ClientInterface
+     */
     private $client;
 
     private $consumerKey = ''; // api key
