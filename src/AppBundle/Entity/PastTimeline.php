@@ -9,7 +9,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * PastTimeline.
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="AppBundle\Entity\PastTimelineRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\PastTimelineRepository")
  * @UniqueEntity("date")
  */
 class PastTimeline
