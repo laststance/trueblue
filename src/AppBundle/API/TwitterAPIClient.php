@@ -31,17 +31,13 @@ class TwitterAPIClient
      *
      * @param array $getQuery
      *
-     * @return stdClass $decoded_json
+     * @return array $response
      */
-    public function callStatusesUserTimeline(array $getQuery = [])
+    public function callStatusesUserTimeline(array $getQuery = []): array
     {
-        $requestUrl = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
+        $endpoint = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
 
-        if ($getQuery) {
-            $requestUrl = $this->concatGetQuery($requestUrl, $getQuery);
-        }
-
-        $response = $this->get($requestUrl, $this->createHeader());
+        $response = $this->get($endpoint, $getQuery, $this->createHeader());
 
         return $response;
     }
@@ -53,35 +49,36 @@ class TwitterAPIClient
      *
      * @param array $getQuery
      *
-     * @return stdClass $decoded_json
+     * @return array $response
      */
-    public function callSearchTweets(array $getQuery = [])
+    public function callSearchTweets(array $getQuery = []): array
     {
-        $requestUrl = 'https://api.twitter.com/1.1/search/tweets.json';
+        $endpoint = 'https://api.twitter.com/1.1/search/tweets.json';
 
-        if ($getQuery) {
-            $requestUrl = $this->concatGetQuery($requestUrl, $getQuery);
-        }
-
-        $response = $this->get($requestUrl, $this->createHeader());
+        $response = $this->get($endpoint, $getQuery, $this->createHeader());
 
         return $response;
     }
 
     /**
-     * call api to get request.
+     * ClientInterface->get() wrapper.
      *
-     * @param string $url
+     * @param string $endpoint
+     * @param array  $getQuery
      * @param array  $options
      *
      * @throws TwitterAPICallException
      *
-     * @return array $decoded_json
+     * @return array $decodedJson
      */
-    private function get(string $url, array $options = [])
+    private function get(string $endpoint, array $getQuery, array $options = []): array
     {
+        if ($getQuery) {
+            $requestUrl = $this->concatGetQuery($endpoint, $getQuery);
+        }
+
         try {
-            $response = $this->client->get($url, $options)->getBody()->getContents();
+            $response = $this->client->get($requestUrl, $options)->getBody()->getContents();
         } catch (RequestException $e) {
             throw new TwitterAPICallException(500, 'twitter api call faild.', $e);
         }
@@ -95,11 +92,11 @@ class TwitterAPIClient
      * concat encoded get_query to http_request_url.
      *
      * @param string $requestUrl
-     * @param string $getQuery
+     * @param array  $getQuery
      *
      * @return string $request_url_with_query
      */
-    private function concatGetQuery($requestUrl, $getQuery)
+    private function concatGetQuery(string $requestUrl, array $getQuery): string
     {
         $requestUrlWithQuery = $requestUrl.'?'.http_build_query($getQuery);
 
@@ -111,7 +108,7 @@ class TwitterAPIClient
      *
      * @return array context
      */
-    private function createHeader()
+    private function createHeader(): array
     {
         return [
             'headers' => [
