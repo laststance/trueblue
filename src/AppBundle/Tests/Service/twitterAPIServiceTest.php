@@ -20,7 +20,7 @@ class TwitterAPIServiceTest extends WebTestCase
         $this->twitterApiService = self::createClient()->getContainer()->get('twitter_api');
 
         $mock = Phake::mock(TwitterAPIClient::class);
-        Phake::when($mock)->callStatusesUserTimeline(Phake::anyParameters())->thenReturn($this->getFixture());
+        Phake::when($mock)->getStatusesUserTimeline(Phake::anyParameters())->thenReturn($this->getFixture());
         $user = (new User())->setTwitterId(1664570156);
 
         $this->twitterApiService->setApi($mock);
@@ -55,7 +55,7 @@ class TwitterAPIServiceTest extends WebTestCase
     public function testFindIdRangeByDateCannotFetch()
     {
         $mock = Phake::mock(TwitterAPIClient::class);
-        Phake::when($mock)->callStatusesUserTimeline(Phake::anyParameters())->thenReturn([]);
+        Phake::when($mock)->getStatusesUserTimeline(Phake::anyParameters())->thenReturn([]);
         $this->twitterApiService->setApi($mock);
 
         $res = $this->twitterApiService->findIdRangeByDate(new \DateTime('2017-01-11'));

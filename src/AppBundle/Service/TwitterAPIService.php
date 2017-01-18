@@ -70,7 +70,7 @@ class TwitterAPIService
         if ($todaySinceId !== '') {
             $getQuery['since_id'] = $todaySinceId;
         }
-        $timeline = $this->api->callStatusesUserTimeline($getQuery);
+        $timeline = $this->api->getStatusesUserTimeline($getQuery);
 
         return $timeline;
     }
@@ -94,8 +94,8 @@ class TwitterAPIService
 
         while (true) {
             // timeline取得apiを叩く 2回目以降はmax_idで指定したつぶやき自身も含まれるので切り捨てる(指定max_id未満が欲しいので)
-            $fetchTimeline = $index === 0 ? $this->api->callStatusesUserTimeline($getQuery) : array_slice(
-                $this->api->callStatusesUserTimeline($getQuery),
+            $fetchTimeline = $index === 0 ? $this->api->getStatusesUserTimeline($getQuery) : array_slice(
+                $this->api->getStatusesUserTimeline($getQuery),
                 1
             );
             $savedTimeline = array_merge($savedTimeline, $fetchTimeline);
@@ -166,7 +166,7 @@ class TwitterAPIService
             'max_id' => $maxId,
         ];
 
-        $decodedJson = $this->api->callStatusesUserTimeline($getQuery);
+        $decodedJson = $this->api->getStatusesUserTimeline($getQuery);
 
         return $decodedJson;
     }

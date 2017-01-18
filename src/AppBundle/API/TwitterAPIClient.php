@@ -33,7 +33,7 @@ class TwitterAPIClient
      *
      * @return array $response
      */
-    public function callStatusesUserTimeline(array $getQuery = []): array
+    public function getStatusesUserTimeline(array $getQuery = []): array
     {
         $endpoint = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
 
@@ -51,7 +51,7 @@ class TwitterAPIClient
      *
      * @return array $response
      */
-    public function callSearchTweets(array $getQuery = []): array
+    public function getSearchTweets(array $getQuery = []): array
     {
         $endpoint = 'https://api.twitter.com/1.1/search/tweets.json';
 
