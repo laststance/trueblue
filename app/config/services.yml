@@ -7,7 +7,6 @@ parameters:
 #    parameter_name: value
 
 services:
-    # TODO: not service
     twitter_api_client:
         class: AppBundle\API\TwitterAPIClient
         arguments: ["%twitter_api%"]
