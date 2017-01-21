@@ -18,7 +18,7 @@ class TwitterAPIClient
 
     public function __construct(array $config)
     {
-        $this->client = new Client(['timeout' => 10.0]);
+        $this->client = new Client(['timeout' => 60.0]);
         $this->consumerKey = $config['consumer_key'];
         $this->consumerSecret = $config['consumer_secret'];
         $this->bearerToken = $config['bearer_token'];
