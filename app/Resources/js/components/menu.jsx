@@ -1,9 +1,13 @@
-import autobind from 'autobind-decorator';
-import React from 'react';
-import { Button } from 'react-bootstrap';
-import { Modal } from 'react-bootstrap';
-import { ListGroup } from 'react-bootstrap';
-import { ListGroupItem } from 'react-bootstrap';
+import autobind from 'autobind-decorator'
+import React from 'react'
+import { Button } from 'react-bootstrap'
+import { Modal } from 'react-bootstrap'
+import { ListGroup } from 'react-bootstrap'
+import { ListGroupItem } from 'react-bootstrap'
+import Flatpickr from 'react-flatpickr'
+
+import '../../sass/material_green.scss'
+import  '../../sass/component/modal.scss'
 
 @autobind
 export default class Menu extends React.Component {
@@ -25,7 +29,13 @@ export default class Menu extends React.Component {
 
     _onClick(date_str) {
         this.close();
-        this.props.onClick(date_str.date_str);
+        this.props.onClick(date_str);
+    }
+
+    _OnChange(date) {
+        var date = date[0]; // TODO
+        this._onClick(date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2));
+        this.close();
     }
 
     render() {
@@ -40,11 +50,11 @@ export default class Menu extends React.Component {
 
                 <Modal show={this.state.showModal} onHide={this.close}>
                     <Modal.Header closeButton>
-                        <Modal.Title>アーカイブ</Modal.Title>
+                        <Modal.Title>Menu</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <ListGroup>
-                            {list_group_items}
+                            <Flatpickr onChange={this._OnChange} options={{inline: true, enable: this.props.timeline_date_list}} />
                         </ListGroup>
                     </Modal.Body>
                     <Modal.Footer>
