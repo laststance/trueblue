@@ -31,12 +31,19 @@ module.exports = function (config) {
 
         webpack: {
             devtool: 'inline-source-map',
-            module: {
+            resolve: {
+                extensions: ['', '.jsx', '.js', '.scss']
+            },
+            module:  {
                 loaders: [
                     {
-                        test: /\.jsx?$/,
-                        loader: 'babel-loader',
+                        test:    /\.jsx?$/,
+                        loader:  'babel-loader',
                         exclude: /node_modules\//
+                    },
+                    {
+                        test:   /\.scss$/,
+                        loader: 'style!css!sass'
                     }
                 ]
             }
