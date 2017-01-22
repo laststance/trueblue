@@ -21,3 +21,4 @@ tags
 .idea
 /ansible/group_vars/all
 fabfile.pyc
+npm-debug.log
