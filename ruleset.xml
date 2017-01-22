@@ -1,6 +1,0 @@
-<ruleset name="Symfony2_Custom">
-    <description>Customization Symfony2 coding-conventions</description>
-    <rule ref="Symfony2">
-        <exclude name="Symfony2.Commenting"/>
-    </rule>
-</ruleset>
