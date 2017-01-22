@@ -4,6 +4,7 @@ import { Button } from 'react-bootstrap'
 import { Modal } from 'react-bootstrap'
 import { ListGroup } from 'react-bootstrap'
 import Flatpickr from 'react-flatpickr'
+import { getYmdStr } from '../utils/util'
 
 import '../../sass/material_green.scss'
 import  '../../sass/component/modal.scss'
@@ -32,7 +33,7 @@ export default class Menu extends React.Component {
     }
 
     _OnChange(date) {
-        this._onClick(date[0].getFullYear() + '-' + ('0' + (date[0].getMonth() + 1)).slice(-2) + '-' + ('0' + date[0].getDate()).slice(-2))
+        this._onClick(getYmdStr(date[0]))
         this.close()
     }
 
