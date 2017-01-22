@@ -10,6 +10,9 @@ git:
   submodules: false
 
 before_script:
+  - nvm install 6
+  - nvm use 6
+  - npm install
   - cp app/config/parameters.yml.dist app/config/parameters.yml
   - composer self-update
   - composer install --no-interaction --prefer-source
@@ -20,6 +23,7 @@ before_script:
 script:
   - ./vendor/phpunit/phpunit/phpunit -c app/
   - ./bin/php-cs-fixer fix --diff --dry-run -v
+  - npm run lint
 
 notifications:
   slack:
