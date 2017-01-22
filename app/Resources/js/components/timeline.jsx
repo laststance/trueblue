@@ -6,18 +6,19 @@ export default class Timeline extends React.Component {
 
     render() {
         var view = ''
-        if (typeof this.props.timeline_json == 'undefined' || !this.props.timeline_json.length || this.props.timeline_json.error) {
+        if (typeof this.props.timelineJson == 'undefined' || !this.props.timelineJson.length || this.props.timelineJson.error) {
             view = (
                 <div>
                     <div className="row" style={{margin: 0}}>
-                        <section className='timeline-item error-msg col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10'>
+                        <section
+                            className='timeline-item error-msg col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10'>
                             <p>tweet not found.</p>
                         </section>
                     </div>
                 </div>
             )
         } else {
-            view = this.props.timeline_json.map((tweet, index)=> {
+            view = this.props.timelineJson.map((tweet, index)=> {
                 const date = new Date(tweet.created_at)
                 return (
                     <div className="col-lg-offset-1 col-lg-10" key={tweet.id_str}>

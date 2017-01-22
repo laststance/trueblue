@@ -47,7 +47,7 @@ export default class Menu extends React.Component {
                     </Modal.Header>
                     <Modal.Body>
                         <ListGroup>
-                            <Flatpickr onChange={this._OnChange} options={{inline: true, enable: this.props.timeline_date_list}} />
+                            <Flatpickr onChange={this._OnChange} options={{inline: true, enable: this.props.timelineDateList}} />
                         </ListGroup>
                     </Modal.Body>
                     <Modal.Footer>

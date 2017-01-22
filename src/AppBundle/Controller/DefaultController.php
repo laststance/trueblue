@@ -19,10 +19,10 @@ class DefaultController extends Controller
             [
                 'props' => $this->get('jms_serializer')->serialize(
                     [
-                        'json_daily_url' => $this->generateUrl('json_daily'),
-                        'timeline_date_list' => $this->fetchPastTimelineDate(),
-                        'timeline_json' => $this->fetchTodayTimeline(),
-                        'app_user_username' => $this->getUser()->getUsername(),
+                        'jsonDailyUrl' => $this->generateUrl('json_daily'),
+                        'timelineDateList' => $this->fetchPastTimelineDate(),
+                        'timelineJson' => $this->fetchTodayTimeline(),
+                        'appUsername' => $this->getUser()->getUsername(),
                     ],
                     'json'
                 ),
@@ -38,6 +38,9 @@ class DefaultController extends Controller
         return $this->render(':default:login.html.twig');
     }
 
+    /**
+     * @return array
+     */
     private function fetchTodayTimeline(): array
     {
         $twitterApi = $this->container->get('twitter_api');
@@ -54,7 +57,7 @@ class DefaultController extends Controller
     /**
      * @return array
      */
-    private function fetchPastTimelineDate()
+    private function fetchPastTimelineDate(): array
     {
         $pastTimelines = $this->getDoctrine()->getRepository('AppBundle:PastTimeline')->findByUser(
             $this->getUser(),

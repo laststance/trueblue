@@ -4,6 +4,7 @@ import ReactOnRails from 'react-on-rails'
 import React from 'react'
 import Timeline from './components/timeline.jsx'
 import Header from './components/header.jsx'
+
 import '../sass/common.scss'
 import '../sass/index.scss'
 
@@ -13,11 +14,11 @@ export default class App extends React.Component {
     constructor(props, context) {
         super(props, context)
         this.state = {
-            today_timeline:     this.props.timeline_json,
-            timeline_json:      this.props.timeline_json,
-            json_daily_url:     this.props.json_daily_url,
-            timeline_date_list: this.props.timeline_date_list,
-            app_user_username:  this.props.app_user_username
+            todayTimeline:    this.props.timelineJson,
+            timelineJson:     this.props.timelineJson,
+            jsonDailyUrl:     this.props.jsonDailyUrl,
+            timelineDateList: this.props.timelineDateList,
+            appUsername:      this.props.appUsername
         }
     }
 
@@ -26,10 +27,10 @@ export default class App extends React.Component {
         const today = newDate.getFullYear() + '-' + (newDate.getMonth() + 1) + '-' + ('0' + newDate.getDate()).slice(-2)
 
         if (date === today) {
-            this.setState({timeline_json: this.state.today_timeline})
+            this.setState({timelineJson: this.state.todayTimeline})
         } else {
-            $.get(this.state.json_daily_url + '/' + date, ((json)=> {
-                this.setState({timeline_json: json})
+            $.get(this.state.jsonDailyUrl + '/' + date, ((json)=> {
+                this.setState({timelineJson: json})
             }).bind(this))
         }
         return 0
@@ -38,9 +39,12 @@ export default class App extends React.Component {
     render() {
         return (
             <div>
-                <Header getDailyJson={this.getDailyJson.bind(this)} timeline_date_list={this.state.timeline_date_list}
-                        app_user_username={this.state.app_user_username}/>
-                <Timeline timeline_json={this.state.timeline_json}/>
+                <Header
+                    getDailyJson={this.getDailyJson.bind(this)}
+                    timelineDateList={this.state.timelineDateList}
+                    appUsername={this.state.appUsername}
+                />
+                <Timeline timelineJson={this.state.timelineJson}/>
             </div>
         )
     }

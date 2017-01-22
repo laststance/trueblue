@@ -18,11 +18,11 @@ export default class Header extends React.Component {
             <Navbar className="root-header">
                 <Nav>
                     <div className="pull-left header-title">
-                        <div>Hello @{this.props.app_user_username} <span
+                        <div>Hello @{this.props.appUsername} <span
                             className="header-title-kaomoji">{this.get_kaomoji()}</span></div>
                     </div>
                     <div className="pull-right">
-                        <Menu onClick={this.props.getDailyJson} timeline_date_list={this.props.timeline_date_list}/>
+                        <Menu onClick={this.props.getDailyJson} timelineDateList={this.props.timelineDateList}/>
                     </div>
                 </Nav>
             </Navbar>
