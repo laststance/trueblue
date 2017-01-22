@@ -8,7 +8,7 @@ import '../sass/common.scss'
 import '../sass/index.scss'
 
 @autobind
-export default class RootComponent extends React.Component {
+export default class App extends React.Component {
 
     constructor(props, context) {
         super(props, context)
@@ -46,4 +46,4 @@ export default class RootComponent extends React.Component {
     }
 }
 
-ReactOnRails.register({RootComponent})
+ReactOnRails.register({App})
