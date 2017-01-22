@@ -2,8 +2,8 @@
 
 namespace AppBundle\Tests\Service;
 
-use AppBundle\API\TwitterAPIClient;
 use AppBundle\Entity\User;
+use AppBundle\Service\TwitterAPIClient;
 use AppBundle\Service\TwitterAPIService;
 use Phake;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;

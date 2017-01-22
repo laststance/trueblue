@@ -2,7 +2,6 @@
 
 namespace AppBundle\Service;
 
-use AppBundle\API\TwitterAPIClient;
 use AppBundle\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;

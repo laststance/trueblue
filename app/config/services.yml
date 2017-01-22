@@ -8,7 +8,7 @@ parameters:
 
 services:
     twitter_api_client:
-        class: AppBundle\API\TwitterAPIClient
+        class: AppBundle\Service\TwitterAPIClient
         arguments: ["%twitter_api%"]
 
     twitter_api:

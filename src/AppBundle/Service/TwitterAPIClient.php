@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\API;
+namespace AppBundle\Service;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
