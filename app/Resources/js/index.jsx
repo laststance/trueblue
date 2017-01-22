@@ -14,11 +14,7 @@ export default class App extends React.Component {
     constructor(props, context) {
         super(props, context)
         this.state = {
-            todayTimeline:    this.props.timelineJson,
-            timelineJson:     this.props.timelineJson,
-            jsonDailyUrl:     this.props.jsonDailyUrl,
-            timelineDateList: this.props.timelineDateList,
-            appUsername:      this.props.appUsername
+            timelineJson: this.props.timelineJson
         }
     }
 
@@ -27,9 +23,9 @@ export default class App extends React.Component {
         const today = newDate.getFullYear() + '-' + (newDate.getMonth() + 1) + '-' + ('0' + newDate.getDate()).slice(-2)
 
         if (date === today) {
-            this.setState({timelineJson: this.state.todayTimeline})
+            this.setState({timelineJson: this.state.timelineJson})
         } else {
-            $.get(this.state.jsonDailyUrl + '/' + date, ((json)=> {
+            $.get(this.props.jsonDailyUrl + '/' + date, ((json)=> {
                 this.setState({timelineJson: json})
             }).bind(this))
         }
@@ -41,8 +37,8 @@ export default class App extends React.Component {
             <div>
                 <Header
                     getDailyJson={this.getDailyJson.bind(this)}
-                    timelineDateList={this.state.timelineDateList}
-                    appUsername={this.state.appUsername}
+                    timelineDateList={this.props.timelineDateList}
+                    appUsername={this.props.appUsername}
                 />
                 <Timeline timelineJson={this.state.timelineJson}/>
             </div>
