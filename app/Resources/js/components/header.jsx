@@ -1,16 +1,16 @@
-import autobind from 'autobind-decorator';
-import React from 'react';
-import { Navbar } from 'react-bootstrap';
-import { Nav } from 'react-bootstrap';
-import Menu from './menu.jsx';
+import autobind from 'autobind-decorator'
+import React from 'react'
+import { Navbar } from 'react-bootstrap'
+import { Nav } from 'react-bootstrap'
+import Menu from './menu.jsx'
 
 @autobind
 export default class Header extends React.Component {
 
     get_kaomoji() {
-        const kaomoji_list = ['ｏ口(・∀・ )', '(*ノ・ω・）', 'o (◡‿◡✿)', 'ヽ(*・ω・)ﾉ'];
-        const rand = Math.round(Math.random() * (kaomoji_list.length - 1));
-        return kaomoji_list[rand];
+        const kaomoji_list = ['ｏ口(・∀・ )', '(*ノ・ω・）', 'o (◡‿◡✿)', 'ヽ(*・ω・)ﾉ']
+        const rand = Math.round(Math.random() * (kaomoji_list.length - 1))
+        return kaomoji_list[rand]
     }
 
     render() {
@@ -26,6 +26,6 @@ export default class Header extends React.Component {
                     </div>
                 </Nav>
             </Navbar>
-        );
+        )
     }
 }

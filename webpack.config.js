@@ -1,49 +1,49 @@
-const webpack = require('webpack');
+const webpack = require('webpack')
 
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var extractSCSS = new ExtractTextPlugin('stylesheets/[name].css');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var extractSCSS = new ExtractTextPlugin('stylesheets/[name].css')
+var CopyWebpackPlugin = require('copy-webpack-plugin')
 
-const devBuild = process.env.NODE_ENV !== 'production';
-const nodeEnv = devBuild ? 'development' : 'production';
+const devBuild = process.env.NODE_ENV !== 'production'
+const nodeEnv = devBuild ? 'development' : 'production'
 
 var config = {
-    entry: {
+    entry:   {
         'index': './app/Resources/js/index.jsx',
         'login': './app/Resources/js/login.js'
 
     },
-    output: {
-        path: './web/assets/build/',
+    output:  {
+        path:       './web/assets/build/',
         publicPath: '/assets/build/',
-        filename: '/js/[name].js',
+        filename:   '/js/[name].js'
     },
     resolve: {
-        extensions: ['', '.js', '.jsx'],
+        extensions: ['', '.js', '.jsx']
     },
     plugins: [
         extractSCSS,
         new webpack.ProvidePlugin({
-            _: 'lodash',
-            $: 'jquery',
-            'jQuery'              : 'jquery',
-            'window.jQuery'       : 'jquery',
+            _:               'lodash',
+            $:               'jquery',
+            'jQuery':        'jquery',
+            'window.jQuery': 'jquery'
         }),
         new CopyWebpackPlugin([
-            { from: './app/Resources/img', to: './img' },
+            {from: './app/Resources/img', to: './img'},
         ]),
         new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: JSON.stringify(nodeEnv),
-            },
-        }),
+            }
+        })
     ],
-    module: {
+    module:  {
         loaders: [
-            { test: require.resolve('jquery'), loader: 'expose?$!expose?jQuery' },
-            { test: /\.jsx?$/, loader: 'babel-loader', exclude: /node_modules/ },
-            
-            {test: /\.scss$/i, loader: extractSCSS.extract(['css','sass'])},
+            {test: require.resolve('jquery'), loader: 'expose?$!expose?jQuery'},
+            {test: /\.jsx?$/, loader: 'babel-loader', exclude: /node_modules/},
+
+            {test: /\.scss$/i, loader: extractSCSS.extract(['css', 'sass'])},
             {test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff'},
             {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream'},
             {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file'},
@@ -54,16 +54,16 @@ var config = {
 }
 
 if (devBuild) {
-    console.log('Webpack dev build');
-    config.devtool = '#eval-source-map';
+    console.log('Webpack dev build')
+    config.devtool = '#eval-source-map'
 } else {
     config.plugins.push(
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin(),
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.AggressiveMergingPlugin()
-    );
-    console.log('Webpack production build');
+    )
+    console.log('Webpack production build')
 }
 
-module.exports = config;
+module.exports = config
