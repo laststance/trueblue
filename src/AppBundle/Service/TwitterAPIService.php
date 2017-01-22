@@ -15,7 +15,6 @@ class TwitterAPIService
 
     /**
      * @var User
-     *           TODO: inject
      */
     private $user;
 
