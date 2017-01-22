@@ -20,15 +20,10 @@ export default class App extends React.Component {
     }
 
     getDailyJson(date) {
-        const today = getYmdStr(new Date())
+        $.get(this.props.jsonDailyUrl + '/' + date, ((json)=> {
+            this.setState({timelineJson: json})
+        }).bind(this))
 
-        if (date === today) {
-            this.setState({timelineJson: this.state.timelineJson})
-        } else {
-            $.get(this.props.jsonDailyUrl + '/' + date, ((json)=> {
-                this.setState({timelineJson: json})
-            }).bind(this))
-        }
         return 0
     }
 
