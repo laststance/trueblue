@@ -12,8 +12,8 @@ describe('testHeader', () => {
         let component = getComponent()
         assert(component.props.appUsername == 'hoge')
     })
-    it('get_kaomoji', () => {
+    it('getKaomoji', () => {
         let component = getComponent()
-        assert(typeof component.get_kaomoji() == 'string')
+        assert(typeof component.getKaomoji() == 'string')
     })
 })
