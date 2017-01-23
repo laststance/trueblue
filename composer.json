@@ -51,7 +51,7 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
         ],
         "copy-git-hook": [
-            "[[ -f .git/hooks/pre-commit ]] && cmp -s pre-commit .git/hooks/pre-commit || cp pre-commit .git/hooks/pre-commit"
+            "[[ -f .git/hooks/pre-commit ]] && cmp -s git-hooks/pre-commit .git/hooks/pre-commit || cp git-hooks/pre-commit .git/hooks/pre-commit"
         ]
     },
     "config": {
