@@ -32,7 +32,7 @@ module.exports = function (config) {
         webpack: {
             devtool: 'inline-source-map',
             resolve: {
-                extensions: ['', '.jsx', '.js', '.scss']
+                extensions: ['', '.js', '.jsx', '.scss']
             },
             module:  {
                 loaders: [
