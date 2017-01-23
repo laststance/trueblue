@@ -1,7 +1,6 @@
 import autobind from 'autobind-decorator'
 import React from 'react'
-import { Navbar } from 'react-bootstrap'
-import { Nav } from 'react-bootstrap'
+import { Navbar, Nav, NavItem } from 'react-bootstrap'
 import Menu from './menu.jsx'
 import { getKaomoji } from '../utils/util'
 
@@ -10,14 +9,19 @@ export default class Header extends React.Component {
     render() {
         return (
             <Navbar className="root-header">
-                <Nav>
-                    <div className="pull-left header-title">
+                <Navbar.Header>
+                    <Navbar.Brand>
                         <div>Hello @{this.props.appUsername} <span
-                            className="header-title-kaomoji">{getKaomoji()}</span></div>
-                    </div>
-                    <div className="pull-right">
-                        <Menu onClick={this.props.getDailyJson} timelineDateList={this.props.timelineDateList}/>
-                    </div>
+                            className="header-title-kaomoji">{getKaomoji()}</span>
+                        </div>
+                    </Navbar.Brand>
+                </Navbar.Header>
+                <Nav pullRight>
+                    <NavItem>
+                        <div>
+                            <Menu onClick={this.props.getDailyJson} timelineDateList={this.props.timelineDateList}/>
+                        </div>
+                    </NavItem>
                 </Nav>
             </Navbar>
         )
