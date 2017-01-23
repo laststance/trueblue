@@ -4,7 +4,6 @@ import ReactOnRails from 'react-on-rails'
 import React from 'react'
 import Timeline from './components/timeline.jsx'
 import Header from './components/header.jsx'
-import { getYmdStr } from './utils/util'
 
 import '../sass/common.scss'
 import '../sass/index.scss'
