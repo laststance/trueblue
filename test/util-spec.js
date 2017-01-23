@@ -1,5 +1,5 @@
 import assert from 'assert'
-import { getKaomoji } from '../app/Resources/js/utils/util'
+import { getKaomoji } from '../app/Resources/js/utils/util.js'
 
 describe('test util', () => {
     it('getKaomoji', () => {
