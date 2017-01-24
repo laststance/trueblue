@@ -11,10 +11,6 @@ a {
 	color: #3B94D9;
 }
 
-.pc-only {
-	display: none;
-}
-
 .menu-btn {
 	//background-color: rgba(255, 255, 255, .3);
 	//color: rgb(194, 255, 255);
@@ -35,3 +31,19 @@ a {
 	text-wrap: none;
 	font-size: 35px;
 }
+
+// tablet & smart phone
+@media (max-width: 47.9em) {
+	.pc-only {
+		display: none;
+	}
+}
+
+// tablet
+@media (min-width: 34em) and (max-width: 47.9em) {
+}
+
+// smart phone
+@media (max-width: 34em) {
+}
+
