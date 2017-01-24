@@ -1,0 +1,16 @@
+// bootstrapのデフォルトスタイル打ち消し
+*:focus, *:active:focus {
+	outline: 0 !important;
+}
+
+.list-group-item:focus {
+	outline: 0;
+}
+
+.navbar-default {
+	border: 0;
+}
+
+.btn-default {
+	border: 0;
+}

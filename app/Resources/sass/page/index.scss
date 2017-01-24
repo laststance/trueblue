@@ -1,14 +1,26 @@
-@import "mixin.scss";
+@import "../common/variable.scss";
 
 body {
 	background-color: #f5f8fa;
 }
 
-@import "component/navbar";
-
 main {
-	.root-header > .container {
-		max-width: 100%;
+	.index-header {
+		left: 0;
+		position: fixed;
+		background-color: $background-color;
+		width: 100%;
+		z-index: 1;
+		.container {
+			max-width: 100%;
+		}
+		.navbar-header{
+			width: 100%;
+		}
+		.nav.navbar-nav {
+			margin: 0;
+			float: right;
+		}
 	}
 
 	#timeline {
@@ -90,7 +102,6 @@ main {
 // tablet
 @media (min-width: 34em) and (max-width: 47.9em) {
 	main {
-		@include fix_header_layout();
 		z-index: auto;
 	}
 }
@@ -98,7 +109,6 @@ main {
 // smart phone
 @media (max-width: 34em) {
 	main {
-		@include fix_header_layout();
 		height: 70%;
 
 		section {

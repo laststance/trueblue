@@ -8,21 +8,21 @@ import { getKaomoji } from '../utils/util'
 export default class Header extends React.Component {
     render() {
         return (
-            <Navbar className="root-header">
+            <Navbar className="index-header">
                 <Navbar.Header>
                     <Navbar.Brand>
                         <div>Hello @{this.props.appUsername} <span
-                            className="header-title-kaomoji">{getKaomoji()}</span>
+                            className="pc-only">{getKaomoji()}</span>
                         </div>
                     </Navbar.Brand>
+                    <Nav>
+                        <NavItem>
+                            <div>
+                                <Menu onClick={this.props.getDailyJson} timelineDateList={this.props.timelineDateList}/>
+                            </div>
+                        </NavItem>
+                    </Nav>
                 </Navbar.Header>
-                <Nav pullRight>
-                    <NavItem>
-                        <div>
-                            <Menu onClick={this.props.getDailyJson} timelineDateList={this.props.timelineDateList}/>
-                        </div>
-                    </NavItem>
-                </Nav>
             </Navbar>
         )
     }

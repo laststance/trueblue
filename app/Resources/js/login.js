@@ -1,7 +1,7 @@
 import $ from 'jquery'
 
-import '../sass/common.scss'
-import '../sass/login.scss'
+import '../sass/common/common.scss'
+import '../sass/page/login.scss'
 
 // スマホのタッチスクリーンでボタンのhoverイベントを有効にする
 $('.btn-twitter-login').on('touchstart', () => {

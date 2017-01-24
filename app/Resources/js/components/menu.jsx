@@ -6,7 +6,7 @@ import { ListGroup } from 'react-bootstrap'
 import Flatpickr from 'react-flatpickr'
 import { getYmdStr } from '../utils/util'
 
-import '../../sass/material_green.scss'
+import '../../sass/component/material_green.scss'
 import  '../../sass/component/modal.scss'
 
 @autobind
@@ -40,7 +40,7 @@ export default class Menu extends React.Component {
     render() {
         return (
             <div id="menu">
-                <Button className="btn-header-right" bsSize="large" onClick={this.open}>&#9776;</Button>
+                <Button className="menu-btn" bsSize="large" onClick={this.open}>&#9776;</Button>
 
                 <Modal show={this.state.showModal} onHide={this.close}>
                     <Modal.Header closeButton>

@@ -5,8 +5,8 @@ import React from 'react'
 import Timeline from './components/timeline.jsx'
 import Header from './components/header.jsx'
 
-import '../sass/common.scss'
-import '../sass/index.scss'
+import '../sass/common/common.scss'
+import '../sass/page/index.scss'
 
 @autobind
 export default class App extends React.Component {

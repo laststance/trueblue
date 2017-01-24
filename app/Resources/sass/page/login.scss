@@ -1,12 +1,20 @@
+@import "../common/variable.scss";
+
 body {
 	background: #ffffff;
 }
 
-@import "component/navbar";
-
 img {
 	max-width: 100%;
 	height: auto;
+}
+
+.login-header {
+	left: 0;
+	position: fixed;
+	background-color: $background-color;
+	width: 100%;
+	z-index: 1;
 }
 
 main {
@@ -33,6 +41,15 @@ main {
 
 // smart phone
 @media (max-width: 34em) {
+	.login-header {
+		li.nav-item.pull-right {
+			padding-top: 30px;
+			padding-bottom: 0;
+			float: none !important;
+			margin-bottom: 10px;
+			text-align: center;
+		}
+	}
 	main {
 		height: 70%;
 
@@ -44,20 +61,5 @@ main {
 				margin-top: auto;
 			}
 		}
-	}
-
-	.navbar {
-		padding-bottom: 0;
-	}
-
-	.header-title,
-	.header-button {
-		float: none !important;
-		margin-bottom: 10px;
-		text-align: center;
-	}
-
-	.header-button {
-		padding-top: 30px;
 	}
 }

@@ -4,13 +4,13 @@
   <link href='https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two' rel='stylesheet' type='text/css'>
 {% endblock %}
 {% block body %}
-<nav class="navbar">
+<nav class="navbar login-header">
   <ul class="nav">
-    <li class="nav-item header-title pull-left">
+    <li class="nav-item pull-left">
       <div>Daily Tweet</div>
     </li>
-    <li class="nav-item header-button pull-right">
-      <a href="{{ path('hwi_oauth_service_redirect', { 'service' : 'twitter' }) }}" class="btn btn-header-right">Login with Twitter</a>
+    <li class="nav-item pull-right">
+      <a href="{{ path('hwi_oauth_service_redirect', { 'service' : 'twitter' }) }}" class="btn menu-btn">Login with Twitter</a>
     </li>
   </ul>
 </nav>
