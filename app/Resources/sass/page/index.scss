@@ -14,6 +14,12 @@ main {
 		.container {
 			max-width: 100%;
 		}
+		.navbar-brand {
+			font-family: Shadows Into Light Two;
+			text-wrap: none;
+			font-size: 35px;
+			line-height: unset;
+		}
 		.navbar-header{
 			width: 100%;
 		}
