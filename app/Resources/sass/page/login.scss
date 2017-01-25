@@ -9,12 +9,29 @@ img {
 	height: auto;
 }
 
-.login-header {
+.login-header { // TODO: dup01
 	left: 0;
 	position: fixed;
 	background-color: $background-color;
+	height: 75px;
 	width: 100%;
 	z-index: 1;
+	.container {
+		max-width: 100%;
+	}
+	.navbar-brand {
+		font-family: Shadows Into Light Two;
+		text-wrap: none;
+		font-size: 35px;
+		line-height: unset;
+	}
+	.navbar-header{
+		width: 100%;
+	}
+	.nav.navbar-nav {
+		margin-top: 11.5px;
+		float: right;
+	}
 }
 
 main {
