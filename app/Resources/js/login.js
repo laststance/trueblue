@@ -4,7 +4,7 @@ import '../sass/common/common.scss'
 import '../sass/page/login.scss'
 
 // スマホのタッチスクリーンでボタンのhoverイベントを有効にする
-$('.btn-twitter-login').on('touchstart', () => {
+$('.menu-btn').on('touchstart', function() {
     const thisAnchor = $(this)
     const touchPos = thisAnchor.offset().top
     //タッチした瞬間のa要素の、上からの位置を取得。
