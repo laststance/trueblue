@@ -8,7 +8,7 @@ use AppBundle\Service\TwitterAPIService;
 use Phake;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class TwitterAPIServiceTest extends WebTestCase
+class twitterAPIServiceTest extends WebTestCase
 {
     /**
      * @var TwitterAPIService
