@@ -12,6 +12,7 @@ git:
 cache:
     directories:
         - $HOME/.composer/cache
+        - node_modules
 
 before_install:
     - export CHROME_BIN=chromium-browser
