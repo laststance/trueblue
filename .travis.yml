@@ -20,7 +20,7 @@ before_script:
     - npm install
     - cp app/config/parameters.yml.dist app/config/parameters.yml
     - composer self-update
-    - composer install --no-interaction --prefer-source
+    - composer install --no-interaction --prefer-dist
     - app/console doctrine:database:create --env=test --no-interaction --quiet
     - app/console doctrine:schema:create  --env=test --no-interaction --quiet
     - app/console cache:warmup --env=test --quiet
