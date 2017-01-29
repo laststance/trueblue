@@ -15,13 +15,8 @@ class DefaultControllerTest extends WebTestCase
         $this->client = static::createClient();
 
         // 未ログイン
-        $crawler = $this->client->request('GET', '/');
+        $this->client->request('GET', '/');
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
-
-        // ログイン @TODO: 500を返すので原因を調査する
-        //$this->logIn();
-        //$crawler = $this->client->request('GET', '/');
-        //$this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 
     public function testLogin()
