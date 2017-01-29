@@ -2,17 +2,15 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\PastTimeline;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
     /**
      * @Route("/", name="indexpage")
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         return $this->render(
             ':default:index.html.twig',
