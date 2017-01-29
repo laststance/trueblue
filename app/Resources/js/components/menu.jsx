@@ -15,7 +15,8 @@ export default class Menu extends React.Component {
     constructor(props, context) {
         super(props, context)
         this.state = {
-            showModal: false
+            showModal: false,
+            selectedDate: new Date()
         }
     }
 
@@ -28,6 +29,7 @@ export default class Menu extends React.Component {
     }
 
     _OnChange(date) {
+        this.setState({selectedDate: date[0]})
         this.close()
         this.props.getDailyJson(getYmdStr(date[0]))
     }
@@ -43,7 +45,7 @@ export default class Menu extends React.Component {
                     </Modal.Header>
                     <Modal.Body>
                         <ListGroup>
-                            <Flatpickr onChange={this._OnChange} options={{inline: true, enable: this.props.timelineDateList}} />
+                            <Flatpickr onChange={this._OnChange} options={{defaultDate: this.state.selectedDate, inline: true, enable: this.props.timelineDateList}} />
                         </ListGroup>
                     </Modal.Body>
                     <Modal.Footer>
