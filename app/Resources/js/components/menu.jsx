@@ -27,14 +27,9 @@ export default class Menu extends React.Component {
         this.setState({showModal: true})
     }
 
-    _onClick(date_str) {
-        this.close()
-        this.props.onClick(date_str)
-    }
-
     _OnChange(date) {
-        this._onClick(getYmdStr(date[0]))
         this.close()
+        this.props.getDailyJson(getYmdStr(date[0]))
     }
 
     render() {

@@ -18,7 +18,7 @@ export default class Header extends React.Component {
                     <Nav>
                         <NavItem>
                             <div>
-                                <Menu onClick={this.props.getDailyJson} timelineDateList={this.props.timelineDateList}/>
+                                <Menu getDailyJson={this.props.getDailyJson} timelineDateList={this.props.timelineDateList}/>
                             </div>
                         </NavItem>
                     </Nav>
