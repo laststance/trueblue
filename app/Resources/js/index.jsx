@@ -21,7 +21,7 @@ export default class App extends React.Component {
     getDailyJson(date) {
         $.get(this.props.jsonDailyUrl + '/' + date, ((json)=> {
             this.setState({timelineJson: json})
-        }).bind(this))
+        }))
 
         return 0
     }
@@ -30,7 +30,7 @@ export default class App extends React.Component {
         return (
             <div>
                 <Header
-                    getDailyJson={this.getDailyJson.bind(this)}
+                    getDailyJson={this.getDailyJson}
                     timelineDateList={this.props.timelineDateList}
                     appUsername={this.props.appUsername}
                 />
