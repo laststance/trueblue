@@ -7,6 +7,11 @@ parameters:
     database_name:     dailytweet
     database_user:     root
     database_password: ~
+    test_database_host: 127.0.0.1
+    test_database_port: ~
+    test_database_name: testdailytweet
+    test_database_user: root
+    test_database_password: ~
     # You should uncomment this if you want use pdo_sqlite
     # database_path: "%kernel.root_dir%/data.db3"
 

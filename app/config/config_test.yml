@@ -14,3 +14,19 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: true
+
+doctrine:
+    dbal:
+        driver:   pdo_mysql
+        host:     "%test_database_host%"
+        port:     "%test_database_port%"
+        dbname:   "%test_database_name%"
+        user:     "%test_database_user%"
+        password: "%test_database_password%"
+        charset:  UTF8
+        # if using pdo_sqlite as your database driver:
+        #   1. add the path in parameters.yml
+        #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
+        #   2. Uncomment database_path in parameters.yml.dist
+        #   3. Uncomment next line:
+        #     path:     "%database_path%"
