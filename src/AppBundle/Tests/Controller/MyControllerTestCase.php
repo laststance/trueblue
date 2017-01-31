@@ -1,13 +1,11 @@
 <?php
-
 namespace AppBundle\Tests\Controller;
 
-use Symfony\Component\BrowserKit\Cookie;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-trait ControllerTestUtilTrait
+class MyControllerTestCase extends WebTestCase
 {
-    private function logIn()
+    protected function logIn()
     {
         $session = $this->client->getContainer()->get('session');
         $firewall = 'secured_area';
