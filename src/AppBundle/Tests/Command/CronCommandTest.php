@@ -102,14 +102,14 @@ class CronCommandTest extends MyKernelTestCase
     {
         return $this->entityManager->getRepository(
             'AppBundle:User'
-        )->findBy(['username' => 'TestFixture']);
+        )->findBy(['username' => 'malloc007']);
     }
 
     private function getFixtureUser()
     {
         return $this->entityManager->getRepository(
             'AppBundle:User'
-        )->findOneBy(['username' => 'TestFixture']);
+        )->findOneBy(['username' => 'malloc007']);
     }
 
     private function getAssertTarget(User $user)

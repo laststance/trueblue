@@ -1,7 +1,7 @@
 AppBundle\Entity\User:
-    SampleUser:
-        twitterId: 1000000000
-        username: TestFixture
+    malloc007:
+        twitterId: 1664570156
+        username: malloc007
         todaySinceId: 1
         sinceIdAt: 1
         isActive: true
