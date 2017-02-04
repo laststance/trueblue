@@ -17,7 +17,6 @@ class DefaultController extends Controller
             [
                 'props' => $this->get('jms_serializer')->serialize(
                     [
-                        'jsonDailyUrl' => $this->generateUrl('json_daily'),
                         'timelineDateList' => $this->fetchPastTimelineDate(),
                         'timelineJson' => $this->fetchTodayTimeline(),
                         'appUsername' => $this->getUser()->getUsername(),

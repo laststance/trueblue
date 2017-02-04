@@ -9,7 +9,7 @@ const nodeEnv = devBuild ? 'development' : 'production'
 
 var config = {
     entry:   {
-        'index': './app/Resources/js/index.jsx',
+        'index': './app/Resources/js/index.js',
         'login': './app/Resources/js/login.js'
 
     },

@@ -35,6 +35,7 @@
             "never"
         ],
         "react/jsx-uses-vars": 1,
-        "no-console": "off"
+        "no-console": "off",
+        "no-unused-vars": "off"
     }
 }

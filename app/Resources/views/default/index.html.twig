@@ -6,7 +6,8 @@
 {% block body %}
 <main id="container" class="container">
   <!-- React <TimelineComponent /> render position -->
-  {{ react_component('App', {'props': props}) }}
+  {{ redux_store('indexStore', props) }}
+  {{ react_component('App') }}
 </main>
 {% endblock %}
 {% block javascript %}

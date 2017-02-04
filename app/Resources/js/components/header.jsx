@@ -18,7 +18,10 @@ export default class Header extends React.Component {
                     <Nav>
                         <NavItem>
                             <div>
-                                <Menu getDailyJson={this.props.getDailyJson} timelineDateList={this.props.timelineDateList}/>
+                                <Menu
+                                    timelineDateList={this.props.timelineDateList}
+                                    fetchDailyTweet={this.props.fetchDailyTweet}
+                                />
                             </div>
                         </NavItem>
                     </Nav>
