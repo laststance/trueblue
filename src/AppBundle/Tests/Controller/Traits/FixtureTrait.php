@@ -1,7 +1,8 @@
 <?php
+
 namespace AppBundle\Tests\Controller\Traits;
 
-Trait FixtureTrait
+trait FixtureTrait
 {
     public static function setUpBeforeClass()
     {

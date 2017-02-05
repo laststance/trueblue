@@ -1,4 +1,5 @@
 <?php
+
 namespace AppBundle\Tests\Controller;
 
 class DefaultControllerTest extends MyControllerTestCase
