@@ -36,7 +36,8 @@
     "redux-logger": "^2.6.1",
     "redux-thunk": "^2.0.1",
     "resolve-url-loader": "^1.6.1",
-    "webpack": "1.13.3"
+    "webpack": "1.13.3",
+    "whatwg-fetch": "^2.0.2"
   },
   "devDependencies": {
     "babel-cli": "^6.6.5",
