@@ -8,14 +8,6 @@ import '../../sass/common/common.scss'
 import '../../sass/page/index.scss'
 
 class App extends React.Component {
-    
-    // constructor(props, context) {
-    //     super(props, context)
-    //     this.state = {
-    //         timelineJson: this.props.timelineJson
-    //     }
-    // }
-    
     render() {
         return (
             <div>
