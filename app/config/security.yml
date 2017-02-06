@@ -18,6 +18,7 @@ security:
                 failure_path: /login
                 oauth_user_provider:
                     service: oauth_entity_user_provider
+                default_target_path: /home
 
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
