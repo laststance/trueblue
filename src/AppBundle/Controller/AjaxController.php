@@ -9,10 +9,10 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @Route("/json")
+ * @Route("/ajax")
  * @Method({"GET"})
  */
-class JsonController extends Controller
+class AjaxController extends Controller
 {
     /**
      * @Route("/daily/{date}", requirements={"date" = "\d{4}-\d{2}-\d{2}"}, defaults={"date" = "0000-00-00"}, name="json_daily")

@@ -4,7 +4,7 @@ const Actions = {
     fetchDailyTweet: (date) => {
         return dispatch => {
             dispatch({ type: Constants.FETCH_DAILY_TWEET })
-            fetch('/json/daily/' + date, {
+            fetch('/ajax/daily/' + date, {
                 credentials: 'include'
             }).then((response) => {
                 return response.json()
