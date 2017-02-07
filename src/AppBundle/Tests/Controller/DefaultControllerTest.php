@@ -10,7 +10,7 @@ class DefaultControllerTest extends MyControllerTestCase
 
     public static $fixtures = [__DIR__.'/../DataFixtures/Alice/user.yml'];
 
-    private $client;
+    protected $client;
 
     public function testIndex()
     {
@@ -19,6 +19,11 @@ class DefaultControllerTest extends MyControllerTestCase
         // 未ログイン
         $this->client->request('GET', '/');
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+
+        // ログイン
+        $this->logIn();
+        $this->client->request('GET', '/');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 
     public function testLogin()
