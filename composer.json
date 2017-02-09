@@ -24,7 +24,8 @@
         "jms/di-extra-bundle": "dev-master",
         "jms/serializer-bundle": "^1.1",
         "guzzlehttp/guzzle": "~6.0",
-        "phpunit/phpunit": "^5.0"
+        "phpunit/phpunit": "^5.0",
+        "doctrine/doctrine-migrations-bundle": "^1.0"
     },
     "require-dev": {
         "h4cc/alice-fixtures-bundle": "^0.5.1",
