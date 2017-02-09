@@ -9,3 +9,6 @@ hwi_oauth_redirect:
 
 twitter_login:
     pattern: /login/check-twitter
+
+logout:
+    path: /logout

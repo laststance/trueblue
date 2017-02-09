@@ -27,6 +27,10 @@ export default class Menu extends React.Component {
     open() {
         this.setState({showModal: true})
     }
+    
+    logout() {
+        location.href = '/logout'
+    }
 
     _OnChange(date) {
         this.setState({selectedDate: date[0]})
@@ -49,7 +53,7 @@ export default class Menu extends React.Component {
                         </ListGroup>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button onClick={this.close}>Close</Button>
+                        <Button onClick={this.logout}>Logout</Button>
                     </Modal.Footer>
                 </Modal>
             </div>
