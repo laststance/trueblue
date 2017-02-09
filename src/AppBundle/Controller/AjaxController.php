@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 class AjaxController extends Controller
 {
     /**
+     * @Security("has_role('ROLE_OAUTH_USER')")
      * @Route("/daily/{date}", requirements={"date" = "\d{4}-\d{2}-\d{2}"}, defaults={"date" = "0000-00-00"}, name="json_daily")
      */
     public function dailyAction($date)

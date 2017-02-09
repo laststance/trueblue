@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class CronCommandTest extends MyKernelTestCase
 {
-    protected static $fixtures = [__DIR__.'/../DataFixtures/Alice/user.yml'];
+    protected static $fixtures = [__DIR__.'/../DataFixtures/Alice/fixture.yml'];
 
     /**
      * @var Application

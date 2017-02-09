@@ -8,12 +8,21 @@ class AjaxControllerTest extends MyControllerTestCase
 {
     use FixtureTrait;
 
-    public static $fixtures = [__DIR__.'/../DataFixtures/Alice/user.yml'];
+    public static $fixtures = [__DIR__.'/../DataFixtures/Alice/fixture.yml'];
 
-    private $client;
+    protected $client;
 
     public function testDaily()
     {
-        $this->markTestIncomplete();
+        $this->client = static::createClient();
+
+        // no login
+        $this->client->request('GET', '/ajax/daily/2017-01-10');
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+
+        // login
+        $this->logIn();
+        $this->client->request('GET', '/ajax/daily/2017-01-10');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 }
