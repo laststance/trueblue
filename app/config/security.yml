@@ -14,13 +14,12 @@ security:
             oauth:
                 resource_owners:
                   twitter:   "/login/check-twitter"
-                login_path:   /login
-                failure_path: /login
+                login_path:   /
+                failure_path: /
                 oauth_user_provider:
                     service: oauth_entity_user_provider
                 default_target_path: /home
 
     access_control:
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/connect, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/, roles: ROLE_OAUTH_USER }
+        - { path: ^/home, roles: ROLE_OAUTH_USER }

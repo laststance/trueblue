@@ -36,14 +36,6 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/login", name="login")
-     */
-    public function loginAction()
-    {
-        return $this->render(':default:login.html.twig');
-    }
-
-    /**
      * @return array
      */
     private function fetchTodayTimeline(): array
