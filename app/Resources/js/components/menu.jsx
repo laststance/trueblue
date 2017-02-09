@@ -28,6 +28,10 @@ export default class Menu extends React.Component {
         this.setState({showModal: true})
     }
     
+    toppage() {
+        location.href = '/'
+    }
+    
     logout() {
         location.href = '/logout'
     }
@@ -45,7 +49,7 @@ export default class Menu extends React.Component {
 
                 <Modal show={this.state.showModal} onHide={this.close}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Menu</Modal.Title>
+                        <Modal.Title><Button onClick={this.toppage}>Top</Button></Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <ListGroup>
