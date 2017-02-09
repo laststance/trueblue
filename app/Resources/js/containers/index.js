@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Timeline from '../components/timeline'
 import Header from '../components/header'
+import Footer from '../components/footer'
 import Actions from '../actions/index'
 
 import '../../sass/common/common.scss'
@@ -17,6 +18,7 @@ class App extends React.Component {
                     fetchDailyTweet={this.props.fetchDailyTweet}
                 />
                 <Timeline timelineJson={this.props.timelineJson}/>
+                {/*<Footer/>*/}
             </div>
         )
     }

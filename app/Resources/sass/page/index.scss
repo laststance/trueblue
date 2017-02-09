@@ -1,10 +1,12 @@
 @import "../common/variable.scss";
+@import "../component/footer.scss";
 
 body {
 	background-color: #f5f8fa;
 }
 
 main {
+	height: 100%;
 	.index-header { // TODO: dup01
 		left: 0;
 		position: fixed;
