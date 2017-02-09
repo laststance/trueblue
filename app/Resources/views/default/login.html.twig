@@ -10,7 +10,11 @@
       <div class="navbar-brand">Daily Tweet</div>
       <ul class="nav navbar-nav">
         <li>
-          <a href="{{ path('hwi_oauth_service_redirect', { 'service' : 'twitter' }) }}" class="btn menu-btn">Login with Twitter</a>
+          {% if is_granted('ROLE_OAUTH_USER') %}
+            <a href="{{ path('home') }}" class="btn menu-btn">Home</a>
+          {% else %}
+            <a href="{{ path('hwi_oauth_service_redirect', { 'service' : 'twitter' }) }}" class="btn menu-btn">Login with Twitter</a>
+          {% endif %}
         </li>
       </ul>
     </div>
