@@ -207,5 +207,7 @@ class TwitterAPIService
     public function setApi(TwitterAPIClient $api)
     {
         $this->api = $api;
+
+        return $this;
     }
 }

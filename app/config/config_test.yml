@@ -1,6 +1,12 @@
 imports:
     - { resource: config_dev.yml }
 
+parameters:
+    twitter_api:
+        consumer_key: ''
+        consumer_secret: ''
+        bearer_token: ''
+
 framework:
     test: ~
     session:
@@ -30,3 +36,16 @@ doctrine:
         #   2. Uncomment database_path in parameters.yml.dist
         #   3. Uncomment next line:
         #     path:     "%database_path%"
+
+monolog:
+    handlers:
+        main:
+            type:         fingers_crossed
+            action_level: error
+            handler:      nested
+        nested:
+            type:  stream
+            path:  "%kernel.logs_dir%/%kernel.environment%.log"
+            level: critical
+        console:
+            type:  console

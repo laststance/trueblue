@@ -2,7 +2,9 @@
 
 namespace AppBundle\Tests\Controller;
 
+use AppBundle\Service\TwitterAPIClient;
 use AppBundle\Tests\Controller\Traits\FixtureTrait;
+use Phake;
 
 class DefaultControllerTest extends MyControllerTestCase
 {
@@ -12,17 +14,30 @@ class DefaultControllerTest extends MyControllerTestCase
 
     protected $client;
 
-    public function testIndex()
+    public function testHome()
     {
-        $this->client = static::createClient();
+        $this->client = self::createClient();
 
         // 未ログイン
         $this->client->request('GET', '/home');
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
 
+
         // ログイン
+        $mock = Phake::mock(TwitterAPIClient::class);
+        Phake::when($mock)->getStatusesUserTimeline(Phake::anyParameters())->thenReturn($this->getFixture());
+        $this->client = self::createClient();
+        $this->client->getContainer()->get('twitter_api')->setApi($mock);
+
         $this->logIn();
         $this->client->request('GET', '/home');
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+    }
+
+    public function getFixture()
+    {
+        require __DIR__.'/../DataFixtures/statusesUserTimelineFixture.php';
+
+        return $statusesUserTimelineFixture;
     }
 }
