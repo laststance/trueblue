@@ -71,8 +71,8 @@ class CronCommandTest extends MyKernelTestCase
         $exitStatus = $this->commandTester->execute(['command' => $this->command->getName(), 'date' => '2020-12-12']);
         $this->assertEquals(0, $exitStatus);
 
-        $user = $this->getFixtureUser();
-        $pastTimeLine = $this->getAssertTarget($user);
+        $user = $this->findFixtureUser();
+        $pastTimeLine = $this->findPersistedObj($user);
 
         $this->assertEquals($pastTimeLine->getUser()->getId(), $user->getId());
         $this->assertEquals(
@@ -90,7 +90,7 @@ class CronCommandTest extends MyKernelTestCase
         $this->container->set('twitter_api', $mockApi);
 
         $mockRepository = Phake::mock(EntityRepository::class);
-        $fixtureUserArray = $this->getFixtureUserArray();
+        $fixtureUserArray = $this->findFixtureUserArray();
         Phake::when($mockRepository)->findAll()->thenReturn($fixtureUserArray);
 
         $mockDoctrine = Phake::mock(Registry::class);
@@ -98,21 +98,21 @@ class CronCommandTest extends MyKernelTestCase
         $this->container->set('doctrine', $mockDoctrine);
     }
 
-    private function getFixtureUserArray()
+    private function findFixtureUserArray()
     {
         return $this->entityManager->getRepository(
             'AppBundle:User'
         )->findBy(['username' => 'malloc007']);
     }
 
-    private function getFixtureUser()
+    private function findFixtureUser()
     {
         return $this->entityManager->getRepository(
             'AppBundle:User'
         )->findOneBy(['username' => 'malloc007']);
     }
 
-    private function getAssertTarget(User $user)
+    private function findPersistedObj(User $user)
     {
         return $this->entityManager->getRepository(
             'AppBundle:PastTimeline'
