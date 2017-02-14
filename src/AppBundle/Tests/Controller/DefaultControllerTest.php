@@ -14,16 +14,31 @@ class DefaultControllerTest extends MyControllerTestCase
 
     protected $client;
 
+    public function testIndex()
+    {
+        $this->client = self::createClient();
+
+        // not login
+        $this->client->request('GET', '/');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertContains('Login with Twitter', $this->client->getResponse()->getContent());
+
+        // login
+        $this->logIn();
+        $this->client->request('GET', '/');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertContains('Home', $this->client->getResponse()->getContent());
+    }
+
     public function testHome()
     {
         $this->client = self::createClient();
 
-        // 未ログイン
+        // not login
         $this->client->request('GET', '/home');
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
 
-
-        // ログイン
+        // login
         $mock = Phake::mock(TwitterAPIClient::class);
         Phake::when($mock)->getStatusesUserTimeline(Phake::anyParameters())->thenReturn($this->getFixture());
         $this->client = self::createClient();
