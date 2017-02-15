@@ -28,6 +28,7 @@
     "react-bootstrap": "^0.30.7",
     "react-dom": "^15.4.2",
     "react-flatpickr": "^3.0.0",
+    "react-images": "^0.5.2",
     "react-on-rails": "6.0.5",
     "react-redux": "^4.4.6",
     "react-router": "^2.0.0",
