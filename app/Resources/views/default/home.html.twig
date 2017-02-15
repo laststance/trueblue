@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% block stylesheet %}
+  <link rel="stylesheet" href="{{ asset('assets/build/stylesheets/index.css', 'webpack') }}">
+  <link href='https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two' rel='stylesheet' type='text/css'>
+{% endblock %}
+{% block body %}
+<main id="container" class="container">
+  <!-- React <TimelineComponent /> render position -->
+  {{ redux_store('indexStore', props) }}
+  {{ react_component('App') }}
+</main>
+{% endblock %}
+{% block javascript %}
+<script src="{{ asset('/assets/build/js/index.js', 'webpack') }}"></script>
+{% endblock %}

@@ -12,7 +12,7 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render(':default:login.html.twig');
+        return $this->render(':default:index.html.twig');
     }
 
     /**
@@ -21,7 +21,7 @@ class DefaultController extends Controller
     public function homeAction()
     {
         return $this->render(
-            ':default:index.html.twig',
+            ':default:home.html.twig',
             [
                 'props' => $this->get('jms_serializer')->serialize(
                     [
