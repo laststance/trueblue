@@ -22,6 +22,7 @@ services:
     app.service.common_service:
         class: AppBundle\Service\CommonService
 
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    app.event_listener.my_locale_listener:
+        class: AppBundle\EventListener\MyLocaleListener
+        tags:
+            - { name: kernel.event_subscriber }
