@@ -24,6 +24,12 @@ a {
 	}
 }
 
+.flex-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 // tablet & smart phone
 @media (max-width: 47.9em) {
 	.pc-only {

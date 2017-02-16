@@ -3,49 +3,62 @@
   <link href='https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two' rel='stylesheet' type='text/css'>
 {% endblock %}
 {% block body %}
-<nav class="login-header navbar navbar-default">
-  <div class="container">
-    <div class="navbar-header">
-      <div class="navbar-brand">DailyTweet</div>
-      <ul class="nav navbar-nav">
-        <li>
-          {% if is_granted('ROLE_OAUTH_USER') %}
-            <a href="{{ path('home') }}" class="btn menu-btn">Home</a>
-          {% else %}
-            <a href="{{ path('hwi_oauth_service_redirect', { 'service' : 'twitter' }) }}" class="btn menu-btn">Login with Twitter</a>
-          {% endif %}
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-<main class="container">
-  <section class="row">
-    <div class="service-infomation col-md-12">
-      <p style="margin-bottom: 20px">{{ 'index.overview'|trans }}</p>
-      <p>
-        <img src="{{ asset('assets/build/img/landing-image.png') }}" >
-      </p>
-    </div>
-  </section>
-</main>
-<footer class="footer">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-4 col-md-4 col-lg-4">
-        <div></div>
-      </div>
-      <div class="col-sm-4 col-md-4 col-lg-4">
-        <div></div>
-      </div>
-      <div class="col-sm-4 col-md-4 col-lg-4">
-        <div>Copyright © 2017 Ryota Murakami. All Rights Reserved.</div>
+  <nav class="login-header navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <div class="navbar-brand">DailyTweet</div>
+        <ul class="nav navbar-nav">
+          <li>
+            {% if is_granted('ROLE_OAUTH_USER') %}
+              <a href="{{ path('home') }}" class="btn menu-btn">Home</a>
+            {% else %}
+              <a href="{{ path('hwi_oauth_service_redirect', { 'service' : 'twitter' }) }}" class="btn menu-btn">Login
+                with
+                Twitter</a>
+            {% endif %}
+          </li>
+        </ul>
       </div>
     </div>
-  </div>
-</footer>
+  </nav>
+  <main>
+    <div class="landing">
+      <div class="opacity-layer">
+        <div class="container" style="height: 100%;">
+          <div class="row">
+            <div class="flex-center col-md-12">
+              <h2>{{ 'index.overview'|trans }}</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {#some content#}
+    <div class="flex-center" style="height: 600px;background-color: oldlace;">
+      <h1>Lolem Ipsome</h1>
+    </div>
+    {#some content#}
+    <div class="flex-center" style="height: 600px;background-color: lightblue;">
+      <h1>Lolem Ipsome</h1>
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4 col-md-4 col-lg-4">
+          <div></div>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+          <div></div>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+          <div>Copyright © 2017 Ryota Murakami. All Rights Reserved.</div>
+        </div>
+      </div>
+    </div>
+  </footer>
 {% endblock %}
 
 {% block javascript %}
-<script src="{{ asset('/assets/build/js/login.js', 'webpack') }}"></script>
+  <script src="{{ asset('/assets/build/js/login.js', 'webpack') }}"></script>
 {% endblock %}

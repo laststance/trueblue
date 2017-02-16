@@ -26,7 +26,7 @@ img {
 		font-size: 35px;
 		line-height: unset;
 	}
-	.navbar-header{
+	.navbar-header {
 		width: 100%;
 	}
 	.nav.navbar-nav {
@@ -35,24 +35,32 @@ img {
 	}
 }
 
+.landing {
+	height: 100vh;
+	background-color: ivory;
+
+	.opacity-layer {
+		height: 100%;
+		background-color: rgba(255, 255, 255, 0.6);
+
+		div {
+			height: 100%;
+		}
+	}
+
+	h2 {
+		font-weight: 300;
+		line-height: 1.5em;
+	}
+}
+
 main {
 	color: #3C4C52;
-	.service-infomation {
-		border-radius: 4px;
-		font-size: 18px;
-		padding: 20px 20px 30px;
-		text-align: center;
-	}
 }
 
 // tablet
 @media (min-width: 34em) and (max-width: 47.9em) {
-	main {
-		.service-infomation {
-			height: 240px;
-			padding: 30px;
-		}
-	}
+
 }
 
 // smart phone
@@ -72,11 +80,6 @@ main {
 	main {
 		section {
 			height: 100%;
-
-			.service-infomation {
-				height: 100%;
-				margin-top: auto;
-			}
 		}
 	}
 }
