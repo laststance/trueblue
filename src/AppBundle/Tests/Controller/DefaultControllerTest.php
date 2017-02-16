@@ -33,10 +33,11 @@ class DefaultControllerTest extends MyControllerTestCase
         $this->client = self::createClient();
         $this->client->request('GET', '/', [], [], ['HTTP_ACCEPT_LANGUAGE' => 'ja,en-US;q=0.8,en;q=0.6']);
         $this->assertContains('Daily Tweetはtwitter上の自分のつぶやきを日別にまとめるサービスです。', $this->client->getResponse()->getContent());
-        $this->client->request('GET', '/', [], [], ['HTTP_ACCEPT_LANGUAGE' => 'ja,en-US;q=0.8,en;q=0.6']);
+        $this->assertContains('このサイトについて', $this->client->getResponse()->getContent());
 
         $this->client->request('GET', '/', [], [], ['HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,ja;q=0.6']);
         $this->assertContains('Daily Tweet is archive tweets on every other day.', $this->client->getResponse()->getContent());
+        $this->assertContains('about', $this->client->getResponse()->getContent());
     }
 
     public function testHome()

@@ -1,4 +1,4 @@
-// bootstrapのデフォルトスタイル打ち消し
+// bootstrap
 *:focus, *:active:focus {
 	outline: 0 !important;
 }
@@ -13,4 +13,10 @@
 
 .btn-default {
 	border: 0;
+}
+
+// browser
+ol, ul {
+	list-style: none;
+	list-style-type: none;
 }

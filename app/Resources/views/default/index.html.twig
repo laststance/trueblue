@@ -41,18 +41,13 @@
     </div>
   </main>
   <footer class="footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-4 col-md-4 col-lg-4">
-          <div></div>
-        </div>
-        <div class="col-sm-4 col-md-4 col-lg-4">
-          <div></div>
-        </div>
-        <div class="col-sm-4 col-md-4 col-lg-4">
-          <div>Copyright © 2017 Ryota Murakami. All Rights Reserved.</div>
-        </div>
-      </div>
+    <ul class="navi">
+      <li><a href="/">{{ 'index.about'|trans }}</a></li>
+      <li><a href="/">{{ 'index.terms-of-service'|trans }}</a></li>
+      <li><a href="/">{{ 'index.privacy-policy'|trans }}</a></li>
+    </ul>
+    <div class="copyright">
+      Copyright © 2017 Ryota Murakami. All Rights Reserved.
     </div>
   </footer>
 {% endblock %}
