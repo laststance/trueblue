@@ -1,4 +1,4 @@
-import Constants from '../constants/index'
+import Constants from '../constants/home'
 
 export const initialState = {
     fetching: false,
@@ -7,7 +7,7 @@ export const initialState = {
     appUsername: ''
 }
 
-export default function indexReducer(state = initialState, action) {
+export default function homeReducer(state = initialState, action) {
     switch (action.type) {
     case Constants.FETCH_DAILY_TWEET:
         return {...state, fetching: true}

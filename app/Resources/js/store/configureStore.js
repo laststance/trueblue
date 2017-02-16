@@ -1,15 +1,15 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
-import reducer from '../reducers/index'
-import { initialStates } from '../reducers'
+import reducer from '../reducers/home'
+import { initialStates } from '../reducers/home'
 
 export default function configureStore(props) {
 
     const { timelineDateList, timelineJson, appUsername } = props
-    const { indexState } = initialStates
+    const { homeState } = initialStates
     
     const initialState = {
-        indexState: { ...indexState, timelineDateList, timelineJson, appUsername }
+        homeState: { ...homeState, timelineDateList, timelineJson, appUsername }
     }
     
     let composeEnhancers = typeof(window) !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

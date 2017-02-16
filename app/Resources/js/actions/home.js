@@ -1,4 +1,4 @@
-import Constants from '../constants/index'
+import Constants from '../constants/home'
 
 const Actions = {
     fetchDailyTweet: (date) => {

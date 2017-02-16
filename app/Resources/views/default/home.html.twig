@@ -5,10 +5,10 @@
 {% block body %}
 <main id="container" class="container">
   <!-- React <TimelineComponent /> render position -->
-  {{ redux_store('indexStore', props) }}
+  {{ redux_store('homeStore', props) }}
   {{ react_component('App') }}
 </main>
 {% endblock %}
 {% block javascript %}
-<script src="{{ asset('/assets/build/js/index.js', 'webpack') }}"></script>
+<script src="{{ asset('/assets/build/js/home.js', 'webpack') }}"></script>
 {% endblock %}

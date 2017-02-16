@@ -5,8 +5,8 @@ const nodeEnv = devBuild ? 'development' : 'production'
 
 var config = {
     entry:   {
-        'index': ['whatwg-fetch', './app/Resources/js/index.js'],
-        'login': './app/Resources/js/login.js'
+        'home': ['whatwg-fetch', './app/Resources/js/home.js'],
+        'index': './app/Resources/js/index.js'
 
     },
     output:  {

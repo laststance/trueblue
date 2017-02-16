@@ -3,10 +3,10 @@ import { connect } from 'react-redux'
 import Timeline from '../components/timeline'
 import Header from '../components/header'
 import Footer from '../components/footer'
-import Actions from '../actions/index'
+import Actions from '../actions/home'
 
 import '../../sass/common/common.scss'
-import '../../sass/page/index.scss'
+import '../../sass/page/home.scss'
 
 class App extends React.Component {
     render() {
@@ -26,9 +26,9 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => (
     {
-        timelineDateList: state.indexState.timelineDateList,
-        timelineJson: state.indexState.timelineJson,
-        appUsername: state.indexState.appUsername,
+        timelineDateList: state.homeState.timelineDateList,
+        timelineJson: state.homeState.timelineJson,
+        appUsername: state.homeState.appUsername,
     }
 )
 
