@@ -11,7 +11,7 @@ export default class Header extends React.Component {
             <Navbar className="index-header">
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <a href="/">DailyTweet</a>
+                        <a href="/">DailyTweet(β)</a>
                     </Navbar.Brand>
                     <Navbar.Text>
                         @{this.props.appUsername} {getKaomoji()}
