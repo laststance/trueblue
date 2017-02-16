@@ -14,24 +14,39 @@ img {
 	left: 0;
 	position: fixed;
 	background-color: $background-color;
-	height: 75px;
+	height: 55px;
 	width: 100%;
 	z-index: 1;
 	.container {
 		max-width: 100%;
-	}
-	.navbar-brand {
-		font-family: Shadows Into Light Two;
-		text-wrap: none;
-		font-size: 35px;
-		line-height: unset;
-	}
-	.navbar-header {
-		width: 100%;
-	}
-	.nav.navbar-nav {
-		margin-top: 11.5px;
-		float: right;
+
+		.navbar-header {
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			flex-wrap: nowrap;
+
+			// enable justify-content: space-between
+			&:before {
+				content: none;
+			}
+			&:after {
+				content: none;
+			}
+
+			.navbar-brand {
+				font-family: Shadows Into Light Two;
+				text-wrap: none;
+				font-size: 20px;
+			}
+			.nav.navbar-nav {
+				.menu-btn {
+					padding-top: 10px;
+					padding-bottom: 10px;
+				}
+			}
+		}
 	}
 }
 
@@ -66,15 +81,19 @@ main {
 // smart phone
 @media (max-width: 34em) {
 	.login-header {
-		.navbar-brand {
-			font-size: 30px;
-		}
-		li.nav-item.pull-right {
-			padding-top: 30px;
-			padding-bottom: 0;
-			float: none !important;
-			margin-bottom: 10px;
-			text-align: center;
+		.container {
+			.navbar-header {
+				.navbar-brand {
+					font-size: 15px;
+				}
+
+				.nav.navbar-nav {
+					.menu-btn {
+						padding-top: 7px;
+						padding-bottom: 7px;
+					}
+				}
+			}
 		}
 	}
 	main {

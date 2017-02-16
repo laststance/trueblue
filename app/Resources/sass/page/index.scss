@@ -7,27 +7,45 @@ body {
 
 main {
 	height: 100%;
-	.index-header { // TODO: dup01
+	.index-header { // header root selector TODO: dup01
+		font-family: Shadows Into Light Two;
 		left: 0;
 		position: fixed;
 		background-color: $background-color;
 		width: 100%;
 		z-index: 1;
+
 		.container {
 			max-width: 100%;
-		}
-		.navbar-brand {
-			font-family: Shadows Into Light Two;
-			text-wrap: none;
-			font-size: 35px;
-			line-height: unset;
-		}
-		.navbar-header{
-			width: 100%;
-		}
-		.nav.navbar-nav {
-			margin: 0;
-			float: right;
+			padding: 0;
+
+			.navbar-header{ // header item wrapper
+				width: 100%;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				flex-wrap: nowrap;
+				margin: 0;
+
+				// enable justify-content: space-between
+				&:before {
+					content: none;
+				}
+				&:after {
+					content: none;
+				}
+
+				.navbar-brand { // left title link
+					text-wrap: none;
+					font-size: 20px;
+				}
+				.navbar-text { // center text
+					font-size: 24px;
+				}
+				.nav.navbar-nav { // button
+					margin: 0;
+				}
+			}
 		}
 	}
 
@@ -123,7 +141,21 @@ main {
 			height: 100%;
 		}
 
+		.index-header{
+			.container {
+				.navbar-header {
+					.navbar-brand {
+						font-size: 15px;
+					}
+					.navbar-text {
+						font-size: 16px;
+					}
+				}
+			}
+		}
+
 		#timeline {
+			padding-top: 80px;
 			.profile-image {
 				width: 32px;
 			}

@@ -5,6 +5,7 @@ import { Modal } from 'react-bootstrap'
 import { ListGroup } from 'react-bootstrap'
 import Flatpickr from 'react-flatpickr'
 import { getYmdStr } from '../utils/util'
+import { isSP } from '../utils/util'
 
 import '../../sass/component/material_green.scss'
 import  '../../sass/component/modal.scss'
@@ -28,10 +29,6 @@ export default class Menu extends React.Component {
         this.setState({showModal: true})
     }
     
-    toppage() {
-        location.href = '/'
-    }
-    
     logout() {
         location.href = '/logout'
     }
@@ -43,13 +40,14 @@ export default class Menu extends React.Component {
     }
 
     render() {
+        const bsSize = isSP() ? 'small' : 'large'
         return (
             <div id="menu">
-                <Button className="menu-btn" bsSize="large" onClick={this.open}>&#9776;</Button>
+                <Button className="menu-btn" bsSize={bsSize} onClick={this.open}>&#9776;</Button>
 
                 <Modal show={this.state.showModal} onHide={this.close}>
                     <Modal.Header closeButton>
-                        <Modal.Title><Button onClick={this.toppage}>Top</Button></Modal.Title>
+                        <Modal.Title>Menu</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <ListGroup>

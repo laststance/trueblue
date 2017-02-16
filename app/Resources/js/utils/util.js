@@ -9,3 +9,11 @@ export function getKaomoji() {
     const rand = Math.round(Math.random() * (kaomojiList.length - 1))
     return kaomojiList[rand]
 }
+
+export function isSP() {
+    if (window.parent.screen.width <= 544) {
+        return true
+    } else {
+        return false
+    }
+}

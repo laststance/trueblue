@@ -11,10 +11,11 @@ export default class Header extends React.Component {
             <Navbar className="index-header">
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <div>Hello @{this.props.appUsername} <span
-                            className="pc-only">{getKaomoji()}</span>
-                        </div>
+                        <a href="/">DailyTweet</a>
                     </Navbar.Brand>
+                    <Navbar.Text>
+                        @{this.props.appUsername} {getKaomoji()}
+                    </Navbar.Text>
                     <Nav>
                         <NavItem>
                             <div>
