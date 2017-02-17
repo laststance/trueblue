@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Service;
+namespace AppBundle\Security;
 
 use AppBundle\Entity\User;
 use Doctrine\Common\Persistence\ManagerRegistry;

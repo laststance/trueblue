@@ -16,7 +16,7 @@ services:
         arguments: ["@doctrine", "@twitter_api_client"]
 
     oauth_entity_user_provider:
-        class: AppBundle\Service\OAuthEntityUserProvider
+        class: AppBundle\Security\OAuthEntityUserProvider
         arguments: ["@doctrine", AppBundle\Entity\User, {twitter: twitterId}]
 
     app.service.common_service:
