@@ -55,7 +55,7 @@ export default class Timeline extends React.Component {
                                                 }
                                                 if (images.length > 0) {
                                                     const imgtags = images.map((i) => {
-                                                        return <img src={i.src} style={{width: '100%'}}/>
+                                                        return <img src={i.src} style={{width: '100%'}} key={i.id} />
                                                     })
                                                     
                                                     return <section style={{
