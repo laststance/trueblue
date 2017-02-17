@@ -50,6 +50,7 @@ main {
 	}
 
 	#timeline {
+		display: block;
 		padding-top: 120px;
 		padding-bottom: 50px;
 
@@ -70,6 +71,23 @@ main {
 			font-weight: bold;
 			padding: 30px;
 		}
+	}
+
+	.timeline-enter {
+		opacity: 0.01;
+		transition: opacity 0.2s ease-in;
+		-webkit-transition: opacity 0.2s ease-in;
+	}
+	.timeline-enter.timeline-enter-active {
+		opacity: 1;
+	}
+	.timeline-leave {
+		opacity: 1;
+		transition: opacity 0.1s ease-in;
+		-webkit-transition: opacity 0.1s ease-in;
+	}
+	.timeline-leave.timeline-leave-active {
+		opacity: 0.01;
 	}
 
 	.timeline-item {

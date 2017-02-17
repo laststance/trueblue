@@ -1,5 +1,6 @@
 import autobind from 'autobind-decorator'
 import React from 'react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import Lightbox from 'react-images'
 
 @autobind
@@ -83,9 +84,9 @@ export default class Timeline extends React.Component {
         }
 
         return (
-            <article id="timeline" className="row">
+            <ReactCSSTransitionGroup transitionName="timeline" id="timeline" className="row">
                 {view}
-            </article>
+            </ReactCSSTransitionGroup>
         )
     }
 
