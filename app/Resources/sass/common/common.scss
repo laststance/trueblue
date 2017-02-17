@@ -17,6 +17,10 @@ a {
 	color: inherit;
 	background-color: inherit;
 	border: solid 1px #ABA3B8;
+
+	&:focus {
+		background-color: inherit;
+	}
 }
 
 .flex-center {
