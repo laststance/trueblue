@@ -5,11 +5,13 @@ import Header from '../app/Resources/js/components/header.jsx'
 
 describe('testHeader', () => {
     const getComponent = () => {
-        return ReactTestUtils.renderIntoDocument(<Header getDailyJson={[]} timelineDateList={[]} appUsername={'hoge'}/>)
+        const renderer = ReactTestUtils.createRenderer()
+        renderer.render(<Header />)
+        return renderer.getRenderOutput()
     }
 
-    it('username', () => {
+    it('isRender', () => {
         let component = getComponent()
-        assert(component.props.appUsername == 'hoge')
+        assert( typeof component == 'object')
     })
 })
