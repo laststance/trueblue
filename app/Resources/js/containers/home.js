@@ -15,6 +15,7 @@ class App extends React.Component {
                     timelineDateList={this.props.timelineDateList}
                     appUsername={this.props.appUsername}
                     fetchDailyTweet={this.props.fetchDailyTweet}
+                    isLogin={this.props.isLogin}
                 />
                 <Timeline timelineJson={this.props.timelineJson}/>
             </div>
@@ -27,6 +28,7 @@ const mapStateToProps = (state) => (
         timelineDateList: state.homeState.timelineDateList,
         timelineJson: state.homeState.timelineJson,
         appUsername: state.homeState.appUsername,
+        isLogin: state.homeState.isLogin
     }
 )
 

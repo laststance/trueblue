@@ -5,11 +5,22 @@ import { initialStates } from '../reducers/home'
 
 export default function configureStore(props) {
 
-    const { timelineDateList, timelineJson, appUsername } = props
+    const {
+        timelineDateList,
+        timelineJson,
+        appUsername,
+        isLogin
+    } = props
     const { homeState } = initialStates
     
     const initialState = {
-        homeState: { ...homeState, timelineDateList, timelineJson, appUsername }
+        homeState: {
+            ...homeState,
+            timelineDateList,
+            timelineJson,
+            appUsername,
+            isLogin
+        }
     }
     
     let composeEnhancers = typeof(window) !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

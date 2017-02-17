@@ -22,6 +22,7 @@ export default class Header extends React.Component {
                                 <Menu
                                     timelineDateList={this.props.timelineDateList}
                                     fetchDailyTweet={this.props.fetchDailyTweet}
+                                    isLogin={this.props.isLogin}
                                 />
                             </div>
                         </NavItem>

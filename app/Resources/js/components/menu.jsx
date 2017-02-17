@@ -55,7 +55,7 @@ export default class Menu extends React.Component {
                         </ListGroup>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button onClick={this.logout}>Logout</Button>
+                        {this.props.isLogin ? <Button onClick={this.logout}>Logout</Button> : ''}
                     </Modal.Footer>
                 </Modal>
             </div>
