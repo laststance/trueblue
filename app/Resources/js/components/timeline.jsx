@@ -2,6 +2,7 @@ import autobind from 'autobind-decorator'
 import React from 'react'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import Lightbox from 'react-images'
+import { isSP } from '../utils/util'
 
 @autobind
 export default class Timeline extends React.Component {
@@ -58,10 +59,10 @@ export default class Timeline extends React.Component {
                                                     const imgtags = images.map((i) => {
                                                         return <img src={i.src} style={{width: '100%'}} key={i.id} />
                                                     })
-                                                    
+                                                    const h = isSP() ? '300px' : '400px'
                                                     return <section style={{
                                                         overflow: 'hidden',
-                                                        height:   '400px',
+                                                        height:   h,
                                                         position: 'relative',
                                                         margin: '10px 0'
                                                     }}>
