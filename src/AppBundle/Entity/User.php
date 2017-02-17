@@ -68,6 +68,13 @@ class User extends OAuthUser
     private $isActive;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="is_initial_tweet_import", type="boolean")
+     */
+    private $isInitialTweetImport;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="create_at", type="datetime")
@@ -212,6 +219,24 @@ class User extends OAuthUser
     public function getIsActive()
     {
         return $this->isActive;
+    }
+
+    /**
+     * @param bool $isInitialTweetImport
+     */
+    public function setIsInitialTweetImport(bool $isInitialTweetImport)
+    {
+        $this->isInitialTweetImport = $isInitialTweetImport;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isIsInitialTweetImport(): bool
+    {
+        return $this->isInitialTweetImport;
     }
 
     /**
