@@ -89,6 +89,7 @@ class CronCommandTest extends MyKernelTestCase
         Phake::when($mockApi)->findIdRangeByDate(Phake::anyParameters())->thenReturn($this->mockApiResponse);
         $this->container->set('twitter_api', $mockApi);
 
+        // only exec for single fixture user(malloc007)
         $mockRepository = Phake::mock(EntityRepository::class);
         $fixtureUserArray = $this->findFixtureUserArray();
         Phake::when($mockRepository)->findAll()->thenReturn($fixtureUserArray);
@@ -117,7 +118,10 @@ class CronCommandTest extends MyKernelTestCase
         return $this->entityManager->getRepository(
             'AppBundle:PastTimeline'
         )->findOneBy(
-            ['user' => $user]
+            [
+                'user' => $user,
+                'date' => new \DateTime('2020-12-12'),
+            ]
         );
     }
 

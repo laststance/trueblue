@@ -34,7 +34,7 @@ class DefaultController extends Controller
                     [
                         'timelineDateList' => $this->fetchPastTimelineDate($user),
                         'timelineJson' => $this->fetchTodayTimeline($user),
-                        'appUsername' => $user->getUsername(),
+                        'username' => $user->getUsername(),
                         'isLogin' => $this->isGranted('ROLE_OAUTH_USER'),
                     ],
                     'json'

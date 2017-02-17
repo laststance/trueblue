@@ -36,7 +36,7 @@ export default class Menu extends React.Component {
     _OnChange(date) {
         this.setState({selectedDate: date[0]})
         this.close()
-        this.props.fetchDailyTweet(getYmdStr(date[0]))
+        this.props.fetchDailyTweet(this.props.username, getYmdStr(date[0]))
     }
 
     render() {

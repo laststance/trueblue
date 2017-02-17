@@ -14,7 +14,7 @@ export default class Header extends React.Component {
                         <a href="/">DailyTweet(β)</a>
                     </Navbar.Brand>
                     <Navbar.Text>
-                        @{this.props.appUsername} {getKaomoji()}
+                        @{this.props.username} {getKaomoji()}
                     </Navbar.Text>
                     <Nav>
                         <NavItem>
@@ -23,6 +23,7 @@ export default class Header extends React.Component {
                                     timelineDateList={this.props.timelineDateList}
                                     fetchDailyTweet={this.props.fetchDailyTweet}
                                     isLogin={this.props.isLogin}
+                                    username={this.props.username}
                                 />
                             </div>
                         </NavItem>

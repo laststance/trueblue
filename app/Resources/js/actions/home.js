@@ -1,10 +1,10 @@
 import Constants from '../constants/home'
 
 const Actions = {
-    fetchDailyTweet: (date) => {
+    fetchDailyTweet: (username, date) => {
         return dispatch => {
             dispatch({ type: Constants.FETCH_DAILY_TWEET })
-            fetch('/ajax/daily/' + date, {
+            fetch('/ajax/' + username + '/' + date, {
                 credentials: 'include'
             }).then((response) => {
                 return response.json()

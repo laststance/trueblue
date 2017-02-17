@@ -13,7 +13,7 @@ class App extends React.Component {
             <div>
                 <Header
                     timelineDateList={this.props.timelineDateList}
-                    appUsername={this.props.appUsername}
+                    username={this.props.username}
                     fetchDailyTweet={this.props.fetchDailyTweet}
                     isLogin={this.props.isLogin}
                 />
@@ -26,16 +26,16 @@ class App extends React.Component {
 const mapStateToProps = (state) => (
     {
         timelineDateList: state.homeState.timelineDateList,
-        timelineJson: state.homeState.timelineJson,
-        appUsername: state.homeState.appUsername,
-        isLogin: state.homeState.isLogin
+        timelineJson:     state.homeState.timelineJson,
+        username:         state.homeState.username,
+        isLogin:          state.homeState.isLogin
     }
 )
 
 function mapDispatchToProps(dispatch) {
     return {
-        fetchDailyTweet: function (date) {
-            dispatch(Actions.fetchDailyTweet(date))
+        fetchDailyTweet: function (username, date) {
+            dispatch(Actions.fetchDailyTweet(username, date))
         }
     }
 }

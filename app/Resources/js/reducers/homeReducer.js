@@ -1,10 +1,10 @@
 import Constants from '../constants/home'
 
 export const initialState = {
-    fetching: false,
+    fetching:         false,
     timelineDateList: [],
-    timelineJson: {},
-    appUsername: ''
+    timelineJson:     {},
+    username:         ''
 }
 
 export default function homeReducer(state = initialState, action) {

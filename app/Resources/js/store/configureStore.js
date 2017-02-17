@@ -8,7 +8,7 @@ export default function configureStore(props) {
     const {
         timelineDateList,
         timelineJson,
-        appUsername,
+        username,
         isLogin
     } = props
     const { homeState } = initialStates
@@ -18,7 +18,7 @@ export default function configureStore(props) {
             ...homeState,
             timelineDateList,
             timelineJson,
-            appUsername,
+            username,
             isLogin
         }
     }
