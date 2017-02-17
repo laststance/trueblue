@@ -75,19 +75,19 @@ main {
 
 	.timeline-enter {
 		opacity: 0.01;
-		transition: opacity 0.2s ease-in;
-		-webkit-transition: opacity 0.2s ease-in;
+		transition: opacity 0.3s ease-in;
+		-webkit-transition: opacity 0.3s ease-in;
 	}
 	.timeline-enter.timeline-enter-active {
 		opacity: 1;
 	}
 	.timeline-leave {
 		opacity: 1;
-		transition: opacity 0.1s ease-in;
-		-webkit-transition: opacity 0.1s ease-in;
+		transition: opacity 0s ease-in;
+		-webkit-transition: opacity 0s ease-in;
 	}
 	.timeline-leave.timeline-leave-active {
-		opacity: 0.01;
+		opacity: 0;
 	}
 
 	.timeline-item {

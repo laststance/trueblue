@@ -84,7 +84,13 @@ export default class Timeline extends React.Component {
         }
 
         return (
-            <ReactCSSTransitionGroup transitionName="timeline" id="timeline" className="row">
+            <ReactCSSTransitionGroup
+                transitionName="timeline"
+                transitionEnterTimeout={500}
+                transitionLeaveTimeout={500}
+                id="timeline"
+                className="row"
+            >
                 {view}
             </ReactCSSTransitionGroup>
         )
