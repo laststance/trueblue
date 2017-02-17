@@ -5,6 +5,7 @@ namespace AppBundle\Tests\Controller;
 use AppBundle\Service\TwitterAPIClient;
 use AppBundle\Tests\Controller\Traits\FixtureTrait;
 use Phake;
+use Symfony\Component\BrowserKit\Client;
 
 class DefaultControllerTest extends MyControllerTestCase
 {
@@ -12,6 +13,7 @@ class DefaultControllerTest extends MyControllerTestCase
 
     public static $fixtures = [__DIR__.'/../DataFixtures/Alice/fixture.yml'];
 
+    /** @var Client */
     protected $client;
 
     public function testIndex()
@@ -42,27 +44,40 @@ class DefaultControllerTest extends MyControllerTestCase
 
     public function testHome()
     {
-        $this->client = self::createClient();
-
         // not login
-        $this->client->request('GET', '/home');
-        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $this->setUpTestHome();
+        $this->client->request('GET', '/malloc007');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
         // login
-        $mock = Phake::mock(TwitterAPIClient::class);
-        Phake::when($mock)->getStatusesUserTimeline(Phake::anyParameters())->thenReturn($this->getFixture());
-        $this->client = self::createClient();
-        $this->client->getContainer()->get('twitter_api')->setApi($mock);
-
+        $this->setUpTestHome();
         $this->logIn();
-        $this->client->request('GET', '/home');
+        $this->client->request('GET', '/malloc007');
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        // undefined user
+        $this->setUpTestHome();
+        $this->client->request('GET', '/foo');
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $this->client->followRedirect();
+        $this->assertEquals('indexpage', $this->client->getRequest()->get('_route'));
     }
 
-    public function getFixture()
+    public function getFixture(): array
     {
         require __DIR__.'/../DataFixtures/statusesUserTimelineFixture.php';
 
         return $statusesUserTimelineFixture;
+    }
+
+    /**
+     * Prevents 500 errors by connecting to the real API.
+     */
+    protected function setUpTestHome()
+    {
+        $mock = Phake::mock(TwitterAPIClient::class);
+        Phake::when($mock)->getStatusesUserTimeline(Phake::anyParameters())->thenReturn($this->getFixture());
+        $this->client = self::createClient();
+        $this->client->getContainer()->get('twitter_api')->setApi($mock);
     }
 }

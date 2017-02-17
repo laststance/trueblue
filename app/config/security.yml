@@ -18,7 +18,6 @@ security:
                 failure_path: /
                 oauth_user_provider:
                     service: oauth_entity_user_provider
-                default_target_path: /home
             logout:
                 path: /logout
                 target: /

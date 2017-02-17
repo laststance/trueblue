@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\User;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -16,18 +18,23 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/home", name="home")
+     * @Route("/{username}", name="home")
+     * @ParamConverter("user", options={"mapping": {"username": "username"}})
      */
-    public function homeAction()
+    public function homeAction(User $user = null)
     {
+        if (is_null($user)) {
+            return $this->redirectToRoute('indexpage');
+        }
+
         return $this->render(
             ':default:home.html.twig',
             [
                 'props' => $this->get('jms_serializer')->serialize(
                     [
-                        'timelineDateList' => $this->fetchPastTimelineDate(),
-                        'timelineJson' => $this->fetchTodayTimeline(),
-                        'appUsername' => $this->getUser()->getUsername(),
+                        'timelineDateList' => $this->fetchPastTimelineDate($user),
+                        'timelineJson' => $this->fetchTodayTimeline($user),
+                        'appUsername' => $user->getUsername(),
                     ],
                     'json'
                 ),
@@ -35,13 +42,10 @@ class DefaultController extends Controller
         );
     }
 
-    /**
-     * @return array
-     */
-    private function fetchTodayTimeline(): array
+    private function fetchTodayTimeline(User $user): array
     {
         $twitterApi = $this->container->get('twitter_api');
-        $twitterApi->setUser($this->getUser());
+        $twitterApi->setUser($user);
 
         $timeline = $twitterApi->getTodayTimeline();
         if (!isset($timeline['error'])) {
@@ -51,13 +55,10 @@ class DefaultController extends Controller
         return $timeline;
     }
 
-    /**
-     * @return array
-     */
-    private function fetchPastTimelineDate(): array
+    private function fetchPastTimelineDate(User $user): array
     {
         $pastTimelines = $this->getDoctrine()->getRepository('AppBundle:PastTimeline')->findByUser(
-            $this->getUser(),
+            $user,
             ['date' => 'DESC']
         );
         $timelineDateList = array_map(

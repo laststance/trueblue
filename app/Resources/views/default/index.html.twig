@@ -10,7 +10,7 @@
         <ul class="nav navbar-nav">
           <li>
             {% if is_granted('ROLE_OAUTH_USER') %}
-              <a href="{{ path('home') }}" class="btn menu-btn">Home</a>
+              <a href="{{ path('home', {'username': app.user.username}) }}" class="btn menu-btn">Home</a>
             {% else %}
               <a href="{{ path('hwi_oauth_service_redirect', { 'service' : 'twitter' }) }}" class="btn menu-btn">Login with Twitter</a>
             {% endif %}
