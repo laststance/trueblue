@@ -45,18 +45,18 @@ class DefaultControllerTest extends MyControllerTestCase
     public function testHome()
     {
         // not login
-        $this->setUpTestHome();
+        $this->setTwitterAPIClientMock();
         $this->client->request('GET', '/malloc007');
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
         // login
-        $this->setUpTestHome();
+        $this->setTwitterAPIClientMock();
         $this->logIn();
         $this->client->request('GET', '/malloc007');
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
         // undefined user
-        $this->setUpTestHome();
+        $this->setTwitterAPIClientMock();
         $this->client->request('GET', '/foo');
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
         $this->client->followRedirect();
@@ -68,16 +68,5 @@ class DefaultControllerTest extends MyControllerTestCase
         require __DIR__.'/../DataFixtures/statusesUserTimelineFixture.php';
 
         return $statusesUserTimelineFixture;
-    }
-
-    /**
-     * Prevents 500 errors by connecting to the real API.
-     */
-    protected function setUpTestHome()
-    {
-        $mock = Phake::mock(TwitterAPIClient::class);
-        Phake::when($mock)->getStatusesUserTimeline(Phake::anyParameters())->thenReturn($this->getFixture());
-        $this->client = self::createClient();
-        $this->client->getContainer()->get('twitter_api')->setApi($mock);
     }
 }

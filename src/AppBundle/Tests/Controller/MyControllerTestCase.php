@@ -2,9 +2,11 @@
 
 namespace AppBundle\Tests\Controller;
 
+use AppBundle\Service\TwitterAPIClient;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Phake;
 
 class MyControllerTestCase extends WebTestCase
 {
@@ -18,5 +20,16 @@ class MyControllerTestCase extends WebTestCase
         $session->save();
         $cookie = new Cookie($session->getName(), $session->getId());
         $this->client->getCookieJar()->set($cookie);
+    }
+
+    /**
+     * Prevents 500 errors by connecting to the real API.
+     */
+    protected function setTwitterAPIClientMock()
+    {
+        $mock = Phake::mock(TwitterAPIClient::class);
+        Phake::when($mock)->getStatusesUserTimeline(Phake::anyParameters())->thenReturn($this->getFixture());
+        $this->client = self::createClient();
+        $this->client->getContainer()->get('twitter_api')->setApi($mock);
     }
 }
