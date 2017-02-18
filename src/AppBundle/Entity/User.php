@@ -234,7 +234,7 @@ class User extends OAuthUser
     /**
      * @return bool
      */
-    public function isIsInitialTweetImport(): bool
+    public function getIsInitialTweetImport(): bool
     {
         return $this->isInitialTweetImport;
     }

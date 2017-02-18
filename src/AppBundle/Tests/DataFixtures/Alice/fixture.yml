@@ -5,6 +5,7 @@ AppBundle\Entity\User:
         todaySinceId: 1
         sinceIdAt: 1
         isActive: true
+        isInitialTweetImport: false
         createAt: <date()>
         updateAt: <date()>
 

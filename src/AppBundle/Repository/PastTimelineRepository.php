@@ -2,6 +2,8 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\PastTimeline;
+use AppBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -12,4 +14,17 @@ use Doctrine\ORM\EntityRepository;
  */
 class PastTimelineRepository extends EntityRepository
 {
+    public function insert(User $user, string $json, \DateTime $date)
+    {
+        $pastTimeLine = new PastTimeline();
+        $pastTimeLine->setUser($user);
+        $pastTimeLine->setTimelineJson($json);
+        $pastTimeLine->setDate($date);
+        $now = new \DateTime();
+        $pastTimeLine->setCreateAt($now);
+        $pastTimeLine->setUpdateAt($now);
+
+        $this->_em->persist($pastTimeLine);
+        $this->_em->flush();
+    }
 }
