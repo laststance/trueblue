@@ -32,4 +32,11 @@ class MyControllerTestCase extends WebTestCase
         $this->client = self::createClient();
         $this->client->getContainer()->get('twitter_api')->setApi($mock);
     }
+
+    protected function getFixture(): array
+    {
+        require __DIR__.'/../DataFixtures/statusesUserTimelineFixture.php';
+
+        return $statusesUserTimelineFixture;
+    }
 }

@@ -62,11 +62,4 @@ class DefaultControllerTest extends MyControllerTestCase
         $this->client->followRedirect();
         $this->assertEquals('indexpage', $this->client->getRequest()->get('_route'));
     }
-
-    public function getFixture(): array
-    {
-        require __DIR__.'/../DataFixtures/statusesUserTimelineFixture.php';
-
-        return $statusesUserTimelineFixture;
-    }
 }
