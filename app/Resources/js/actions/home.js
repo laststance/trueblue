@@ -15,6 +15,19 @@ const Actions = {
                 })
             })
         }
+    },
+    import: () => {
+        return dispatch => {
+            fetch('/ajax/initial/import', {
+                credentials: 'include'
+            }).then((response) => {
+                return response.json()
+            }).then((data) => {
+                dispatch({
+                    type: Constants.DONE_IMPORT
+                })
+            })
+        }
     }
 }
 

@@ -36,6 +36,7 @@ class DefaultController extends Controller
                         'timelineJson' => $this->fetchTodayTimeline($user),
                         'username' => $user->getUsername(),
                         'isLogin' => $this->isGranted('ROLE_OAUTH_USER'),
+                        'isShowImportModal' => $this->isShowImportModal(),
                     ],
                     'json'
                 ),
@@ -72,5 +73,23 @@ class DefaultController extends Controller
         array_unshift($timelineDateList, (new \DateTime())->format('Y-m-d'));
 
         return $timelineDateList;
+    }
+
+    private function isShowImportModal(): bool
+    {
+        // not login
+        if (!$this->isGranted('ROLE_OAUTH_USER')) {
+            return false;
+        }
+
+        $repository = $this->get('doctrine.orm.default_entity_manager')->getRepository('AppBundle:User');
+        $user = $repository->find($this->getUser()->getId());
+
+        // already import
+        if ($user->getIsInitialTweetImport()) {
+            return false;
+        }
+
+        return true;
     }
 }

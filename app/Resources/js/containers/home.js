@@ -1,5 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import ImportModal from '../components/import/importModal'
+import ImportButton from '../components/import/importButton'
 import Timeline from '../components/timeline'
 import Header from '../components/header'
 import Actions from '../actions/home'
@@ -11,6 +13,11 @@ class App extends React.Component {
     render() {
         return (
             <div>
+                {/*<ImportButton import={this.props.import}/>*/}
+                <ImportModal
+                    isShowImportModal={this.props.isShowImportModal}
+                    import={this.props.import}
+                />
                 <Header
                     timelineDateList={this.props.timelineDateList}
                     username={this.props.username}
@@ -25,10 +32,11 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => (
     {
-        timelineDateList: state.homeState.timelineDateList,
-        timelineJson:     state.homeState.timelineJson,
-        username:         state.homeState.username,
-        isLogin:          state.homeState.isLogin
+        timelineDateList:  state.homeState.timelineDateList,
+        timelineJson:      state.homeState.timelineJson,
+        username:          state.homeState.username,
+        isLogin:           state.homeState.isLogin,
+        isShowImportModal: state.homeState.isShowImportModal
     }
 )
 
@@ -36,6 +44,9 @@ function mapDispatchToProps(dispatch) {
     return {
         fetchDailyTweet: function (username, date) {
             dispatch(Actions.fetchDailyTweet(username, date))
+        },
+        import:          function () {
+            dispatch(Actions.import())
         }
     }
 }

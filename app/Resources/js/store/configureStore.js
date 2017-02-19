@@ -9,7 +9,8 @@ export default function configureStore(props) {
         timelineDateList,
         timelineJson,
         username,
-        isLogin
+        isLogin,
+        isShowImportModal
     } = props
     const { homeState } = initialStates
     
@@ -19,7 +20,8 @@ export default function configureStore(props) {
             timelineDateList,
             timelineJson,
             username,
-            isLogin
+            isLogin,
+            isShowImportModal
         }
     }
     
