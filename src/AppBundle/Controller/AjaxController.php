@@ -2,10 +2,12 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\PastTimeline;
 use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -49,5 +51,59 @@ class AjaxController extends Controller
         $response->headers->set('Content-Type', 'application/json');
 
         return $response;
+    }
+
+    /**
+     * @Security("has_role('ROLE_OAUTH_USER')")
+     * @Route("/initial/import", name="initial_import")
+     */
+    public function initialImportAction()
+    {
+        $complateMessage = 'complate';
+        $entityManager = $this->get('doctrine.orm.default_entity_manager');
+        $user = $entityManager->getRepository('AppBundle:User')->find($this->getUser()->getId());
+        $this->get('twitter_api')->setUser($user);
+
+        if ($user->getIsInitialTweetImport()) {
+            return new JsonResponse('already imported');
+        }
+
+        try {
+            $dates = array_map(function ($d) {
+                return new \DateTime($d.' days ago');
+            }, range(1, 14));
+            foreach ($dates as $d) {
+                if ($entityManager->getRepository('AppBundle:PastTimeline')->findOneBy(['date' => $d]) instanceof PastTimeline) {
+                    continue;
+                }
+
+                $json = $this->get('twitter_api')->findIdRangeByDate($d);
+
+                if (isset($json['error'])) {
+                    if ($json['error'] == 'timeline get count 0.') {
+                        return new JsonResponse($complateMessage);
+                    }
+
+                    if ($json['error'] == 'target days tweet not found.') {
+                        continue;
+                    }
+                }
+
+                $entityManager->getRepository('AppBundle:PastTimeline')
+                    ->insert(
+                        $user,
+                        json_encode($json['timeline_json']),
+                        $d
+                    );
+            }
+        } catch (\Exception $e) {
+            throw new \LogicException('faild import', $e->getCode(), $e);
+        }
+
+        $user->setIsInitialTweetImport(true);
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        return new JsonResponse($complateMessage);
     }
 }
