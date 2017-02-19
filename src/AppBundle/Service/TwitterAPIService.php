@@ -52,7 +52,7 @@ class TwitterAPIService
 
             // since_idのDB登録
             $user = $this->user;
-            $user->setTodaySinceId($result['since_id']);
+            $user->setTodaySinceId((int)$result['since_id']);
             $user->setSinceIdAt(new \DateTime());
             $user->setUpdateAt(new \DateTime());
             $em = $this->doctrine->getEntityManager();

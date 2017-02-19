@@ -26,9 +26,9 @@ class User extends OAuthUser
     private $id;
 
     /**
-     * @var string
+     * @var bigint
      *
-     * @ORM\Column(name="twitter_id", type="string", length=255, unique=true)
+     * @ORM\Column(name="twitter_id", type="bigint", unique=true)
      */
     private $twitterId;
 
@@ -40,9 +40,9 @@ class User extends OAuthUser
     protected $username;
 
     /**
-     * @var string
+     * @var bigint
      *
-     * @ORM\Column(name="today_since_id", type="string", length=255)
+     * @ORM\Column(name="today_since_id", type="bigint", nullable=true)
      */
     private $todaySinceId;
 
@@ -106,7 +106,7 @@ class User extends OAuthUser
     /**
      * Set twitterId.
      *
-     * @param string $twitterId
+     * @param integer $twitterId
      *
      * @return User
      */
@@ -120,7 +120,7 @@ class User extends OAuthUser
     /**
      * Get twitterId.
      *
-     * @return string
+     * @return integer
      */
     public function getTwitterId()
     {
@@ -166,7 +166,7 @@ class User extends OAuthUser
     /**
      * Get todaySinceId.
      *
-     * @return string
+     * @return integer
      */
     public function getTodaySinceId()
     {
@@ -285,5 +285,39 @@ class User extends OAuthUser
     public function getUpdateAt()
     {
         return $this->updateAt;
+    }
+
+    /**
+     * Add pastTimelines.
+     *
+     * @param \AppBundle\Entity\PastTimeline $pastTimelines
+     *
+     * @return User
+     */
+    public function addPastTimeline(\AppBundle\Entity\PastTimeline $pastTimelines)
+    {
+        $this->pastTimelines[] = $pastTimelines;
+
+        return $this;
+    }
+
+    /**
+     * Remove pastTimelines.
+     *
+     * @param \AppBundle\Entity\PastTimeline $pastTimelines
+     */
+    public function removePastTimeline(\AppBundle\Entity\PastTimeline $pastTimelines)
+    {
+        $this->pastTimelines->removeElement($pastTimelines);
+    }
+
+    /**
+     * Get pastTimelines.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPastTimelines()
+    {
+        return $this->pastTimelines;
     }
 }

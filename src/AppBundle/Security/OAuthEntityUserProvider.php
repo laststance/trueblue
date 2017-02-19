@@ -42,7 +42,7 @@ class OAuthEntityUserProvider extends EntityUserProvider implements UserProvider
             $user = new User($rawResponse['screen_name']);
             $user->setTwitterId($rawResponse['id']);
             $user->setUsername($rawResponse['screen_name']);
-            $user->setTodaySinceId('');
+            $user->setTodaySinceId(null);
             $user->setIsActive(true);
             $user->setIsInitialTweetImport(false);
             $user->setCreateAt(new \DateTime());
