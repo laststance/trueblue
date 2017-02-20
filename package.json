@@ -5,7 +5,7 @@
   },
   "private": true,
   "scripts": {
-    "test": "karma start",
+    "test": "karma start --single-run",
     "lint": "eslint -c .eslintrc.json \"app/Resources/js/**/*.js?(x)\""
   },
   "keywords": [
