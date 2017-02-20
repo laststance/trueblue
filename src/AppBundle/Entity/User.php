@@ -106,7 +106,7 @@ class User extends OAuthUser
     /**
      * Set twitterId.
      *
-     * @param integer $twitterId
+     * @param int $twitterId
      *
      * @return User
      */
@@ -120,7 +120,7 @@ class User extends OAuthUser
     /**
      * Get twitterId.
      *
-     * @return integer
+     * @return int
      */
     public function getTwitterId()
     {
@@ -166,7 +166,7 @@ class User extends OAuthUser
     /**
      * Get todaySinceId.
      *
-     * @return integer
+     * @return int
      */
     public function getTodaySinceId()
     {

@@ -2,9 +2,7 @@
 
 namespace AppBundle\Tests\Controller;
 
-use AppBundle\Service\TwitterAPIClient;
 use AppBundle\Tests\Controller\Traits\FixtureTrait;
-use Phake;
 use Symfony\Component\BrowserKit\Client;
 
 class DefaultControllerTest extends MyControllerTestCase
