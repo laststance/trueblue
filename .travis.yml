@@ -23,6 +23,7 @@ before_script:
     - nvm install 6
     - nvm use 6
     - npm install
+    - phpenv config-rm xdebug.ini
     - cp app/config/parameters.yml.dist app/config/parameters.yml
     - composer self-update
     - composer install --no-interaction --prefer-dist
