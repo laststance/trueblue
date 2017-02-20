@@ -31,6 +31,8 @@ before_script:
     - app/console cache:warmup --env=test --quiet
 
 script:
+    - app/console lint:yaml @AppBundle
+    - app/console lint:twig @AppBundle
     - ./vendor/phpunit/phpunit/phpunit -c app/
     - ./bin/php-cs-fixer fix --diff --dry-run ./src/AppBundle/
     - npm run lint
