@@ -69,7 +69,7 @@ class TwitterAPIClient
      *
      * @throws TwitterAPICallException
      *
-     * @return array $decodedJson
+     * @return array $array
      */
     private function get(string $endpoint, array $getQuery, array $options = []): array
     {
@@ -83,9 +83,9 @@ class TwitterAPIClient
             throw new TwitterAPICallException(500, 'twitter api call faild.', $e);
         }
 
-        $decodedJson = json_decode($response, true);
+        $array = json_decode($response, true);
 
-        return $decodedJson;
+        return $array;
     }
 
     /**

@@ -32,3 +32,8 @@ services:
         arguments:  ["@security.http_utils", {}]
         tags:
             - { name: 'monolog.logger', channel: 'security' }
+
+    my_faker_provider:
+        class: AppBundle\Tests\DataFixtures\MyFakerProvider
+        tags:
+            - { name: h4cc_alice_fixtures.provider }

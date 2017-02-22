@@ -14,7 +14,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class PastTimelineRepository extends EntityRepository
 {
-    public function insert(User $user, string $json, \DateTime $date)
+    public function insert(User $user, array $json, \DateTime $date)
     {
         $pastTimeLine = new PastTimeline();
         $pastTimeLine->setUser($user);

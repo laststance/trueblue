@@ -54,13 +54,8 @@ class CronCommand extends ContainerAwareCommand
                 continue;
             }
 
-            $encodedJson = json_encode($res['timeline_json']); // DBにはJSONとして格納する
-
-            $em->getRepository('AppBundle:PastTimeline')->insert(
-                $user,
-                $encodedJson,
-                $targetDate
-            );
+            $repository = $em->getRepository('AppBundle:PastTimeline');
+            $repository->insert($user, $res['timeline_json'], $targetDate);
         }
 
         $output->writeln('Save PastTimeLine Complete.');

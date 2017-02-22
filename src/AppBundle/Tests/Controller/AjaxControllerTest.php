@@ -33,7 +33,7 @@ class AjaxControllerTest extends MyControllerTestCase
         // undefined date
         $this->client->request('GET', '/ajax/malloc007/2200-01-10');
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-        $this->assertEquals('[]', $this->client->getResponse()->getContent());
+        $this->assertEquals('""', $this->client->getResponse()->getContent());
 
         // undefined user
         $this->client->request('GET', '/ajax/nonon/2200-01-10');

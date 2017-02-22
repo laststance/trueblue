@@ -10,7 +10,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @Route("/ajax")
@@ -42,15 +41,14 @@ class AjaxController extends Controller
             ]
         );
 
-        $timelinejson = !is_null($pastTimeline) ? json_decode($pastTimeline->getTimelineJson(), true) : [];
+        if (is_null($pastTimeline)) {
+            return new JsonResponse('');
+        }
 
-        $timelinejson = json_encode($this->get('app.service.common_service')->enableHtmlLink($timelinejson));
+        $commonService = $this->get('app.service.common_service');
+        $res = $commonService->enableHtmlLink($pastTimeline->getTimelineJson());
 
-        // DBに入れる際、既にjson_encode済みなので通常のResponseクラスを使う
-        $response = new Response($timelinejson);
-        $response->headers->set('Content-Type', 'application/json');
-
-        return $response;
+        return new JsonResponse($res);
     }
 
     /**
@@ -89,12 +87,8 @@ class AjaxController extends Controller
                     }
                 }
 
-                $entityManager->getRepository('AppBundle:PastTimeline')
-                    ->insert(
-                        $user,
-                        json_encode($json['timeline_json']),
-                        $d
-                    );
+                $repository = $entityManager->getRepository('AppBundle:PastTimeline');
+                $repository->insert($user, $json['timeline_json'], $d);
             }
         } catch (\Exception $e) {
             throw new \LogicException('faild import', $e->getCode(), $e);
