@@ -73,11 +73,7 @@ class AjaxControllerTest extends MyControllerTestCase
     {
         $this->reload();
         $this->logIn();
-        $em = $this->client->getContainer()->get('doctrine.orm.default_entity_manager');
-        $user = $em->getRepository('AppBundle:User')->findOneByUsername('malloc007');
-        $user->setIsInitialTweetImport(true);
-        $em->persist($user);
-        $em->flush();
+        $this->setInportState(true);
         $this->client->request('GET', '/ajax/initial/import');
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertEquals('"already imported"', $this->client->getResponse()->getContent());
@@ -147,5 +143,14 @@ class AjaxControllerTest extends MyControllerTestCase
     protected function reload()
     {
         $this->client = static::createClient();
+    }
+
+    protected function setInportState(bool $bool)
+    {
+        $em = $this->client->getContainer()->get('doctrine.orm.default_entity_manager');
+        $user = $em->getRepository('AppBundle:User')->findOneByUsername('malloc007');
+        $user->setIsInitialTweetImport($bool);
+        $em->persist($user);
+        $em->flush();
     }
 }
