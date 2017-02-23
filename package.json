@@ -7,7 +7,7 @@
   "scripts": {
     "test": "karma start",
     "lint": "eslint -c .eslintrc.json \"app/Resources/js/**/*.js?(x)\"",
-    "travis-local": "npm run test && npm run lint && app/console lint:yaml app/config && app/console lint:yaml @AppBundle && app/console lint:twig app/Resources && ./vendor/phpunit/phpunit/phpunit -c app/ && ./bin/php-cs-fixer fix --diff ./src/AppBundle/"
+    "travis-local": "npm run test && npm run lint && app/console security:check && app/console lint:yaml app/config && app/console lint:yaml @AppBundle && app/console lint:twig app/Resources && ./vendor/phpunit/phpunit/phpunit -c app/ && ./bin/php-cs-fixer fix --diff ./src/AppBundle/"
   },
   "keywords": [
     "symfony"

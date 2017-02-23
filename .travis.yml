@@ -37,6 +37,7 @@ before_script:
     - app/console cache:warmup --env=test --quiet
 
 script:
+    - app/console security:check
     - app/console lint:yaml @AppBundle
     - app/console lint:twig app/Resources
     - app/console lint:yaml app/config
