@@ -1,5 +1,7 @@
 language: php
 
+sudo: true
+
 php:
   - 7.0
 
@@ -20,6 +22,7 @@ before_install:
     - sh -e /etc/init.d/xvfb start
 
 before_script:
+    - bash .travis.install-mysql-5.7.sh
     - nvm install 6
     - nvm use 6
     - curl -o- -L https://yarnpkg.com/install.sh | bash
