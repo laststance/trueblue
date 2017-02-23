@@ -20,26 +20,31 @@ class AjaxControllerTest extends MyControllerTestCase
         $this->client = static::createClient();
 
         // no login
+        $this->reload();
         $this->client->request('GET', '/ajax/malloc007/2017-01-21');
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertContains('[{"created_at":"Sat Jan 21 11:52:08 +0000 2017",', $this->client->getResponse()->getContent());
 
         // login
+        $this->reload();
         $this->logIn();
         $this->client->request('GET', '/ajax/malloc007/2017-01-21');
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertContains('[{"created_at":"Sat Jan 21 11:52:08 +0000 2017",', $this->client->getResponse()->getContent());
 
         // undefined date
+        $this->reload();
         $this->client->request('GET', '/ajax/malloc007/2200-01-10');
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertEquals('""', $this->client->getResponse()->getContent());
 
         // undefined user
+        $this->reload();
         $this->client->request('GET', '/ajax/nonon/2200-01-10');
         $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
 
         // invalid date format
+        $this->reload();
         $this->client->request('GET', '/ajax/nonon/22000110');
         $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
     }
@@ -66,7 +71,7 @@ class AjaxControllerTest extends MyControllerTestCase
 
     public function testInitialImportAlreadyImport()
     {
-        $this->client = self::createClient();
+        $this->reload();
         $this->logIn();
         $em = $this->client->getContainer()->get('doctrine.orm.default_entity_manager');
         $user = $em->getRepository('AppBundle:User')->findOneByUsername('malloc007');
@@ -137,5 +142,10 @@ class AjaxControllerTest extends MyControllerTestCase
         $con = $this->client->getContainer()->get('doctrine.orm.default_entity_manager')->getConnection();
         $con->exec('SET FOREIGN_KEY_CHECKS = 0');
         $con->exec('TRUNCATE TABLE past_timeline');
+    }
+
+    protected function reload()
+    {
+        $this->client = static::createClient();
     }
 }
