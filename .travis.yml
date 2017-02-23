@@ -38,7 +38,7 @@ before_script:
 
 script:
     - app/console lint:yaml @AppBundle
-    - app/console lint:twig @AppBundle
+    - app/console lint:twig app/Resources
     - ./vendor/phpunit/phpunit/phpunit -c app/
     - ./bin/php-cs-fixer fix --diff --dry-run ./src/AppBundle/
     - npm run lint
