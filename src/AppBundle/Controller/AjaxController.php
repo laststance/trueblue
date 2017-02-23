@@ -46,7 +46,7 @@ class AjaxController extends Controller
         }
 
         $commonService = $this->get('app.service.common_service');
-        $res = $commonService->enableHtmlLink($pastTimeline->getTimelineJson());
+        $res = $commonService->enableHtmlLink($pastTimeline->getTimeline());
 
         return new JsonResponse($res);
     }

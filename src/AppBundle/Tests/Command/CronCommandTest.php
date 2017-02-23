@@ -76,7 +76,7 @@ class CronCommandTest extends MyKernelTestCase
 
         $this->assertEquals($pastTimeLine->getUser()->getId(), $user->getId());
         $this->assertEquals(
-            $pastTimeLine->getTimelineJson(),
+            $pastTimeLine->getTimeline(),
             $this->mockApiResponse['timeline_json']
         );
 

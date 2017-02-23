@@ -18,7 +18,7 @@ class PastTimelineRepository extends EntityRepository
     {
         $pastTimeLine = new PastTimeline();
         $pastTimeLine->setUser($user);
-        $pastTimeLine->setTimelineJson($json);
+        $pastTimeLine->setTimeline($json);
         $pastTimeLine->setDate($date);
         $now = new \DateTime();
         $pastTimeLine->setCreateAt($now);

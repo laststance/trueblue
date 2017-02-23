@@ -13,6 +13,6 @@ AppBundle\Entity\PastTimeline:
     one:
         user: '@malloc007'
         date: <(new \DateTime('2017-01-21'))>
-        timelineJson: <timeline()>
+        timeline: <timeline()>
         createAt: <(new \DateTime())>
         updateAt: <(new \DateTime())>

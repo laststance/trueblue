@@ -41,9 +41,9 @@ class PastTimeline
     /**
      * @var string
      *
-     * @ORM\Column(name="timeline_json", type="json_array")
+     * @ORM\Column(name="timeline", type="json_array")
      */
-    private $timelineJson;
+    private $timeline;
 
     /**
      * @var \DateTime
@@ -120,13 +120,13 @@ class PastTimeline
     /**
      * Set timelineJson.
      *
-     * @param array $timelineJson
+     * @param array $timeline
      *
      * @return PastTimeline
      */
-    public function setTimelineJson(array $timelineJson)
+    public function setTimeline(array $timeline)
     {
-        $this->timelineJson = $timelineJson;
+        $this->timeline = $timeline;
 
         return $this;
     }
@@ -136,9 +136,9 @@ class PastTimeline
      *
      * @return array
      */
-    public function getTimelineJson(): array
+    public function getTimeline(): array
     {
-        return $this->timelineJson;
+        return $this->timeline;
     }
 
     /**
