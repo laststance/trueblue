@@ -42,7 +42,7 @@ script:
     - ./vendor/phpunit/phpunit/phpunit -c app/
     - ./bin/php-cs-fixer fix --diff --dry-run ./src/AppBundle/
     - npm run lint
-    - node_modules/karma/bin/karma start karma.conf.js --single-run
+    - npm run test
 
 notifications:
     slack:

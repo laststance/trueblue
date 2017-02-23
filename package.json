@@ -5,7 +5,7 @@
   },
   "private": true,
   "scripts": {
-    "test": "karma start --single-run",
+    "test": "karma start",
     "lint": "eslint -c .eslintrc.json \"app/Resources/js/**/*.js?(x)\"",
     "travis-local": "npm run test && npm run lint && app/console lint:yaml @AppBundle && app/console lint:twig @AppBundle && ./vendor/phpunit/phpunit/phpunit -c app/ && ./bin/php-cs-fixer fix --diff ./src/AppBundle/"
   },
