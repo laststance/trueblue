@@ -20,6 +20,10 @@ class MyControllerTestCase extends WebTestCase
 
     protected function logIn()
     {
+        if ($this->client == null) {
+            throw new \LogicException('reload() must be execute.');
+        }
+
         $session = $this->client->getContainer()->get('session');
         $user = $this->client->getContainer()->get('doctrine')->getManager()->getRepository('AppBundle:User')->findOneByUsername('malloc007');
         $firewall = 'secured_area';
@@ -35,9 +39,12 @@ class MyControllerTestCase extends WebTestCase
      */
     protected function setTwitterAPIClientMock()
     {
+        if ($this->client == null) {
+            throw new \LogicException('reload() must be execute.');
+        }
+
         $mock = Phake::mock(TwitterAPIClient::class);
         Phake::when($mock)->getStatusesUserTimeline(Phake::anyParameters())->thenReturn($this->getFixture());
-        $this->client = self::createClient();
         $this->client->getContainer()->get('twitter_api')->setApi($mock);
     }
 

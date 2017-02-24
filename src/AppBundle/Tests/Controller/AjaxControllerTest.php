@@ -49,6 +49,7 @@ class AjaxControllerTest extends MyControllerTestCase
 
     public function testInitialImportNotLogin()
     {
+        $this->reload();
         $this->setTwitterAPIClientMock();
         $this->client->request('GET', '/ajax/initial/import');
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
