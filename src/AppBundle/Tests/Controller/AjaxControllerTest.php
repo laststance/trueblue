@@ -81,12 +81,11 @@ class AjaxControllerTest extends MyControllerTestCase
 
     public function testInitialImportFaild()
     {
-        $this->markTestIncomplete();
-//            $mock = $this->prepareFaildResponse();
-//            $this->client->request('GET', '/ajax/initial/import');
-//            Phake::verify($mock, Phake::times(0))->findIdRangeByDate(Phake::anyParameters());
-//            $this->assertEquals(500, $this->client->getResponse()->getStatusCode());
-//            var_dump($this->client->getResponse()->getContent());
+        $mock = $this->prepareFaildResponse();
+        $this->setInportState(false);
+        $this->client->request('GET', '/ajax/initial/import');
+        Phake::verify($mock, Phake::times(1))->findIdRangeByDate(Phake::anyParameters());
+        $this->assertEquals(500, $this->client->getResponse()->getStatusCode());
     }
 
     protected function prepareTrueResponse()
@@ -118,7 +117,7 @@ class AjaxControllerTest extends MyControllerTestCase
     {
         $mock = $this->setFaildResponseMock();
 
-        $this->client = self::createClient();
+        $this->reload();
         $this->logIn();
         $this->client->getContainer()->set('twitter_api', $mock);
 
