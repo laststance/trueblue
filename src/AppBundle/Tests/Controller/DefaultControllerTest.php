@@ -32,6 +32,7 @@ class DefaultControllerTest extends MyControllerTestCase
         $this->assertContains('このサイトについて', $this->client->getResponse()->getContent());
 
         // trans en
+        $this->reload();
         $this->client->request('GET', '/', [], [], ['HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,ja;q=0.6']);
         $this->assertContains('Daily Tweet is archive tweets on every other day.', $this->client->getResponse()->getContent());
         $this->assertContains('about', $this->client->getResponse()->getContent());
