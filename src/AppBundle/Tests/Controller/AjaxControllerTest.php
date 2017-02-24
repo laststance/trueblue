@@ -71,7 +71,7 @@ class AjaxControllerTest extends MyControllerTestCase
         // when user is already initial imported, expect API return "already imported"
         $this->reload();
         $this->logIn();
-        $this->setInportState(true);
+        $this->setImportState(true);
         $this->client->request('GET', '/ajax/initial/import');
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertEquals('"already imported"', $this->client->getResponse()->getContent());
@@ -80,7 +80,7 @@ class AjaxControllerTest extends MyControllerTestCase
         $this->reload();
         $this->logIn();
         $mock = $this->prepareFaildResponse();
-        $this->setInportState(false);
+        $this->setImportState(false);
         $this->client->request('GET', '/ajax/initial/import');
         Phake::verify($mock, Phake::times(1))->findIdRangeByDate(Phake::anyParameters());
         $this->assertEquals(500, $this->client->getResponse()->getStatusCode());
@@ -143,7 +143,7 @@ class AjaxControllerTest extends MyControllerTestCase
         $em->flush();
     }
 
-    protected function setInportState(bool $bool)
+    protected function setImportState(bool $bool)
     {
         $em = $this->client->getContainer()->get('doctrine.orm.default_entity_manager');
         $user = $em->getRepository('AppBundle:User')->findOneByUsername('malloc007');
