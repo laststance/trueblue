@@ -17,20 +17,20 @@ class DefaultControllerTest extends MyControllerTestCase
     public function testIndex()
     {
         // not login
-        $this->client = self::createClient();
+        $this->reload();
         $this->client->request('GET', '/');
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertContains('Login with Twitter', $this->client->getResponse()->getContent());
 
         // login
-        $this->client = self::createClient();
+        $this->reload();
         $this->logIn();
         $this->client->request('GET', '/');
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertContains('Home', $this->client->getResponse()->getContent());
 
         // transtation
-        $this->client = self::createClient();
+        $this->reload();
         $this->client->request('GET', '/', [], [], ['HTTP_ACCEPT_LANGUAGE' => 'ja,en-US;q=0.8,en;q=0.6']);
         $this->assertContains('Daily Tweetはtwitter上の自分のつぶやきを日別にまとめるサービスです。', $this->client->getResponse()->getContent());
         $this->assertContains('このサイトについて', $this->client->getResponse()->getContent());
