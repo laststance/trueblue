@@ -115,7 +115,7 @@ class AjaxControllerTest extends MyControllerTestCase
     {
         $this->expectClient();
 
-        $em = $this->client->getContainer()->get('doctrine.orm.default_entity_manager');
+        $em = $this->getEntityManager();
         $repository = $em->getRepository('AppBundle:PastTimeline');
         $pastTimelines = $repository->findBy([], ['id' => 'DESC'], 14);
 
@@ -126,7 +126,7 @@ class AjaxControllerTest extends MyControllerTestCase
     {
         $this->expectClient();
 
-        $em = $this->client->getContainer()->get('doctrine.orm.default_entity_manager');
+        $em = $this->getEntityManager();
         foreach ($this->fetchImportedByTest() as $i) {
             $em->remove($i);
         }
@@ -137,7 +137,7 @@ class AjaxControllerTest extends MyControllerTestCase
     {
         $this->expectClient();
 
-        $em = $this->client->getContainer()->get('doctrine.orm.default_entity_manager');
+        $em = $this->getEntityManager();
         $user = $em->getRepository('AppBundle:User')->findOneByUsername('malloc007');
         $user->setIsInitialTweetImport($bool);
         $em->persist($user);

@@ -63,4 +63,9 @@ class MyControllerTestCase extends WebTestCase
             throw new \LogicException('setClient() must be executed. You are calling a $this->client dependent method.');
         }
     }
+
+    protected function getEntityManager()
+    {
+        return $this->client->getContainer()->get('doctrine.orm.default_entity_manager');
+    }
 }
