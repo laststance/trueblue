@@ -6,6 +6,7 @@ use AppBundle\Exception\TwitterAPICallException;
 use AppBundle\Service\TwitterAPIService;
 use AppBundle\Tests\Controller\Traits\FixtureTrait;
 use Phake;
+use Symfony\Bundle\FrameworkBundle\Client;
 
 class AjaxControllerTest extends MyControllerTestCase
 {
@@ -13,6 +14,7 @@ class AjaxControllerTest extends MyControllerTestCase
 
     public static $fixtures = [__DIR__.'/../DataFixtures/Alice/fixture.yml'];
 
+    /** @var Client */
     protected $client;
 
     public function testDaily()
@@ -60,13 +62,12 @@ class AjaxControllerTest extends MyControllerTestCase
 
     public function testInitialImportSuccess()
     {
-        $this->markTestIncomplete();
-//        $mock = $this->prepareTrueResponse();
-//        $this->client->request('GET', '/ajax/initial/import');
-//        Phake::verify($mock, Phake::times(14))->findIdRangeByDate(Phake::anyParameters());
-//        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-//        $this->assertEquals('"complate"', $this->client->getResponse()->getContent());
-//        $this->cleanDB();
+        $mock = $this->prepareTrueResponse();
+        $this->client->request('GET', '/ajax/initial/import');
+        Phake::verify($mock, Phake::times(14))->findIdRangeByDate(Phake::anyParameters());
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals('"complate"', $this->client->getResponse()->getContent());
+        $this->cleanDB();
     }
 
     public function testInitialImportAlreadyImport()
@@ -107,7 +108,7 @@ class AjaxControllerTest extends MyControllerTestCase
         $mock = Phake::mock(TwitterAPIService::class);
         for ($i = 1; $i <= 14; ++$i) {
             $d = new \DateTime($i.' days ago');
-            Phake::when($mock)->findIdRangeByDate($d)->thenReturn(['timeline_json' => 'mock data No.'.$i]);
+            Phake::when($mock)->findIdRangeByDate($d)->thenReturn(['timeline_json' => ['mock data No.'.$i]]);
         }
 
         return $mock;
@@ -134,9 +135,13 @@ class AjaxControllerTest extends MyControllerTestCase
 
     protected function cleanDB()
     {
-        $con = $this->client->getContainer()->get('doctrine.orm.default_entity_manager')->getConnection();
-        $con->exec('SET FOREIGN_KEY_CHECKS = 0');
-        $con->exec('TRUNCATE TABLE past_timeline');
+        $em = $this->client->getContainer()->get('doctrine.orm.default_entity_manager');
+        $repository = $em->getRepository('AppBundle:PastTimeline');
+        $pastTimelines = $repository->findBy([], ['id' => 'DESC'], 14);
+        foreach ($pastTimelines as $i) {
+            $em->remove($i);
+        }
+        $em->flush();
     }
 
     protected function reload()
