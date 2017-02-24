@@ -67,6 +67,10 @@ class AjaxControllerTest extends MyControllerTestCase
         Phake::verify($mock, Phake::times(14))->findIdRangeByDate(Phake::anyParameters());
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertEquals('"complate"', $this->client->getResponse()->getContent());
+        $imported = $this->fetchImportedByTest();
+        for ($i = 14; $i >= 1; --$i) {
+            $this->assertEquals(['mock data No.'.$i], array_shift($imported)->getTimeline());
+        }
         $this->cleanDB();
     }
 
@@ -133,12 +137,19 @@ class AjaxControllerTest extends MyControllerTestCase
         return $mock;
     }
 
-    protected function cleanDB()
+    protected function fetchImportedByTest(): array
     {
         $em = $this->client->getContainer()->get('doctrine.orm.default_entity_manager');
         $repository = $em->getRepository('AppBundle:PastTimeline');
         $pastTimelines = $repository->findBy([], ['id' => 'DESC'], 14);
-        foreach ($pastTimelines as $i) {
+
+        return $pastTimelines;
+    }
+
+    protected function cleanDB()
+    {
+        $em = $this->client->getContainer()->get('doctrine.orm.default_entity_manager');
+        foreach ($this->fetchImportedByTest() as $i) {
             $em->remove($i);
         }
         $em->flush();
