@@ -21,9 +21,7 @@ class MyControllerTestCase extends WebTestCase
 
     protected function logIn()
     {
-        if ($this->client == null) {
-            throw new \LogicException('reload() must be execute.');
-        }
+        $this->expectClient();
 
         $session = $this->client->getContainer()->get('session');
         $user = $this->client->getContainer()->get('doctrine')->getManager()->getRepository('AppBundle:User')->findOneByUsername('malloc007');
@@ -40,9 +38,7 @@ class MyControllerTestCase extends WebTestCase
      */
     protected function setTwitterAPIClientMock()
     {
-        if ($this->client == null) {
-            throw new \LogicException('reload() must be execute.');
-        }
+        $this->expectClient();
 
         $mock = Phake::mock(TwitterAPIClient::class);
         Phake::when($mock)->getStatusesUserTimeline(Phake::anyParameters())->thenReturn($this->getFixture());
@@ -59,5 +55,12 @@ class MyControllerTestCase extends WebTestCase
     protected function setClient()
     {
         $this->client = static::createClient();
+    }
+
+    protected function expectClient()
+    {
+        if ($this->client == null) {
+            throw new \LogicException('setClient() must be executed. You are calling a $this->client dependent method.');
+        }
     }
 }
