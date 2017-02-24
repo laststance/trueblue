@@ -3,13 +3,21 @@
 namespace AppBundle\Tests\Controller;
 
 use AppBundle\Service\TwitterAPIClient;
+use Phake;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Phake;
 
 class MyControllerTestCase extends WebTestCase
 {
+    /** @var Client */
+    protected $client;
+
+    protected function reload()
+    {
+        $this->client = static::createClient();
+    }
+
     protected function logIn()
     {
         $session = $this->client->getContainer()->get('session');

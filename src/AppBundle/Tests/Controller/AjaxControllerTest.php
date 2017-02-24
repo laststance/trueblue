@@ -6,16 +6,12 @@ use AppBundle\Exception\TwitterAPICallException;
 use AppBundle\Service\TwitterAPIService;
 use AppBundle\Tests\Controller\Traits\FixtureTrait;
 use Phake;
-use Symfony\Bundle\FrameworkBundle\Client;
 
 class AjaxControllerTest extends MyControllerTestCase
 {
     use FixtureTrait;
 
     public static $fixtures = [__DIR__.'/../DataFixtures/Alice/fixture.yml'];
-
-    /** @var Client */
-    protected $client;
 
     public function testDaily()
     {
@@ -153,11 +149,6 @@ class AjaxControllerTest extends MyControllerTestCase
             $em->remove($i);
         }
         $em->flush();
-    }
-
-    protected function reload()
-    {
-        $this->client = static::createClient();
     }
 
     protected function setInportState(bool $bool)
