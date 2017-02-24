@@ -3,16 +3,12 @@
 namespace AppBundle\Tests\Controller;
 
 use AppBundle\Tests\Controller\Traits\FixtureTrait;
-use Symfony\Component\BrowserKit\Client;
 
 class DefaultControllerTest extends MyControllerTestCase
 {
     use FixtureTrait;
 
     public static $fixtures = [__DIR__.'/../DataFixtures/Alice/fixture.yml'];
-
-    /** @var Client */
-    protected $client;
 
     public function testIndex()
     {
