@@ -64,7 +64,7 @@ class CronCommandTest extends MyKernelTestCase
         $this->commandTester->execute(['command' => $this->command->getName(), 'date' => 'あ']);
     }
 
-    public function testShouldBePersist()
+    public function testExpectPersist2020_12_12Tweet()
     {
         $this->setMocks();
 
