@@ -88,6 +88,8 @@ class AjaxControllerTest extends MyControllerTestCase
 
     protected function set2WeeksTweetMock()
     {
+        $this->expectClient();
+
         $mock = Phake::mock(TwitterAPIService::class);
         for ($i = 1; $i <= 14; ++$i) {
             $d = new \DateTime($i.' days ago');
@@ -109,6 +111,8 @@ class AjaxControllerTest extends MyControllerTestCase
 
     protected function setFaildResponseMock()
     {
+        $this->expectClient();
+
         $mock = Phake::mock(TwitterAPIService::class);
         Phake::when($mock)->findIdRangeByDate(new \DateTime('1 days ago'))->thenThrow(new TwitterAPICallException(500));
 
@@ -117,6 +121,8 @@ class AjaxControllerTest extends MyControllerTestCase
 
     protected function fetchImportedByTest(): array
     {
+        $this->expectClient();
+
         $em = $this->client->getContainer()->get('doctrine.orm.default_entity_manager');
         $repository = $em->getRepository('AppBundle:PastTimeline');
         $pastTimelines = $repository->findBy([], ['id' => 'DESC'], 14);
@@ -126,6 +132,8 @@ class AjaxControllerTest extends MyControllerTestCase
 
     protected function cleanDB()
     {
+        $this->expectClient();
+
         $em = $this->client->getContainer()->get('doctrine.orm.default_entity_manager');
         foreach ($this->fetchImportedByTest() as $i) {
             $em->remove($i);
@@ -135,6 +143,8 @@ class AjaxControllerTest extends MyControllerTestCase
 
     protected function setImportState(bool $bool)
     {
+        $this->expectClient();
+
         $em = $this->client->getContainer()->get('doctrine.orm.default_entity_manager');
         $user = $em->getRepository('AppBundle:User')->findOneByUsername('malloc007');
         $user->setIsInitialTweetImport($bool);
