@@ -15,8 +15,6 @@ class AjaxControllerTest extends MyControllerTestCase
 
     public function testDaily()
     {
-        $this->client = static::createClient();
-
         // no login
         $this->reload();
         $this->client->request('GET', '/ajax/malloc007/2017-01-21');
