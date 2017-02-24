@@ -79,7 +79,7 @@ class AjaxControllerTest extends MyControllerTestCase
         // when thrown Exception on business logic, expect return 500 response
         $this->reload();
         $this->logIn();
-        $mock = $this->prepareFaildResponse();
+        $mock = $this->setIntentionalExceptionMock();
         $this->setImportState(false);
         $this->client->request('GET', '/ajax/initial/import');
         Phake::verify($mock, Phake::times(1))->findIdRangeByDate(Phake::anyParameters());
@@ -100,21 +100,13 @@ class AjaxControllerTest extends MyControllerTestCase
         return $mock; // for Phake::verify()
     }
 
-    protected function prepareFaildResponse()
-    {
-        $mock = $this->setFaildResponseMock();
-
-        $this->client->getContainer()->set('twitter_api', $mock);
-
-        return $mock;
-    }
-
-    protected function setFaildResponseMock()
+    protected function setIntentionalExceptionMock()
     {
         $this->expectClient();
 
         $mock = Phake::mock(TwitterAPIService::class);
         Phake::when($mock)->findIdRangeByDate(new \DateTime('1 days ago'))->thenThrow(new TwitterAPICallException(500));
+        $this->client->getContainer()->set('twitter_api', $mock);
 
         return $mock;
     }
