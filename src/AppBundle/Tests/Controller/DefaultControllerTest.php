@@ -44,20 +44,17 @@ class DefaultControllerTest extends MyControllerTestCase
     {
         // not login
         $this->reload();
-        $this->setTwitterAPIClientMock();
         $this->client->request('GET', '/malloc007');
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
         // login
         $this->reload();
-        $this->setTwitterAPIClientMock();
         $this->logIn();
         $this->client->request('GET', '/malloc007');
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
         // undefined user
         $this->reload();
-        $this->setTwitterAPIClientMock();
         $this->client->request('GET', '/foo');
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
         $this->client->followRedirect();

@@ -16,6 +16,7 @@ class MyControllerTestCase extends WebTestCase
     protected function reload()
     {
         $this->client = static::createClient();
+        $this->setTwitterAPIClientMock();
     }
 
     protected function logIn()
