@@ -50,7 +50,7 @@ class AjaxControllerTest extends MyControllerTestCase
         // when action successful, expect for 2 weeks tweet inserted DB
         $this->reload();
         $this->logIn();
-        $mock = $this->prepareTrueResponse();
+        $mock = $this->set2WeeksTweetMock();
         $this->client->request('GET', '/ajax/initial/import');
         Phake::verify($mock, Phake::times(14))->findIdRangeByDate(Phake::anyParameters());
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
@@ -86,26 +86,16 @@ class AjaxControllerTest extends MyControllerTestCase
         $this->assertEquals(500, $this->client->getResponse()->getStatusCode());
     }
 
-    protected function prepareTrueResponse()
-    {
-        $mock = $this->setTrueResponseMock();
-        $this->client->getContainer()->set('twitter_api', $mock);
-
-        return $mock; // for Phake::verify()
-    }
-
-    /**
-     * Set a mock for two weeks.
-     */
-    protected function setTrueResponseMock()
+    protected function set2WeeksTweetMock()
     {
         $mock = Phake::mock(TwitterAPIService::class);
         for ($i = 1; $i <= 14; ++$i) {
             $d = new \DateTime($i.' days ago');
             Phake::when($mock)->findIdRangeByDate($d)->thenReturn(['timeline_json' => ['mock data No.'.$i]]);
         }
+        $this->client->getContainer()->set('twitter_api', $mock);
 
-        return $mock;
+        return $mock; // for Phake::verify()
     }
 
     protected function prepareFaildResponse()
