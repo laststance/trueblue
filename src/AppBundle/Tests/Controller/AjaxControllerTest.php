@@ -48,6 +48,8 @@ class AjaxControllerTest extends MyControllerTestCase
     public function testInitialImport()
     {
         // when action successful, expect for 2 weeks tweet inserted DB
+        $this->reload();
+        $this->logIn();
         $mock = $this->prepareTrueResponse();
         $this->client->request('GET', '/ajax/initial/import');
         Phake::verify($mock, Phake::times(14))->findIdRangeByDate(Phake::anyParameters());
@@ -75,6 +77,8 @@ class AjaxControllerTest extends MyControllerTestCase
         $this->assertEquals('"already imported"', $this->client->getResponse()->getContent());
 
         // when thrown Exception on business logic, expect return 500 response
+        $this->reload();
+        $this->logIn();
         $mock = $this->prepareFaildResponse();
         $this->setInportState(false);
         $this->client->request('GET', '/ajax/initial/import');
@@ -85,9 +89,6 @@ class AjaxControllerTest extends MyControllerTestCase
     protected function prepareTrueResponse()
     {
         $mock = $this->setTrueResponseMock();
-
-        $this->client = self::createClient();
-        $this->logIn();
         $this->client->getContainer()->set('twitter_api', $mock);
 
         return $mock; // for Phake::verify()
@@ -111,8 +112,6 @@ class AjaxControllerTest extends MyControllerTestCase
     {
         $mock = $this->setFaildResponseMock();
 
-        $this->reload();
-        $this->logIn();
         $this->client->getContainer()->set('twitter_api', $mock);
 
         return $mock;
