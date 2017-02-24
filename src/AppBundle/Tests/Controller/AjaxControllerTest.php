@@ -47,17 +47,9 @@ class AjaxControllerTest extends MyControllerTestCase
         $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
     }
 
-    public function testInitialImportNotLogin()
+    public function testInitialImport()
     {
-        $this->reload();
-        $this->client->request('GET', '/ajax/initial/import');
-        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
-        $this->client->followRedirect();
-        $this->assertEquals('indexpage', $this->client->getRequest()->get('_route'));
-    }
-
-    public function testInitialImportSuccess()
-    {
+        // when action successful, expect for 2 weeks tweet inserted DB
         $mock = $this->prepareTrueResponse();
         $this->client->request('GET', '/ajax/initial/import');
         Phake::verify($mock, Phake::times(14))->findIdRangeByDate(Phake::anyParameters());
@@ -68,20 +60,23 @@ class AjaxControllerTest extends MyControllerTestCase
             $this->assertEquals(['mock data No.'.$i], array_shift($imported)->getTimeline());
         }
         $this->cleanDB();
-    }
 
-    public function testInitialImportAlreadyImport()
-    {
+        // when not login, expect redirect to index
+        $this->reload();
+        $this->client->request('GET', '/ajax/initial/import');
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $this->client->followRedirect();
+        $this->assertEquals('indexpage', $this->client->getRequest()->get('_route'));
+
+        // when user is already initial imported, expect API return "already imported"
         $this->reload();
         $this->logIn();
         $this->setInportState(true);
         $this->client->request('GET', '/ajax/initial/import');
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertEquals('"already imported"', $this->client->getResponse()->getContent());
-    }
 
-    public function testInitialImportFaild()
-    {
+        // when thrown Exception on business logic, expect return 500 response
         $mock = $this->prepareFaildResponse();
         $this->setInportState(false);
         $this->client->request('GET', '/ajax/initial/import');
