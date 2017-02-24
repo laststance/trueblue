@@ -15,7 +15,7 @@ class MyControllerTestCase extends WebTestCase
 
     protected function reload()
     {
-        $this->client = static::createClient();
+        $this->setClient();
         $this->setTwitterAPIClientMock();
     }
 
@@ -54,5 +54,10 @@ class MyControllerTestCase extends WebTestCase
         require __DIR__.'/../DataFixtures/statusesUserTimelineFixture.php';
 
         return $statusesUserTimelineFixture;
+    }
+
+    protected function setClient()
+    {
+        $this->client = static::createClient();
     }
 }
