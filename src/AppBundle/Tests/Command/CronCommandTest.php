@@ -57,13 +57,18 @@ class CronCommandTest extends MyKernelTestCase
     }
 
     /**
+     * cron:SaveTargetDateTimeline あ
+     *
      * @expectedException \InvalidArgumentException
      */
-    public function testInvalidArgument()
+    public function testInvalidArgumentExpectException()
     {
         $this->commandTester->execute(['command' => $this->command->getName(), 'date' => 'あ']);
     }
 
+    /**
+     * cron:SaveTargetDateTimeline 2020-12-12.
+     */
     public function testExpectPersist2020_12_12Tweet()
     {
         $this->setMocks();

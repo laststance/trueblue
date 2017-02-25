@@ -42,7 +42,7 @@ class AjaxController extends Controller
         );
 
         if (is_null($pastTimeline)) {
-            return new JsonResponse('');
+            return new JsonResponse('', 404);
         }
 
         $commonService = $this->get('app.service.common_service');

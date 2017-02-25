@@ -15,31 +15,36 @@ class AjaxControllerTest extends MyControllerTestCase
 
     public function testDaily()
     {
-        // no login
+        /* @NomalScenario */
+        // when not login & valid username & request tweet of 2017-01-21, expect return json of 2017-01-21
         $this->reload();
         $this->client->request('GET', '/ajax/malloc007/2017-01-21');
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertContains('[{"created_at":"Sat Jan 21 11:52:08 +0000 2017",', $this->client->getResponse()->getContent());
 
-        // login
+        /* @NomalScenario */
+        // when logined & valid username & request tweet of 2017-01-21, expect return json of 2017-01-21
         $this->reload();
         $this->logIn();
         $this->client->request('GET', '/ajax/malloc007/2017-01-21');
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertContains('[{"created_at":"Sat Jan 21 11:52:08 +0000 2017",', $this->client->getResponse()->getContent());
 
-        // undefined date
+        /* @NomalScenario */
+        // when request date tweet not found, expect 404 response
         $this->reload();
         $this->client->request('GET', '/ajax/malloc007/2200-01-10');
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
         $this->assertEquals('""', $this->client->getResponse()->getContent());
 
-        // undefined user
+        /* @ExceptionScenario */
+        // when request undefined user, expect 404 response
         $this->reload();
         $this->client->request('GET', '/ajax/nonon/2200-01-10');
         $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
 
-        // invalid date format
+        /* @ExceptionScenario */
+        // when request invalid date format, expect 404 response
         $this->reload();
         $this->client->request('GET', '/ajax/nonon/22000110');
         $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
@@ -47,7 +52,8 @@ class AjaxControllerTest extends MyControllerTestCase
 
     public function testInitialImport()
     {
-        // when action successful, expect for 2 weeks tweet inserted DB
+        /* @NomalScenario */
+        // when action successful, expect stored DB for 2 weeks tweet
         $this->reload();
         $this->logIn();
         $mock = $this->set2WeeksTweetMock();
@@ -61,6 +67,7 @@ class AjaxControllerTest extends MyControllerTestCase
         }
         $this->cleanDB();
 
+        /* @ExceptionScenario */
         // when not login, expect redirect to index
         $this->reload();
         $this->client->request('GET', '/ajax/initial/import');
@@ -68,6 +75,7 @@ class AjaxControllerTest extends MyControllerTestCase
         $this->client->followRedirect();
         $this->assertEquals('indexpage', $this->client->getRequest()->get('_route'));
 
+        /* @ExceptionScenario */
         // when user is already initial imported, expect API return "already imported"
         $this->reload();
         $this->logIn();
@@ -76,6 +84,7 @@ class AjaxControllerTest extends MyControllerTestCase
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertEquals('"already imported"', $this->client->getResponse()->getContent());
 
+        /* @ExceptionScenario */
         // when thrown Exception on business logic, expect return 500 response
         $this->reload();
         $this->logIn();
