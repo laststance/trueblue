@@ -57,6 +57,7 @@ class CronCommandTest extends MyKernelTestCase
     }
 
     /**
+     * @ExceptionScenario
      * cron:SaveTargetDateTimeline あ
      *
      * @expectedException \InvalidArgumentException
@@ -67,6 +68,7 @@ class CronCommandTest extends MyKernelTestCase
     }
 
     /**
+     * @NomalScenario
      * cron:SaveTargetDateTimeline 2020-12-12.
      */
     public function testExpectPersist2020_12_12Tweet()
