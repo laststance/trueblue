@@ -46,13 +46,13 @@ class TwitterAPIServiceTest extends WebTestCase
         $this->assertEquals($tweet['id'], 819175659234701313);
         $this->assertEquals($tweet['text'], '@malloc007 fixture21');
 
-/** @NomalScenario */
+        //** @NomalScenario */
         // when usertimeline(fetch from twitter API) not contain '2018-01-11' tweet, expect error message
         $res = $this->twitterApiService->findIdRangeByDate(new \DateTime('2018-01-11'));
 
         $this->assertEquals($res, ['error' => 'target days tweet not found.']);
 
-/** @NomalScenario */
+        //** @NomalScenario */
         // when could not fetch usertimeline from twitter API, expect error message
         $mock = Phake::mock(TwitterAPIClient::class);
         Phake::when($mock)->getStatusesUserTimeline(Phake::anyParameters())->thenReturn([]);
