@@ -50,7 +50,7 @@ class TwitterAPIServiceTest extends WebTestCase
         // when usertimeline(fetch from twitter API) not contain '2018-01-11' tweet, expect error message
         $res = $this->twitterApiService->findIdRangeByDate(new \DateTime('2018-01-11'));
 
-        $this->assertEquals($res, ['error' => 'target days tweet not found.']);
+        $this->assertEquals($res, ['error' => 'usertimeline(fetch from twitter API) not contain targetdate.']);
 
         //** @NomalScenario */
         // when could not fetch usertimeline from twitter API, expect error message

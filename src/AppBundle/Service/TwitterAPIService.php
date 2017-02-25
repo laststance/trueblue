@@ -8,6 +8,7 @@ use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 
 class TwitterAPIService
 {
+    const ERROR_NOT_CONTAIN_MES = 'usertimeline(fetch from twitter API) not contain targetdate.';
     /**
      * @var Registry
      */
@@ -119,7 +120,7 @@ class TwitterAPIService
 
                 // 指定日のtweetが一件もなかった場合
                 if ($maxId === null && $targetDay > $createdDay) {
-                    return ['error' => 'target days tweet not found.'];
+                    return ['error' => self::ERROR_NOT_CONTAIN_MES];
                 }
 
                 // 指定日の一番最後のtweetをmax_idとしてセット

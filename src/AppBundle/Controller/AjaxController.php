@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\PastTimeline;
 use AppBundle\Entity\User;
+use AppBundle\Service\TwitterAPIService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -82,7 +83,7 @@ class AjaxController extends Controller
                         return new JsonResponse($complateMessage);
                     }
 
-                    if ($json['error'] == 'target days tweet not found.') {
+                    if ($json['error'] == TwitterAPIService::ERROR_NOT_CONTAIN_MES) {
                         continue;
                     }
                 }
