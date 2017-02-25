@@ -27,8 +27,10 @@ class TwitterAPIServiceTest extends WebTestCase
         $this->twitterApiService->setUser($user);
     }
 
-    public function testFindIdRangeByDateExist()
+    public function testFindIdRangeByDate()
     {
+        /** @NomalScenario */
+        // when usertimeline(fetch from twitter API) contain '2017-01-11' tweet, expect return '2017-01-11' tweet collection
         $res = $this->twitterApiService->findIdRangeByDate(new \DateTime('2017-01-11'));
 
         $this->assertTrue(isset($res['since_id']));
@@ -43,17 +45,15 @@ class TwitterAPIServiceTest extends WebTestCase
         $this->assertEquals($tweet['created_at'], 'Wed Jan 11 13:34:31 +0000 2017');
         $this->assertEquals($tweet['id'], 819175659234701313);
         $this->assertEquals($tweet['text'], '@malloc007 fixture21');
-    }
 
-    public function testFindIdRangeByDateNonExist()
-    {
+/** @NomalScenario */
+        // when usertimeline(fetch from twitter API) not contain '2018-01-11' tweet, expect error message
         $res = $this->twitterApiService->findIdRangeByDate(new \DateTime('2018-01-11'));
 
         $this->assertEquals($res, ['error' => 'target days tweet not found.']);
-    }
 
-    public function testFindIdRangeByDateCannotFetch()
-    {
+/** @NomalScenario */
+        // when could not fetch usertimeline from twitter API, expect error message
         $mock = Phake::mock(TwitterAPIClient::class);
         Phake::when($mock)->getStatusesUserTimeline(Phake::anyParameters())->thenReturn([]);
         $this->twitterApiService->setApi($mock);
