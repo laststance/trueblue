@@ -79,7 +79,7 @@ class AjaxController extends Controller
                 $json = $this->get('twitter_api')->findIdRangeByDate($d);
 
                 if (isset($json['error'])) {
-                    if ($json['error'] == 'timeline get count 0.') {
+                    if ($json['error'] == TwitterAPIService::ERROR_COULD_NOT_FETCH_MES) {
                         return new JsonResponse($complateMessage);
                     }
 
