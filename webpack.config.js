@@ -5,9 +5,9 @@ const nodeEnv = devBuild ? 'development' : 'production'
 
 var config = {
     entry:   {
-        'home': ['whatwg-fetch', './app/Resources/js/home.js'],
-        'index': './app/Resources/js/index.js'
-
+        'home': ['whatwg-fetch', './app/Resources/js/home.js', 'webpack/hot/only-dev-server'],
+        'index': ['./app/Resources/js/index.js', 'webpack/hot/only-dev-server'],
+        'devServerClient': 'webpack-dev-server/client?http://localhost:8080'
     },
     output:  {
         path:       './web/assets/build/',
