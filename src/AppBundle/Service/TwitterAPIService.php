@@ -9,6 +9,7 @@ use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 class TwitterAPIService
 {
     const ERROR_NOT_CONTAIN_MES = 'usertimeline(fetch from twitter API) not contain targetdate.';
+    const ERROR_COULD_NOT_FETCH_MES = 'could not fetch any data of usertimeline, from twitter API.';
     /**
      * @var Registry
      */
@@ -103,7 +104,7 @@ class TwitterAPIService
             if (count($fetchTimeline) < 1) {
                 // timelineの総取得総数が0件 一件もつぶやきが無い人など
                 if (count($savedTimeline) < 1) {
-                    return ['error' => 'timeline get count 0.'];
+                    return ['error' => self::ERROR_COULD_NOT_FETCH_MES];
                     // apiの取得範囲制限内で指定日のsince_idが見つからない
                 } else {
                     return ['since_id' => 'undefined', 'max_id' => $maxId, 'timeline_json' => $savedTimeline];

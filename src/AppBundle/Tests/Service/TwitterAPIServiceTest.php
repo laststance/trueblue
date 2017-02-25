@@ -60,7 +60,7 @@ class TwitterAPIServiceTest extends WebTestCase
 
         $res = $this->twitterApiService->findIdRangeByDate(new \DateTime('2017-01-11'));
 
-        $this->assertEquals($res, ['error' => 'timeline get count 0.']);
+        $this->assertEquals($res, ['error' => 'could not fetch any data of usertimeline, from twitter API.']);
     }
 
     public function getFixture()
