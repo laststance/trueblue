@@ -63,7 +63,10 @@ var config = {
             },
             {
                 test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'file-loader'
+                use: [
+                    'url-loader',
+                    'file-loader'
+                ]
             },
             {
                 test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
