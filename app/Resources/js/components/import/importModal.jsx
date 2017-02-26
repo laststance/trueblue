@@ -18,18 +18,10 @@ export default class ImportModal extends React.Component {
         this.setState({showModal: props.isShowImportModal})
     }
     
-    close() {
-        this.setState({showModal: false})
-    }
-    
-    open() {
-        this.setState({showModal: true})
-    }
-    
     render() {
         return (
-            <Modal show={this.state.showModal} onHide={this.close}>
-                <Modal.Header closeButton>
+            <Modal show={this.state.showModal} onHide={this.close} backdrop={'static'}>
+                <Modal.Header>
                     <Modal.Title>Import</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
