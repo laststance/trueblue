@@ -14,11 +14,7 @@ class App extends React.Component {
         return (
             <div>
                 {/*<ImportButton import={this.props.import}/>*/}
-                <ImportModal
-                    isShowImportModal={this.props.isShowImportModal}
-                    import={this.props.import}
-                    isInitialImportDebug={this.props.isInitialImportDebug}
-                />
+                <ImportModal/>
                 <Header
                     timelineDateList={this.props.timelineDateList}
                     username={this.props.username}
@@ -36,9 +32,7 @@ const mapStateToProps = (state) => (
         timelineDateList:       state.homeState.timelineDateList,
         timelineJson:           state.homeState.timelineJson,
         username:               state.homeState.username,
-        isLogin:                state.homeState.isLogin,
-        isShowImportModal:      state.homeState.isShowImportModal,
-        isInitialImportDebug:   state.homeState.isInitialImportDebug
+        isLogin:                state.homeState.isLogin
     }
 )
 
@@ -46,9 +40,6 @@ function mapDispatchToProps(dispatch) {
     return {
         fetchDailyTweet: function (username, date) {
             dispatch(Actions.fetchDailyTweet(username, date))
-        },
-        import:          function () {
-            dispatch(Actions.import())
         }
     }
 }

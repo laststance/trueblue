@@ -29,10 +29,7 @@ class ImportModal extends React.Component {
                     {this.props.transText.import.desc}
                 </Modal.Body>
                 <Modal.Footer>
-                    <ImportButton
-                        import={this.props.import}
-                        isInitialImportDebug={this.props.isInitialImportDebug}
-                    />
+                    <ImportButton/>
                 </Modal.Footer>
             </Modal>
         )
@@ -41,7 +38,8 @@ class ImportModal extends React.Component {
 
 const mapStateToProps = (state) => (
     {
-        transText: state.homeState.transText
+        transText: state.homeState.transText,
+        isShowImportModal: state.homeState.isShowImportModal
     }
 )
 

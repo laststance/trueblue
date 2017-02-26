@@ -56,7 +56,8 @@ class ImportButton extends React.Component {
 
 const mapStateToProps = (state) => (
     {
-        transText: state.homeState.transText
+        transText: state.homeState.transText,
+        isInitialImportDebug: state.homeState.isInitialImportDebug
     }
 )
 
@@ -64,6 +65,9 @@ function mapDispatchToProps(dispatch) {
     return {
         debugImport: function () {
             dispatch(Actions.debugImport())
+        },
+        import: function () {
+            dispatch(Actions.import())
         }
     }
 }
