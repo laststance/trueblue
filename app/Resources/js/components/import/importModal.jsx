@@ -36,7 +36,10 @@ export default class ImportModal extends React.Component {
                     Import Recently 2 weeks tweet.
                 </Modal.Body>
                 <Modal.Footer>
-                    <ImportButton import={this.props.import}/>
+                    <ImportButton
+                        import={this.props.import}
+                        isInitialImportDebug={this.props.isInitialImportDebug}
+                    />
                 </Modal.Footer>
             </Modal>
         )

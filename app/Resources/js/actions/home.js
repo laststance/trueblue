@@ -28,6 +28,13 @@ const Actions = {
                 })
             })
         }
+    },
+    debugImport: () => {
+        return dispatch => {
+            dispatch({
+                type: Constants.DONE_IMPORT
+            })
+        }
     }
 }
 

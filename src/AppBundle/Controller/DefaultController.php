@@ -37,6 +37,7 @@ class DefaultController extends Controller
                         'username' => $user->getUsername(),
                         'isLogin' => $this->isGranted('ROLE_OAUTH_USER'),
                         'isShowImportModal' => $this->isShowImportModal(),
+                        'isInitialImportDebug' => $this->isInitialImportDebug(),
                     ],
                     'json'
                 ),
@@ -78,7 +79,7 @@ class DefaultController extends Controller
     private function isShowImportModal(): bool
     {
         // only develop
-        if ($this->getParameter('initial_import_debug') === true) {
+        if ($this->isInitialImportDebug()) {
             return true;
         }
 
@@ -96,5 +97,14 @@ class DefaultController extends Controller
         }
 
         return true;
+    }
+
+    private function isInitialImportDebug(): bool
+    {
+        if ($this->getParameter('initial_import_debug') === true) {
+            return true;
+        }
+
+        return false;
     }
 }

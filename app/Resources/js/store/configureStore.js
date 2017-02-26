@@ -10,7 +10,8 @@ export default function configureStore(props) {
         timelineJson,
         username,
         isLogin,
-        isShowImportModal
+        isShowImportModal,
+        isInitialImportDebug
     } = props
     const { homeState } = initialStates
     
@@ -21,7 +22,8 @@ export default function configureStore(props) {
             timelineJson,
             username,
             isLogin,
-            isShowImportModal
+            isShowImportModal,
+            isInitialImportDebug
         }
     }
     

@@ -17,6 +17,7 @@ class App extends React.Component {
                 <ImportModal
                     isShowImportModal={this.props.isShowImportModal}
                     import={this.props.import}
+                    isInitialImportDebug={this.props.isInitialImportDebug}
                 />
                 <Header
                     timelineDateList={this.props.timelineDateList}
@@ -32,11 +33,12 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => (
     {
-        timelineDateList:  state.homeState.timelineDateList,
-        timelineJson:      state.homeState.timelineJson,
-        username:          state.homeState.username,
-        isLogin:           state.homeState.isLogin,
-        isShowImportModal: state.homeState.isShowImportModal
+        timelineDateList:       state.homeState.timelineDateList,
+        timelineJson:           state.homeState.timelineJson,
+        username:               state.homeState.username,
+        isLogin:                state.homeState.isLogin,
+        isShowImportModal:      state.homeState.isShowImportModal,
+        isInitialImportDebug:   state.homeState.isInitialImportDebug
     }
 )
 
