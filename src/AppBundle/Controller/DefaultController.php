@@ -77,6 +77,11 @@ class DefaultController extends Controller
 
     private function isShowImportModal(): bool
     {
+        // only develop
+        if ($this->getParameter('initial_import_debug') === true) {
+            return true;
+        }
+
         // not login
         if (!$this->isGranted('ROLE_OAUTH_USER')) {
             return false;
