@@ -3,3 +3,11 @@ index:
     about: about
     privacy-policy: privacy policy
     terms-of-service: terms of service
+
+home:
+    import:
+        title: First
+        desc: Import tweets for the last 2 weeks (=ﾟωﾟ)ﾉ
+        btn:
+            default: Import
+            loading: Please wait a few minutes （＊´ω｀）

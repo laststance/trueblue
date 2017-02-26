@@ -30,12 +30,12 @@ class ImportButton extends React.Component {
     renderLoadingText() {
         if (this.state.isLoading) {
             return (
-                <div><i className="fa fa-spinner fa-spin"></i> Loading...</div>
+                <div><i className="fa fa-spinner fa-spin"></i> {this.props.transText.import.btn.loading}</div>
             )
         }
         
         return (
-            <div>Import</div>
+            <div>{this.props.transText.import.btn.default}</div>
         )
     }
     
@@ -55,7 +55,9 @@ class ImportButton extends React.Component {
 }
 
 const mapStateToProps = (state) => (
-    {}
+    {
+        transText: state.homeState.transText
+    }
 )
 
 function mapDispatchToProps(dispatch) {

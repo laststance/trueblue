@@ -6,6 +6,7 @@ use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Yaml\Yaml;
 
 class DefaultController extends Controller
 {
@@ -14,6 +15,7 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
+        $this->getTransText();
         return $this->render(':default:index.html.twig');
     }
 
@@ -38,6 +40,7 @@ class DefaultController extends Controller
                         'isLogin' => $this->isGranted('ROLE_OAUTH_USER'),
                         'isShowImportModal' => $this->isShowImportModal(),
                         'isInitialImportDebug' => $this->isInitialImportDebug(),
+                        'transText' => $this->getHomeTransText()
                     ],
                     'json'
                 ),
@@ -106,5 +109,15 @@ class DefaultController extends Controller
         }
 
         return false;
+    }
+
+    private function getHomeTransText(): array
+    {
+        $kernelDir  = $this->get('kernel')->getRootDir();
+        $locale = $this->get('request')->getLocale();
+        $file   = $kernelDir.'/Resources/translations/messages.'.$locale.'.yml';
+        $parsed = Yaml::parse(file_get_contents($file));
+
+        return $parsed['home'];
     }
 }

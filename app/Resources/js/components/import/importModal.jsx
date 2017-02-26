@@ -1,11 +1,12 @@
 import autobind from 'autobind-decorator'
 import React from 'react'
+import { connect } from 'react-redux'
 import { Modal } from 'react-bootstrap'
 import { Button } from 'react-bootstrap'
 import ImportButton from './importButton'
 
 @autobind
-export default class ImportModal extends React.Component {
+class ImportModal extends React.Component {
     
     constructor(props, context) {
         super(props, context)
@@ -22,10 +23,10 @@ export default class ImportModal extends React.Component {
         return (
             <Modal show={this.state.showModal} onHide={this.close} backdrop={'static'}>
                 <Modal.Header>
-                    <Modal.Title>Import</Modal.Title>
+                    <Modal.Title>{this.props.transText.import.title}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
-                    Import Recently 2 weeks tweet.
+                <Modal.Body style={{wordBreak: 'keep-all'}}>
+                    {this.props.transText.import.desc}
                 </Modal.Body>
                 <Modal.Footer>
                     <ImportButton
@@ -37,3 +38,11 @@ export default class ImportModal extends React.Component {
         )
     }
 }
+
+const mapStateToProps = (state) => (
+    {
+        transText: state.homeState.transText
+    }
+)
+
+export default connect(mapStateToProps)(ImportModal)

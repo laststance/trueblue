@@ -11,7 +11,8 @@ export default function configureStore(props) {
         username,
         isLogin,
         isShowImportModal,
-        isInitialImportDebug
+        isInitialImportDebug,
+        transText
     } = props
     const { homeState } = initialStates
     
@@ -23,7 +24,8 @@ export default function configureStore(props) {
             username,
             isLogin,
             isShowImportModal,
-            isInitialImportDebug
+            isInitialImportDebug,
+            transText
         }
     }
     

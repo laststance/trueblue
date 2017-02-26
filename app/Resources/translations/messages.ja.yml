@@ -3,3 +3,11 @@ index:
     about: このサイトについて
     privacy-policy: プライバシーポリシー
     terms-of-service: 利用規約
+
+home:
+    import:
+        title: はじめに
+        desc: 直近2週間分のつぶやきを インポートします (=ﾟωﾟ)ﾉ
+        btn:
+            default: Import
+            loading: 数分お待ちください（＊´ω｀）
