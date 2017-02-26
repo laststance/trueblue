@@ -21,7 +21,7 @@ class App extends React.Component {
                     fetchDailyTweet={this.props.fetchDailyTweet}
                     isLogin={this.props.isLogin}
                 />
-                <Timeline timelineJson={this.props.timelineJson}/>
+                <Timeline/>
             </div>
         )
     }

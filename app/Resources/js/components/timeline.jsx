@@ -1,11 +1,12 @@
 import autobind from 'autobind-decorator'
 import React from 'react'
+import { connect } from 'react-redux'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import Lightbox from 'react-images'
 import { isSP } from '../utils/util'
 
 @autobind
-export default class Timeline extends React.Component {
+class Timeline extends React.Component {
 
     render() {
         var view = ''
@@ -96,5 +97,12 @@ export default class Timeline extends React.Component {
             </ReactCSSTransitionGroup>
         )
     }
-
 }
+
+const mapStateToProps = (state) => (
+    {
+        timelineJson:           state.homeState.timelineJson
+    }
+)
+
+export default connect(mapStateToProps)(Timeline)
