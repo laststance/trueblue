@@ -15,7 +15,6 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        $this->getTransText();
         return $this->render(':default:index.html.twig');
     }
 
@@ -40,7 +39,7 @@ class DefaultController extends Controller
                         'isLogin' => $this->isGranted('ROLE_OAUTH_USER'),
                         'isShowImportModal' => $this->isShowImportModal(),
                         'isInitialImportDebug' => $this->isInitialImportDebug(),
-                        'transText' => $this->getHomeTransText()
+                        'transText' => $this->getHomeTransText(),
                     ],
                     'json'
                 ),
@@ -113,9 +112,9 @@ class DefaultController extends Controller
 
     private function getHomeTransText(): array
     {
-        $kernelDir  = $this->get('kernel')->getRootDir();
+        $kernelDir = $this->get('kernel')->getRootDir();
         $locale = $this->get('request')->getLocale();
-        $file   = $kernelDir.'/Resources/translations/messages.'.$locale.'.yml';
+        $file = $kernelDir.'/Resources/translations/messages.'.$locale.'.yml';
         $parsed = Yaml::parse(file_get_contents($file));
 
         return $parsed['home'];
