@@ -40,7 +40,7 @@ export default class Menu extends React.Component {
     }
 
     render() {
-        const bsSize = isSP() ? 'small' : 'large'
+        const bsSize = isSP() ? '' : 'large'
         return (
             <div id="menu">
                 <Button className="menu-btn" bsSize={bsSize} onClick={this.open}>&#9776;</Button>

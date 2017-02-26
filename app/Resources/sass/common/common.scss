@@ -1,6 +1,7 @@
 $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 @import "~bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 @import "reset.scss";
+@import "variable.scss";
 
 html,
 body {
@@ -14,9 +15,10 @@ a {
 .menu-btn {
 	cursor: pointer;
 	transition-duration: .5s;
-	color: inherit;
-	background-color: inherit;
-	border: solid 1px #ABA3B8;
+	color: #777 !important;
+	background-color: inherit !important;
+	border: solid 1px $light-gray !important;
+	font-weight: normal !important;
 
 	&:focus {
 		background-color: inherit;
@@ -27,6 +29,12 @@ a {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+// modal close btn
+body > div > div > div.fade.in.modal > div > div > div.modal-header > button > span {
+	display: block;
+	font-size: 30px;
 }
 
 // tablet & smart phone
