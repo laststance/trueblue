@@ -101,7 +101,7 @@ class Timeline extends React.Component {
 
 const mapStateToProps = (state) => (
     {
-        timelineJson:           state.homeState.timelineJson
+        timelineJson: state.homeState.timelineJson
     }
 )
 

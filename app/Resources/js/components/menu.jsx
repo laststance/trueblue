@@ -1,5 +1,7 @@
 import autobind from 'autobind-decorator'
 import React from 'react'
+import Actions from '../actions/home'
+import { connect } from 'react-redux'
 import { Button } from 'react-bootstrap'
 import { Modal } from 'react-bootstrap'
 import { ListGroup } from 'react-bootstrap'
@@ -11,7 +13,7 @@ import '../../sass/component/material_green.scss'
 import  '../../sass/component/modal.scss'
 
 @autobind
-export default class Menu extends React.Component {
+class Menu extends React.Component {
 
     constructor(props, context) {
         super(props, context)
@@ -62,3 +64,21 @@ export default class Menu extends React.Component {
         )
     }
 }
+
+const mapStateToProps = (state) => (
+    {
+        timelineDateList: state.homeState.timelineDateList,
+        username: state.homeState.username,
+        isLogin: state.homeState.isLogin
+    }
+)
+
+function mapDispatchToProps(dispatch) {
+    return {
+        fetchDailyTweet: function (username, date) {
+            dispatch(Actions.fetchDailyTweet(username, date))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Menu)

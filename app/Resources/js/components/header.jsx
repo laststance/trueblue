@@ -1,11 +1,12 @@
 import autobind from 'autobind-decorator'
 import React from 'react'
+import { connect } from 'react-redux'
 import { Navbar, Nav, NavItem } from 'react-bootstrap'
 import Menu from './menu.jsx'
 import { getKaomoji } from '../utils/util'
 
 @autobind
-export default class Header extends React.Component {
+class Header extends React.Component {
     render() {
         return (
             <Navbar className="index-header">
@@ -19,12 +20,7 @@ export default class Header extends React.Component {
                     <Nav>
                         <NavItem>
                             <div>
-                                <Menu
-                                    timelineDateList={this.props.timelineDateList}
-                                    fetchDailyTweet={this.props.fetchDailyTweet}
-                                    isLogin={this.props.isLogin}
-                                    username={this.props.username}
-                                />
+                                <Menu/>
                             </div>
                         </NavItem>
                     </Nav>
@@ -33,3 +29,11 @@ export default class Header extends React.Component {
         )
     }
 }
+
+const mapStateToProps = (state) => (
+    {
+        username: state.homeState.username
+    }
+)
+
+export default connect(mapStateToProps)(Header)
