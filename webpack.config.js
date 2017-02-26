@@ -31,15 +31,47 @@ var config = {
         })
     ],
     module:  {
-        loaders: [
-            {test: require.resolve('jquery'), loader: 'expose-loader?$!expose-loader?jQuery'},
-            {test: /\.jsx?$/, loader: 'babel-loader', exclude: /node_modules/},
-            {test: /\.scss$/i, loader: 'style-loader!css-loader!resolve-url-loader!sass-loader?sourceMap'},
-            {test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=application/font-woff'},
-            {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=application/octet-stream'},
-            {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader'},
-            {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=image/svg+xml'},
-            {test: /\.(jpe?g|png)$/, loader: 'file-loader'}
+        rules: [
+            {
+                test: require.resolve('jquery'),
+                use: [
+                    'expose-loader?$',
+                    'expose-loader?jQuery'
+                ]
+            },
+            {
+                test: /\.jsx?$/,
+                loader: 'babel-loader',
+                exclude: /node_modules/
+            },
+            {
+                test: /\.scss$/i,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    'resolve-url-loader',
+                    'sass-loader?sourceMap'
+                ]
+            },
+            {
+                test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
+                loader: 'url-loader?limit=10000&mimetype=application/font-woff'
+            },
+            {
+                test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+                loader: 'url-loader?limit=10000&mimetype=application/octet-stream'
+            },
+            {
+                test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+                loader: 'file-loader'
+            },
+            {
+                test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+                loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
+            },
+            {
+                test: /\.(jpe?g|png)$/, loader: 'file-loader'
+            }
         ]
     }
 }
@@ -57,9 +89,7 @@ if (devBuild) {
     )
 } else {
     config.plugins.push(
-        new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.UglifyJsPlugin(),
-        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.optimize.UglifyJsPlugin({sourceMap: true}),
         new webpack.optimize.AggressiveMergingPlugin()
     )
     console.log('Webpack production build')
