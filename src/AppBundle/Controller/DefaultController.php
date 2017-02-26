@@ -115,6 +115,11 @@ class DefaultController extends Controller
         $kernelDir = $this->get('kernel')->getRootDir();
         $locale = $this->get('request')->getLocale();
         $file = $kernelDir.'/Resources/translations/messages.'.$locale.'.yml';
+
+        if (!file_exists($file)) {
+            $file = $kernelDir.'/Resources/translations/messages.en.yml';
+        }
+
         $parsed = Yaml::parse(file_get_contents($file));
 
         return $parsed['home'];
