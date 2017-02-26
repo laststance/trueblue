@@ -32,4 +32,4 @@ parameters:
     session_expires: 604800
     assets_base_url:   "http://localhost:8080"
 
-   initial_import_debug: false
+    initial_import_debug: false
