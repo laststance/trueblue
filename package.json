@@ -6,7 +6,8 @@
   "private": true,
   "scripts": {
     "server": "webpack-dev-server --progress --colors --config webpack.config.js",
-    "test": "karma start",
+    "test": "karma start --single-run",
+    "test-server": "karma start",
     "lint": "eslint -c .eslintrc.json \"app/Resources/js/**/*.js?(x)\"",
     "fix": "eslint -c .eslintrc.json --fix \"app/Resources/js/**/*.js?(x)\"",
     "travis-js": " npm run lint && npm run test",
