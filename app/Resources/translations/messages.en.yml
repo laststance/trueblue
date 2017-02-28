@@ -11,3 +11,7 @@ home:
         btn:
             default: Import
             loading: Please wait a few minutes （＊´ω｀）
+
+error:
+    404: 404 not found.
+    500: Sorry, some error occurred.
