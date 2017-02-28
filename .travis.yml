@@ -41,6 +41,7 @@ script:
     - app/console lint:yaml @AppBundle
     - app/console lint:twig app/Resources
     - app/console lint:yaml app/config
+    - app/console doctrine:schema:validate
     - ./vendor/phpunit/phpunit/phpunit -c app/
     - ./bin/php-cs-fixer fix --diff --dry-run ./src/AppBundle/
     - npm run lint
