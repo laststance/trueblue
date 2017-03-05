@@ -12,7 +12,7 @@ var config = {
     output:  {
         path:       path.resolve('./web/assets/build/'),
         publicPath: 'http://localhost:8080/assets/build/',
-        filename:   path.resolve('./web/assets/build/js/[name].js')
+        filename:   path.resolve('/js/[name].js')
     },
     resolve: {
         extensions: ['.js', '.jsx']
