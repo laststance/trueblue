@@ -43,7 +43,7 @@ script:
     - app/console lint:twig app/Resources
     - app/console lint:yaml app/config
     - app/console doctrine:schema:validate --env=test
-    - ./vendor/phpunit/phpunit/phpunit -c app/
+    - ./bin/phpunit -c app/
     - ./bin/php-cs-fixer fix --diff --dry-run ./src/AppBundle/
     - npm run lint
     - npm run test
