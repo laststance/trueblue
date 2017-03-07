@@ -84,7 +84,7 @@ if (devBuild) {
     config.devtool = '#eval-source-map'
     config.devServer = {
         hot: true,
-        contentBase: path.resolve('./web/assets/build/'),
+        contentBase: path.resolve('./web/'),
         inline: true
     }
     config.plugins.push(
