@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import Lightbox from 'react-images'
 import { isSP } from '../utils/util'
+import Slider from 'react-slick'
+import Actions from '../actions/home'
 
 @autobind
 class Timeline extends React.Component {
@@ -84,25 +86,124 @@ class Timeline extends React.Component {
                 )
             })
         }
-
+    
+        /***
+         *
+         *フリックされたら発火
+         *  nextかprevかをcurrentSlide, nextSlideから判定
+         *      currentSlide === 2 && nextSlide === 0
+         *          next
+         *      currentSlide === 0 && nextSlide 2
+         *          prev
+         *      currentSlide < nextSlide
+         *          next
+         *      currentSlide > nextSlide
+         *          prev
+         *
+         *  nextなら
+         *      currentDateの次に当たる日付をtimelineDateListから探す
+         *          次のtimelineDateListがあれば
+         *              その値を引数にfetchDailyTweet()を起動する
+         *                  viewとcurrentDateが更新される
+         *          次のtimelineDateListがなければ
+         *              何もしない
+         *  prevなら
+         *      currentDateの前に当たる日付をtimelineDateListから探す
+         *          前のtimelineDateListがあれば
+         *              その値を引数にfetchDailyTweet()を起動する
+         *                  viewとcurrentDateが更新される
+         *      currentDateが更新される
+         *          前のtimelineDateListがなければ
+         *              何もしない
+         *
+         * @type {{beforeChange: beforeChange}}
+         */
+        const sliderSetting = {
+            beforeChange: (currentSlide, nextSlide) => {
+                const next = 'next'
+                const prev = 'prev'
+                var direction = next
+                switch (true) {
+                case currentSlide === 2 && nextSlide === 0:
+                    direction = next
+                    break
+                case currentSlide === 0 && nextSlide === 2:
+                    direction = prev
+                    break
+                case currentSlide < nextSlide:
+                    direction = next
+                    break
+                case currentSlide > nextSlide:
+                    direction = prev
+                    break
+                }
+        
+                if (direction === next) {
+                    const n = this.props.timelineDateList.indexOf(this.props.currentDate) - 1
+                    if (this.props.timelineDateList[n]) {
+                        this.props.fetchDailyTweet(this.props.username, this.props.timelineDateList[n])
+                    }
+                } else if (direction === prev) {
+                    const p = this.props.timelineDateList.indexOf(this.props.currentDate) + 1
+                    if (this.props.timelineDateList[p]) {
+                        this.props.fetchDailyTweet(this.props.username, this.props.timelineDateList[p])
+                    }
+                }
+            }
+        }
+        
         return (
-            <ReactCSSTransitionGroup
-                transitionName="timeline"
-                transitionEnterTimeout={500}
-                transitionLeaveTimeout={500}
-                id="timeline"
-                className="row"
-            >
-                {view}
-            </ReactCSSTransitionGroup>
+            <Slider {...sliderSetting}>
+                <section>
+                <ReactCSSTransitionGroup
+                    transitionName="timeline"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={500}
+                    id="timeline"
+                    className="row"
+                >
+                        {view}
+                </ReactCSSTransitionGroup></section>
+                <section>
+                <ReactCSSTransitionGroup
+                    transitionName="timeline"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={500}
+                    id="timeline"
+                    className="row"
+                >
+                        {view}
+                </ReactCSSTransitionGroup></section>
+                <section>
+                <ReactCSSTransitionGroup
+                    transitionName="timeline"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={500}
+                    id="timeline"
+                    className="row"
+                >
+                        {view}
+                </ReactCSSTransitionGroup></section>
+            </Slider>
         )
     }
 }
 
 const mapStateToProps = (state) => (
     {
-        timelineJson: state.homeState.timelineJson
+        timelineJson: state.homeState.timelineJson,
+        timelineDateList: state.homeState.timelineDateList,
+        currentDate: state.homeState.currentDate,
+        username: state.homeState.username,
     }
 )
 
-export default connect(mapStateToProps)(Timeline)
+function mapDispatchToProps(dispatch) {
+    return {
+        fetchDailyTweet: function (username, date) {
+            dispatch(Actions.fetchDailyTweet(username, date))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Timeline)
