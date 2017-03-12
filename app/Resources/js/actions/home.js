@@ -11,7 +11,8 @@ const Actions = {
             }).then((data) => {
                 dispatch({
                     type: Constants.DAILY_TWEET_RECEIVED,
-                    timelineJson: data
+                    timelineJson: data,
+                    currentDate: date
                 })
             })
         }

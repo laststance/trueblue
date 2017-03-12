@@ -32,7 +32,8 @@ class Header extends React.Component {
 
 const mapStateToProps = (state) => (
     {
-        username: state.homeState.username
+        username: state.homeState.username,
+        currentDate: state.homeState.currentDate
     }
 )
 
