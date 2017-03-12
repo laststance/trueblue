@@ -95,4 +95,12 @@ class CommonService
 
         return $tweets;
     }
+
+    /**
+     * @return string
+     */
+    public function getToday(): string
+    {
+        return (new \DateTime())->format('Y-m-d');
+    }
 }

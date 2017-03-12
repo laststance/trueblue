@@ -73,7 +73,7 @@ class DefaultController extends Controller
             $pastTimelines
         );
         // 今日のタイムライン表示ボタンに使用
-        array_unshift($timelineDateList, (new \DateTime())->format('Y-m-d'));
+        array_unshift($timelineDateList, $this->get('app.service.common_service')->getToday());
 
         return $timelineDateList;
     }
