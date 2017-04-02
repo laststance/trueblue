@@ -34,7 +34,7 @@ class DefaultController extends Controller
                 'props' => $this->get('jms_serializer')->serialize(
                     [
                         'timelineDateList' => $this->fetchPastTimelineDate($user),
-                        'timelineJson' => $this->fetchTodayTimeline($user),
+                        'timelineJson' => $this->fetchTimeline($user),
                         'username' => $user->getUsername(),
                         'isLogin' => $this->isGranted('ROLE_OAUTH_USER'),
                         'isShowImportModal' => $this->isShowImportModal(),
@@ -45,6 +45,31 @@ class DefaultController extends Controller
                 ),
             ]
         );
+    }
+
+    private function fetchTimeline(User $user): array
+    {
+        $res = [];
+        $res[] = $this->fetchTodayTimeline($user);
+
+        $repository = $this->get('doctrine.orm.default_entity_manager')->getRepository('AppBundle:PastTimeline');
+        $pastTimelines = $repository->findBy(
+            [
+                'user' => $user
+            ],
+            [
+                'date' => 'DESC'
+            ],
+            10
+        );
+
+        if (count($pastTimelines)) {
+            foreach ($pastTimelines as $item) {
+                $res[] = $item->getTimeline();
+            }
+        }
+
+        return $res;
     }
 
     private function fetchTodayTimeline(User $user): array

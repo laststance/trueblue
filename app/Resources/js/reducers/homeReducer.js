@@ -14,6 +14,7 @@ export default function homeReducer(state = initialState, action) {
     case Constants.FETCH_DAILY_TWEET:
         return {...state, fetching: true}
     case Constants.DAILY_TWEET_RECEIVED:
+        // push
         return {...state, timelineJson: action.timelineJson, fetching: false, currentDate: action.currentDate}
     case Constants.DONE_IMPORT:
         return {...state, isShowImportModal: false}
