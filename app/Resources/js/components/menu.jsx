@@ -38,7 +38,8 @@ class Menu extends React.Component {
     _OnChange(date) {
         this.setState({selectedDate: date[0]})
         this.close()
-        this.props.fetchDailyTweet(this.props.username, getYmdStr(date[0]))
+        // TODO TimeLineJsonの中にある選択された曜日にカーソルを合わせる
+        // this.props.fetchSingleDate(this.props.username, getYmdStr(date[0]))
     }
 
     render() {
@@ -75,8 +76,8 @@ const mapStateToProps = (state) => (
 
 function mapDispatchToProps(dispatch) {
     return {
-        fetchDailyTweet: function (username, date) {
-            dispatch(Actions.fetchDailyTweet(username, date))
+        fetchSingleDate: function (username, date) {
+            dispatch(Actions.fetchSingleDate(username, date))
         }
     }
 }

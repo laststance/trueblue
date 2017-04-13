@@ -86,12 +86,12 @@ class Timeline extends React.Component {
         //         if (direction === next) {
         //             const n = this.props.timelineDateList.indexOf(this.props.currentDate) - 1
         //             if (this.props.timelineDateList[n]) {
-        //                 this.props.fetchDailyTweet(this.props.username, this.props.timelineDateList[n])
+        //                 this.props.fetchSingleDate(this.props.username, this.props.timelineDateList[n])
         //             }
         //         } else if (direction === prev) {
         //             const p = this.props.timelineDateList.indexOf(this.props.currentDate) + 1
         //             if (this.props.timelineDateList[p]) {
-        //                 this.props.fetchDailyTweet(this.props.username, this.props.timelineDateList[p])
+        //                 this.props.fetchSingleDate(this.props.username, this.props.timelineDateList[p])
         //             }
         //         }
         //     }
@@ -200,8 +200,8 @@ const mapStateToProps = (state) => (
 
 function mapDispatchToProps(dispatch) {
     return {
-        fetchDailyTweet: function (username, date) {
-            dispatch(Actions.fetchDailyTweet(username, date))
+        fetchSingleDate: function (username, date) {
+            dispatch(Actions.fetchSingleDate(username, date))
         }
     }
 }

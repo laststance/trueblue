@@ -11,9 +11,9 @@ export const initialState = {
 
 export default function homeReducer(state = initialState, action) {
     switch (action.type) {
-    case Constants.FETCH_DAILY_TWEET:
+    case Constants.AJAX_FETCH_START:
         return {...state, fetching: true}
-    case Constants.DAILY_TWEET_RECEIVED:
+    case Constants.FETCH_SINGLE_DATE:
         // push
         return {...state, timelineJson: action.timelineJson, fetching: false, currentDate: action.currentDate}
     case Constants.DONE_IMPORT:
