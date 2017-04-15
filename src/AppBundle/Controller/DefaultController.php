@@ -33,7 +33,6 @@ class DefaultController extends Controller
             [
                 'props' => $this->get('jms_serializer')->serialize(
                     [
-                        'timelineDateList' => $this->fetchPastTimelineDate($user),
                         'timelineJson' => $this->fetchTimeline($user),
                         'username' => $user->getUsername(),
                         'isLogin' => $this->isGranted('ROLE_OAUTH_USER'),
@@ -51,21 +50,20 @@ class DefaultController extends Controller
     {
         $res = [];
         $res[] = $this->fetchTodayTimeline($user);
-
         $repository = $this->get('doctrine.orm.default_entity_manager')->getRepository('AppBundle:PastTimeline');
         $pastTimelines = $repository->findBy(
             [
-                'user' => $user
+                'user' => $user,
             ],
             [
-                'date' => 'DESC'
+                'date' => 'DESC',
             ],
             10
         );
 
         if (count($pastTimelines)) {
             foreach ($pastTimelines as $item) {
-                $res[] = $item->getTimeline();
+                $res[$item->getDate()->format('Y-m-d')] = $item->getTimeline();
             }
         }
 

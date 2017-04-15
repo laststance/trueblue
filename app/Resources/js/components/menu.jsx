@@ -8,6 +8,7 @@ import { ListGroup } from 'react-bootstrap'
 import Flatpickr from 'react-flatpickr'
 import { getYmdStr } from '../utils/util'
 import { isSP } from '../utils/util'
+import { getJsonKeys } from '../utils/util'
 
 import '../../sass/component/material_green.scss'
 import  '../../sass/component/modal.scss'
@@ -44,6 +45,7 @@ class Menu extends React.Component {
 
     render() {
         const bsSize = isSP() ? '' : 'large'
+        console.log(getJsonKeys(this.props.timelineJson))
         return (
             <div id="menu">
                 <Button className="menu-btn" bsSize={bsSize} onClick={this.open}>&#9776;</Button>
@@ -54,7 +56,7 @@ class Menu extends React.Component {
                     </Modal.Header>
                     <Modal.Body>
                         <ListGroup>
-                            <Flatpickr onChange={this._OnChange} options={{defaultDate: this.state.selectedDate, inline: true, enable: this.props.timelineDateList}} />
+                            <Flatpickr onChange={this._OnChange} options={{defaultDate: this.state.selectedDate, inline: true, enable: getJsonKeys(this.props.timelineJson)}} />
                         </ListGroup>
                     </Modal.Body>
                     <Modal.Footer>
@@ -68,7 +70,7 @@ class Menu extends React.Component {
 
 const mapStateToProps = (state) => (
     {
-        timelineDateList: state.homeState.timelineDateList,
+        timelineJson: state.homeState.timelineJson,
         username: state.homeState.username,
         isLogin: state.homeState.isLogin
     }
