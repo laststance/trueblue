@@ -109,7 +109,7 @@ class Timeline extends React.Component {
     }
     
     render() {
-        if (typeof this.props.timelineJson == 'undefined' || !this.props.timelineJson.length) {
+        if (typeof this.props.timelineJson == 'undefined') {
             return (
                 <div id="timeline" className="row">
                     <div className="row" style={{margin: 0}}>
