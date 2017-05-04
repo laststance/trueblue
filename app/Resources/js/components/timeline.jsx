@@ -98,8 +98,7 @@ class Timeline extends React.Component {
         // }
         
         const settings = {
-            arrows: false,
-            swipeToSlide: false
+            arrows: false
         }
         
         return (
