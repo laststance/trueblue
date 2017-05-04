@@ -49,7 +49,7 @@ class DefaultController extends Controller
     private function fetchTimeline(User $user): array
     {
         $res = [];
-        $res[] = $this->fetchTodayTimeline($user);
+        $res[$this->get('app.service.common_service')->getToday()] = $this->fetchTodayTimeline($user);
         $repository = $this->get('doctrine.orm.default_entity_manager')->getRepository('AppBundle:PastTimeline');
         $pastTimelines = $repository->findBy(
             [

@@ -12,10 +12,10 @@ class Timeline extends React.Component {
 
     // this.props.timelineJsonの個数分elementを格納したSliderをレンダリングする
     renderSliderRoot(timeline) {
-        const rows = timeline.map((e) => {
-            if (e.error) return
+        const rows = Object.keys(timeline).map((e) => {
+            if (timeline[e].error) return
             
-            const row = e.map(this.renderSliderRow)
+            const row = timeline[e].map(this.renderSliderRow)
             
             return (
                 <section>
