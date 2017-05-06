@@ -1,12 +1,12 @@
 import Constants from '../constants/home'
-import { getYmdStr } from '../utils/util'
+import {getYmdStr} from '../utils/util'
 
 export const initialState = {
-    fetching:         false,
+    fetching: false,
     timelineDateList: [],
-    timelineJson:     {},
-    username:         '',
-    currentDate:      getYmdStr(new Date())
+    timelineJson: {},
+    username: '',
+    currentDate: getYmdStr(new Date())
 }
 
 export default function homeReducer(state = initialState, action) {
