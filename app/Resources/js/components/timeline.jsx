@@ -39,74 +39,13 @@ class Timeline extends React.Component {
                 </section>
             )
         })
-    
-        /***
-         *
-         *フリックされたら発火
-         *  nextかprevかをcurrentSlide, nextSlideから判定
-         *      currentSlide === 2 && nextSlide === 0
-         *          next
-         *      currentSlide === 0 && nextSlide 2
-         *          prev
-         *      currentSlide < nextSlide
-         *          next
-         *      currentSlide > nextSlide
-         *          prev
-         *
-         *  nextなら
-         *      currentDateの次に当たる日付をtimelineDateListから探す
-         *          次のtimelineDateListがあれば
-         *              その値を引数にfetchDailyTweet()を起動する
-         *                  viewとcurrentDateが更新される
-         *          次のtimelineDateListがなければ
-         *              何もしない
-         *  prevなら
-         *      currentDateの前に当たる日付をtimelineDateListから探す
-         *          前のtimelineDateListがあれば
-         *              その値を引数にfetchDailyTweet()を起動する
-         *                  viewとcurrentDateが更新される
-         *      currentDateが更新される
-         *          前のtimelineDateListがなければ
-         *              何もしない
-         *
-         * @type {{beforeChange: beforeChange}}
-         */
-        // const sliderSetting = {
-        //     beforeChange: (currentSlide, nextSlide) => {
-        //         const next = 'next'
-        //         const prev = 'prev'
-        //         var direction = next
-        //         switch (true) {
-        //         case currentSlide === 2 && nextSlide === 0:
-        //             direction = next
-        //             break
-        //         case currentSlide === 0 && nextSlide === 2:
-        //             direction = prev
-        //             break
-        //         case currentSlide < nextSlide:
-        //             direction = next
-        //             break
-        //         case currentSlide > nextSlide:
-        //             direction = prev
-        //             break
-        //         }
-        //
-        //         if (direction === next) {
-        //             const n = this.props.timelineDateList.indexOf(this.props.currentDate) - 1
-        //             if (this.props.timelineDateList[n]) {
-        //                 this.props.fetchSingleDate(this.props.username, this.props.timelineDateList[n])
-        //             }
-        //         } else if (direction === prev) {
-        //             const p = this.props.timelineDateList.indexOf(this.props.currentDate) + 1
-        //             if (this.props.timelineDateList[p]) {
-        //                 this.props.fetchSingleDate(this.props.username, this.props.timelineDateList[p])
-        //             }
-        //         }
-        //     }
-        // }
+
         const settings = {
             arrows: false,
-            slickGoTo: this.state.currentIndex
+            slickGoTo: this.state.currentIndex,
+            afterChange: (currentSlide) => {
+                this.props.setCurrentIndex(currentSlide)
+            }
         }
         
         return (
@@ -210,6 +149,9 @@ function mapDispatchToProps(dispatch) {
     return {
         fetchSingleDate: function (username, date) {
             dispatch(Actions.fetchSingleDate(username, date))
+        },
+        setCurrentIndex: function (i) {
+            dispatch(Actions.setCurrentIndex(i))
         }
     }
 }
