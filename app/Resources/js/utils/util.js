@@ -21,10 +21,8 @@ export function isSP() {
 export function getJsonKeys(json) {
     var r = []
     for (const k in json) {
-        console.log(k)
         r.push(k)
     }
     
-    console.log(r)
     return r
 }

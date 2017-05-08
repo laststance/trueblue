@@ -41,11 +41,11 @@ class Menu extends React.Component {
         this.close()
         // TODO TimeLineJsonの中にある選択された曜日にカーソルを合わせる
         // this.props.fetchSingleDate(this.props.username, getYmdStr(date[0]))
+        this.props.setCurrentDate(getYmdStr(date[0]))
     }
 
     render() {
         const bsSize = isSP() ? '' : 'large'
-        console.log(getJsonKeys(this.props.timelineJson))
         return (
             <div id="menu">
                 <Button className="menu-btn" bsSize={bsSize} onClick={this.open}>&#9776;</Button>
@@ -80,6 +80,9 @@ function mapDispatchToProps(dispatch) {
     return {
         fetchSingleDate: function (username, date) {
             dispatch(Actions.fetchSingleDate(username, date))
+        },
+        setCurrentDate: function (ymd) {
+            return dispatch(Actions.setCurrentDate(ymd))
         }
     }
 }

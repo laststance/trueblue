@@ -39,6 +39,14 @@ const Actions = {
     },
     selectDateOnCalender: () => {
         // TODO Jsonで保持している範囲外のページに該当するアイテムが選択された場合はAJAXで新たに取得する
+    },
+    setCurrentDate: (ymd) => {
+        return dispatch => {
+            dispatch({
+                type: Constants.SET_CURRENT_DATE,
+                currentDate: ymd
+            })
+        }
     }
 }
 
