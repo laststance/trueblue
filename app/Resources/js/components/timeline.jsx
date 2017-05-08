@@ -9,7 +9,15 @@ import Actions from '../actions/home'
 
 @autobind
 class Timeline extends React.Component {
-
+    constructor(props) {
+        super(props)
+        this.state = {
+            currentIndex: this.props.currentIndex
+        }
+    }
+    componentWillReceiveProps(props) {
+        this.setState({currentIndex: props.currentIndex})
+    }
     // this.props.timelineJsonの個数分elementを格納したSliderをレンダリングする
     renderSliderRoot(timeline) {
         const rows = Object.keys(timeline).map((e) => {
@@ -96,13 +104,13 @@ class Timeline extends React.Component {
         //         }
         //     }
         // }
-        
         const settings = {
-            arrows: false
+            arrows: false,
+            slickGoTo: this.state.currentIndex
         }
         
         return (
-            <Slider {...settings}>
+            <Slider ref='slider' {...settings}>
                 {rows}
             </Slider>
         )
@@ -193,6 +201,7 @@ const mapStateToProps = (state) => (
         timelineJson: state.homeState.timelineJson,
         timelineDateList: state.homeState.timelineDateList,
         currentDate: state.homeState.currentDate,
+        currentIndex: state.homeState.currentIndex,
         username: state.homeState.username,
     }
 )

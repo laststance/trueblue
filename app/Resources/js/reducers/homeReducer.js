@@ -1,12 +1,13 @@
 import Constants from '../constants/home'
 import {getYmdStr} from '../utils/util'
+import {getObjectKeyIndex} from '../utils/util'
 
 export const initialState = {
     fetching: false,
-    timelineDateList: [],
     timelineJson: {},
     username: '',
-    currentDate: getYmdStr(new Date())
+    currentDate: getYmdStr(new Date()),
+    currentIndex: 0
 }
 
 export default function homeReducer(state = initialState, action) {
@@ -19,7 +20,7 @@ export default function homeReducer(state = initialState, action) {
     case Constants.DONE_IMPORT:
         return {...state, isShowImportModal: false}
     case Constants.SET_CURRENT_DATE:
-        return {...state, currentDate: action.currentDate}
+        return {...state, currentDate: action.currentDate, currentIndex: getObjectKeyIndex(state.timelineJson, action.currentDate)}
 
     default:
         return state
