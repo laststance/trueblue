@@ -41,11 +41,13 @@ class Timeline extends React.Component {
         })
 
         const settings = {
-            arrows: false,
-            slickGoTo: this.state.currentIndex,
-            afterChange: (currentSlide) => {
+            arrows: false, // disable prev|next ui button
+            initialSlide: this.state.currentIndex, // rows displayed at initial loading
+            slickGoTo: this.state.currentIndex, // reactive changed store.currentIndex at other Action (etc. calender UI)
+            afterChange: (currentSlide) => { // when swipe row, update store.currentIndex & store.currentDate
                 this.props.setCurrentIndex(currentSlide)
-            }
+            },
+            lazyLoad: true
         }
         
         return (
