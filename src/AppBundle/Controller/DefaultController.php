@@ -56,9 +56,9 @@ class DefaultController extends Controller
                 'user' => $user,
             ],
             [
-                'date' => 'DESC',
+                'date' => 'ASC',
             ],
-            10
+            100
         );
 
         if (count($pastTimelines)) {
