@@ -19,8 +19,7 @@ class Menu extends React.Component {
     constructor(props, context) {
         super(props, context)
         this.state = {
-            showModal: false,
-            selectedDate: new Date()
+            showModal: false
         }
     }
 
@@ -37,7 +36,6 @@ class Menu extends React.Component {
     }
 
     _OnChange(date) {
-        this.setState({selectedDate: date[0]})
         this.close()
         this.props.setCurrentDate(getYmdStr(date[0]))
     }
@@ -54,7 +52,7 @@ class Menu extends React.Component {
                     </Modal.Header>
                     <Modal.Body>
                         <ListGroup>
-                            <Flatpickr onChange={this._OnChange} options={{defaultDate: this.state.selectedDate, inline: true, enable: getJsonKeys(this.props.timelineJson)}} />
+                            <Flatpickr onChange={this._OnChange} options={{defaultDate: this.props.currentDate, inline: true, enable: getJsonKeys(this.props.timelineJson)}} />
                         </ListGroup>
                     </Modal.Body>
                     <Modal.Footer>
@@ -70,7 +68,8 @@ const mapStateToProps = (state) => (
     {
         timelineJson: state.homeState.timelineJson,
         username: state.homeState.username,
-        isLogin: state.homeState.isLogin
+        isLogin: state.homeState.isLogin,
+        currentDate: state.homeState.currentDate
     }
 )
 
