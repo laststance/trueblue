@@ -39,8 +39,6 @@ class Menu extends React.Component {
     _OnChange(date) {
         this.setState({selectedDate: date[0]})
         this.close()
-        // TODO TimeLineJsonの中にある選択された曜日にカーソルを合わせる
-        // this.props.fetchSingleDate(this.props.username, getYmdStr(date[0]))
         this.props.setCurrentDate(getYmdStr(date[0]))
     }
 
