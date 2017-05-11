@@ -40,3 +40,17 @@ export function getObjectKeyIndex(obj, keyToFind) {
 
     return null
 }
+
+export function getObjectKeyByIndex(obj, index) {
+    var i = 0, key
+
+    for (key in obj) {
+        if (i == index) {
+            return key
+        }
+
+        i++
+    }
+
+    return null
+}

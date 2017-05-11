@@ -6,6 +6,7 @@ import Lightbox from 'react-images'
 import { isSP } from '../utils/util'
 import Slider from 'react-slick'
 import Actions from '../actions/home'
+import {getObjectKeyByIndex} from '../utils/util'
 
 @autobind
 class Timeline extends React.Component {
@@ -55,6 +56,7 @@ class Timeline extends React.Component {
             slickGoTo: this.state.currentIndex, // reactive changed store.currentIndex at other Action (etc. calender UI)
             afterChange: (currentSlide) => { // when swipe row, update store.currentIndex & store.currentDate
                 this.props.setCurrentIndex(currentSlide)
+                this.props.setCurrentDate(getObjectKeyByIndex(this.props.timelineJson,  currentSlide))
             },
             lazyLoad: true
         }
@@ -163,6 +165,8 @@ function mapDispatchToProps(dispatch) {
         },
         setCurrentIndex: function (i) {
             dispatch(Actions.setCurrentIndex(i))
+        },setCurrentDate: function (ymd) {
+            dispatch(Actions.setCurrentDate(ymd))
         }
     }
 }
