@@ -24,7 +24,7 @@ class Timeline extends React.Component {
         const rows = Object.keys(timeline).map((e) => {
             if (timeline[e].error) return (
                 <div id="timeline" className="row">
-                    <div className="row" style={{margin: 0}}>
+                    <div style={{margin: 0}}>
                         <section
                             className='timeline-item error-msg col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10'>
                             <p>tweet not found.</p>
