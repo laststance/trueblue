@@ -12,7 +12,7 @@ class Header extends React.Component {
             <Navbar className="index-header">
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <a href="/">DailyTweet(β)</a>
+                        <a href="/">TrueBlue(β)</a>
                     </Navbar.Brand>
                     <Navbar.Text>
                         @{this.props.username} {getKaomoji()}
