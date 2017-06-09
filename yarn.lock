@@ -2115,10 +2115,6 @@ enhanced-resolve@^3.0.0:
     object-assign "^4.0.1"
     tapable "^0.2.5"
 
-enquire.js@^2.1.1:
-  version "2.1.5"
-  resolved "https://registry.yarnpkg.com/enquire.js/-/enquire.js-2.1.5.tgz#8135598cbd70dd15eee2d39e1967f2eea06e1e8a"
-
 enquire.js@^2.1.6:
   version "2.1.6"
   resolved "https://registry.yarnpkg.com/enquire.js/-/enquire.js-2.1.6.tgz#3e8780c9b8b835084c3f60e166dbc3c2a3c89814"
@@ -5037,14 +5033,6 @@ react-redux@^5.0.3:
     lodash-es "^4.2.0"
     loose-envify "^1.1.0"
 
-react-responsive-mixin@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/react-responsive-mixin/-/react-responsive-mixin-0.4.0.tgz#9504218a17d49346d9a09a1f5945f629afdb624b"
-  dependencies:
-    can-use-dom "^0.1.0"
-    enquire.js "^2.1.1"
-    json2mq "^0.2.0"
-
 react-router-redux@^4.0.0:
   version "4.0.8"
   resolved "https://registry.yarnpkg.com/react-router-redux/-/react-router-redux-4.0.8.tgz#227403596b5151e182377dab835b5d45f0f8054e"
@@ -5062,28 +5050,6 @@ react-router@^3.0.2:
 react-scrolllock@^1.0.1:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/react-scrolllock/-/react-scrolllock-1.0.5.tgz#66829739cf70e2380fd39b9b2f1215b059bcfa05"
-
-react-slick@^0.14.7:
-  version "0.14.7"
-  resolved "https://registry.yarnpkg.com/react-slick/-/react-slick-0.14.7.tgz#5035f8b070f26fd18be1f6d3adc7dd2ab4b0bc2f"
-  dependencies:
-    classnames "^2.2.5"
-    json2mq "^0.2.0"
-    object-assign "^4.1.0"
-    react-responsive-mixin "^0.4.0"
-    slick-carousel "^1.6.0"
-
-"react-slick@git+ssh://git@github.com:ryota-murakami/react-slick.git":
-  version "0.14.11"
-  resolved "git+ssh://git@github.com:ryota-murakami/react-slick.git#d886d87152d6110221a9ad4c5747c3f2d5dc6c7a"
-  dependencies:
-    can-use-dom "^0.1.0"
-    classnames "^2.2.5"
-    create-react-class "^15.5.2"
-    enquire.js "^2.1.6"
-    json2mq "^0.2.0"
-    object-assign "^4.1.0"
-    slick-carousel "^1.6.0"
 
 react-transform-hmr@^1.0.1:
   version "1.0.4"
@@ -5451,6 +5417,18 @@ run-async@^0.1.0:
 rx-lite@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/rx-lite/-/rx-lite-3.1.2.tgz#19ce502ca572665f3b647b10939f97fd1615f102"
+
+ryotamurakami-react-slick@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/ryotamurakami-react-slick/-/ryotamurakami-react-slick-0.0.1.tgz#6a31d3a5f1b42d84905d50f5b58e2eb34dc1275e"
+  dependencies:
+    can-use-dom "^0.1.0"
+    classnames "^2.2.5"
+    create-react-class "^15.5.2"
+    enquire.js "^2.1.6"
+    json2mq "^0.2.0"
+    object-assign "^4.1.0"
+    slick-carousel "^1.6.0"
 
 safe-buffer@^5.0.1:
   version "5.0.1"
