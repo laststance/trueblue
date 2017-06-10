@@ -35,7 +35,7 @@ class Menu extends React.Component {
         location.href = '/logout'
     }
 
-    _OnChange(date) {
+    onClickSpecificDate(date) {
         this.close()
         this.props.setCurrentDate(getYmdStr(date[0]))
     }
@@ -52,7 +52,7 @@ class Menu extends React.Component {
                     </Modal.Header>
                     <Modal.Body>
                         <ListGroup>
-                            <Flatpickr onChange={this._OnChange} options={{defaultDate: this.props.currentDate, inline: true, enable: getJsonKeys(this.props.timelineJson)}} />
+                            <Flatpickr onChange={this.onClickSpecificDate} options={{defaultDate: this.props.currentDate, inline: true, enable: getJsonKeys(this.props.timelineJson)}} />
                         </ListGroup>
                     </Modal.Body>
                     <Modal.Footer>
