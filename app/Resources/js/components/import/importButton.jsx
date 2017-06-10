@@ -63,10 +63,10 @@ const mapStateToProps = (state) => (
 
 function mapDispatchToProps(dispatch) {
     return {
-        debugImport: function () {
+        debugImport: () => {
             dispatch(Actions.debugImport())
         },
-        import: function () {
+        import: () => {
             dispatch(Actions.import())
         }
     }
