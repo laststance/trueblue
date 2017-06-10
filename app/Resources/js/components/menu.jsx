@@ -75,10 +75,10 @@ const mapStateToProps = (state) => (
 
 function mapDispatchToProps(dispatch) {
     return {
-        fetchSingleDate: function (username, date) {
+        fetchSingleDate: (username, date) => {
             dispatch(Actions.fetchSingleDate(username, date))
         },
-        setCurrentDate: function (ymd) {
+        setCurrentDate: (ymd) => {
             return dispatch(Actions.setCurrentDate(ymd))
         }
     }
