@@ -122,9 +122,9 @@ class PhpIniRequirement extends Requirement
      *                                         or a callback function receiving the configuration value as parameter to determine the fulfillment of the requirement
      * @param bool          $approveCfgAbsence If true the Requirement will be fulfilled even if the configuration option does not exist, i.e. ini_get() returns false.
      *                                         This is helpful for abandoned configs in later PHP versions or configs of an optional extension, like Suhosin.
-     *                                         Example: You require a config to be true but PHP later removes this config and defaults it to true internally.
-     * @param string|null   $testMessage       The message for testing the requirement (when null and $evaluation is a boolean a default message is derived)
-     * @param string|null   $helpHtml          The help text formatted in HTML for resolving the problem (when null and $evaluation is a boolean a default help is derived)
+     *                                         Example: You require a config to be true but PHP later removes this config and defaults it to true internally
+     * @param string|null   $testMessage       The message for testing the requirement (when null and $evaluation is a boolean a main message is derived)
+     * @param string|null   $helpHtml          The help text formatted in HTML for resolving the problem (when null and $evaluation is a boolean a main help is derived)
      * @param string|null   $helpText          The help text (when null, it will be inferred from $helpHtml, i.e. stripped from HTML tags)
      * @param bool          $optional          Whether this is only an optional recommendation not a mandatory requirement
      */
@@ -168,7 +168,7 @@ class PhpIniRequirement extends Requirement
  */
 class RequirementCollection implements IteratorAggregate
 {
-    private $requirements = array();
+    private $requirements = [];
 
     /**
      * Gets the current RequirementCollection as an Iterator.
@@ -224,9 +224,9 @@ class RequirementCollection implements IteratorAggregate
      *                                         or a callback function receiving the configuration value as parameter to determine the fulfillment of the requirement
      * @param bool          $approveCfgAbsence If true the Requirement will be fulfilled even if the configuration option does not exist, i.e. ini_get() returns false.
      *                                         This is helpful for abandoned configs in later PHP versions or configs of an optional extension, like Suhosin.
-     *                                         Example: You require a config to be true but PHP later removes this config and defaults it to true internally.
-     * @param string        $testMessage       The message for testing the requirement (when null and $evaluation is a boolean a default message is derived)
-     * @param string        $helpHtml          The help text formatted in HTML for resolving the problem (when null and $evaluation is a boolean a default help is derived)
+     *                                         Example: You require a config to be true but PHP later removes this config and defaults it to true internally
+     * @param string        $testMessage       The message for testing the requirement (when null and $evaluation is a boolean a main message is derived)
+     * @param string        $helpHtml          The help text formatted in HTML for resolving the problem (when null and $evaluation is a boolean a main help is derived)
      * @param string|null   $helpText          The help text (when null, it will be inferred from $helpHtml, i.e. stripped from HTML tags)
      */
     public function addPhpIniRequirement($cfgName, $evaluation, $approveCfgAbsence = false, $testMessage = null, $helpHtml = null, $helpText = null)
@@ -242,9 +242,9 @@ class RequirementCollection implements IteratorAggregate
      *                                         or a callback function receiving the configuration value as parameter to determine the fulfillment of the requirement
      * @param bool          $approveCfgAbsence If true the Requirement will be fulfilled even if the configuration option does not exist, i.e. ini_get() returns false.
      *                                         This is helpful for abandoned configs in later PHP versions or configs of an optional extension, like Suhosin.
-     *                                         Example: You require a config to be true but PHP later removes this config and defaults it to true internally.
-     * @param string        $testMessage       The message for testing the requirement (when null and $evaluation is a boolean a default message is derived)
-     * @param string        $helpHtml          The help text formatted in HTML for resolving the problem (when null and $evaluation is a boolean a default help is derived)
+     *                                         Example: You require a config to be true but PHP later removes this config and defaults it to true internally
+     * @param string        $testMessage       The message for testing the requirement (when null and $evaluation is a boolean a main message is derived)
+     * @param string        $helpHtml          The help text formatted in HTML for resolving the problem (when null and $evaluation is a boolean a main help is derived)
      * @param string|null   $helpText          The help text (when null, it will be inferred from $helpHtml, i.e. stripped from HTML tags)
      */
     public function addPhpIniRecommendation($cfgName, $evaluation, $approveCfgAbsence = false, $testMessage = null, $helpHtml = null, $helpText = null)
@@ -279,7 +279,7 @@ class RequirementCollection implements IteratorAggregate
      */
     public function getRequirements()
     {
-        $array = array();
+        $array = [];
         foreach ($this->requirements as $req) {
             if (!$req->isOptional()) {
                 $array[] = $req;
@@ -296,7 +296,7 @@ class RequirementCollection implements IteratorAggregate
      */
     public function getFailedRequirements()
     {
-        $array = array();
+        $array = [];
         foreach ($this->requirements as $req) {
             if (!$req->isFulfilled() && !$req->isOptional()) {
                 $array[] = $req;
@@ -313,7 +313,7 @@ class RequirementCollection implements IteratorAggregate
      */
     public function getRecommendations()
     {
-        $array = array();
+        $array = [];
         foreach ($this->requirements as $req) {
             if ($req->isOptional()) {
                 $array[] = $req;
@@ -330,7 +330,7 @@ class RequirementCollection implements IteratorAggregate
      */
     public function getFailedRecommendations()
     {
-        $array = array();
+        $array = [];
         foreach ($this->requirements as $req) {
             if (!$req->isFulfilled() && $req->isOptional()) {
                 $array[] = $req;
@@ -432,7 +432,7 @@ class SymfonyRequirements extends RequirementCollection
         );
 
         if (version_compare($installedPhpVersion, self::REQUIRED_PHP_VERSION, '>=')) {
-            $timezones = array();
+            $timezones = [];
             foreach (DateTimeZone::listAbbreviations() as $abbreviations) {
                 foreach ($abbreviations as $abbreviation) {
                     $timezones[$abbreviation['timezone_id']] = true;
@@ -441,8 +441,8 @@ class SymfonyRequirements extends RequirementCollection
 
             $this->addRequirement(
                 isset($timezones[@date_default_timezone_get()]),
-                sprintf('Configured default timezone "%s" must be supported by your installation of PHP', @date_default_timezone_get()),
-                'Your default timezone is not supported by PHP. Check for typos in your <strong>php.ini</strong> file and have a look at the list of deprecated timezones at <a href="http://php.net/manual/en/timezones.others.php">http://php.net/manual/en/timezones.others.php</a>.'
+                sprintf('Configured main timezone "%s" must be supported by your installation of PHP', @date_default_timezone_get()),
+                'Your main timezone is not supported by PHP. Check for typos in your <strong>php.ini</strong> file and have a look at the list of deprecated timezones at <a href="http://php.net/manual/en/timezones.others.php">http://php.net/manual/en/timezones.others.php</a>.'
             );
         }
 

@@ -4,7 +4,7 @@ namespace AppBundle\Tests\Controller;
 
 use AppBundle\Tests\Controller\Traits\FixtureTrait;
 
-class DefaultControllerTest extends MyControllerTestCase
+class MainControllerTest extends MyControllerTestCase
 {
     use FixtureTrait;
 

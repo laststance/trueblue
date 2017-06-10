@@ -8,14 +8,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Yaml\Yaml;
 
-class DefaultController extends Controller
+class MainController extends Controller
 {
     /**
      * @Route("/", name="indexpage")
      */
     public function indexAction()
     {
-        return $this->render(':default:index.html.twig');
+        return $this->render(':main:index.html.twig');
     }
 
     /**
@@ -29,7 +29,7 @@ class DefaultController extends Controller
         }
 
         return $this->render(
-            ':default:home.html.twig',
+            ':main:home.html.twig',
             [
                 'props' => $this->get('jms_serializer')->serialize(
                     [
