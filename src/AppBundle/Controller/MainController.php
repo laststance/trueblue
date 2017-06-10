@@ -55,8 +55,9 @@ class MainController extends Controller
                 'user' => $user,
             ],
             [
-                'date' => 'ASC',
-            ]
+                'date' => 'DESC',
+            ],
+            31
         );
 
         if (count($pastTimelines)) {
