@@ -101,5 +101,10 @@ main {
 		section {
 			height: 100%;
 		}
+
+		// Head Line
+		div.landing > div > div > div > div > section {
+			margin-top: 200px;
+		}
 	}
 }

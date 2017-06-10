@@ -31,6 +31,12 @@ a {
 	align-items: center;
 }
 
+.flex-horizontally-center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
 // modal close btn
 body > div > div > div.fade.in.modal > div > div > div.modal-header > button > span {
 	display: block;
