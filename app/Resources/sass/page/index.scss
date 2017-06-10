@@ -88,7 +88,11 @@ main {
 
 // tablet
 @media (min-width: 34em) and (max-width: 47.9em) {
-
+  main {
+    section {
+      padding: 30px;
+    }
+  }
 }
 
 // smart phone
