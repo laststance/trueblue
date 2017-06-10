@@ -7,6 +7,17 @@ import { getKaomoji } from '../utils/util'
 
 @autobind
 class Header extends React.Component {
+    constructor(props, context) {
+        super(props, context)
+        this.state = {
+            kaomoji: ''
+        }
+    }
+
+    componentWillMount() {
+        this.setState({kaomoji: getKaomoji()})
+    }
+
     render() {
         return (
             <Navbar className="index-header">
@@ -15,7 +26,7 @@ class Header extends React.Component {
                         <a href="/">TrueBlue(β)</a>
                     </Navbar.Brand>
                     <Navbar.Text>
-                        @{this.props.username} {getKaomoji()}
+                        @{this.props.username} {this.state.kaomoji}
                     </Navbar.Text>
                     <Nav>
                         <NavItem>
