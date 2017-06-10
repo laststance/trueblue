@@ -1,9 +1,9 @@
 import autobind from 'autobind-decorator'
 import React from 'react'
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import Lightbox from 'react-images'
-import { isSP } from '../utils/util'
+import {isSP} from '../utils/util'
 import Slider from 'ryotamurakami-react-slick'
 import Actions from '../actions/home'
 import {getObjectKeyByIndex} from '../utils/util'
@@ -16,9 +16,11 @@ class Timeline extends React.Component {
             currentIndex: this.props.currentIndex
         }
     }
+
     componentWillReceiveProps(props) {
         this.setState({currentIndex: props.currentIndex})
     }
+
     // this.props.timelineJsonの個数分elementを格納したSliderをレンダリングする
     renderSliderRoot(timeline) {
         const rows = Object.keys(timeline).map((e) => {
@@ -32,9 +34,9 @@ class Timeline extends React.Component {
                     </div>
                 </div>
             )
-            
+
             const row = timeline[e].map(this.renderSliderRow)
-            
+
             return (
                 <section>
                     <ReactCSSTransitionGroup
@@ -56,18 +58,18 @@ class Timeline extends React.Component {
             slickGoTo: this.state.currentIndex, // reactive changed store.currentIndex at other Action (etc. calender UI)
             afterChange: (currentSlide) => { // when swipe row, update store.currentIndex & store.currentDate
                 this.props.setCurrentIndex(currentSlide)
-                this.props.setCurrentDate(getObjectKeyByIndex(this.props.timelineJson,  currentSlide))
+                this.props.setCurrentDate(getObjectKeyByIndex(this.props.timelineJson, currentSlide))
             },
             lazyLoad: true
         }
-        
+
         return (
             <Slider ref='slider' {...settings}>
                 {rows}
             </Slider>
         )
     }
-    
+
     render() {
         if (typeof this.props.timelineJson == 'undefined') {
             return (
@@ -81,10 +83,10 @@ class Timeline extends React.Component {
                 </div>
             )
         }
-        
+
         return this.renderSliderRoot(this.props.timelineJson)
     }
-    
+
     renderSliderRow(tweet, index) {
         const date = new Date(tweet.created_at)
         return (
@@ -101,17 +103,19 @@ class Timeline extends React.Component {
                                 <span className="user-name">{tweet.user.name}</span>
                                 <span className="screen-name">@{tweet.user.screen_name}</span>
                                 <p className="text" dangerouslySetInnerHTML={{__html: tweet.text}}></p>
-                                {( () => { // TODO mediaコンポーネントに切り出す
+                                {(() => { // TODO mediaコンポーネントに切り出す
                                     // URLのtwitter card的なものを表示
                                     let urls = tweet.entities.urls
-                                    if(urls.length > 0) {
-                                        const url = 'https://hatenablog-parts.com/embed?url=' + urls[urls.length-1].url
-                                        return <p style={{margin:'10px 0'}}><iframe src={url} className="urlcard" scrolling="no" frameBorder="0" style={{width:'100%', height:'155px', maxWidth:'500px'}}></iframe></p>
+                                    if (urls.length > 0) {
+                                        const url = 'https://hatenablog-parts.com/embed?url=' + urls[urls.length - 1].url
+                                        return <p style={{margin: '10px 0'}}>
+                                            <iframe src={url} className="urlcard" scrolling="no" frameBorder="0" style={{width: '100%', height: '155px', maxWidth: '500px'}}></iframe>
+                                        </p>
                                     }
-                                    
+
                                     let media = [] // 画像や動画が添付されていないtweetではtweet.entities.mediaがundefinedになる
                                     if (typeof tweet.entities.media !== 'undefined') media = tweet.entities.media
-                                    if(media.length > 0) {
+                                    if (media.length > 0) {
                                         // 画像URL → imgタグ
                                         let images = []
                                         for (var i = 0; i < media.length; i++) {
@@ -121,12 +125,12 @@ class Timeline extends React.Component {
                                         }
                                         if (images.length > 0) {
                                             const imgtags = images.map((i) => {
-                                                return <img src={i.src} style={{width: '100%'}} key={i.id} />
+                                                return <img src={i.src} style={{width: '100%'}} key={i.id}/>
                                             })
                                             const h = isSP() ? '300px' : '400px'
                                             return <section style={{
                                                 overflow: 'hidden',
-                                                height:   h,
+                                                height: h,
                                                 position: 'relative',
                                                 margin: '10px 0'
                                             }}>
@@ -160,12 +164,12 @@ const mapStateToProps = (state) => (
 
 function mapDispatchToProps(dispatch) {
     return {
-        fetchSingleDate: function (username, date) {
+        fetchSingleDate: (username, date) => {
             dispatch(Actions.fetchSingleDate(username, date))
         },
-        setCurrentIndex: function (i) {
+        setCurrentIndex: (i) => {
             dispatch(Actions.setCurrentIndex(i))
-        },setCurrentDate: function (ymd) {
+        }, setCurrentDate: (ymd) => {
             dispatch(Actions.setCurrentDate(ymd))
         }
     }
