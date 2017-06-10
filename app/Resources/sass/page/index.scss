@@ -72,6 +72,18 @@ img {
 
 main {
 	color: #3C4C52;
+
+    .description {
+      background-color: oldlace;
+      div > h6 {
+        margin-top: 50px;
+      }
+      padding-bottom: 50px;
+
+      .navigate-btn {
+        margin-top: 40px;
+      }
+    }
 }
 
 // tablet

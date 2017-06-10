@@ -1,4 +1,6 @@
 index:
+    home: Home
+    login: Login with Twitter
     overview: TrueBlue is archive tweets on every other day.
     description:
         first: TrueBlueは1日毎につぶやきを収集、カレンダーで見やすくする管理するサービスです。
