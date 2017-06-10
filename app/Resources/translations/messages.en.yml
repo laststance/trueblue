@@ -10,7 +10,7 @@ home:
         desc: Import tweets for the last 2 weeks (=ﾟωﾟ)ﾉ
         btn:
             default: Import
-            loading: Please wait a few minutes （＊´ω｀）
+            loading: Please wait a few minutes, You can kill time with other apps（＊´ω｀)
 
 error:
     404: 404 not found.
