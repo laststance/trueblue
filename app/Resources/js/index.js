@@ -3,6 +3,8 @@ import $ from 'jquery'
 import '../sass/common/common.scss'
 import '../sass/page/index.scss'
 
+import './utils/ServiceWorker'
+
 // スマホのタッチスクリーンでボタンのhoverイベントを有効にする
 $('.menu-btn').on('touchstart', function() {
     const thisAnchor = $(this)

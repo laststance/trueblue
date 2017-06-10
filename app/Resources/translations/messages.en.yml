@@ -18,7 +18,7 @@ index:
         other4: 読み取り権限のみ。このアプリから自動でTwitterに投稿する事はありません。
         device-header: 対応デバイス
         device1: PC(Google Chrome)
-        device2: Andriod Chrome(バナーからホーム画面へ追加してご利用ください)
+        device2: Andriod(Chromeのメニューからホーム画面へ追加してご利用ください)
         device3: iPhone(Safariからホーム画面追加を行いご利用ください)
         develop-header: 開発情報
         developer1: このアプリは
