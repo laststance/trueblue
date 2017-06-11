@@ -57,7 +57,7 @@ class MainController extends Controller
             [
                 'date' => 'DESC',
             ],
-            31
+            30
         );
 
         if (count($pastTimelines)) {
