@@ -33,7 +33,7 @@ framework:
     fragments:       ~
     http_method_override: true
     assets:
-        version: 'v0002'
+        version: 'v0003'
         packages:
             webpack: ~
 
