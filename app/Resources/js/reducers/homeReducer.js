@@ -7,7 +7,7 @@ export const initialState = {
     timelineJson: {},
     username: '',
     currentDate: getYmdStr(new Date()),
-    currentIndex: 0
+    currentIndex: 1
 }
 
 export default function homeReducer(state = initialState, action) {
