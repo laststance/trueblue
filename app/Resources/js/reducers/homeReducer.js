@@ -5,8 +5,7 @@ export const initialState = {
     fetching: false,
     timelineJson: {},
     username: '',
-    currentDate: getYmdStr(new Date()),
-    currentIndex: 0
+    currentDate: getYmdStr(new Date()), // @TODO
 }
 
 export default function homeReducer(state = initialState, action) {
