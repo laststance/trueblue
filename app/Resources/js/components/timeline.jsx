@@ -59,9 +59,9 @@ class Timeline extends React.Component {
             arrows: false, // disable prev|next ui button
             initialSlide: this.state.currentIndex, // rows displayed at initial loading
             slickGoTo: this.state.currentIndex, // reactive changed store.currentIndex at other Action (etc. calender UI)
-            afterChange: (currentSlide) => { // when swipe row, update store.currentIndex & store.currentDate
-                this.props.setCurrentIndex(currentSlide)
-                this.props.setCurrentDate(currentSlide)
+            afterChange: (currentSlideIntegerNumber) => { // when swipe row, update store.currentIndex & store.currentDate
+                this.props.setCurrentIndex(currentSlideIntegerNumber)
+                this.props.setCurrentDate(currentSlideIntegerNumber)
             },
             lazyLoad: true
         }
