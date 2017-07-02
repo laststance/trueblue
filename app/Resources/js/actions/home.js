@@ -37,11 +37,11 @@ const Actions = {
             })
         }
     },
-    setCurrentDate: (ymd) => {
+    setCurrentDate: (ymdString) => {
         return dispatch => {
             dispatch({
                 type: Constants.SET_CURRENT_DATE,
-                currentDate: ymd
+                currentDate: ymdString
             })
         }
     },

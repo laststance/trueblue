@@ -61,7 +61,7 @@ class Timeline extends React.Component {
             slickGoTo: this.state.currentIndex, // reactive changed store.currentIndex at other Action (etc. calender UI)
             afterChange: (currentSlideIntegerNumber) => { // when swipe row, update store.currentIndex & store.currentDate
                 this.props.setCurrentIndex(currentSlideIntegerNumber)
-                this.props.setCurrentDate(currentSlideIntegerNumber)
+                this.props.setCurrentDate(Object.keys(this.props.timelineJson[currentSlideIntegerNumber]).toString()) // YmdString
             },
             lazyLoad: true
         }
@@ -172,8 +172,8 @@ function mapDispatchToProps(dispatch) {
         },
         setCurrentIndex: (i) => {
             dispatch(Actions.setCurrentIndex(i))
-        }, setCurrentDate: (ymd) => {
-            dispatch(Actions.setCurrentDate(ymd))
+        }, setCurrentDate: (ymdString) => {
+            dispatch(Actions.setCurrentDate(ymdString))
         }
     }
 }
