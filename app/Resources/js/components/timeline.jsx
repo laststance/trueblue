@@ -23,10 +23,10 @@ class Timeline extends React.Component {
 
     // this.props.timelineJsonの個数分elementを格納したSliderをレンダリングする
     renderSliderRoot(timeline) {
-        const rows = timeline.map((oneday) => {
-
-            for (var prop in oneday) {
-                if (oneday[prop].error) {
+        const alldaysTimeline = timeline.map((oneday) => {
+            const prop = Object.keys(oneday);
+            const onedayContents = oneday[prop];
+                if (onedayContents.error) {
                     return (
                         <div id="timeline" className="row">
                             <div style={{margin: 0}}>
@@ -39,8 +39,7 @@ class Timeline extends React.Component {
                     )
                 }
 
-                var row = oneday[prop].map(this.renderSliderRow);
-            }
+            const onedayTimelines = onedayContents.map(this.renderSliderRow);
 
             return (
                 <section>
@@ -51,7 +50,7 @@ class Timeline extends React.Component {
                         id="timeline"
                         className="row"
                     >
-                        {row}
+                        {onedayTimelines}
                     </ReactCSSTransitionGroup>
                 </section>
             )
@@ -70,7 +69,7 @@ class Timeline extends React.Component {
 
         return (
             <Slider ref='slider' {...settings}>
-                {rows}
+                {alldaysTimeline}
             </Slider>
         )
     }
