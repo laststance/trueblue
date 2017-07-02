@@ -26,7 +26,7 @@ export default function configureStore(props) {
             isShowImportModal,
             isInitialImportDebug,
             transText,
-            currentIndex: 0
+            currentIndex: 30
         }
     }
 
