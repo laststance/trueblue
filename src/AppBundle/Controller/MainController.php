@@ -27,7 +27,6 @@ class MainController extends Controller
         if (is_null($user)) {
             return $this->redirectToRoute('indexpage');
         }
-        dump($this->fetchTimeline($user));
 
         return $this->render(
             ':main:home.html.twig',
