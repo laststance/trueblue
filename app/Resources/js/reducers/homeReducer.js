@@ -19,7 +19,7 @@ export default function homeReducer(state = initialState, action) {
     case Constants.DONE_IMPORT:
         return {...state, isShowImportModal: false}
     case Constants.SET_CURRENT_DATE:
-        return {...state, currentDate: action.currentDate, currentIndex: getObjectKeyIndex(state.timelineJson, action.currentDate)}
+        return {...state, currentDate: action.currentDate, currentIndex: state.timelineJson}
     case Constants.SET_CURRENT_INDEX:
         return {...state, currentIndex: action.index}
 
