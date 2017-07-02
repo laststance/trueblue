@@ -2,8 +2,8 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import reducer from '../reducers/home'
 import { initialStates } from '../reducers/home'
-import {getObjectKeyIndex} from '../utils/util'
-import {getYmdStr} from '../utils/util'
+import { getObjectKeyIndex } from '../utils/util'
+import { getYmdStr } from '../utils/util'
 
 export default function configureStore(props) {
 
