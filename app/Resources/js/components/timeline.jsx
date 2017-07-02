@@ -24,7 +24,6 @@ class Timeline extends React.Component {
         return this.renderAlldaysSlider(this.props.timelineJson)
     }
 
-    // this.props.timelineJsonの個数分elementを格納したSliderをレンダリングする
     renderAlldaysSlider(timeline) {
         const alldaysTimeline = timeline.map((oneday) => {
             const prop = Object.keys(oneday);
