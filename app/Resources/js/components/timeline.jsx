@@ -39,7 +39,7 @@ class Timeline extends React.Component {
                     )
                 }
 
-            const onedayTimelines = onedayContents.map(this.renderSliderRow);
+            const onedayTimelines = onedayContents.map(this.renderOnedaySlider);
 
             return (
                 <section>
@@ -91,7 +91,7 @@ class Timeline extends React.Component {
         return this.renderSliderRoot(this.props.timelineJson)
     }
 
-    renderSliderRow(tweet, index) {
+    renderOnedaySlider(tweet, index) {
         const date = new Date(tweet.created_at)
         return (
             <div className="col-lg-offset-1 col-lg-10" key={tweet.id_str}>
