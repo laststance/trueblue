@@ -21,11 +21,11 @@ class Timeline extends React.Component {
     }
 
     render() {
-        return this.renderSliderRoot(this.props.timelineJson)
+        return this.renderAlldaysSlider(this.props.timelineJson)
     }
 
     // this.props.timelineJsonの個数分elementを格納したSliderをレンダリングする
-    renderSliderRoot(timeline) {
+    renderAlldaysSlider(timeline) {
         const alldaysTimeline = timeline.map((oneday) => {
             const prop = Object.keys(oneday);
             const onedayContents = oneday[prop];
