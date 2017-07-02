@@ -68,6 +68,7 @@ class MainController extends Controller
         );
 
         if (count($pastTimelines)) {
+            $pastTimelines = array_reverse($pastTimelines);
             foreach ($pastTimelines as $item) {
                 $res[] = [$item->getDate()->format('Y-m-d') => $item->getTimeline()];
             }
