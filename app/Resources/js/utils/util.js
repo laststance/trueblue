@@ -27,16 +27,3 @@ export function getJsonKeys(json) {
     return r
 }
 
-export function getObjectKeyByIndex(obj, index) {
-    var i = 0, key
-
-    for (key in obj) {
-        if (i == index) {
-            return key
-        }
-
-        i++
-    }
-
-    return null
-}
