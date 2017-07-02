@@ -1,6 +1,5 @@
 import Constants from '../constants/home'
 import { getYmdStr } from '../utils/util'
-import { getObjectKeyIndex } from '../utils/util'
 
 export const initialState = {
     fetching: false,

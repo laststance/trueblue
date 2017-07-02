@@ -27,20 +27,6 @@ export function getJsonKeys(json) {
     return r
 }
 
-export function getObjectKeyIndex(obj, keyToFind) {
-    var i = 0, key
-
-    for (key in obj) {
-        if (key == keyToFind) {
-            return i
-        }
-
-        i++
-    }
-
-    return null
-}
-
 export function getObjectKeyByIndex(obj, index) {
     var i = 0, key
 

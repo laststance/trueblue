@@ -46,11 +46,6 @@ const Actions = {
         }
     },
     setCurrentIndex: (i) => {
-        // timeline json index start at 1
-        if (i === 0) {
-            i = 1
-        }
-
         return dispatch => {
             dispatch({
                 type: Constants.SET_CURRENT_INDEX,
