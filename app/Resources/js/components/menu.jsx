@@ -52,7 +52,7 @@ class Menu extends React.Component {
                     </Modal.Header>
                     <Modal.Body>
                         <ListGroup>
-                            <Flatpickr onChange={this.onClickSpecificDate} options={{defaultDate: this.props.currentDate, inline: true, enable: getJsonKeys(this.props.timelineJson)}} />
+                            <Flatpickr onChange={this.onClickSpecificDate} options={{defaultDate: this.props.currentDate, inline: true, enable: this.props.timelineJson}} />
                         </ListGroup>
                     </Modal.Body>
                     <Modal.Footer>

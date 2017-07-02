@@ -17,12 +17,3 @@ export function isSP() {
         return false
     }
 }
-
-export function getJsonKeys(json) {
-    var r = []
-    for (const k in json) {
-        r.push(k)
-    }
-    
-    return r
-}
