@@ -20,6 +20,10 @@ class Timeline extends React.Component {
         this.setState({currentIndex: props.currentIndex})
     }
 
+    render() {
+        return this.renderSliderRoot(this.props.timelineJson)
+    }
+
     // this.props.timelineJsonの個数分elementを格納したSliderをレンダリングする
     renderSliderRoot(timeline) {
         const alldaysTimeline = timeline.map((oneday) => {
@@ -71,10 +75,6 @@ class Timeline extends React.Component {
                 {alldaysTimeline}
             </Slider>
         )
-    }
-
-    render() {
-        return this.renderSliderRoot(this.props.timelineJson)
     }
 
     renderOnedaySlider(tweet, index) {
