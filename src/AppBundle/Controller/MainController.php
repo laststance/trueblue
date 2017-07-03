@@ -28,12 +28,15 @@ class MainController extends Controller
             return $this->redirectToRoute('indexpage');
         }
 
+        $timelineJson = $this->fetchTimeline($user);
+
         return $this->render(
             ':main:home.html.twig',
             [
                 'props' => $this->get('jms_serializer')->serialize(
                     [
-                        'timelineJson' => $this->fetchTimeline($user),
+                        'timelineJson' => $timelineJson,
+                        'timelineDateList' => $this->fetchTimelineDateList($timelineJson),
                         'username' => $user->getUsername(),
                         'isLogin' => $this->isGranted('ROLE_OAUTH_USER'),
                         'isShowImportModal' => $this->isShowImportModal(),
@@ -74,6 +77,18 @@ class MainController extends Controller
         }
 
         $res = array_reverse($res);
+
+        return $res;
+    }
+
+    private function fetchTimelineDateList(array $timelineJson): array
+    {
+        $res = [];
+
+        // 一段下のarray keys一覧を取得
+        foreach ($timelineJson as $item) {
+            $res[] = key($item);
+        }
 
         return $res;
     }

@@ -52,7 +52,7 @@ class Menu extends React.Component {
                     </Modal.Header>
                     <Modal.Body>
                         <ListGroup>
-                            <Flatpickr onChange={this.onClickSpecificDate} options={{defaultDate: this.props.currentDate, inline: true, enable: this.props.timelineJson}} />
+                            <Flatpickr onChange={this.onClickSpecificDate} options={{defaultDate: this.props.currentDate, inline: true, enable: this.props.timelineDateList}} />
                         </ListGroup>
                     </Modal.Body>
                     <Modal.Footer>
@@ -69,7 +69,8 @@ const mapStateToProps = (state) => (
         timelineJson: state.homeState.timelineJson,
         username: state.homeState.username,
         isLogin: state.homeState.isLogin,
-        currentDate: state.homeState.currentDate
+        currentDate: state.homeState.currentDate,
+        timelineDateList: state.homeState.timelineDateList
     }
 )
 
