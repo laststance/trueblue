@@ -8,7 +8,6 @@ import { ListGroup } from 'react-bootstrap'
 import Flatpickr from 'react-flatpickr'
 import { getYmdStr } from '../utils/util'
 import { isSP } from '../utils/util'
-import { getJsonKeys } from '../utils/util'
 
 import '../../sass/component/material_green.scss'
 import  '../../sass/component/modal.scss'
