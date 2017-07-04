@@ -36,8 +36,9 @@ class Menu extends React.Component {
 
     onClickSpecificDate(date) {
         this.close()
-        const ymdString = getYmdStr(date[0]);
-        this.props.setCurrentDate(ymdString)
+        this.props.moveToSpecificDate(date);
+        // const ymdString = getYmdStr(date[0]);
+        // this.props.setCurrentDate(ymdString)
     }
 
     render() {
@@ -76,6 +77,9 @@ const mapStateToProps = (state) => (
 
 function mapDispatchToProps(dispatch) {
     return {
+        moveToSpecificDate: (date) => {
+            dispatch(Actions.moveToSpecificDate(date))
+        }
     }
 }
 

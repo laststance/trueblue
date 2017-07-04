@@ -52,6 +52,14 @@ const Actions = {
                 currentIndex: i
             })
         }
+    },
+    // menu.jsx
+    moveToSpecificDate: (dateObj) => {
+        return dispatch => {
+            dispatch({
+                type: Constants.MOVE_TO_SPECIFIC_DATE
+            })
+        }
     }
 }
 
