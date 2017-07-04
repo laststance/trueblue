@@ -41,8 +41,15 @@ const Actions = {
         return dispatch => {
             dispatch({
                 type: Constants.SET_CURRENT_DATE_AND_INDEX,
-                currentDate: ymdString,
-                currentIndex: currentIndexNumber
+                currentDate: ymdString
+            })
+        }
+    },
+    setCurrentIndex: (i) => {
+        return dispatch => {
+            dispatch({
+                type: Constants.SET_CURRENT_INDEX,
+                currentIndex: i
             })
         }
     }
