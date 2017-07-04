@@ -1,4 +1,5 @@
 import Constants from '../constants/home'
+import { getYmdStr } from '../utils/util'
 
 const Actions = {
     fetchSingleDate: (username, date) => {
@@ -55,9 +56,14 @@ const Actions = {
     },
     // menu.jsx
     moveToSpecificDate: (dateObj) => {
+        const ymdString = getYmdStr(dateObj[0]);
+        const i = 10; // TODO
+
         return dispatch => {
             dispatch({
-                type: Constants.MOVE_TO_SPECIFIC_DATE
+                type: Constants.MOVE_TO_SPECIFIC_DATE,
+                currentDate: ymdString,
+                currentIndex: i
             })
         }
     }

@@ -22,6 +22,8 @@ export default function homeReducer(state = initialState, action) {
         return {...state, currentDate: action.currentDate}
     case Constants.SET_CURRENT_INDEX:
         return {...state, currentIndex: action.currentIndex}
+    case Constants.MOVE_TO_SPECIFIC_DATE:
+        return {...state,currentDate: action.currentDate, currentIndex: action.currentIndex}
 
     default:
         return state
