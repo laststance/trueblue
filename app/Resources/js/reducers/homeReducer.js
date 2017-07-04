@@ -19,7 +19,7 @@ export default function homeReducer(state = initialState, action) {
     case Constants.DONE_IMPORT:
         return {...state, isShowImportModal: false}
     case Constants.SET_CURRENT_DATE_AND_INDEX:
-        return {...state, currentDate: action.currentDate}
+        return {...state, currentDate: action.currentDate, currentIndex: action.currentIndex}
 
     default:
         return state
