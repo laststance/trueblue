@@ -37,7 +37,7 @@ class Menu extends React.Component {
     onClickSpecificDate(date) {
         this.close()
         const ymdString = getYmdStr(date[0]);
-        this.props.setCurrentDateAndIndex(ymdString)
+        this.props.setCurrentDate(ymdString)
     }
 
     render() {
@@ -79,8 +79,8 @@ function mapDispatchToProps(dispatch) {
         fetchSingleDate: (username, date) => {
             dispatch(Actions.fetchSingleDate(username, date))
         },
-        setCurrentDateAndIndex: (ymdString) => {
-            return dispatch(Actions.setCurrentDateAndIndex(ymdString))
+        setCurrentDate: (ymdString) => {
+            return dispatch(Actions.setCurrentDate(ymdString))
         }
     }
 }

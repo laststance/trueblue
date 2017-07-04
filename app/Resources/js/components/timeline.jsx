@@ -65,7 +65,7 @@ class Timeline extends React.Component {
             afterChange: (currentSlideIntegerNumber) => { // when swipe row, update store.currentIndex & store.currentDate
                 this.props.setCurrentIndex(currentSlideIntegerNumber)
                 const ymdString = Object.keys(this.props.timelineJson[currentSlideIntegerNumber]).toString()
-                this.props.setCurrentDateAndIndex(ymdString)
+                this.props.setCurrentDate(ymdString)
             },
             lazyLoad: true
         }
@@ -159,8 +159,8 @@ function mapDispatchToProps(dispatch) {
         },
         setCurrentIndex: (i) => {
             dispatch(Actions.setCurrentIndex(i))
-        }, setCurrentDateAndIndex: (ymdString) => {
-            dispatch(Actions.setCurrentDateAndIndex(ymdString))
+        }, setCurrentDate: (ymdString) => {
+            dispatch(Actions.setCurrentDate(ymdString))
         }
     }
 }

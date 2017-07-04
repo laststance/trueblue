@@ -37,7 +37,7 @@ const Actions = {
             })
         }
     },
-    setCurrentDateAndIndex: (ymdString, currentIndexNumber) => {
+    setCurrentDate: (ymdString, currentIndexNumber) => {
         return dispatch => {
             dispatch({
                 type: Constants.SET_CURRENT_DATE_AND_INDEX,
