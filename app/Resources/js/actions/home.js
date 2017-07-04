@@ -40,7 +40,7 @@ const Actions = {
     setCurrentDate: (ymdString) => {
         return dispatch => {
             dispatch({
-                type: Constants.SET_CURRENT_DATE_AND_INDEX,
+                type: Constants.SET_CURRENT_DATE,
                 currentDate: ymdString
             })
         }
