@@ -1,6 +1,7 @@
 import Constants from '../constants/home'
 import { getYmdStr } from '../utils/util'
 
+// TODO Require Export?
 export const initialState = {
     fetching: false,
     timelineJson: {},
