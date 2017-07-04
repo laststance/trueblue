@@ -78,8 +78,8 @@ function mapDispatchToProps(dispatch) {
         fetchSingleDate: (username, date) => {
             dispatch(Actions.fetchSingleDate(username, date))
         },
-        setCurrentDate: (ymd) => {
-            return dispatch(Actions.setCurrentDate(ymd))
+        setCurrentDateAndIndex: (ymdString) => {
+            return dispatch(Actions.setCurrentDateAndIndex(ymdString))
         }
     }
 }
