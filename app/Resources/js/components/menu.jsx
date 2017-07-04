@@ -36,7 +36,8 @@ class Menu extends React.Component {
 
     onClickSpecificDate(date) {
         this.close()
-        this.props.setCurrentDate(getYmdStr(date[0]))
+        const ymdString = getYmdStr(date[0]);
+        this.props.setCurrentDateAndIndex(ymdString)
     }
 
     render() {
