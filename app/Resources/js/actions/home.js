@@ -55,15 +55,29 @@ const Actions = {
         }
     },
     // menu.jsx
-    moveToSpecificDate: (dateObj) => {
-        const ymdString = getYmdStr(dateObj[0]);
-        const i = 10; // TODO
+    moveToSpecificDate: (dateObj, timelineJson) => {
+        const ymdString = getYmdStr(dateObj[0])
+        var currentIndex = undefined
+        var i = 0
+        for (var key in timelineJson) {
+            if (timelineJson.hasOwnProperty(key)) {
+                var itemDateString = Object.keys(timelineJson[key]).toString()
+                if (itemDateString == ymdString) {
+                    currentIndex = i
+                    break
+                }
+                i++
+            } else {
+                console.error('error. in moveToSpecificDate() Action')
+            }
+        }
+        if (typeof currentIndex == 'undefined') console.error('invalid arg set. in moveToSpecificDate() Action')
 
         return dispatch => {
             dispatch({
                 type: Constants.MOVE_TO_SPECIFIC_DATE,
                 currentDate: ymdString,
-                currentIndex: i
+                currentIndex: currentIndex
             })
         }
     }
