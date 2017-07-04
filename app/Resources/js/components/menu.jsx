@@ -6,7 +6,6 @@ import { Button } from 'react-bootstrap'
 import { Modal } from 'react-bootstrap'
 import { ListGroup } from 'react-bootstrap'
 import Flatpickr from 'react-flatpickr'
-import { getYmdStr } from '../utils/util'
 import { isSP } from '../utils/util'
 
 import '../../sass/component/material_green.scss'
@@ -37,8 +36,6 @@ class Menu extends React.Component {
     onClickSpecificDate(date) {
         this.close()
         this.props.moveToSpecificDate(date);
-        // const ymdString = getYmdStr(date[0]);
-        // this.props.setCurrentDate(ymdString)
     }
 
     render() {
