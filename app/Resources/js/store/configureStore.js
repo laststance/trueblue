@@ -26,7 +26,7 @@ export default function configureStore(props) {
             isShowImportModal,
             isInitialImportDebug,
             transText,
-            currentIndex: 30
+            currentIndex: 30 // initial display at latest date
         }
     }
 
