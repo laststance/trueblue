@@ -2,7 +2,6 @@ import autobind from 'autobind-decorator'
 import React from 'react'
 import { connect } from 'react-redux'
 import { Modal } from 'react-bootstrap'
-import { Button } from 'react-bootstrap'
 import ImportButton from './importButton'
 
 @autobind
