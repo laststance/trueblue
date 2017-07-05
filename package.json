@@ -6,11 +6,11 @@
   "private": true,
   "scripts": {
     "server": "webpack-dev-server --progress --colors --config webpack.config.js",
-    "test": "karma start --single-run",
-    "test-server": "karma start",
+    "single-run-karma": "karma start --single-run",
+    "karma": "karma start",
     "lint": "eslint -c .eslintrc.json \"app/Resources/js/**/*.js?(x)\"",
     "fix": "eslint -c .eslintrc.json --fix \"app/Resources/js/**/*.js?(x)\"",
-    "travis-js": " npm run lint && npm run test",
+    "travis-js": " npm run lint && npm run single-run-karma",
     "travis-symfony": "app/console security:check && app/console lint:yaml app/config && app/console lint:yaml @AppBundle && app/console lint:twig app/Resources && app/console doctrine:schema:validate",
     "travis-php": "./bin/php-cs-fixer fix --diff ./src/AppBundle/ && ./bin/phpunit -c app/",
     "travis-all": "npm run travis-js && npm run travis-symfony && npm run travis-php"

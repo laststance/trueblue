@@ -46,7 +46,7 @@ script:
     - ./bin/phpunit -c app/
     - ./bin/php-cs-fixer fix --diff --dry-run ./src/AppBundle/
     - npm run lint
-    - npm run test
+    - npm run karma
 
 notifications:
     email: false
