@@ -3,7 +3,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import Lightbox from 'react-images'
-import {isSP} from '../utils/util'
+import { isSP } from '../utils/util'
 import Slider from 'ryotamurakami-react-slick'
 import Actions from '../actions/home'
 
