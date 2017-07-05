@@ -35,7 +35,7 @@ class Menu extends React.Component {
 
     onClickSpecificDate(date) {
         this.close()
-        this.props.moveToSpecificDate(date, this.props.timelineJson);
+        this.props.moveToSpecificDate(date, this.props.timelineJson)
     }
 
     render() {

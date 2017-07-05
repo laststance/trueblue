@@ -1,9 +1,8 @@
 {
     "env": {
         "browser": true,
-        "es6": true,
         "commonjs": true,
-        "node": true
+        "es6": true
     },
     "extends": "eslint:recommended",
     "parser": "babel-eslint",
@@ -34,8 +33,7 @@
             "error",
             "never"
         ],
-        "react/jsx-uses-vars": 1,
-        "no-console": "off",
-        "no-unused-vars": "off"
+        "no-unused-vars": "off",
+        "no-console": "off"
     }
 }

@@ -26,10 +26,10 @@ class Timeline extends React.Component {
 
     renderAlldaysSlider(timeline) {
         const alldaysTimeline = timeline.map((oneday) => {
-            const prop = Object.keys(oneday);
-            const onedayContents = oneday[prop];
-                if (onedayContents.error) {
-                    return (
+            const prop = Object.keys(oneday)
+            const onedayContents = oneday[prop]
+            if (onedayContents.error) {
+                return (
                         <div id="timeline" className="row">
                             <div style={{margin: 0}}>
                                 <section
@@ -38,10 +38,10 @@ class Timeline extends React.Component {
                                 </section>
                             </div>
                         </div>
-                    )
-                }
+                )
+            }
 
-            const onedayTimelines = onedayContents.map(this.renderOnedaySlider);
+            const onedayTimelines = onedayContents.map(this.renderOnedaySlider)
 
             return (
                 <section>
