@@ -8,7 +8,7 @@
     "server": "webpack-dev-server --progress --colors --config webpack.config.js",
     "single-run-karma": "karma start --single-run",
     "karma": "karma start",
-    "lint": "eslint -c .eslintrc.json \"app/Resources/js/**/*.js?(x)\"",
+    "eslint": "eslint -c .eslintrc.json \"app/Resources/js/**/*.js?(x)\"",
     "fix": "eslint -c .eslintrc.json --fix \"app/Resources/js/**/*.js?(x)\"",
     "travis-js": " npm run lint && npm run single-run-karma",
     "travis-symfony": "app/console security:check && app/console lint:yaml app/config && app/console lint:yaml @AppBundle && app/console lint:twig app/Resources && app/console doctrine:schema:validate",

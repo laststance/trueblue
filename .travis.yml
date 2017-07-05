@@ -45,7 +45,7 @@ script:
     - app/console doctrine:schema:validate --env=test
     - ./bin/phpunit -c app/
     - ./bin/php-cs-fixer fix --diff --dry-run ./src/AppBundle/
-    - npm run lint
+    - npm run eslint
     - npm run karma
 
 notifications:
