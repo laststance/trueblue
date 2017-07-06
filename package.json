@@ -1,8 +1,4 @@
 {
-  "main": "index.js",
-  "directories": {
-    "test": "tests"
-  },
   "jest": {
     "rootDir": "jest"
   },
