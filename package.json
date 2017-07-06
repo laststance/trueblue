@@ -3,6 +3,9 @@
   "directories": {
     "test": "tests"
   },
+  "jest": {
+    "rootDir": "jest"
+  },
   "private": true,
   "scripts": {
     "server": "webpack-dev-server --progress --colors --config webpack.config.js",
