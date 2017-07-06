@@ -15,13 +15,9 @@
     "travis-php": "./bin/php-cs-fixer fix --diff ./src/AppBundle/ && ./bin/phpunit -c app/",
     "travis-all": "npm run travis-js && npm run travis-symfony && npm run travis-php"
   },
-  "keywords": [
-    "symfony"
-  ],
   "author": {
     "name": "Ryota Murakami"
   },
-  "license": "MIT",
   "dependencies": {
     "autobind-decorator": "^1.3.4",
     "babel": "^6.5.2",
