@@ -11,7 +11,7 @@ const initialState = {
 
 describe('homeReducer', () => {
     it('undefined Action', () => {
-        expect(homeReducer(undefined, {})).toEqual(
+        expect(homeReducer(initialState, {})).toEqual(
             initialState
         )
     })
