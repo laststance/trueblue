@@ -1,6 +1,6 @@
 import homeReducer from '../app/Resources/js/reducers/homeReducer'
 import Constants from '../app/Resources/js/constants/home'
-import {getYmdStr} from '../app/Resources/js/utils/util'
+import { getYmdStr } from '../app/Resources/js/utils/util'
 
 const initialState = {
     fetching: false,
