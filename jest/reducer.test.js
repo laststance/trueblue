@@ -10,7 +10,7 @@ const initialState = {
 }
 
 describe('homeReducer', () => {
-    it('not give action type, return initial state', () => {
+    it('undefined Action', () => {
         expect(homeReducer(undefined, {})).toEqual(
             initialState
         )
