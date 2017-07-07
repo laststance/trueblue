@@ -8,6 +8,7 @@
     "single-run-karma": "karma start --single-run",
     "karma": "karma start",
     "jest": "jest",
+    "jest-watch": "jest --watch",
     "eslint": "eslint -c .eslintrc.json \"app/Resources/js/**/*.js?(x)\"",
     "eslint-fix": "eslint -c .eslintrc.json --fix \"app/Resources/js/**/*.js?(x)\"",
     "travis-js": " npm run eslint && npm run single-run-karma && npm run jest",
