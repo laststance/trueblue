@@ -59,4 +59,15 @@ describe('homeReducer', () => {
             expectState
         )
     })
+    it('SET_CURRENT_INDEX', () => {
+        initialState.currentIndex = 10
+        const expectState = initialState
+
+        expect(homeReducer(initialState, {
+            type: Constants.SET_CURRENT_INDEX,
+            currentIndex: 10
+        })).toEqual(
+            expectState
+        )
+    })
 })
