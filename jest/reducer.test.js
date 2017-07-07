@@ -15,7 +15,7 @@ describe('homeReducer', () => {
             initialState
         )
     })
-    it('give AJAX_FETCH_START', () => {
+    it('AJAX_FETCH_START', () => {
         initialState.fetching = true
 
         expect(homeReducer(undefined, {
