@@ -48,4 +48,15 @@ describe('homeReducer', () => {
             expectState
         )
     })
+    it('SET_CURRENT_DATE', () => {
+        initialState.currentDate = '2020-12-20'
+        const expectState = initialState
+
+        expect(homeReducer(initialState, {
+            type: Constants.SET_CURRENT_DATE,
+            currentDate: '2020-12-20'
+        })).toEqual(
+            expectState
+        )
+    })
 })
