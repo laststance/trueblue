@@ -37,4 +37,15 @@ describe('homeReducer', () => {
             expectState
         )
     })
+    it('DONE_IMPORT', () => {
+        initialState.isShowImportModal = false
+        const expectState = initialState
+
+        expect(homeReducer(initialState, {
+            type: Constants.DONE_IMPORT,
+            currentDate: initialState.currentDate
+        })).toEqual(
+            expectState
+        )
+    })
 })
