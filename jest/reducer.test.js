@@ -25,4 +25,16 @@ describe('homeReducer', () => {
             expectState
         )
     })
+    it('FETCH_SINGLE_DATE', () => {
+        initialState.fetching = false
+        const expectState = initialState
+
+        expect(homeReducer(initialState, {
+            type: Constants.FETCH_SINGLE_DATE,
+            timelineJson: {},
+            currentDate: initialState.currentDate
+        })).toEqual(
+            expectState
+        )
+    })
 })
