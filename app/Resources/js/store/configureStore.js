@@ -2,6 +2,7 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import reducer from '../reducers/home'
 import { initialStates } from '../reducers/home'
+import { getYmdStr } from '../utils/util'
 
 export default function configureStore(props) {
 
@@ -26,7 +27,8 @@ export default function configureStore(props) {
             isShowImportModal,
             isInitialImportDebug,
             transText,
-            currentIndex: 30 // initial display at latest date
+            currentIndex: 30, // initial display at latest date,
+            currentDate: getYmdStr(new Date())
         }
     }
 
