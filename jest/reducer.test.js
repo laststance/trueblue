@@ -1,6 +1,6 @@
 import homeReducer from '../app/Resources/js/reducers/homeReducer'
 import Constants from '../app/Resources/js/constants/home'
-import { getYmdStr } from '../app/Resources/js/utils/util'
+import {getYmdStr} from '../app/Resources/js/utils/util'
 
 const initialState = {
     fetching: false,
@@ -17,11 +17,12 @@ describe('homeReducer', () => {
     })
     it('AJAX_FETCH_START', () => {
         initialState.fetching = true
+        const expectState = initialState
 
         expect(homeReducer(undefined, {
             type: Constants.AJAX_FETCH_START
         })).toEqual(
-            initialState
+            expectState
         )
     })
 })
