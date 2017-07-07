@@ -19,7 +19,7 @@ describe('homeReducer', () => {
         initialState.fetching = true
         const expectState = initialState
 
-        expect(homeReducer(undefined, {
+        expect(homeReducer(initialState, {
             type: Constants.AJAX_FETCH_START
         })).toEqual(
             expectState
