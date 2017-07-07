@@ -70,4 +70,17 @@ describe('homeReducer', () => {
             expectState
         )
     })
+    it('MOVE_TO_SPECIFIC_DATE', () => {
+        initialState.currentIndex = 10
+        initialState.currentDate = '2020-12-20'
+        const expectState = initialState
+
+        expect(homeReducer(initialState, {
+            type: Constants.MOVE_TO_SPECIFIC_DATE,
+            currentIndex: 10,
+            currentDate: '2020-12-20'
+        })).toEqual(
+            expectState
+        )
+    })
 })
