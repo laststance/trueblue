@@ -43,4 +43,26 @@ describe('components', () => {
             expect(enzymeWrapper.find('#menu').exists()).toBe(true)
         })
     })
+
+    describe('Timeline', () => {
+        function timelineSetup() {
+            const props = {
+                timelineJson: {},
+                timelineDateList: [],
+                currentDate: '2020-12-12',
+                currentIndex: 1
+            }
+
+            // TODO https://github.com/WickyNilliams/enquire.js/issues/82
+            // const enzymeWrapper = shallow(<Timeline {...props}/>)
+
+            return enzymeWrapper
+        }
+
+        it('shallow smoke test', () => {
+            // const enzymeWrapper = timelineSetup()
+
+            expect(true).toBe(true)
+        })
+    })
 })

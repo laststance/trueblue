@@ -8,7 +8,7 @@ import Slider from 'ryotamurakami-react-slick'
 import Actions from '../actions/home'
 
 @autobind
-class Timeline extends React.Component {
+export class Timeline extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
