@@ -12,7 +12,7 @@ import '../../sass/component/material_green.scss'
 import  '../../sass/component/modal.scss'
 
 @autobind
-class Menu extends React.Component {
+export class Menu extends React.Component {
 
     constructor(props, context) {
         super(props, context)
@@ -39,7 +39,7 @@ class Menu extends React.Component {
     }
 
     render() {
-        const bsSize = isSP() ? '' : 'large'
+        const bsSize = isSP() ? undefined : 'large'
         return (
             <div id="menu">
                 <Button className="menu-btn" bsSize={bsSize} onClick={this.open}>&#9776;</Button>
