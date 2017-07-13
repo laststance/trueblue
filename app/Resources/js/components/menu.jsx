@@ -65,7 +65,6 @@ class Menu extends React.Component {
 const mapStateToProps = (state) => (
     {
         timelineJson: state.homeState.timelineJson,
-        username: state.homeState.username,
         isLogin: state.homeState.isLogin,
         currentDate: state.homeState.currentDate,
         timelineDateList: state.homeState.timelineDateList
