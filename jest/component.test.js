@@ -67,7 +67,7 @@ describe('components', () => {
         })
     })
 
-    describe('importButton', () => {
+    describe('ImportButton', () => {
         function importButtonSetup() {
             const props = {
                 transText: {"import": {"btn": {"default": "valal"}}},
