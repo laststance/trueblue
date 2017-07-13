@@ -1,5 +1,4 @@
 import React from 'react'
-import { mount } from 'enzyme'
 import { shallow } from 'enzyme'
 import { Header } from '../app/Resources/js/components/header'
 
