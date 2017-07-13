@@ -83,5 +83,10 @@ describe('components', () => {
 
             expect(enzymeWrapper.find('Button').exists()).toBe(true)
         })
+        it('collect display ButtonText', () => {
+            const enzymeWrapper = importButtonSetup()
+
+            expect(enzymeWrapper.contains(<div>valal</div>)).toBe(true)
+        })
     })
 })
