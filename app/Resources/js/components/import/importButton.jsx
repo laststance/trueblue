@@ -5,7 +5,7 @@ import Actions from '../../actions/home'
 import { Button } from 'react-bootstrap'
 
 @autobind
-class ImportButton extends React.Component {
+export class ImportButton extends React.Component {
     
     constructor(props, context) {
         super(props, context)

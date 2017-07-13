@@ -2,6 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { Header } from '../app/Resources/js/components/header'
 import { Menu } from '../app/Resources/js/components/menu'
+import { ImportButton } from '../app/Resources/js/components/import/importButton'
 
 describe('components', () => {
     describe('Header', () => {
@@ -63,6 +64,24 @@ describe('components', () => {
             // const enzymeWrapper = timelineSetup()
 
             expect(true).toBe(true)
+        })
+    })
+
+    describe('importButton', () => {
+        function importButtonSetup() {
+            const props = {
+                transText: {"import": {"btn": {"default": "valal"}}},
+                isInitialImportDebug: false
+            }
+            const enzymeWrapper = shallow(<ImportButton {...props}/>)
+
+            return enzymeWrapper
+        }
+
+        it('shallow smoke test', () => {
+            const enzymeWrapper = importButtonSetup()
+
+            expect(enzymeWrapper.find('Button').exists()).toBe(true)
         })
     })
 })
