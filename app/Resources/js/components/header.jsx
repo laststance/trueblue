@@ -6,7 +6,7 @@ import Menu from './menu.jsx'
 import { getKaomoji } from '../utils/util'
 
 @autobind
-class Header extends React.Component {
+export class Header extends React.Component {
     constructor(props, context) {
         super(props, context)
         this.state = {
