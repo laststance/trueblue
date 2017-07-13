@@ -3,29 +3,29 @@ index:
     login: Login with Twitter
     overview: TrueBlue is archive tweets on every other day.
     description:
-        demo: ざっくりデモを見たい方はこちら (本物はもうちょい滑らかに動きます^^;)
-        first: TrueBlueは1日毎につぶやきを収集、カレンダーで見やすくする管理するサービスです。
-        function-header: 機能について
-        function1: 登録すると毎日深夜0時にその日のつぶやきが自動保存されます。
-        function1-more: 初めて登録する際は、2週間を遡ってつぶやきを取得、格納します。それ以上はTwitter APIの制限に引っかかるため取得が難しいです。
-        function2: タイムラインには自分のつぶやきしか表示されないので時間浪費の心配なし！
-        function3: 普通にツイートしておけば自動で「あの日は何をしたのか？」ログとして残しておけます。
-        function4: 通常、過去のつぶやきは沢山フリックしないと見られない...ところをカレンダーで見やすく管理できます。
-        other-header: その他
-        other1: 料金は無料です。
-        other2: Twitterアカウント(鍵垢不可)が必要です。
-        other3: OAuth2というログイン認証方式のため、このアプリにパスワードは保存されません。
-        other4: 読み取り権限のみ。このアプリから自動でTwitterに投稿する事はありません。
-        device-header: 対応デバイス
+        demo: show demo.
+        first: TrueBlue is archive tweets on every other day.
+        function-header: Overview.
+        function1: Every day at 00:00 o'clock the tweets for that day are automatically saved.
+        function1-more: When registering for the first time, get a tweet and store it for two weeks back. It is difficult to acquire it since it is caught by the restriction of Twitter API beyond that.
+        function2: Since only the tweet is displayed on the timeline, do not worry about wasting time!
+        function3: If you tweet normally, you can leave it automatically as "What did you do on that day?" Log.
+        function4: Usually, past tweets can not be seen unless you do a lot of flick ... you can manage where the place is easy to see with the calendar.
+        other-header: Other
+        other1: free.
+        other2: need a Twitter account.
+        other3: Because this is a login authentication method called OAuth 2, the password is not saved in this application.
+        other4: Read permission only. We will not automatically post to Twitter from this application.
+        device-header: Device
         device1: PC(Google Chrome)
-        device2: Andriod(Chromeのメニューからホーム画面へ追加してご利用ください)
-        device3: iPhone(Safariからホーム画面追加を行いご利用ください)
-        develop-header: 開発情報
-        developer1: このアプリは
-        developer2: が個人で趣味の時間に作っています。
-        progress1: まだ完全ではないβ版なので至らない点は寛容に受け止めて頂けると嬉しいです、ただいまご要望フォーラムを作成中です(｡･ω･)ﾉﾞ
-        progress2: 退会機能は現在作成中です、どうしても...という方は登録をお控えください。
-        last: Twitterをより良い日記として使おう！
+        device2: Andriod
+        device3: iOS
+        develop-header: Development information
+        developer1: This app
+        developer2: making it for personal hobby time.
+        progress1: I am glad that it is tolerated to accept the point that it is not yet complete because it is a beta version, I am currently creating a request forum(｡･ω･)ﾉﾞ
+        progress2: The withdrawal function is currently being created, please refrain from registering anyhow.
+        last: Let's use Twitter as a better diary!
     about: about
     privacy-policy: privacy policy
     terms-of-service: terms of service
