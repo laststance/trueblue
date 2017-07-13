@@ -10,16 +10,13 @@ function setup() {
 
     const enzymeWrapper = shallow(<Header {...props}/>)
 
-    return {
-        props,
-        enzymeWrapper
-    }
+    return enzymeWrapper
 }
 
 describe('components', () => {
     describe('Header', () => {
         it('shallow smoke test', () => {
-            const { enzymeWrapper } = setup()
+            const enzymeWrapper = setup()
 
             expect(enzymeWrapper.find('.index-header').exists()).toBe(true)
         })
