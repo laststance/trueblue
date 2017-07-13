@@ -5,7 +5,7 @@ import { Modal } from 'react-bootstrap'
 import ImportButton from './importButton'
 
 @autobind
-class ImportModal extends React.Component {
+export class ImportModal extends React.Component {
     
     constructor(props, context) {
         super(props, context)
