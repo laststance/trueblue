@@ -147,16 +147,12 @@ const mapStateToProps = (state) => (
         timelineJson: state.homeState.timelineJson,
         timelineDateList: state.homeState.timelineDateList,
         currentDate: state.homeState.currentDate,
-        currentIndex: state.homeState.currentIndex,
-        username: state.homeState.username,
+        currentIndex: state.homeState.currentIndex
     }
 )
 
 function mapDispatchToProps(dispatch) {
     return {
-        fetchSingleDate: (username, date) => {
-            dispatch(Actions.fetchSingleDate(username, date))
-        },
         setCurrentIndex: (i) => {
             dispatch(Actions.setCurrentIndex(i))
         }, setCurrentDate: (ymdString) => {
