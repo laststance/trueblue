@@ -3,7 +3,7 @@ index:
     login: Twitterでログイン
     overview: TrueBlueはtwitter上の自分のつぶやきを日別にまとめるサービスです。
     description:
-        demo: ざっくりデモを見たい方はこちら (本物はもうちょい滑らかに動きます^^;)
+        demo: デモ
         first: TrueBlueは1日毎につぶやきを収集、カレンダーで見やすくする管理するサービスです。
         function-header: 機能について
         function1: 登録すると毎日深夜0時にその日のつぶやきが自動保存されます。
