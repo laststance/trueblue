@@ -1,5 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
 import { Header } from '../app/Resources/js/components/header'
 import { Menu } from '../app/Resources/js/components/menu'
 import { ImportButton } from '../app/Resources/js/components/import/importButton'
