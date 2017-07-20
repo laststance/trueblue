@@ -5,7 +5,6 @@ import { Header } from '../app/Resources/js/components/header'
 import { Menu } from '../app/Resources/js/components/menu'
 import { ImportButton } from '../app/Resources/js/components/import/importButton'
 import { ImportModal } from '../app/Resources/js/components/import/importModal'
-import { Timeline } from "../app/Resources/js/components/timeline";
 
 describe('components', () => {
     describe('Header', () => {
