@@ -48,7 +48,7 @@ describe('components', () => {
     })
 
     describe('Timeline', () => {
-        function timelineSetup() {
+        function timelineShalowSetup() {
             const props = {
                 timelineJson: {},
                 timelineDateList: [],
@@ -63,7 +63,7 @@ describe('components', () => {
         }
 
         it('shallow smoke test', () => {
-            // const enzymeWrapper = timelineSetup()
+            // const enzymeWrapper = timelineShalowSetup()
 
             expect(true).toBe(true)
         })
