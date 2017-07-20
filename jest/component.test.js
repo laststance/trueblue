@@ -5,6 +5,7 @@ import { Header } from '../app/Resources/js/components/header'
 import { Menu } from '../app/Resources/js/components/menu'
 import { ImportButton } from '../app/Resources/js/components/import/importButton'
 import { ImportModal } from '../app/Resources/js/components/import/importModal'
+import { Timeline } from "../app/Resources/js/components/timeline";
 
 describe('components', () => {
     describe('Header', () => {
@@ -61,6 +62,18 @@ describe('components', () => {
 
             return enzymeWrapper
         }
+        
+        function timelineMountSetup() {
+            const props = {
+                timelineJson: {},
+                timelineDateList: [],
+                currentDate: '2020-12-12',
+                currentIndex: 1
+            }
+
+            // TODO https://github.com/WickyNilliams/enquire.js/issues/82
+            // const enzymeWrapper = mount(<Timeline {...props}/>)
+        }
 
         it('shallow smoke test', () => {
             // const enzymeWrapper = timelineShalowSetup()
@@ -69,6 +82,7 @@ describe('components', () => {
         })
 
         it('should be render timeline', () => {
+            // const enzymeWrapper = timelineMountSetup()
 
             // TODO
             expect(true).toBe(true)
