@@ -67,6 +67,12 @@ describe('components', () => {
 
             expect(true).toBe(true)
         })
+
+        it('should be render timeline', () => {
+
+            // TODO
+            expect(true).toBe(true)
+        })
     })
 
     describe('ImportButton', () => {
