@@ -6173,9 +6173,9 @@ rx-lite@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/rx-lite/-/rx-lite-3.1.2.tgz#19ce502ca572665f3b647b10939f97fd1615f102"
 
-ryotamurakami-react-slick@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/ryotamurakami-react-slick/-/ryotamurakami-react-slick-0.0.1.tgz#6a31d3a5f1b42d84905d50f5b58e2eb34dc1275e"
+ryotamurakami-react-slick@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/ryotamurakami-react-slick/-/ryotamurakami-react-slick-0.0.7.tgz#16daa8ff49e0e57793f9848461cb6f3e92b55345"
   dependencies:
     can-use-dom "^0.1.0"
     classnames "^2.2.5"
