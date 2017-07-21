@@ -56,7 +56,7 @@ describe('components', () => {
                 currentIndex: 1
             }
 
-            // TODO https://github.com/WickyNilliams/enquire.js/issues/82
+            // TODO test failed. because https://github.com/WickyNilliams/enquire.js/issues/82
             // const enzymeWrapper = shallow(<Timeline {...props}/>)
 
             return enzymeWrapper
@@ -70,7 +70,7 @@ describe('components', () => {
                 currentIndex: 1
             }
 
-            // TODO https://github.com/WickyNilliams/enquire.js/issues/82
+            // TODO test failed. because https://github.com/WickyNilliams/enquire.js/issues/82
             // const enzymeWrapper = mount(<Timeline {...props}/>)
         }
 
