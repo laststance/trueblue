@@ -83,7 +83,6 @@ describe('components', () => {
         it('should be render timeline', () => {
             // const enzymeWrapper = timelineMountSetup()
 
-            // TODO
             expect(true).toBe(true)
         })
     })
