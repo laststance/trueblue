@@ -2,7 +2,7 @@ import autobind from 'autobind-decorator'
 import React from 'react'
 import {connect} from 'react-redux'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
-import Lightbox from 'react-images'
+import Lightbox from 'react-images' // TODO 画像をLightboxで表示する
 import { isSP } from '../utils/util'
 import Slider from 'ryotamurakami-react-slick'
 import Actions from '../actions/home'
