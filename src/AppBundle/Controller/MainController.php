@@ -35,6 +35,7 @@ class MainController extends Controller
             [
                 'props' => $this->get('jms_serializer')->serialize(
                     [
+                        // TODO コントローラにロジック詰めすぎ、適切なドメインロジックを作成する
                         'timelineJson' => $timelineJson,
                         'timelineDateList' => $this->fetchTimelineDateList($timelineJson),
                         'username' => $user->getUsername(),
@@ -72,7 +73,7 @@ class MainController extends Controller
 
         if (count($pastTimelines)) {
             foreach ($pastTimelines as $item) {
-                $res[] = [$item->getDate()->format('Y-m-d') => $item->getTimeline()];
+                $res[] = [$item->getDate()->format('Y-m-d') => $this->get('app.service.common_service')->enableHtmlLink($item->getTimeline())]; // TODO monkey patch https://github.com/ryota-murakami/trueblue/issues/51
             }
         }
 
@@ -100,28 +101,13 @@ class MainController extends Controller
 
         $timeline = $twitterApi->getTodayTimeline();
         if (!isset($timeline['error'])) {
+            // TODO こういうダメなコードが原因で不具合が発生する
+            // フリック後リンクテキストが通常の文字列になってしまう不具合を修正 #51
+            // https://github.com/ryota-murakami/trueblue/issues/51
             $timeline = $this->get('app.service.common_service')->enableHtmlLink($timeline);
         }
 
         return $timeline;
-    }
-
-    private function fetchPastTimelineDate(User $user): array
-    {
-        $pastTimelines = $this->getDoctrine()->getRepository('AppBundle:PastTimeline')->findByUser(
-            $user,
-            ['date' => 'DESC']
-        );
-        $timelineDateList = array_map(
-            function ($obj) {
-                return $obj->getDate()->format('Y-m-d');
-            },
-            $pastTimelines
-        );
-        // 今日のタイムライン表示ボタンに使用
-        array_unshift($timelineDateList, $this->get('app.service.common_service')->getToday());
-
-        return $timelineDateList;
     }
 
     private function isShowImportModal(): bool
