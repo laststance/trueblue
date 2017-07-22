@@ -101,6 +101,9 @@ class MainController extends Controller
 
         $timeline = $twitterApi->getTodayTimeline();
         if (!isset($timeline['error'])) {
+            // TODO こういうダメなコードが原因で不具合が発生する
+            // フリック後リンクテキストが通常の文字列になってしまう不具合を修正 #51
+            // https://github.com/ryota-murakami/trueblue/issues/51
             $timeline = $this->get('app.service.common_service')->enableHtmlLink($timeline);
         }
 
