@@ -29,6 +29,7 @@ export class Timeline extends React.Component {
             const prop = Object.keys(oneday)
             const onedayContents = oneday[prop]
             if (onedayContents.error) {
+                // TODO わかりにくい
                 return (
                         <div id="timeline" className="row">
                             <div style={{margin: 0}}>
