@@ -73,7 +73,7 @@ class MainController extends Controller
 
         if (count($pastTimelines)) {
             foreach ($pastTimelines as $item) {
-                $res[] = [$item->getDate()->format('Y-m-d') => $item->getTimeline()];
+                $res[] = [$item->getDate()->format('Y-m-d') => $this->get('app.service.common_service')->enableHtmlLink($item->getTimeline())]; // TODO monkey patch https://github.com/ryota-murakami/trueblue/issues/51
             }
         }
 
