@@ -106,24 +106,6 @@ class MainController extends Controller
         return $timeline;
     }
 
-    private function fetchPastTimelineDate(User $user): array
-    {
-        $pastTimelines = $this->getDoctrine()->getRepository('AppBundle:PastTimeline')->findByUser(
-            $user,
-            ['date' => 'DESC']
-        );
-        $timelineDateList = array_map(
-            function ($obj) {
-                return $obj->getDate()->format('Y-m-d');
-            },
-            $pastTimelines
-        );
-        // 今日のタイムライン表示ボタンに使用
-        array_unshift($timelineDateList, $this->get('app.service.common_service')->getToday());
-
-        return $timelineDateList;
-    }
-
     private function isShowImportModal(): bool
     {
         // only develop
