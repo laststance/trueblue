@@ -35,6 +35,7 @@ class MainController extends Controller
             [
                 'props' => $this->get('jms_serializer')->serialize(
                     [
+                        // TODO コントローラにロジック詰めすぎ、適切なドメインロジックを作成する
                         'timelineJson' => $timelineJson,
                         'timelineDateList' => $this->fetchTimelineDateList($timelineJson),
                         'username' => $user->getUsername(),
