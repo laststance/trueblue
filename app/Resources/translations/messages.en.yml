@@ -3,7 +3,7 @@ index:
     login: Login with Twitter
     overview: TrueBlue is archive tweets on every other day.
     description:
-        demo: show demo.
+        demo: demo.
         first: TrueBlue is archive tweets on every other day.
         function-header: Overview.
         function1: Every day at 00:00 o'clock the tweets for that day are automatically saved.
