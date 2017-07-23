@@ -88,7 +88,6 @@
     "karma-webpack": "^2.0.1",
     "loader-utils": "^1.0.2",
     "mocha": "^3.2.0",
-    "nock": "^9.0.14",
     "node-sass": "^4.5.0",
     "power-assert": "^1.4.2",
     "react-addons-test-utils": "^15.4.2",
