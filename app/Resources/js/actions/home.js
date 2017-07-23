@@ -4,18 +4,21 @@ import { getYmdStr } from '../utils/util'
 const Actions = {
     fetchSingleDate: (username, date) => {
         return dispatch => {
-            dispatch({ type: Constants.AJAX_FETCH_START })
+            dispatch({type: Constants.AJAX_FETCH_START})
             fetch('/ajax/' + username + '/' + date, {
                 credentials: 'include'
-            }).then((response) => {
-                return response.json()
-            }).then((data) => {
-                dispatch({
-                    type: Constants.FETCH_SINGLE_DATE,
-                    timelineJson: data,
-                    currentDate: date
+            })
+                .then((response) => {
+                    return response.json()
                 })
-            }).catch(ex => console.log(ex))
+                .then((data) => {
+                    dispatch({
+                        type: Constants.FETCH_SINGLE_DATE,
+                        timelineJson: data,
+                        currentDate: date
+                    })
+                })
+                .catch(ex => console.log(ex))
         }
     },
     import: () => {
