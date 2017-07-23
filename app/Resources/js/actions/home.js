@@ -15,7 +15,7 @@ const Actions = {
                     timelineJson: data,
                     currentDate: date
                 })
-            })
+            }).catch(ex => console.log(ex))
         }
     },
     import: () => {
