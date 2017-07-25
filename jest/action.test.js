@@ -28,7 +28,7 @@ describe('fetchSingleDate()', () => {
             .then(() => {
                 const [prevFetch, afterFetch] = store.getActions()
 
-                expect(prevFetch.type).toEqual(Types.AJAX_FETCH_START)
+                expect(prevFetch.type).toBe(Types.AJAX_FETCH_START)
             })
     })
 })
