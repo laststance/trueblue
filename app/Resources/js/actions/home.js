@@ -5,7 +5,7 @@ const Actions = {
     fetchSingleDate: (username, date) => {
         return dispatch => {
             dispatch({type: Constants.AJAX_FETCH_START})
-            fetch('/ajax/' + username + '/' + date, {
+            return fetch('/ajax/' + username + '/' + date, {
                 credentials: 'include'
             })
                 .then((response) => {
