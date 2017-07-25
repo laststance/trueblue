@@ -13,7 +13,7 @@ describe('fetchSingleDate()', () => {
         const timelineJson = {timelineJson: {key: 'value'}}
         const store = mockStore()
         global.fetch = jest.fn().mockImplementation(() => {
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve) => {
                 resolve({
                     ok: true,
                     Id: '123',
