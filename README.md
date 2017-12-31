@@ -2,7 +2,7 @@ True Blue [![Build Status](https://travis-ci.org/ryota-murakami/trueblue.svg?bra
 ========================
 
 Archive tweets on every other day.       
-β version available now. <a href="https://trueblue.design" target="_blank">https://trueblue.design</a>
+stopping develop now...
 
 
 ![example](demo.gif)
