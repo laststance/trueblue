@@ -20,4 +20,3 @@ Description
 - Contribute, Enhancement Requests are Free.
   - [Report](https://github.com/ryota-murakami/trueblue/issues)
   - [Pull Request](https://github.com/ryota-murakami/trueblue/pulls)
-- I Will Check And Respond to My Free Time Accordingly.
