@@ -2,7 +2,7 @@ True Blue
 ========================
 
 Archive tweets on every other day.       
-stopping develop now...
+development is stopping now...
 
 
 ![example](demo.gif)
