@@ -1,0 +1,18 @@
+AppBundle\Entity\User:
+    malloc007:
+        twitterId: 1664570156
+        username: malloc007
+        todaySinceId: 1
+        sinceIdAt: 1
+        isActive: true
+        isInitialTweetImport: false
+        createAt: <date()>
+        updateAt: <date()>
+
+AppBundle\Entity\PastTimeline:
+    one:
+        user: '@malloc007'
+        date: <(new \DateTime('2017-01-21'))>
+        timeline: <timeline()>
+        createAt: <(new \DateTime())>
+        updateAt: <(new \DateTime())>

@@ -1,0 +1,55 @@
+language: php
+
+dist: precise
+
+sudo: true
+
+php:
+  - 7.0
+
+services:
+  - mysql
+
+git:
+  submodules: false
+
+cache:
+    directories:
+        - $HOME/.composer/cache
+        - node_modules
+
+before_install:
+    - export CHROME_BIN=chromium-browser
+    - export DISPLAY=:99.0
+    - sh -e /etc/init.d/xvfb start
+
+before_script:
+    - bash .travis.install-mysql-5.7.sh
+    - nvm install 6
+    - nvm use 6
+    - curl -o- -L https://yarnpkg.com/install.sh | bash
+    - export PATH=$HOME/.yarn/bin:$PATH
+    - yarn install --non-interactive --prefer-offline
+    - npm rebuild node-sass # patch for Error: ENOENT: no such file or directory, scandir '**/node_modules/node-sass/vendor' https://github.com/sass/node-sass/issues/1579
+    - phpenv config-rm xdebug.ini
+    - cp app/config/parameters.yml.dist app/config/parameters.yml
+    - composer self-update
+    - composer install --no-interaction --prefer-dist
+    - app/console doctrine:database:create --env=test --no-interaction --quiet
+    - app/console doctrine:migrations:migrate  --env=test --no-interaction --quiet
+    - app/console cache:warmup --env=test --quiet
+
+script:
+    - app/console security:check --end-point=http://security.sensiolabs.org/check_lock
+    - app/console lint:yaml @AppBundle
+    - app/console lint:twig app/Resources
+    - app/console lint:yaml app/config
+    - app/console doctrine:schema:validate --env=test
+    - ./bin/phpunit -c app/
+    - ./bin/php-cs-fixer fix --diff --dry-run ./src/AppBundle/
+    - npm run eslint
+    - npm run single-run-karma
+    - npm run jest
+
+notifications:
+    email: false

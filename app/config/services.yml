@@ -1,0 +1,39 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+imports:
+    - { resource: parameters.yml }
+
+parameters:
+#    parameter_name: value
+
+services:
+    twitter_api_client:
+        class: AppBundle\Service\TwitterAPIClient
+        arguments: ["%twitter_api%"]
+
+    twitter_api:
+        class: AppBundle\Service\TwitterAPIService
+        arguments: ["@doctrine", "@twitter_api_client"]
+
+    oauth_entity_user_provider:
+        class: AppBundle\Security\OAuthEntityUserProvider
+        arguments: ["@doctrine", AppBundle\Entity\User, {twitter: twitterId}]
+
+    app.service.common_service:
+        class: AppBundle\Service\CommonService
+
+    app.event_listener.my_locale_listener:
+        class: AppBundle\EventListener\MyLocaleListener
+        tags:
+            - { name: kernel.event_subscriber }
+
+    security.authentication.success_handler:
+        class:  AppBundle\Handler\AuthenticationSuccessHandler
+        arguments:  ["@security.http_utils", {}]
+        tags:
+            - { name: 'monolog.logger', channel: 'security' }
+
+    my_faker_provider:
+        class: AppBundle\Tests\DataFixtures\MyFakerProvider
+        tags:
+            - { name: h4cc_alice_fixtures.provider }

@@ -1,0 +1,127 @@
+@import "../common/flat-ui.scss";
+@import "../common/variable.scss";
+@import "../component/footer.scss";
+
+body {
+	background: #ffffff;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+.login-header { // TODO: dup01
+	left: 0;
+	position: fixed;
+	background-color: $background-color;
+	height: 55px;
+	width: 100%;
+	z-index: 1;
+	.container {
+		max-width: 100%;
+
+		.navbar-header {
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			flex-wrap: nowrap;
+
+			// enable justify-content: space-between
+			&:before {
+				content: none;
+			}
+			&:after {
+				content: none;
+			}
+
+			.navbar-brand {
+				font-family: Shadows Into Light Two;
+				text-wrap: none;
+				font-size: 20px;
+			}
+			.nav.navbar-nav {
+				.menu-btn {
+					padding-top: 10px;
+					padding-bottom: 10px;
+				}
+			}
+		}
+	}
+}
+
+.landing {
+	height: 100vh;
+	background-color: ivory;
+
+	.opacity-layer {
+		height: 100%;
+		background-color: rgba(255, 255, 255, 0.6);
+
+		div {
+			height: 100%;
+		}
+	}
+
+	h2 {
+		font-weight: 300;
+		line-height: 1.5em;
+	}
+}
+
+main {
+	color: #3C4C52;
+
+    .description {
+      background-color: oldlace;
+      div > h6 {
+        margin-top: 50px;
+      }
+      padding-bottom: 50px;
+
+      .navigate-btn {
+        margin-top: 40px;
+      }
+    }
+}
+
+// tablet
+@media (min-width: 34em) and (max-width: 50em) {
+  main {
+    section {
+      padding: 30px;
+    }
+  }
+}
+
+// smart phone
+@media (max-width: 34em) {
+	.login-header {
+		.container {
+			.navbar-header {
+				.navbar-brand {
+					font-size: 15px;
+				}
+
+				.nav.navbar-nav {
+					.menu-btn {
+						padding-top: 7px;
+						padding-bottom: 7px;
+					}
+				}
+			}
+		}
+	}
+	main {
+		section {
+			height: 100%;
+            padding: 30px;
+		}
+
+		// Head Line
+		div.landing > div > div > div > div > section {
+			margin-top: 200px;
+		}
+	}
+}

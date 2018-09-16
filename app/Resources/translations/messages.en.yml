@@ -1,0 +1,43 @@
+index:
+    home: Home
+    login: Login with Twitter
+    overview: TrueBlue is archive tweets on every other day.
+    description:
+        demo: demo.
+        first: TrueBlue is archive tweets on every other day.
+        function-header: Overview.
+        function1: Automatically save your tweet at 00:00 Every Day.
+        function1-more: ''
+        function2: Display only yourself tweet, don't concern pay attension about others tweets.
+        function3: If you tweet normally, you can leave it automatically as "What did you do on that day?" Log.
+        function4: You can separate tweet by date.
+        other-header: Other
+        other1: Available for free.
+        other2: Necessary Twitter account.
+        other3: using OAuth 2 for authentiction, twitter password is not saved in this application.
+        other4: Read permission only. App will not automatically post to Your Twitter.
+        device-header: Device
+        device1: PC(Google Chrome)
+        device2: Andriod(Browser)
+        device3: iOS(Browser)
+        develop-header: Development information
+        developer1: This app
+        developer2: making it for personal hobby time.
+        progress1: β version now.
+        progress2: ''
+        last: Let's use Twitter as a better diary!
+    about: about
+    privacy-policy: privacy policy
+    terms-of-service: terms of service
+
+home:
+    import:
+        title: First
+        desc: Import tweets for the last 2 weeks (=ﾟωﾟ)ﾉ
+        btn:
+            default: Import
+            loading: Please wait a few minutes, You can kill time with other apps（＊´ω｀)
+
+error:
+    404: 404 not found.
+    500: Sorry, some error occurred.
