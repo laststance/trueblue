@@ -1,4 +1,4 @@
-True Blue
+True Blue [![Build Status](https://travis-ci.org/ryota-murakami/trueblue.svg?branch=master)](https://travis-ci.org/ryota-murakami/trueblue)
 ========================
 
 Archive tweets on every other day.       
